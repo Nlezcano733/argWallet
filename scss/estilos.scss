@@ -1,0 +1,75 @@
+@import 'Enlaces/mixins';
+@import 'Enlaces/variables';
+@import 'Enlaces/fuentes';
+
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: $fuenteGeneral;
+}
+
+body{
+    background-color: #f3f3f3;
+}
+.logoPpal{
+    display: block;
+    height: 200px;
+    margin: 20px auto;
+}
+#navbar{
+    @include flexbox(row, space-between, center);
+    padding: 0px 25px;
+    background-image: $gradienteAzul;
+
+
+    h1{
+        width: 25%;
+        font-family: $fuenteTitulo;
+        font-size: $displayLg;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        color: #e4e4e4;
+
+        strong{
+            font-weight: 800;
+        }
+    }
+
+    ul{
+        @include flexbox(row, space-between, center);
+        width: 40%;
+        height: 100%;
+
+
+        li{
+            font-size: $cuerpoLg;
+            list-style-type: none;
+            text-decoration: none;
+            color: white;
+
+            &:hover{
+                cursor: pointer;
+                color: #ddd;
+            }
+        }
+    }
+
+    .moneda{
+        @include flexbox(row, flex-end, center);
+        width: 25%;
+        font-size: $cuerpoLg;
+        color: white;
+
+        i,p{
+            margin: 0px 5px;
+
+        }
+        p:hover{
+            cursor: pointer;
+            color: #ddd;
+        }
+    }
+}

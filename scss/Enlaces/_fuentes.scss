@@ -1,0 +1,18 @@
+@font-face{
+    font-family: Ebirma;
+    src: url("../../assets/fuentes/ebrima.ttf") format("Truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+$fuenteGeneral: sans-serif, verdana, arial;
+$fuenteTitulo: Ebirma, sans-serif;
+
+$cuerpoSm: 14px;
+$cuerpo: 16px;
+$cuerpoLg: 18px;
+$subtitulo: 20px;
+$titulo: 24px;
+$display: 30px;
+$displayLg: 34px;
+$jumbo: 38px;
