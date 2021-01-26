@@ -104,7 +104,7 @@ function convertirCripto(dineroIngresado, criptoConvertido){
         tickerCripto = tether.ticker
     }
 
-    console.log(criptomonedasStr + " " + tickerCripto);
+    console.log("Compra total: " + criptomonedasStr + " " + tickerCripto);
     alert("Usted adquirió: " + criptomonedasStr + " " + tickerCripto );
     console.log("hasta aca vamos bien");
 }

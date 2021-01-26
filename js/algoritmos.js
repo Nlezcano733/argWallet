@@ -31,6 +31,7 @@ convertirDivisas();
 //Obtenemos los datos del usuario ingresado
 let datosUsuario = new Billetera(nombreUsuario, monedaDivisa, ingresoDinero)
 console.log (datosUsuario.nombre + " ahorra en " + datosUsuario.divisaNombre);
+console.log("Valor de cuenta: " + datosUsuario.cantidad + " " + datosUsuario.divisaNombre);
 
 //Generamos la conversion de criptomonedas
 let monedaCripto = cambioCripto();
