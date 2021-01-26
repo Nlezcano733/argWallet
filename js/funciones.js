@@ -2,11 +2,12 @@
 
 //Consultamos que tipo de divisa de va a ingresar
 function cambioDinero(){
+
     let divisa = false;
     let moneda;
 
     while(divisa == false){
-        moneda = prompt("Que tipo de moneda quiere ingresar\n Pesos --> ars\n Dolar --> usd\n Euro --> euro");
+        moneda = prompt("Que tipo de moneda quiere ingresar", "ARS - USD - EURO");
 
         if(moneda == 'ars' || moneda == 'Ars' || moneda == 'ARS'){
             moneda = ars;
@@ -31,19 +32,23 @@ function cambioCripto(){
     let moneda;
 
     while(cripto == false){
-        moneda = prompt("Que Criptomoneda desea comprar?:\n Bitcoin (BTC)= $" + btc + "\n Ethereum (ETH)= $" + eth + "\n Litecoin (LTC)= $" + ltc + "\n Tether (USDT)= $" + usdt);
+        moneda = prompt("¿Qué Criptomoneda desea comprar?\n" + 
+                        bitcoin.nombre + "  = $" + bitcoin.value + "\n" +
+                        ethereum.nombre + " = $" + ethereum.value + "\n" +
+                        litecoin.nombre + " = $" + litecoin.value + "\n" +
+                        tether.nombre + " = $" + tether.value , "BTC - ETH - LTC - USDT")
 
         if(moneda == 'btc' || moneda == 'BTC' || moneda == 'Btc'){
-            moneda = btc;
+            moneda = bitcoin.value;
             cripto = true;
         } else if(moneda == 'eth' || moneda == 'Eth' || moneda == 'ETH'){
-            moneda = eth;
+            moneda = ethereum.value;
             cripto = true;
         } else if(moneda == 'ltc' || moneda == 'Ltc' || moneda == 'LTC'){
-            moneda = ltc;
+            moneda = litecoin.value;
             cripto = true;
         } else if(moneda == 'usdt' || moneda == 'Usdt' || moneda == 'USDT'){
-            moneda = usdt;
+            moneda = tether.value;
             cripto = true;
         } else{
             alert("La divisa ingresada no es valida");
@@ -69,6 +74,7 @@ function convertirDivisas(money){
                 confirmacion = true;
             }
         }
+    return ingresoDinero;
     }
 
 
@@ -90,24 +96,40 @@ function convertirCripto(dineroIngresado, criptoConvertido){
     let criptomonedas = dineroIngresado / criptoConvertido;
     let tickerCripto, criptomonedasStr;
 
-    if(criptoConvertido == btc){
-        tickerCripto = "BTC";
+    if(criptoConvertido == bitcoin.value){
         criptomonedasStr = parseFloat(criptomonedas.toFixed(4));
-        console.log(criptomonedasStr + " " + tickerCripto);
-    } else if(criptoConvertido == eth){
-        tickerCripto = "ETH";
+        console.log(criptomonedasStr + " " + bitcoin.ticker);
+        tickerCripto = bitcoin.ticker
+
+    } else if(criptoConvertido == ethereum.value){
         criptomonedasStr = parseFloat(criptomonedas.toFixed(4));
-        console.log(criptomonedasStr + " " + tickerCripto);
-    } else if(criptoConvertido == ltc){
-        tickerCripto = "LTC";
+        console.log(criptomonedasStr + " " + ethereum.ticker);
+        tickerCripto = ethereum.ticker
+
+    } else if(criptoConvertido == litecoin.value){
         criptomonedasStr = parseFloat(criptomonedas.toFixed(6));
-        console.log(criptomonedasStr + " " + tickerCripto);
+        console.log(criptomonedasStr + " " + litecoin.ticker);
+        tickerCripto = litecoin.ticker
+
     } else{
-        tickerCripto = "USDT";
         criptomonedasStr = parseFloat(criptomonedas.toFixed(2));
-        console.log(criptomonedasStr + " " + tickerCripto);
+        console.log(criptomonedasStr + " " + tether.ticker);
+        tickerCripto = tether.ticker
     }
 
     alert("Usted adquirió: " + criptomonedasStr + " " + tickerCripto );
     console.log("hasta aca vamos bien");
+}
+
+
+//Tipo de moneda
+function declaracionDivisa (divisa){
+    if(divisa == 1){
+        return "pesos"
+    } else if(divisa == 151){
+        return "dolares"
+    } else {
+        return "euros"
+    }
+    
 }
