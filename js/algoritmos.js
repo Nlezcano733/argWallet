@@ -26,7 +26,7 @@ let tether = new Cripto ('Tether', 'USDT', 151);
 // Comienzo de algoritmo -- obtenemos datos
 nombreUsuario = prompt("Bienvenid@ a ArgWALLET\n Por favor, ingrese su nombre")
 let monedaDivisa = cambioDinero();
-convertirDivisas(monedaDivisa);
+convertirDivisas();
 
 //Obtenemos los datos del usuario ingresado
 let datosUsuario = new Billetera(nombreUsuario, monedaDivisa, ingresoDinero)

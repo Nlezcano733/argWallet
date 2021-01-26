@@ -62,7 +62,7 @@ function cambioCripto(){
 //FUNCIONES PARA CONVERTIR DIVISAS
 
 //Ingresamos la cantidad de dinero Fiat
-function convertirDivisas(money){
+function convertirDivisas(){
     ingresoDinero = parseFloat(prompt("Ingrese la cantidad de dinero que quiera ingresar en su cuenta"));
     if(ingresoDinero <= 0){
         confirmacion = false;
@@ -77,15 +77,6 @@ function convertirDivisas(money){
     return ingresoDinero;
     }
 
-
-    console.log(ingresoDinero);
-
-    if(money != 1){
-        ingresoDinero = Math.round((ingresoDinero * 100) * money)/100;
-        console.log("La conversion a pesos es: $" + ingresoDinero);
-    } else {
-        console.log("esta en pesos");
-    }
 }
 
 
