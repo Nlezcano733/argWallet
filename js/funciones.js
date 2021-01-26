@@ -98,25 +98,22 @@ function convertirCripto(dineroIngresado, criptoConvertido){
 
     if(criptoConvertido == bitcoin.value){
         criptomonedasStr = parseFloat(criptomonedas.toFixed(4));
-        console.log(criptomonedasStr + " " + bitcoin.ticker);
         tickerCripto = bitcoin.ticker
 
     } else if(criptoConvertido == ethereum.value){
         criptomonedasStr = parseFloat(criptomonedas.toFixed(4));
-        console.log(criptomonedasStr + " " + ethereum.ticker);
         tickerCripto = ethereum.ticker
 
     } else if(criptoConvertido == litecoin.value){
         criptomonedasStr = parseFloat(criptomonedas.toFixed(6));
-        console.log(criptomonedasStr + " " + litecoin.ticker);
         tickerCripto = litecoin.ticker
 
     } else{
         criptomonedasStr = parseFloat(criptomonedas.toFixed(2));
-        console.log(criptomonedasStr + " " + tether.ticker);
         tickerCripto = tether.ticker
     }
 
+    console.log(criptomonedasStr + " " + tickerCripto);
     alert("Usted adquirió: " + criptomonedasStr + " " + tickerCripto );
     console.log("hasta aca vamos bien");
 }
@@ -131,5 +128,4 @@ function declaracionDivisa (divisa){
     } else {
         return "euros"
     }
-    
 }
