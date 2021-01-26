@@ -12,6 +12,7 @@ function Cripto (nombre, ticker, valor){
 function Billetera (nombre, divisa, cantidad){
     this.nombre = nombre,
     this.divisa = divisa,
+    this.divisaNombre = declaracionDivisa(this.divisa),
     this.cantidad = cantidad
 }
 
@@ -29,8 +30,7 @@ convertirDivisas(monedaDivisa);
 
 //Obtenemos los datos del usuario ingresado
 let datosUsuario = new Billetera(nombreUsuario, monedaDivisa, ingresoDinero)
-let divisaNombre = declaracionDivisa(datosUsuario.divisa);
-console.log (datosUsuario.nombre + " ahorra en " + divisaNombre);
+console.log (datosUsuario.nombre + " ahorra en " + datosUsuario.divisaNombre);
 
 //Generamos la conversion de criptomonedas
 let monedaCripto = cambioCripto();
