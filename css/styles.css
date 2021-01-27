@@ -1,24 +1,53 @@
+/*$gradienteAzul: linear-gradient(to bottom, $celeste2, $celeste3);*/
 @font-face {
   font-family: Ebirma;
   src: url("../../assets/fuentes/ebrima.ttf") format("Truetype");
   font-weight: 400;
   font-style: normal;
 }
+@font-face {
+  font-family: Lato;
+  src: url(../../assets/fuentes/Lato/Lato-Regular.ttf) format("Truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../../assets/fuentes/Roboto/Roboto-Medium.ttf) format("Truetype");
+  font-weight: 600;
+  font-style: normal;
+}
 * {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-  font-family: sans-serif, verdana, arial;
+  font-family: Lato, sans-serif, verdana;
 }
 
 body {
-  background-color: #f3f3f3;
+  background-color: #dddddd;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80vh;
+  width: 100%;
+  padding: 30px 70px;
+  background-image: url(../assets/imagenes/cabecera.jpg);
+  background-color: #7692b7;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  color: #ffffff;
 }
 
 .logoPpal {
   display: block;
-  height: 200px;
-  margin: 20px auto;
+  height: 100px;
+  margin: 10px auto;
 }
 
 #navbar {
@@ -26,54 +55,49 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 25px;
-  background-image: linear-gradient(to bottom, #5882be, #436899);
-}
-#navbar h1 {
-  width: 25%;
-  font-family: Ebirma, sans-serif;
-  font-size: 34px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.7px;
-  color: #e4e4e4;
-}
-#navbar h1 strong {
-  font-weight: 800;
-}
-#navbar ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 40%;
-  height: 100%;
-}
-#navbar ul li {
-  font-size: 18px;
-  list-style-type: none;
-  text-decoration: none;
-  color: white;
-}
-#navbar ul li:hover {
-  cursor: pointer;
-  color: #ddd;
-}
-#navbar .moneda {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  width: 25%;
-  font-size: 18px;
-  color: white;
+  padding: 0px;
+  height: 70px;
+  width: 100%;
 }
 #navbar .moneda i, #navbar .moneda p {
-  margin: 0px 5px;
+  font-size: 24px;
+  margin-left: 10px;
 }
-#navbar .moneda p:hover {
-  cursor: pointer;
-  color: #ddd;
+#navbar #menuHamburguesa {
+  font-size: 24px;
+}
+
+.intro {
+  height: 50vh;
+  width: 60%;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.intro h1 {
+  font-family: Roboto, sans-serif, verdana;
+  font-size: 34px;
+}
+.intro p {
+  font-size: 20px;
+  width: 80%;
+}
+.intro input {
+  height: 40px;
+  width: 140px;
+  font-size: 18px;
+  background-color: #dae2ec;
+  border: 1px solid #212f40;
+  color: #212f40;
+  border-radius: 20px;
+  transition: all 0.2s linear;
+}
+.intro input:hover {
+  background-color: #212f40;
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=styles.css.map */
