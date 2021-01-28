@@ -8,14 +8,15 @@ function cambioDinero(){
 
     while(divisa == false){
         moneda = prompt("Que tipo de moneda quiere ingresar", "ARS - USD - EURO");
+        moneda = moneda.toLowerCase();
 
-        if(moneda == 'ars' || moneda == 'Ars' || moneda == 'ARS'){
+        if(moneda == 'ars'){
             moneda = ars;
             divisa = true;
-        } else if(moneda == 'usd' || moneda == 'Usd' || moneda == 'USD'){
+        } else if(moneda == 'usd'){
             moneda = usd;
             divisa = true;
-        } else if(moneda == 'euro' || moneda == 'Euro' || moneda == 'EURO'){
+        } else if(moneda == 'euro'){
             moneda = euro;
             divisa = true;
         } else{
@@ -36,18 +37,19 @@ function cambioCripto(){
                         bitcoin.nombre + "  = $" + bitcoin.value + "\n" +
                         ethereum.nombre + " = $" + ethereum.value + "\n" +
                         litecoin.nombre + " = $" + litecoin.value + "\n" +
-                        tether.nombre + " = $" + tether.value , "BTC - ETH - LTC - USDT")
+                        tether.nombre + " = $" + tether.value , "BTC - ETH - LTC - USDT");
+        moneda = moneda.toLocaleUpperCase();
 
-        if(moneda == 'btc' || moneda == 'BTC' || moneda == 'Btc'){
+        if(moneda == bitcoin.ticker){
             moneda = bitcoin.value;
             cripto = true;
-        } else if(moneda == 'eth' || moneda == 'Eth' || moneda == 'ETH'){
+        } else if(moneda == ethereum.ticker){
             moneda = ethereum.value;
             cripto = true;
-        } else if(moneda == 'ltc' || moneda == 'Ltc' || moneda == 'LTC'){
+        } else if(moneda == litecoin.ticker){
             moneda = litecoin.value;
             cripto = true;
-        } else if(moneda == 'usdt' || moneda == 'Usdt' || moneda == 'USDT'){
+        } else if(moneda == tether.ticker){
             moneda = tether.value;
             cripto = true;
         } else{
@@ -105,7 +107,8 @@ function convertirCripto(dineroIngresado, criptoConvertido){
     }
 
     console.log("Compra total: " + criptomonedasStr + " " + tickerCripto);
-    alert("Usted adquirió: " + criptomonedasStr + " " + tickerCripto );
+    //alert("Usted adquirió: " + criptomonedasStr + " " + tickerCripto );
+    alert(`Usted adquirio: ${criptomonedasStr} ${tickerCripto}` );
     console.log("hasta aca vamos bien");
 }
 
