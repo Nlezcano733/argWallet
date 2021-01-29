@@ -69,11 +69,11 @@ function cantidadDinero(){
     ingresoDinero = parseFloat(prompt("Ingrese la cantidad de dinero que quiera ingresar en su cuenta"));
 
     //VALIDACION DE INGRESO
-    if (ingresoDinero == '' || ingresoDinero == null){
+    if (isNaN(ingresoDinero)){
         let validacion = false;
         while (validacion == false){
             ingresoDinero = parseFloat(prompt('Por favor ingrese una cantidad de dinero para poder comenzar a operar'));
-            if (isNaN(ingresoDinero)){
+            if (ingresoDinero != '' && ingresoDinero != null){
                 validacion = true
             }
         }
