@@ -64,52 +64,57 @@ function cambioCripto(){
 //FUNCIONES PARA CONVERTIR DIVISAS
 
 //Ingresamos la cantidad de dinero Fiat
-function convertirDivisas(){
+function cantidadDinero(){
+    let dineroCuenta;
     ingresoDinero = parseFloat(prompt("Ingrese la cantidad de dinero que quiera ingresar en su cuenta"));
-    if(ingresoDinero <= 0){
-        confirmacion = false;
 
-        while(confirmacion == false){
-            alert("Por favor, ingrese una suma de dinero Real");
-            ingresoDinero = parseFloat(prompt("Ingrese la cantidad de dinero que quiera ingresar en su cuenta"));
-            if (ingresoDinero > 0){
-                confirmacion = true;
+    //VALIDACION DE INGRESO
+    if (ingresoDinero == '' || ingresoDinero == null){
+        let validacion = false;
+        while (validacion == false){
+            ingresoDinero = parseFloat(prompt('Por favor ingrese una cantidad de dinero para poder comenzar a operar'));
+            if (isNaN(ingresoDinero)){
+                validacion = true
             }
         }
-    return ingresoDinero;
     }
 
+    dineroCuenta = validacionIngresoDinero(ingresoDinero);
+    return dineroCuenta;
 }
 
-
-
 //Conversion a cripto
-function convertirCripto(dineroIngresado, criptoConvertido){
+function feedBack(cantidadCompra, criptoConvertido){
 
-    let criptomonedas = dineroIngresado / criptoConvertido;
-    let tickerCripto, criptomonedasStr;
+    let tickerCripto;
 
     if(criptoConvertido == bitcoin.value){
-        criptomonedasStr = parseFloat(criptomonedas.toFixed(4));
+        cantidadCompra = parseFloat(cantidadCompra.toFixed(bitcoin.decimales));
         tickerCripto = bitcoin.ticker
 
     } else if(criptoConvertido == ethereum.value){
-        criptomonedasStr = parseFloat(criptomonedas.toFixed(4));
+        cantidadCompra = parseFloat(cantidadCompra.toFixed(ethereum.decimales));
         tickerCripto = ethereum.ticker
 
     } else if(criptoConvertido == litecoin.value){
-        criptomonedasStr = parseFloat(criptomonedas.toFixed(6));
+        cantidadCompra = parseFloat(cantidadCompra.toFixed(litecoin.decimales));
         tickerCripto = litecoin.ticker
 
     } else{
-        criptomonedasStr = parseFloat(criptomonedas.toFixed(2));
+        cantidadCompra = parseFloat(cantidadCompra.toFixed(tether.decimales));
         tickerCripto = tether.ticker
     }
 
-    console.log("Compra total: " + criptomonedasStr + " " + tickerCripto);
-    //alert("Usted adquirió: " + criptomonedasStr + " " + tickerCripto );
-    alert(`Usted adquirio: ${criptomonedasStr} ${tickerCripto}` );
-    console.log("hasta aca vamos bien");
+    console.log(`Compra total: ${cantidadCompra} ${tickerCripto}`);
+    alert(`Usted adquirio: ${cantidadCompra} ${tickerCripto}` );
+
+    return cantidadCompra
+
+    // guardar todos los objetos de criptoactivos en un array
+    // Crear funcion que realice el if 
+    //realizar repeticion por cada valor
+    //ver como colocar una sentencia break para optimizar codigo
+    
 }
 
 
@@ -123,3 +128,36 @@ function declaracionDivisa (divisa){
         return "euros"
     }
 }
+
+// FUNCIONES PARA ADMINISTRAR BILLETERA LOCAL
+
+function distribucionBilletera({wallet}, tipoCripto) {
+    let billetera = [];
+    let contadorPosiciones, cantidad, cantidadCriptos, cantidadRedondeada, dineroCuenta, dineroAlcanza;
+
+    cantidad = parseInt(prompt('Ingrese cantidad de dinero para compra'));
+    cantidad = validacionIngresoDinero(cantidad, 'la suma de dinero con la que desea comprar');
+    dineroCuenta = validacionIngresoDinero(cantidad);
+    dineroAlcanza = validacionDisponibilidad(wallet, dineroCuenta);
+
+    dineroRestante = wallet - dineroAlcanza;
+    console.log(dineroRestante);
+
+    contadorPosiciones = billetera.push(dineroRestante);
+    cantidadCriptos = parseFloat(dineroAlcanza / tipoCripto);
+
+    cantidadRedondeada = feedBack(cantidadCriptos, tipoCripto);
+
+    contadorPosiciones = billetera.push(cantidadRedondeada);
+    console.log(billetera)
+    
+    console.log("hasta aca vamos bien");
+
+    return billetera;
+}
+
+/*
+    PUNTOS RESTANTES:
+    - posibilidad de ver estado de billetera --> Crear objeto billetera global
+
+*/
