@@ -1,7 +1,7 @@
 let ars = 1;
 let usd = 151;
 let euro = 183;
-let ingresoDinero, nombreUsuario, monedaDivisa, dineroCuenta;
+let ingresoDinero, nombreUsuario, monedaDivisa, dineroCuenta, nombreValido;
 
 function Cripto (nombre, ticker, valor, decimales){
     this.nombre = nombre,
@@ -26,13 +26,13 @@ let tether = new Cripto ('Tether', 'USDT', 151, 2);
 
 // Comienzo de algoritmo -- obtenemos datos
 nombreUsuario = prompt("Bienvenid@ a ArgWALLET\n Por favor, ingrese su nombre");
-nombreUsuario = validacionIngresoDatos(nombreUsuario, 'su nombre.');
+nombreValido = validacionIngresoString(nombreUsuario);
 
 monedaDivisa = cambioDinero();
 dineroCuenta = cantidadDinero();
 
 //Obtenemos los datos del usuario ingresado
-let datosUsuario = new Billetera(nombreUsuario, monedaDivisa, dineroCuenta);
+let datosUsuario = new Billetera(nombreValido, monedaDivisa, dineroCuenta);
 
 console.log (`${datosUsuario.nombre} ahorra en ${datosUsuario.divisaNombre}`);
 console.log(`Valor de cuenta: ${datosUsuario.wallet} ${datosUsuario.divisaNombre}`);
@@ -41,6 +41,6 @@ console.log(`Valor de cuenta: ${datosUsuario.wallet} ${datosUsuario.divisaNombre
 let monedaCripto = cambioCripto();
 
 //  Ingresar funcion que pregunte cantidad de monedas que se desean adquirir
-let cantidadDistribuida = distribucionBilletera(datosUsuario, monedaCripto);
+let cantidadDistribuida = distribucionBilletera(datosUsuario, monedaCripto, monedaDivisa);
 
 

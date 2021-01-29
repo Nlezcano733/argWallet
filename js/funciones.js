@@ -64,9 +64,9 @@ function cambioCripto(){
 //FUNCIONES PARA CONVERTIR DIVISAS
 
 //Ingresamos la cantidad de dinero Fiat
-function cantidadDinero(){
-    let dineroCuenta;
+function cantidadDinero(tipoCambio){
     ingresoDinero = parseFloat(prompt("Ingrese la cantidad de dinero que quiera ingresar en su cuenta"));
+
 
     //VALIDACION DE INGRESO
     if (isNaN(ingresoDinero)){
@@ -79,8 +79,7 @@ function cantidadDinero(){
         }
     }
 
-    dineroCuenta = validacionIngresoDinero(ingresoDinero);
-    return dineroCuenta;
+    return ingresoDinero;
 }
 
 //Conversion a cripto
@@ -130,8 +129,8 @@ function declaracionDivisa (divisa){
 }
 
 // FUNCIONES PARA ADMINISTRAR BILLETERA LOCAL
-
-function distribucionBilletera({wallet}, tipoCripto) {
+//ingresoDinero *= tipoCambio; // Devuelve valor en pesos para realizar conversion
+function distribucionBilletera({wallet}, tipoCripto, tipoCambio) {
     let billetera = [];
     let contadorPosiciones, cantidad, cantidadCriptos, cantidadRedondeada, dineroCuenta, dineroAlcanza;
 
@@ -141,11 +140,10 @@ function distribucionBilletera({wallet}, tipoCripto) {
     dineroAlcanza = validacionDisponibilidad(wallet, dineroCuenta);
 
     dineroRestante = wallet - dineroAlcanza;
-    console.log(dineroRestante);
 
     contadorPosiciones = billetera.push(dineroRestante);
-    cantidadCriptos = parseFloat(dineroAlcanza / tipoCripto);
 
+    cantidadCriptos = parseFloat((dineroAlcanza * tipoCambio) / tipoCripto);
     cantidadRedondeada = feedBack(cantidadCriptos, tipoCripto);
 
     contadorPosiciones = billetera.push(cantidadRedondeada);
