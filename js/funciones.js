@@ -108,8 +108,19 @@ function declaracionDivisa (divisa){
     }
 }
 
+// tipo de criptomoneda
+function declaracionCripto (cripto, cartera){ // primer parametro debe ser el valor de la cripto y el segundo objeto para desarmarlo
+
+    for(i = 0; i < cartera.length; i++){
+        posicionesCartera = cartera[i];
+        if(cripto == posicionesCartera.value){
+            return posicionesCartera.ticker
+        }
+    }
+}
+
 // FUNCIONES PARA ADMINISTRAR BILLETERA LOCAL
-function distribucionBilletera({wallet}, tipoCripto, tipoCambio) {
+function distribucionBilletera({billete}, tipoCripto, tipoCambio) { 
     let billetera = [];
     let contadorPosiciones, cantidad, cantidadCriptos, cantidadRedondeada, dineroCuenta, dineroAlcanza;
 
@@ -117,8 +128,8 @@ function distribucionBilletera({wallet}, tipoCripto, tipoCambio) {
     cantidad = validacionIngresoDinero(cantidad, 'la suma de dinero con la que desea comprar');
     dineroCuenta = validacionIngresoDinero(cantidad);
 
-    dineroAlcanza = validacionDisponibilidad(wallet, dineroCuenta);
-    dineroRestante = wallet - dineroAlcanza;
+    dineroAlcanza = validacionDisponibilidad(billete, dineroCuenta);
+    dineroRestante = billete - dineroAlcanza;
 
     contadorPosiciones = billetera.push(dineroRestante);
 
@@ -133,6 +144,20 @@ function distribucionBilletera({wallet}, tipoCripto, tipoCambio) {
     return billetera; 
 }
 
- 
-    // posibilidad de ver estado de billetera  
-    //Crear objeto que sea la billeterea
+
+function estadoBilletera (cantidadDivisa, cantidadCripto, divisaUsada, criptoComprado){
+    let billetera = [cantidadDivisa, divisaUsada, cantidadCripto, criptoComprado];
+    let estadoFinal = [];
+    let slice, contadorPosiciones;
+
+    for(i = 0; i < billetera.length; i = i + 2){
+        slice = billetera.slice(i,i+2);
+        slice = slice.toString();
+        slice = slice.replace(',',' ')
+        contadorPosiciones = estadoFinal.push(slice);
+    }
+    console.log(estadoFinal)
+    alert(`El estado de su cuenta actual es:\n${estadoFinal[0]}\n${estadoFinal[1]}`);
+
+    return estadoFinal;
+}

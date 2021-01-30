@@ -10,12 +10,13 @@ function Cripto (nombre, ticker, valor, decimales){
     this.decimales = decimales
 }
 
-function Billetera (nombre, divisa, cantidad){
+function Billetera (nombre, divisa, billete){
     this.nombre = nombre,
     this.divisa = divisa,
     this.divisaNombre = declaracionDivisa(this.divisa),
-    this.wallet = cantidad
+    this.billete = billete
 }
+
 
 
 let bitcoin = new Cripto ('Bitcoin', 'BTC', 2652536.61, 4);
@@ -37,12 +38,12 @@ dineroCuenta = cantidadDinero();
 let datosUsuario = new Billetera(nombreUsuario, monedaDivisa, dineroCuenta);
 
 console.log (`${datosUsuario.nombre} ahorra en ${datosUsuario.divisaNombre}`);
-console.log(`Valor de cuenta: ${datosUsuario.wallet} ${datosUsuario.divisaNombre}`);
+console.log(`Valor de cuenta: ${datosUsuario.billete} ${datosUsuario.divisaNombre}`);
 
 //Generamos la conversion de criptomonedas
 let monedaCripto = cambioCripto();
-
 //  Ingresar funcion que pregunte cantidad de monedas que se desean adquirir
 let cantidadDistribuida = distribucionBilletera(datosUsuario, monedaCripto, monedaDivisa);
 
-
+let ticker = declaracionCripto(monedaCripto, carteraCriptos);
+let estadoBilleteraActual = estadoBilletera(cantidadDistribuida[0], cantidadDistribuida[1], datosUsuario.divisaNombre, ticker);
