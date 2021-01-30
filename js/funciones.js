@@ -99,9 +99,9 @@ function feedBack(cantidadCompra, criptoConvertido, carteraCriptos){
 
 //Tipo de moneda
 function declaracionDivisa (divisa){
-    if(divisa == 1){
+    if(divisa == ars){
         return "pesos"
-    } else if(divisa == 151){
+    } else if(divisa == usd){
         return "dolares"
     } else {
         return "euros"
