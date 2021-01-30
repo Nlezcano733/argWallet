@@ -29,34 +29,29 @@ function cambioDinero(){
 
 //Verificacion de cambio de cripto
 function cambioCripto(){
-    let cripto = false;
+    let validacion = false;
     let moneda;
 
-    while(cripto == false){
+    while(validacion == false){
         moneda = prompt("¿Qué Criptomoneda desea comprar?\n" + 
                         bitcoin.nombre + "  = $" + bitcoin.value + "\n" +
                         ethereum.nombre + " = $" + ethereum.value + "\n" +
                         litecoin.nombre + " = $" + litecoin.value + "\n" +
                         tether.nombre + " = $" + tether.value , "BTC - ETH - LTC - USDT");
         moneda = moneda.toLocaleUpperCase();
-
-        if(moneda == bitcoin.ticker){
-            moneda = bitcoin.value;
-            cripto = true;
-        } else if(moneda == ethereum.ticker){
-            moneda = ethereum.value;
-            cripto = true;
-        } else if(moneda == litecoin.ticker){
-            moneda = litecoin.value;
-            cripto = true;
-        } else if(moneda == tether.ticker){
-            moneda = tether.value;
-            cripto = true;
-        } else{
+        
+        for (i = 0; i < carteraCriptos.length; i++){
+            let criptos = carteraCriptos [i];
+            if(moneda == criptos.ticker){
+                moneda = criptos.value;
+                validacion = true;
+                break;
+            }
+        }
+        if (validacion == false){
             alert("La divisa ingresada no es valida");
         }
     }
-    
     return moneda;
 }
 
@@ -64,7 +59,7 @@ function cambioCripto(){
 //FUNCIONES PARA CONVERTIR DIVISAS
 
 //Ingresamos la cantidad de dinero Fiat
-function cantidadDinero(tipoCambio){
+function cantidadDinero(){
     ingresoDinero = parseFloat(prompt("Ingrese la cantidad de dinero que quiera ingresar en su cuenta"));
 
 
@@ -83,37 +78,22 @@ function cantidadDinero(tipoCambio){
 }
 
 //Conversion a cripto
-function feedBack(cantidadCompra, criptoConvertido){
+function feedBack(cantidadCompra, criptoConvertido, carteraCriptos){
 
     let tickerCripto;
 
-    if(criptoConvertido == bitcoin.value){
-        cantidadCompra = parseFloat(cantidadCompra.toFixed(bitcoin.decimales));
-        tickerCripto = bitcoin.ticker
-
-    } else if(criptoConvertido == ethereum.value){
-        cantidadCompra = parseFloat(cantidadCompra.toFixed(ethereum.decimales));
-        tickerCripto = ethereum.ticker
-
-    } else if(criptoConvertido == litecoin.value){
-        cantidadCompra = parseFloat(cantidadCompra.toFixed(litecoin.decimales));
-        tickerCripto = litecoin.ticker
-
-    } else{
-        cantidadCompra = parseFloat(cantidadCompra.toFixed(tether.decimales));
-        tickerCripto = tether.ticker
+    for (i = 0; i < carteraCriptos.length; i++){
+        let cripto = carteraCriptos[i];
+        if (criptoConvertido == cripto. value){
+            cantidadCompra = parseFloat (cantidadCompra.toFixed(cripto.decimales));
+            tickerCripto = cripto.ticker;
+            break;
+        }
     }
-
     console.log(`Compra total: ${cantidadCompra} ${tickerCripto}`);
     alert(`Usted adquirio: ${cantidadCompra} ${tickerCripto}` );
 
-    return cantidadCompra
-
-    // guardar todos los objetos de criptoactivos en un array
-    // Crear funcion que realice el if 
-    //realizar repeticion por cada valor
-    //ver como colocar una sentencia break para optimizar codigo
-    
+    return cantidadCompra   
 }
 
 
@@ -129,7 +109,6 @@ function declaracionDivisa (divisa){
 }
 
 // FUNCIONES PARA ADMINISTRAR BILLETERA LOCAL
-//ingresoDinero *= tipoCambio; // Devuelve valor en pesos para realizar conversion
 function distribucionBilletera({wallet}, tipoCripto, tipoCambio) {
     let billetera = [];
     let contadorPosiciones, cantidad, cantidadCriptos, cantidadRedondeada, dineroCuenta, dineroAlcanza;
@@ -137,25 +116,23 @@ function distribucionBilletera({wallet}, tipoCripto, tipoCambio) {
     cantidad = parseInt(prompt('Ingrese cantidad de dinero para compra'));
     cantidad = validacionIngresoDinero(cantidad, 'la suma de dinero con la que desea comprar');
     dineroCuenta = validacionIngresoDinero(cantidad);
-    dineroAlcanza = validacionDisponibilidad(wallet, dineroCuenta);
 
+    dineroAlcanza = validacionDisponibilidad(wallet, dineroCuenta);
     dineroRestante = wallet - dineroAlcanza;
 
     contadorPosiciones = billetera.push(dineroRestante);
 
     cantidadCriptos = parseFloat((dineroAlcanza * tipoCambio) / tipoCripto);
-    cantidadRedondeada = feedBack(cantidadCriptos, tipoCripto);
+    cantidadRedondeada = feedBack(cantidadCriptos, tipoCripto, carteraCriptos);
 
     contadorPosiciones = billetera.push(cantidadRedondeada);
     console.log(billetera)
     
     console.log("hasta aca vamos bien");
 
-    return billetera;
+    return billetera; 
 }
 
-/*
-    PUNTOS RESTANTES:
-    - posibilidad de ver estado de billetera --> Crear objeto billetera global
-
-*/
+ 
+    // posibilidad de ver estado de billetera  
+    //Crear objeto que sea la billeterea

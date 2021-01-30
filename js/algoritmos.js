@@ -22,6 +22,7 @@ let ethereum = new Cripto ('Ethereum', 'ETH', 96502.48, 4);
 let litecoin = new Cripto ('Litecoin', 'LTC', 11202.62, 6);
 let tether = new Cripto ('Tether', 'USDT', 151, 2);
 
+let carteraCriptos = [bitcoin, ethereum, litecoin, tether];
 
 
 // Comienzo de algoritmo -- obtenemos datos
