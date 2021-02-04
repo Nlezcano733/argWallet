@@ -12,27 +12,36 @@
     <header>
         <div id="navbar">
             <i class="fas fa-bars" id="menuHamburguesa"></i>
-            <!--ul>
-                <li>Convesor</li>
-                <li>Cotizaciones</li>
-                <li>Wallet</li>
-            </ul-->
             <img class="logoPpal" src="assets/imagenes/Recurso 2.png" alt="ArgWallet">
             <div class="moneda">
-                <!--p>ARS</p>
-                <p>USD</p-->
+                <p id="moneda">ARS</p>
                 <i class="fas fa-money-bill"></i>
-                <i class="fas fa-chevron-down"></i>
+                <!-- <i class="fas fa-chevron-down"></i> -->
             </div>
         </div>
-        <div class="intro">
-            <h1>Operar criptomonedas nunca fue tan sencillo.</h1>
-            <p>
-                Compré, vendé y calculá el valor de tus criptos favoritas en
-                un solo lugar y con pocos clicks de distancia.
-            </p>
-            <input type="button" value="Comenzar">
-        </div>
+        <section class="intro">
+            <div class="descripcion">
+                <h1>Operar criptomonedas nunca fue tan sencillo.</h1>
+                <p>
+                    Compré, vendé y calculá el valor de tus criptos favoritas en
+                    un solo lugar y con pocos clicks de distancia.
+                </p>
+            </div>
+            <!-- <input type="button" value="Comenzar"> -->
+            <div class="activo">
+                <h2>Billetera de activos</h2>
+                <div class="activo__informacion" id="divisa">
+                    <h3 class="activo__informacion--nombre">ARS</h3>
+                    <h4 class="activo__informacion--cantidad">$ 0,00</h4>
+                    <h5 class="activo__informacion--conversion">USD 0,00</h5>
+                </div>
+                <div class="activo__informacion" id="cripto">
+                    <h3 class="activo__informacion--nombre">BTC</h3>
+                    <h4 class="activo__informacion--cantidad">$ 0,00</h4>
+                    <h5 class="activo__informacion--conversion">USD 0,00</h5>
+                </div>
+            </div>
+        </section>
     </header>
 
     <script src="js/validaciones.js"></script>
