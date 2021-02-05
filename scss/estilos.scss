@@ -28,14 +28,17 @@ header{
 }
 .logoPpal{
     display: block;
+    position: fixed;
+    top: 20px;
+    left: calc(50% - 50px - 30px);
     height: 100px;
-    margin: 10px auto;
 }
 #navbar{
     @include flexbox(row, space-between, center);
     padding: 0px;
     height: 70px;
     width: 100%;
+    margin-top: 30px;
 
     .moneda{
         width: fit-content;
@@ -55,6 +58,7 @@ header{
     height: 70vh;
     width: 60%;
     padding: 0px 20px;
+    margin-top: 50px;
     margin-bottom: 50px;
     @include flexbox(column, space-around, center);
     text-align: center;
@@ -87,7 +91,6 @@ header{
         h2{
             grid-column-start: 0;
             grid-column-end: span 2;
-            margin: 0px;
         }
         .activo__informacion{
             height: 210px;

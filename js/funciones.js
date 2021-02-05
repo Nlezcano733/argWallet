@@ -8,16 +8,15 @@ function cambioDinero(){
 
     while(divisa == false){
         moneda = prompt("Que tipo de moneda quiere ingresar", "ARS - USD - EURO");
-        moneda = moneda.toLowerCase();
-
-        if(moneda == 'ars'){
-            moneda = ars;
+        moneda = moneda.toUpperCase();
+        if(moneda == ars.ticker){
+            moneda = ars.value;
             divisa = true;
-        } else if(moneda == 'usd'){
-            moneda = usd;
+        } else if(moneda == usd.ticker){
+            moneda = usd.value;
             divisa = true;
-        } else if(moneda == 'euro'){
-            moneda = euro;
+        } else if(moneda == euro.ticker){
+            moneda = euro.value;
             divisa = true;
         } else{
             alert("La divisa ingresada no es valida");
@@ -25,19 +24,49 @@ function cambioDinero(){
     }
 
     return moneda;
+    //retorna el valor de la moneda que queda --> ej: usd  = 151
 }
 
+//PASAMOS AL USUARIO LA MONEDA ENTERA
+function objetoMoneda (moneda, arrayMonedas){
+    let i, array;
+    for(i=0; i< arrayMonedas.length; i++){
+        array = arrayMonedas[i];
+        if(moneda == array.value){
+            break;
+        }
+    }
+    return array;
+}
+
+
 //Verificacion de cambio de cripto
-function cambioCripto(){
+let conversion = ( moneda, criptoValue) => parseFloat((criptoValue.value / moneda.value ).toFixed(criptoValue.decimales));
+
+function convertiCriptos (divisa, criptoArray){ 
+    let arrayConvertido = [];
+    for (let i = 0; i < criptoArray.length; i++){
+        let contadorPosiciones;
+        let valoresArray = criptoArray[i];
+
+        let criptosConvertidos = conversion (divisa, valoresArray);
+        contadorPosiciones = arrayConvertido.push(criptosConvertidos);
+    }
+    return arrayConvertido
+}
+
+
+function cambioCripto(objetoMoneda, criptoArray ){ 
     let validacion = false;
     let moneda;
+    let conversion = convertiCriptos (objetoMoneda, criptoArray);
 
     while(validacion == false){
         moneda = prompt("¿Qué Criptomoneda desea comprar?\n" + 
-                        bitcoin.nombre + "  = $" + bitcoin.value + "\n" +
-                        ethereum.nombre + " = $" + ethereum.value + "\n" +
-                        litecoin.nombre + " = $" + litecoin.value + "\n" +
-                        tether.nombre + " = $" + tether.value , "BTC - ETH - LTC - USDT");
+                        bitcoin.nombre + "  = $" + conversion[0].toFixed(2) + "\n" +
+                        ethereum.nombre + " = $" + conversion [1].toFixed(2) + "\n" +
+                        litecoin.nombre + " = $" + conversion [2].toFixed(2)+ "\n" +
+                        tether.nombre + " = $" + conversion[3].toFixed(2) , "BTC - ETH - LTC - USDT");
         moneda = moneda.toLocaleUpperCase();
         
         for (i = 0; i < carteraCriptos.length; i++){
@@ -62,7 +91,6 @@ function cambioCripto(){
 function cantidadDinero(){
     ingresoDinero = parseFloat(prompt("Ingrese la cantidad de dinero que quiera ingresar en su cuenta"));
 
-
     //VALIDACION DE INGRESO
     if (isNaN(ingresoDinero)){
         let validacion = false;
@@ -73,9 +101,9 @@ function cantidadDinero(){
             }
         }
     }
-
     return ingresoDinero;
 }
+
 
 //Conversion a cripto
 function feedBack(cantidadCompra, criptoConvertido, carteraCriptos){
@@ -99,18 +127,18 @@ function feedBack(cantidadCompra, criptoConvertido, carteraCriptos){
 
 //Tipo de moneda
 function declaracionDivisa (divisa){
-    if(divisa == ars){
-        return "pesos"
-    } else if(divisa == usd){
-        return "dolares"
+    if(divisa == ars.value){
+        return ars.ticker
+    } else if(divisa == usd.value){
+        return usd.ticker
     } else {
-        return "euros"
+        return usd.ticker
     }
 }
 
-// tipo de criptomoneda
-function declaracionCripto (cripto, cartera){ // primer parametro debe ser el valor de la cripto y el segundo objeto para desarmarlo
 
+// tipo de criptomoneda
+function declaracionCripto (cripto, cartera){
     for(i = 0; i < cartera.length; i++){
         posicionesCartera = cartera[i];
         if(cripto == posicionesCartera.value){
@@ -118,6 +146,7 @@ function declaracionCripto (cripto, cartera){ // primer parametro debe ser el va
         }
     }
 }
+
 
 // FUNCIONES PARA ADMINISTRAR BILLETERA LOCAL
 function distribucionBilletera({billete}, tipoCripto, tipoCambio) { 
