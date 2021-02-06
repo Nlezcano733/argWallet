@@ -9,6 +9,7 @@ function cambioDinero(){
     while(divisa == false){
         moneda = prompt("Que tipo de moneda quiere ingresar", "ARS - USD - EURO");
         moneda = moneda.toUpperCase();
+
         if(moneda == ars.ticker){
             moneda = ars.value;
             divisa = true;
@@ -22,22 +23,21 @@ function cambioDinero(){
             alert("La divisa ingresada no es valida");
         }
     }
-
     return moneda;
-    //retorna el valor de la moneda que queda --> ej: usd  = 151
 }
 
 //PASAMOS AL USUARIO LA MONEDA ENTERA
-function objetoMoneda (moneda, arrayMonedas){
-    let i, array;
-    for(i=0; i< arrayMonedas.length; i++){
-        array = arrayMonedas[i];
-        if(moneda == array.value){
+function objetoCompleto (divisa, array){ 
+    let i, arrayDivisas;
+    for(i=0; i< array.length; i++){
+        arrayDivisas = array[i];
+        if(divisa == arrayDivisas.value){ 
             break;
         }
     }
-    return array;
+    return array[i]
 }
+
 
 
 //Verificacion de cambio de cripto
@@ -46,11 +46,9 @@ let conversion = ( moneda, criptoValue) => parseFloat((criptoValue.value / moned
 function convertiCriptos (divisa, criptoArray){ 
     let arrayConvertido = [];
     for (let i = 0; i < criptoArray.length; i++){
-        let contadorPosiciones;
         let valoresArray = criptoArray[i];
-
         let criptosConvertidos = conversion (divisa, valoresArray);
-        contadorPosiciones = arrayConvertido.push(criptosConvertidos);
+        arrayConvertido.push(criptosConvertidos);
     }
     return arrayConvertido
 }
@@ -106,87 +104,101 @@ function cantidadDinero(){
 
 
 //Conversion a cripto
-function feedBack(cantidadCompra, criptoConvertido, carteraCriptos){
-
-    let tickerCripto;
+function feedBack(cantidadCompra, criptoConvertido, carteraCriptos){ // se encarga de redondear la cantidad de criptos compradas
 
     for (i = 0; i < carteraCriptos.length; i++){
         let cripto = carteraCriptos[i];
-        if (criptoConvertido == cripto. value){
+        if (criptoConvertido == cripto.value){
             cantidadCompra = parseFloat (cantidadCompra.toFixed(cripto.decimales));
-            tickerCripto = cripto.ticker;
             break;
         }
     }
-    console.log(`Compra total: ${cantidadCompra} ${tickerCripto}`);
-    alert(`Usted adquirio: ${cantidadCompra} ${tickerCripto}` );
-
     return cantidadCompra   
 }
 
 
-//Tipo de moneda
-function declaracionDivisa (divisa){
-    if(divisa == ars.value){
-        return ars.ticker
-    } else if(divisa == usd.value){
-        return usd.ticker
-    } else {
-        return usd.ticker
-    }
-}
-
-
-// tipo de criptomoneda
-function declaracionCripto (cripto, cartera){
-    for(i = 0; i < cartera.length; i++){
-        posicionesCartera = cartera[i];
-        if(cripto == posicionesCartera.value){
-            return posicionesCartera.ticker
-        }
-    }
-}
-
-
 // FUNCIONES PARA ADMINISTRAR BILLETERA LOCAL
-function distribucionBilletera({billete}, tipoCripto, tipoCambio) { 
+function distribucionBilletera(cantidadPesos, tipoCripto, tipoCambio) { // Ingresamos --> cantidad de plata / valor de cripto / valor de moneda
     let billetera = [];
-    let contadorPosiciones, cantidad, cantidadCriptos, cantidadRedondeada, dineroCuenta, dineroAlcanza;
+    let cantidad, cantidadCriptos, cantidadRedondeada, dineroCuenta, dineroAlcanza;
 
     cantidad = parseInt(prompt('Ingrese cantidad de dinero para compra'));
+
     cantidad = validacionIngresoDinero(cantidad, 'la suma de dinero con la que desea comprar');
     dineroCuenta = validacionIngresoDinero(cantidad);
+    dineroAlcanza = validacionDisponibilidad(cantidadPesos, dineroCuenta);
 
-    dineroAlcanza = validacionDisponibilidad(billete, dineroCuenta);
-    dineroRestante = billete - dineroAlcanza;
-
-    contadorPosiciones = billetera.push(dineroRestante);
+    dineroRestante = cantidadPesos - dineroAlcanza;
+    billetera.push(dineroRestante);
 
     cantidadCriptos = parseFloat((dineroAlcanza * tipoCambio) / tipoCripto);
     cantidadRedondeada = feedBack(cantidadCriptos, tipoCripto, carteraCriptos);
 
-    contadorPosiciones = billetera.push(cantidadRedondeada);
-    console.log(billetera)
-    
-    console.log("hasta aca vamos bien");
+    billetera.push(cantidadRedondeada);
 
     return billetera; 
 }
 
 
 function estadoBilletera (cantidadDivisa, cantidadCripto, divisaUsada, criptoComprado){
-    let billetera = [cantidadDivisa, divisaUsada, cantidadCripto, criptoComprado];
+    let billetera = [divisaUsada, cantidadDivisa, cantidadCripto, criptoComprado];
     let estadoFinal = [];
-    let slice, contadorPosiciones;
+    let slice;
 
     for(i = 0; i < billetera.length; i = i + 2){
         slice = billetera.slice(i,i+2);
         slice = slice.toString();
         slice = slice.replace(',',' ')
-        contadorPosiciones = estadoFinal.push(slice);
+        estadoFinal.push(slice);
     }
-    console.log(estadoFinal)
-    alert(`El estado de su cuenta actual es:\n${estadoFinal[0]}\n${estadoFinal[1]}`);
-
     return estadoFinal;
+}
+
+
+function VerificacionReferencia ({divisa}, divisaConvertida, id, clase){
+    let elementoPadre = document.getElementById(id);
+    let elementoHijo = document.getElementsByClassName(clase);
+    let elementoParaRemover = elementoHijo[0];
+
+    if(divisa == usd){
+        elementoPadre.removeChild(elementoParaRemover);
+    } 
+}
+
+
+function conversionRefencia ( {cantidadDivisa}, {cantidadCripto}, divisaConversion, criptoConversion){
+    let billeteraEnDolares = [];
+    let divisaEnDolares, criptoEnDolares;
+
+    divisaEnDolares = parseFloat((cantidadDivisa * divisaConversion).toFixed(2));
+    billeteraEnDolares.push(divisaEnDolares);
+
+    criptoEnDolares = parseFloat((cantidadCripto * criptoConversion).toFixed(2));
+    billeteraEnDolares.push(criptoEnDolares);
+
+    return billeteraEnDolares;
+}
+
+function modificarValores (classTexto, divisa, cripto){ // Modificador debe ser array con listado de cripto de usuario
+    let elemento = document.getElementsByClassName(classTexto);
+
+    elemento[0].innerHTML = divisa;
+    elemento[1].innerHTML = cripto;
+}
+function modificarId (idtexto, texto){
+    let elemento = document.getElementById(idtexto);
+    elemento.innerHTML = texto;
+}
+
+function agregarNodos (idPadre, atributo, nombreAtributo, { billeteraTotal }){
+    let etiqueta, contenido, nodoPrincipal;
+
+    etiqueta = document.createElement('p');
+    etiqueta.setAttribute(atributo, nombreAtributo); 
+
+    contenido = document.createTextNode(billeteraTotal); 
+    etiqueta.appendChild(contenido);
+
+    nodoPrincipal = document.getElementById(idPadre);
+    nodoPrincipal.appendChild(etiqueta);
 }

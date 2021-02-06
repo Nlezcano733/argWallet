@@ -62,13 +62,16 @@ header {
   width: 100%;
   margin-top: 30px;
 }
-#navbar .moneda {
+#navbar #moneda {
   width: fit-content;
 }
-#navbar .moneda i, #navbar .moneda p {
-  display: inline-block;
+#navbar #moneda i {
   font-size: 20px;
-  margin-left: 15px;
+  margin-right: 10px;
+}
+#navbar #moneda p {
+  display: inline-block;
+  font-size: 18px;
 }
 #navbar #menuHamburguesa {
   font-size: 20px;
@@ -99,7 +102,7 @@ header {
 .intro .descripcion p {
   margin: 0 auto;
   font-size: 20px;
-  width: 70%;
+  width: 80%;
   margin: 10px auto;
 }
 .intro .activo {
@@ -122,10 +125,13 @@ header {
   height: 210px;
   width: 180px;
   padding: 8px 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 10px;
+  justify-content: center;
   align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 1fr 20px;
   background-color: #7692b777;
   box-shadow: 0px 0px 5px #455f83;
   border-radius: 10px;

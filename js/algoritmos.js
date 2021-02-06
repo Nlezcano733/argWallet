@@ -1,4 +1,4 @@
-let ingresoDinero, nombreUsuario, monedaDivisa, dineroCuenta;
+let ingresoDinero, nombreUsuario, monedaDivisa, monedaUsuario, dineroCuenta;
 
 // --------- CREACION DE CONSTRUCTORES ---------- //
 
@@ -23,31 +23,27 @@ Cripto.prototype.conversionMoneda = function (moneda) {
 
 // ------------------------------------ //
 
-function Billetera (nombre, divisa, billete){
+function Billetera (nombre, divisa, cripto, billeteraTotal, cantidadDivisa, cantidadCripto){
     this.nombre = nombre,
     this.divisa = divisa,
-    this.divisaNombre = declaracionDivisa(this.divisa),
-    this.billete = billete
+    this.cripto = cripto,
+    this.billeteraTotal = billeteraTotal,
+    this.cantidadDivisa = cantidadDivisa,
+    this.cantidadCripto = cantidadCripto
 }
 
 // ------------------------------------ //
 
-class Pesos {
-    constructor (nombre, ticker, value){
+function Divisas (nombre, ticker, value, simbolo){
     this. nombre = nombre,
     this.ticker = ticker,
-    this.value = value
-    }
+    this.value = value,
+    this.simbolo = simbolo
 }
 
-class Divisas extends Pesos{
-    conversion ( { value }) {
+Divisas.prototype.conversion = function ({value}){
         return parseFloat((this.value / value).toFixed(4));
-        //Devuelve el valor corvertido en la moneda elegida
-    }
 }
-
-
 
 
 // --------- CREAMOS OBJETOS ---------- //
@@ -61,38 +57,44 @@ let carteraCriptos = [bitcoin, ethereum, litecoin, tether];
 
 // ---------------------------------------- //
 
-let ars = new Pesos ('pesos', 'ARS', 1);
-let usd = new Divisas ('dolares', 'USD', 156);
-let euro = new Divisas ('euros', 'EURO', 184);
+let ars = new Divisas ('Pesos', 'ARS', 1, '$');
+let usd = new Divisas ('Dolares', 'USD', 156, '$');
+let euro = new Divisas ('Euros', 'EURO', 184, '€');
 
 let carteraDivisas = [ars, usd, euro];
-
 // --------------------------------------- //
 
 
-
-
-
-// Comienzo de algoritmo -- obtenemos datos
 nombreUsuario = prompt("Bienvenid@ a ArgWALLET\n Por favor, ingrese su nombre");
 nombreUsuario = validacionIngresoString(nombreUsuario);
 
-monedaDivisa = cambioDinero(); // devuelve el valor de la moneda --> moneda.value
-monedaUsuario = objetoMoneda (monedaDivisa, carteraDivisas);    // Necesitamos que pasarle al usuario la moneda entera
+monedaDivisa = cambioDinero();
+monedaUsuario = objetoCompleto (monedaDivisa, carteraDivisas);
 dineroCuenta = cantidadDinero();
 
-
-let datosUsuario = new Billetera(nombreUsuario, monedaUsuario, dineroCuenta);
-
-
-
-console.log (`${datosUsuario.nombre} ahorra en ${datosUsuario.divisaNombre}`);
-console.log(`Valor de cuenta: ${datosUsuario.billete} ${datosUsuario.divisaNombre}`);
-
-//Generamos la conversion de criptomonedas
-let monedaCripto = cambioCripto(datosUsuario.divisa, carteraCriptos);
+monedaCripto = cambioCripto(monedaUsuario, carteraCriptos);
+criptoUsuario = objetoCompleto (monedaCripto, carteraCriptos);
 //  Agregar funcion que pregunte cantidad de monedas que se desean adquirir -- Eventos
-let cantidadDistribuida = distribucionBilletera(datosUsuario, monedaCripto, monedaDivisa);
 
-let ticker = declaracionCripto(monedaCripto, carteraCriptos);
-let estadoBilleteraActual = estadoBilletera(cantidadDistribuida[0], cantidadDistribuida[1], datosUsuario.divisaNombre, ticker);
+let cantidadDistribuida = distribucionBilletera(dineroCuenta, monedaCripto, monedaDivisa);  // Array se agregaria con esta funcion --> ver como complejizar 
+let datosUsuario = new Billetera(nombreUsuario, monedaUsuario, criptoUsuario, dineroCuenta, cantidadDistribuida[0], cantidadDistribuida[1]);    // ver como agregar array de activos
+
+let nombreCripto = datosUsuario.cripto.nombre;
+let tickerCripto = datosUsuario.cripto.ticker;
+let nombreDivisa = datosUsuario.divisa.nombre;
+let simboloDivisa = datosUsuario.divisa.simbolo;
+let estadoBilleteraActual = estadoBilletera(datosUsuario.cantidadDivisa, datosUsuario.cantidadCripto, simboloDivisa, tickerCripto);
+
+// Modificacion de DOM para Tarjetas
+modificarValores('activo__informacion--nombre', nombreDivisa, nombreCripto);
+modificarValores('activo__informacion--cantidad', estadoBilleteraActual[0], estadoBilleteraActual[1]);
+
+let conversorDivisa = datosUsuario.divisa.conversion(usd);
+let conversorCripto = datosUsuario.cripto.conversionMoneda(usd);
+
+let arrayADolar = conversionRefencia(datosUsuario, datosUsuario, conversorDivisa, conversorCripto);
+modificarValores('activo__informacion--conversion', `U$D ${arrayADolar[0]}`, `U$D ${arrayADolar[1]}`);
+let conversionUsd = VerificacionReferencia(datosUsuario, arrayADolar[0], 'divisa', 'activo__informacion--conversion');
+
+modificarId('divisaTicker', datosUsuario.divisa.simbolo)
+let valorCuenta = agregarNodos('moneda', 'class', 'valorBilletera', datosUsuario);
