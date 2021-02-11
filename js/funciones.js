@@ -178,27 +178,3 @@ function conversionRefencia ( {cantidadDivisa}, {cantidadCripto}, divisaConversi
 
     return billeteraEnDolares;
 }
-
-function modificarValores (classTexto, divisa, cripto){ // Modificador debe ser array con listado de cripto de usuario
-    let elemento = document.getElementsByClassName(classTexto);
-
-    elemento[0].innerHTML = divisa;
-    elemento[1].innerHTML = cripto;
-}
-function modificarId (idtexto, texto){
-    let elemento = document.getElementById(idtexto);
-    elemento.innerHTML = texto;
-}
-
-function agregarNodos (idPadre, atributo, nombreAtributo, { billeteraTotal }){
-    let etiqueta, contenido, nodoPrincipal;
-
-    etiqueta = document.createElement('p');
-    etiqueta.setAttribute(atributo, nombreAtributo); 
-
-    contenido = document.createTextNode(billeteraTotal); 
-    etiqueta.appendChild(contenido);
-
-    nodoPrincipal = document.getElementById(idPadre);
-    nodoPrincipal.appendChild(etiqueta);
-}
