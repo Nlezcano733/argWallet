@@ -1,55 +1,50 @@
-/*$gradienteAzul: linear-gradient(to bottom, $celeste2, $celeste3);*/
 @font-face {
   font-family: Ebirma;
-  src: url("../../assets/fuentes/ebrima.ttf") format("Truetype");
-  font-weight: 400;
+  src: url("../assets/fuentes/ebrima.ttf") format("Truetype");
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: Lato;
-  src: url(../../assets/fuentes/Lato/Lato-Regular.ttf) format("Truetype");
-  font-weight: 400;
+  src: url("../assets/fuentes/Lato/Lato-Regular.ttf") format("Truetype");
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: Roboto;
-  src: url(../../assets/fuentes/Roboto/Roboto-Medium.ttf) format("Truetype");
-  font-weight: 600;
+  src: url("../assets/fuentes/Roboto/Roboto-Medium.ttf") format("Truetype");
+  font-weight: normal;
   font-style: normal;
 }
 * {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  font-family: Ebirma, sans-serif, verdana;
+}
+
+h1, h2, h3, h4, h5 {
   font-family: Lato, sans-serif, verdana;
+}
+
+p, a {
+  font-family: Ebirma, sans-serif, verdana;
 }
 
 body {
   background-color: #dddddd;
-}
-
-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-  padding: 30px 70px;
-  background-image: url(../assets/imagenes/cabecera.jpg);
-  background-color: #7692b7;
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: multiply;
-  color: #ffffff;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .logoPpal {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   display: block;
-  position: fixed;
-  top: 20px;
-  left: calc(50% - 50px - 30px);
-  height: 100px;
+  height: 70px;
+  margin: 0px auto;
 }
 
 #navbar {
@@ -57,93 +52,642 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px;
-  height: 70px;
+  height: 90px;
+  width: 100%;
+  padding: 5px 50px;
+  background-image: linear-gradient(to top, #7692b7, #455f83);
+  color: #ffffff;
+}
+#navbar section {
+  height: 40px;
+  width: fit-content;
+  font-size: 18px;
+  background-color: #5678a4;
+  box-shadow: 0px 0px 5px #5678a4;
+}
+#navbar .navbar__moneda {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 220px;
+}
+#navbar .navbar__moneda .cantidadDinero {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+  margin: 8px 20px 8px 10px;
+}
+#navbar .navbar__moneda .cantidadDinero i {
+  margin-right: 10px;
+}
+#navbar .navbar__moneda #cantidadVisible {
+  height: 100%;
+  padding: 11px 10px;
+  border-left: 2px solid #7692b7;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+#navbar .navbar__moneda #cantidadVisible:hover {
+  background-color: #455f83;
+}
+#navbar .navbar__moneda #cantidadVisible:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+#navbar .navbar__user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 220px;
+  max-width: 320px;
+}
+#navbar .navbar__user #userIn {
+  height: 100%;
+  padding: 10px 12px;
+  border-left: 2px solid #7692b7;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+#navbar .navbar__user #userIn:hover {
+  background-color: #455f83;
+}
+#navbar .navbar__user #userIn:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+#navbar .navbar__user p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+main #mainAside {
+  grid-area: aside;
+  height: calc(100vh - 120px);
+  width: 320px;
+  padding-top: 15px;
+  background-image: radial-gradient(circle at left bottom, #7908FF, #7692b7);
+  box-shadow: 0px 15px 20px 0px #7692b7 inset;
+  border-top: 3px solid #7692b7;
+}
+main #mainAside h2 {
+  height: 50px;
+  padding-bottom: 15px;
+  font-family: Lato, sans-serif, verdana;
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+  color: #ffffff;
+  border-bottom: 2px solid #7692b7;
+}
+main #mainAside #listadoCriptos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: calc(100% - 50px);
+  padding: 10px 5px;
+  overflow-y: scroll;
+  direction: rtl;
+}
+main #mainAside #listadoCriptos .cripto {
+  width: 260px;
+  height: 80px;
+  padding: 5px 10px;
+  margin-top: 15px;
+  color: #ffffff;
+  direction: ltr;
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 0px;
+  justify-content: flex-start;
+  align-items: center;
+  grid-template-columns: 60px 1fr 1fr;
+  grid-template-rows: 2fr 32px;
+  grid-template-areas: "imagen nombre nombre" "imagen cambio valor";
+  background-color: #7708ff66;
+  box-shadow: 0px 0px 7px #7908FF;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in;
+  cursor: pointer;
+}
+main #mainAside #listadoCriptos .cripto:hover {
+  background-color: #5F06CC;
+}
+main #mainAside #listadoCriptos .cripto:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+main #mainAside #listadoCriptos .cripto .imagenCripto {
+  grid-area: imagen;
+  width: 60px;
+  height: 100%;
+  padding-top: 12px;
+  overflow: hidden;
+}
+main #mainAside #listadoCriptos .cripto .imagenCripto img {
+  width: 100%;
+}
+main #mainAside #listadoCriptos .cripto .nombreCripto {
+  grid-area: nombre;
+  font-family: Lato, sans-serif, verdana;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+main #mainAside #listadoCriptos .cripto .cambioCripto {
+  grid-area: cambio;
+  font-size: 16px;
+  font-family: Ebirma, sans-serif, verdana;
+  font-weight: 400;
+}
+main #mainAside #listadoCriptos .cripto .valorCripto {
+  grid-area: valor;
+}
+main #mainAside #listadoCriptos .cripto .marketCapCripto {
+  grid-area: marketCap;
+}
+main #mainAside #listadoCriptos::-webkit-scrollbar {
+  width: 5px;
+}
+main #mainAside #listadoCriptos::-webkit-scrollbar:active {
+  width: 10px;
+}
+main #mainAside #listadoCriptos::-webkit-scrollbar-thumb {
+  background-color: #5F06CC;
+  border-radius: 10px;
+}
+main #panel {
+  display: grid;
+  grid-column-gap: 40px;
+  grid-row-gap: 15px;
+  justify-content: center;
+  align-items: start;
+  grid-template-rows: 125px 100px 1fr 90px;
+  grid-template-columns: 100px 420px 1fr;
+  grid-template-areas: "imagen nombre cotizacion" "compra compra detalles" "compra compra info" "adquisicion adquisicion info";
+  width: calc(100vw - 320px);
+  height: calc(100vh - 120px);
+  padding: 30px;
+  color: #333333;
+}
+main #panel #logoCripto {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  align-self: center;
+}
+main #panel #logoCripto img {
   width: 100%;
   margin-top: 30px;
 }
 #navbar #moneda {
   width: fit-content;
 }
-#navbar #moneda i {
-  font-size: 20px;
-  margin-right: 10px;
+main #panel #nombreCripto {
+  grid-area: nombre;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  width: 100%;
 }
-#navbar #moneda p {
-  display: inline-block;
+main #panel #nombreCripto #nombre {
+  font-size: 46px;
+  font-weight: 200;
+  width: fit-content;
+}
+main #panel #nombreCripto #ticker {
+  font-size: 24px;
+  font-weight: 200;
+  width: fit-content;
+  margin-left: 15px;
+}
+main #panel #cotizacion {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 80px;
+  grid-template-rows: 35px 30px 60px;
+  grid-template-areas: "conversion conversion ." "compra venta monedas" "precioCompra precioVenta monedas";
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-image: linear-gradient(to top, #7692b7, #455f83);
+  color: #ffffff;
+  box-shadow: 0px 0px 20px #bbbbbb;
+  border-radius: 8px;
+  text-align: center;
+}
+main #panel #cotizacion p, main #panel #cotizacion h4 {
+  height: 100%;
+  background-color: #dddddd;
+  color: #1a1a1a;
+}
+main #panel #cotizacion p {
+  font-family: Roboto, sans-serif, verdana;
+  font-size: 24px;
+  line-height: 50px;
+  border-top: 1px solid #bbbbbb;
+}
+main #panel #cotizacion h4 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+  color: #999999;
+}
+main #panel #cotizacion #conversion {
+  grid-area: conversion;
   font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
 }
-#navbar #menuHamburguesa {
-  font-size: 20px;
+main #panel #cotizacion #compra {
+  grid-area: compra;
 }
-
-.intro {
-  height: 70vh;
-  width: 60%;
-  padding: 0px 20px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+main #panel #cotizacion #venta {
+  grid-area: venta;
+}
+main #panel #cotizacion #valorCompra {
+  grid-area: precioCompra;
+  border-bottom-left-radius: 8px;
+}
+main #panel #cotizacion #valorVenta {
+  grid-area: precioVenta;
+}
+main #panel #cotizacion .monedas {
+  grid-area: monedas;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  text-align: center;
+  height: 100%;
+  width: 100%;
 }
-.intro .descripcion {
-  display: block;
-  height: fit-content;
-  padding: 20px 0px;
+main #panel #cotizacion .monedas ul {
+  width: 100%;
+  height: 100%;
+  line-height: 25px;
+  border-top: 1px solid #bbbbbb;
+  cursor: pointer;
 }
-.intro .descripcion h1 {
-  font-family: Roboto, sans-serif, verdana;
-  font-size: 34px;
-  margin: 10px auto;
+main #panel #cotizacion .monedas ul:hover {
+  background-color: #5678a4;
+  border-bottom-right-radius: 8px;
 }
-.intro .descripcion p {
-  margin: 0 auto;
-  font-size: 20px;
-  width: 80%;
-  margin: 10px auto;
+main #panel #cotizacion .monedas ul:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
 }
-.intro .activo {
-  display: grid;
-  grid-column-gap: 50px;
-  grid-row-gap: 10px;
-  justify-content: space-around;
+main #panel .infoMercado {
+  grid-area: detalles;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+main #panel .infoMercado div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 36px auto;
-  height: 60%;
-  width: fit-content;
-  padding: 10px 30px;
+  width: 300px;
+  margin-bottom: 10px;
 }
-.intro .activo h2 {
-  grid-column-start: 0;
-  grid-column-end: span 2;
+main #panel .infoMercado div p {
+  margin-left: 10px;
 }
-.intro .activo .activo__informacion {
-  height: 210px;
-  width: 180px;
-  padding: 8px 5px;
+main #panel .infoMercado div h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+main #panel .infoMercado div h4 {
+  color: #4d4d4d;
+}
+main #panel #resumen {
+  grid-area: info;
+}
+main #panel #transaccion {
+  grid-area: compra;
   display: grid;
-  grid-column-gap: 0px;
+  grid-column-gap: 20px;
   grid-row-gap: 10px;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr;
-  grid-template-rows: 60px 1fr 20px;
-  background-color: #7692b777;
-  box-shadow: 0px 0px 5px #455f83;
-  border-radius: 10px;
-}
-.intro .activo .activo__informacion--nombre {
+  grid-template-columns: 1fr 50px 1fr;
+  grid-template-rows: 60px repeat(3, 30px) 50px 40px;
+  grid-template-areas: "titulo titulo titulo" "ingreso cambio resultado" "ingreso igual resultado" "resto resto resto" "confirmacion confirmacion confirmacion" "compra compra compra";
+  height: 100%;
   width: 100%;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #7692b7;
 }
-.intro .activo .activo__informacion--conversion {
-  font-size: 14px;
+main #panel #transaccion .titulo {
+  grid-area: titulo;
+  text-align: center;
+}
+main #panel #transaccion form {
+  grid-area: ingreso;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+main #panel #transaccion form #conversorSimbolo {
+  font-size: 30px;
+  font-weight: 400;
+  width: 40px;
+  margin-right: 10px;
+}
+main #panel #transaccion form #ingresoDivisa {
+  height: 40px;
+  width: calc(100% - 70px);
+  font-size: 30px;
+  text-align: right;
+  color: #333333;
+  background-color: #dddddd;
+  border: none;
+  border-bottom: 1px solid #999999;
+}
+main #panel #transaccion form #ingresoDivisa::placeholder {
+  font-size: 30px;
+}
+main #panel #transaccion form #ingresoDivisa::step {
+  display: none;
+}
+main #panel #transaccion form #ingresoDivisa:focus {
+  outline: none;
+}
+main #panel #transaccion .boton {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  color: #ffffff;
+  background-color: #bbbbbb;
+  border: 2px solid #808080;
+  font-size: 16px;
+  line-height: 1.5em;
+  transition: background-color 0.2s ease-in;
+  text-align: center;
+}
+main #panel #transaccion .boton:hover {
+  background-color: #808080;
+}
+main #panel #transaccion .boton:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+main #panel #transaccion .boton:focus {
+  outline: none;
+}
+main #panel #transaccion #cambioConversion {
+  grid-area: cambio;
+}
+main #panel #transaccion #igual {
+  grid-area: igual;
+}
+main #panel #transaccion #resultado {
+  grid-area: resultado;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  color: #333333;
+  background-color: #dddddd;
+}
+main #panel #transaccion #resultado #valorConvertido {
+  width: calc(100% - 80px);
+}
+main #panel #transaccion #resultado #tickerConvertido {
+  width: 70px;
+  margin-left: 10px;
+}
+main #panel #transaccion #resto {
+  grid-area: resto;
+  text-align: center;
+}
+main #panel #transaccion #confirmacionCompra {
+  grid-area: confirmacion;
+  width: 150px;
+  height: 40px;
+  margin: 0 auto;
+  color: #ffffff;
+  background-color: #14b10b;
+  border: 2px solid #097c02;
+  font-size: 16px;
+  line-height: 1.5em;
+  transition: background-color 0.2s ease-in;
+}
+main #panel #transaccion #confirmacionCompra:hover {
+  background-color: #097c02;
+}
+main #panel #transaccion #confirmacionCompra:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+main #panel #transaccion #confirmacionCompra:focus {
+  outline: none;
+}
+main #panel #transaccion #compra {
+  grid-area: compra;
+  margin: 0 auto;
+  color: #ffffff;
+}
+main #panel #transaccion #compra p {
+  height: 35px;
+  min-width: 260px;
+  padding: 0px 10px;
+  line-height: 30px;
+}
+main #panel #transaccion #compra .exito {
+  background-color: #097c02;
+  box-shadow: 0px 0px 2px #097c02;
+}
+main #panel #transaccion #compra .error {
+  background-color: #920005;
+  box-shadow: 0px 0px 2px #920005;
+}
+
+footer {
+  width: 100%;
+  height: 30px;
+  background-color: #4d4d4d;
+  color: #ffffff;
+  text-align: center;
+}
+
+#panelUser {
+  width: 420px;
+  height: calc(100vh - 30px);
+  position: absolute;
+  top: 0px;
+  right: -420px;
+  z-index: 10;
+  background-image: linear-gradient(to right, #7908FF, #5F06CC);
+  color: #ffffff;
+}
+#panelUser #salir {
+  position: relative;
+  font-size: 24px;
+  top: 15px;
+  left: 25px;
+  transition: transform 0.5s ease-in;
+}
+#panelUser #salir:hover {
+  transform: scale(1.2);
+}
+#panelUser #panelUser__user {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 250px;
+  max-width: 280px;
+  height: 50px;
+  margin: 0px auto;
+  padding: 7px 10px;
+  background-color: #5F06CC;
+  box-shadow: 0px 0px 10px #5F06CC;
+}
+#panelUser #panelUser__user #panelUser__nombre {
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Lato, sans-serif, verdana;
+  line-height: 30px;
+}
+#panelUser #depositos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+#panelUser #depositos h2 {
+  grid-area: titulo;
+  font-size: 20px;
+}
+#panelUser #depositos .dr {
+  grid-area: ingreso;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 60px 40px;
+  grid-template-areas: "ingreso ingreso" "deposito retiro";
+  width: 100%;
+  margin: 25px 0px;
+}
+#panelUser #depositos .dr .input {
+  grid-area: ingreso;
+  font-size: 24px;
+}
+#panelUser #depositos .dr .input #deposito-retiro {
+  height: 40px;
+  width: calc(100% - 70px);
+  font-size: 30px;
+  text-align: right;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #dddddd;
+}
+#panelUser #depositos .dr .input #deposito-retiro::placeholder {
+  font-size: 30px;
+}
+#panelUser #depositos .dr .input #deposito-retiro::step {
+  display: none;
+}
+#panelUser #depositos .dr .input #deposito-retiro:focus {
+  outline: none;
+}
+#panelUser #depositos .dr .dr__boton {
+  width: 150px;
+  height: 40px;
+  margin: 0 auto;
+  color: #ffffff;
+  background-color: #5F06CC;
+  border: 2px solid #3B0480;
+  font-size: 16px;
+  line-height: 1.5em;
+  transition: background-color 0.2s ease-in;
+}
+#panelUser #depositos .dr .dr__boton:hover {
+  background-color: #3B0480;
+}
+#panelUser #depositos .dr .dr__boton:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+#panelUser #depositos .dr .dr__boton:focus {
+  outline: none;
+}
+#panelUser #depositos .dr #botonDeposito {
+  grid-area: deposito;
+}
+#panelUser #depositos .dr #botonRetiro {
+  grid-area: retiro;
+}
+#panelUser .adquisicion {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  justify-content: center;
+  align-items: baseline;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 30px);
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px 10px 5px 10px;
+  border: 1px solid #bbbbbb;
+}
+#panelUser .adquisicion p {
+  height: 100%;
+  padding-left: 10px;
+}
+#panelUser .adquisicion #dineroRestante {
   color: #bbbbbb;
+}
+#panelUser .adquisicion h5 {
+  color: #999999;
+}
+
+.panelUser__animation {
+  animation: traslacion 0.7s ease;
+}
+
+@keyframes traslacion {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+#panelUser__abierto {
+  transform: translateX(-100%);
 }
 
 /*# sourceMappingURL=styles.css.map */
