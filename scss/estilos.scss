@@ -9,72 +9,622 @@
     box-sizing: border-box;
     font-family: $fuenteGeneral;
 }
+h1, h2, h3, h4, h5{
+    font-family: $fuenteTitulo;
+}
+p, a{
+    font-family: $fuenteGeneral;
+}
 
 body{
     background-color: $colorGris1;
+    width: 100vw;
+    overflow: hidden;
 }
 
-header{
-    @include flexbox(column, space-between, center);
-    height: 80vh;
-    width: 100%;
-    padding: 30px 70px;
-    background-image: url(../assets/imagenes/cabecera.jpg);
-    background-color: $colorAzul3;
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: multiply;
-    color: $colorGris0;
-}
 .logoPpal{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     display: block;
-    height: 100px;
-    margin: 10px auto;
+    height: 70px;
+    margin: 0px auto;
 }
+
 #navbar{
     @include flexbox(row, space-between, center);
-    padding: 0px;
-    height: 70px;
+    height: 90px;
     width: 100%;
+    padding: 5px 50px;
+    background-image: $gradienteHeader;
+    color: $colorGris0;
 
-    .moneda{
-        i, p{
-            font-size: $titulo;
-            margin-left: 10px;
+    section{
+        height: 40px;
+        width: fit-content;
+        font-size: $cuerpoLg;
+        background-color: $colorAzul4;
+        box-shadow: 0px 0px 5px $colorAzul4;
+
+    }
+    .navbar__moneda{
+        @include flexbox(row, space-between, center);
+        width: 220px;
+
+        .cantidadDinero{
+            @include flexbox(row, flex-start, center);
+            width: fit-content;
+            margin: 8px 20px 8px 10px;
+
+            i{
+                margin-right: 10px;
+            }
+        }
+        #cantidadVisible{
+            height: 100%;
+            padding: 11px 10px;
+            border-left: 2px solid $colorAzul3;
+
+            cursor:pointer;
+            transition: all 0.1s linear;
+            &:hover{
+                background-color: $colorAzul5;
+            }
+            &:active{
+                outline: none;
+                box-shadow: 0px 0px 5px $colorGris7 inset;
+            }
         }
     }
-    #menuHamburguesa{
-        font-size: $titulo;
+
+    .navbar__user{
+        @include flexbox(row, space-between, center);
+        min-width: 220px;
+        max-width: 320px;
+
+
+        #userIn{
+            height: 100%;
+            padding: 10px 12px;
+            border-left: 2px solid $colorAzul3;
+            cursor:pointer;
+            transition: all 0.1s linear;
+
+            &:hover{
+                background-color: $colorAzul5;
+            }
+            &:active{
+                outline: none;
+                box-shadow: 0px 0px 5px $colorGris7 inset;
+            }
+        }
+        p{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
     }
 }
 
-.intro{
-    height: 50vh;
-    width: 60%;
-    padding: 0px 20px;
-    @include flexbox(column, space-around, center);
-    text-align: center;
-    h1{
-        font-family: $fuenteTitulo;
-        font-size: $displayLg;
-    }
-    p{
-        font-size: $subtitulo;
-        width: 80%;
-    }
-    input{
-        height: 40px;
-        width: 140px;
-        font-size: $cuerpoLg;
-        background-color: $colorAzul0;
-        border: 1px solid $colorAzul7;
-        color: $colorAzul7;
-        border-radius: 20px;
-        transition: all 0.2s linear;
+main{
+    @include flexbox (row,space-between, center);
+    
+    #mainAside{
+        grid-area: aside;
+        height: calc(100vh - 120px);
+        width: 320px;
+        padding-top: 15px;
+        background-image: $gradienteAside;
+        box-shadow: 0px 15px 20px 0px $colorAzul3 inset;
+        border-top: 3px solid $colorAzul3;
 
-        &:hover{
-            background-color: $colorAzul7;
+        h2{
+            height: 50px;
+            padding-bottom: 15px;
+            font-family: $fuenteTitulo;
+            font-size: $titulo;
+            font-weight: 800;
+            text-align: center;
             color: $colorGris0;
+            border-bottom: 2px solid $colorAzul3;
+        }
+
+        #listadoCriptos{
+            @include flexbox(column, space-between, center);
+            flex-wrap: nowrap;
+            height: calc(100% - 50px);
+            padding: 10px 5px;
+            overflow-y: scroll;
+            direction: rtl;
+
+            .cripto{
+                width: 260px;
+                height: 80px;
+                padding: 5px 10px;
+                margin-top: 15px;
+                color: $colorGris0;
+                direction: ltr;
+
+                @include grids(15px, 0px, flex-start, center);
+                grid-template-columns: 60px 1fr 1fr;
+                grid-template-rows: 2fr 32px;
+                grid-template-areas:
+                    "imagen nombre nombre"
+                    "imagen cambio valor";
+
+                background-color: $fondoTranslucido;
+                box-shadow: 0px 0px 7px $colorVioleta2;
+                border-radius: 5px;
+                transition: background-color 0.2s ease-in;
+                cursor: pointer;
+                &:hover{
+                    background-color: $colorVioleta3;
+                }
+                &:active{
+                    outline: none;
+                    box-shadow: 0px 0px 5px $colorGris7 inset;
+                }
+
+                .imagenCripto{
+                    grid-area: imagen;
+                    width: 60px;
+                    height: 100%;
+                    padding-top: 12px;
+                    overflow: hidden;
+
+                    img{
+                        width: 100%;
+                    }
+                }
+                .nombreCripto{
+                    grid-area: nombre;
+                    font-family: $fuenteTitulo;
+                    font-size: $subtitulo;
+                    font-weight: 700;
+                    letter-spacing: 0.7px;
+                }
+                .cambioCripto{
+                    grid-area: cambio;
+                    font-size: $cuerpo;
+                    font-family: $fuenteGeneral;
+                    font-weight: 400;
+                }
+                .valorCripto{
+                    grid-area: valor;
+                }
+                .marketCapCripto{
+                    grid-area: marketCap;
+                }
+            }
+
+
+            &::-webkit-scrollbar{
+                width: 5px;
+            }
+            &::-webkit-scrollbar:active{
+                width: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb{
+                background-color: $colorVioleta3;
+                border-radius: 10px;
+            }
         }
     }
+
+    #panel{
+        @include grids(40px, 15px, center, start);
+        grid-template-rows: 125px 100px 1fr 90px;
+        grid-template-columns: 100px 420px 1fr;
+        grid-template-areas: 
+            "imagen nombre cotizacion"
+            "compra compra detalles"
+            "compra compra info"
+            "adquisicion adquisicion info";
+        width: calc(100vw - 320px);
+        height: calc(100vh - 120px);
+        padding: 30px;
+        color: $colorGris7;
+
+        #logoCripto{
+            @include flexbox (row, center, center);
+            overflow: hidden;
+            align-self: center;
+            img{
+                width: 100%;
+            }
+        }
+        #nombreCripto{
+            grid-area: nombre;
+            align-self: center;
+            @include flexbox(row, flex-start, baseline);
+            width: 100%;
+
+            #nombre{
+                font-size: $jumboXl;
+                font-weight: 200;
+                width: fit-content;
+            }
+            #ticker{
+                font-size: $titulo;
+                font-weight: 200;
+                width: fit-content;
+                margin-left: 15px;
+            }
+        }
+
+        #cotizacion {
+            @include  grids (0px, 0px, center, center);
+            grid-template-columns: 1fr 1fr 80px;
+            grid-template-rows: 35px 30px 60px;
+            grid-template-areas:
+                "conversion conversion ."
+                "compra venta monedas"
+                "precioCompra precioVenta monedas";
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            background-image: $gradienteHeader; // ver gradiente
+            color: $colorGris0;
+            box-shadow: 0px 0px 20px $colorGris2;
+            border-radius: 8px;
+            text-align: center;
+
+            p, h4{
+                height: 100%;
+                background-color: $colorGris1;
+                color: $colorGris8;
+            }
+            p{
+                font-family: $fuenteSubtitulo;
+                font-size: $titulo;
+                line-height: 50px;
+                border-top: 1px solid $colorGris2;
+            }
+            h4{
+                font-size: $subtitulo;
+                line-height: 30px;
+                font-weight: 400;
+                color: $colorGris3;
+            }
+
+            #conversion{
+                grid-area: conversion;
+                font-size: $cuerpoLg;
+                line-height: 28px;
+                font-weight: 400;
+            }
+            #compra{
+                grid-area: compra;
+            }
+            #venta{
+                grid-area: venta;
+            }
+            #valorCompra{
+                grid-area: precioCompra;
+                border-bottom-left-radius: 8px;
+            }
+            #valorVenta{
+                grid-area: precioVenta;
+            }
+            .monedas{
+                grid-area: monedas;
+                @include flexbox (column, space-around, center);
+                height: 100%;
+                width: 100%;
+
+                ul{
+                    width: 100%;
+                    height: 100%;
+                    line-height: 25px;
+                    border-top: 1px solid $colorGris2;
+                    cursor: pointer;
+
+                    &:hover{
+                        background-color: $colorAzul4;
+                        border-bottom-right-radius: 8px;
+                    }
+                    &:active{
+                        outline: none;
+                        box-shadow: 0px 0px 5px $colorGris7 inset;
+                    }
+                }
+            }
+        }
+        .infoMercado{
+            grid-area: detalles;
+            @include flexbox(column, flex-start, flex-start);
+            width: 100%;
+            height: 100%;
+
+            div{
+                @include flexbox (row, flex-start, center);
+                width: 300px;
+                margin-bottom: 10px;
+
+                p{
+                    margin-left: 10px;
+                }
+                h3{
+                    font-size: $subtitulo;
+                    font-weight: 700;
+                }
+                h4{
+                    color: $colorGris6;
+                }
+            }
+        }
+        #resumen{
+            grid-area: info;
+        }
+        #transaccion{
+            grid-area: compra;
+            @include grids (20px, 10px, center, center);
+            grid-template-columns: 1fr 50px 1fr;
+            grid-template-rows: 60px repeat(3, 30px) 50px 40px;
+            grid-template-areas: 
+                "titulo titulo titulo"
+                "ingreso cambio resultado"
+                "ingreso igual resultado"
+                "resto resto resto"
+                "confirmacion confirmacion confirmacion"
+                "compra compra compra";
+            height: 100%;
+            width: 100%;
+
+            .titulo{
+                grid-area: titulo;
+                text-align: center;
+            }
+            form{
+                grid-area: ingreso;
+                @include flexbox(row, space-between, center);
+
+                #conversorSimbolo{
+                    font-size: $display;
+                    font-weight: 400;
+                    width: 40px;
+                    margin-right: 10px;
+                }
+
+                #ingresoDivisa{
+                    height: 40px;
+                    width: calc(100% - 70px);
+                    font-size: $display;
+                    text-align: right;
+                    color: $colorGris7;
+                    background-color: $colorGris1;
+                    border: none;
+                    border-bottom: 1px solid $colorGris3;
+
+                    &::placeholder{
+                        font-size: $display;
+                    }
+                    &::step{
+                        display: none;
+                    }
+
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+
+            .boton{
+                @include boton (100%, 100%, $colorGris2, $colorGris4);
+                text-align: center;
+            }
+
+            #cambioConversion{
+                grid-area: cambio;
+            }
+            #igual{
+                grid-area: igual;
+            }
+            #resultado{
+                grid-area: resultado;
+                height: 40px;
+                width: 100%;
+                @include flexbox(row, space-between, center);
+                font-size: $display;
+                color: $colorGris7;
+                background-color: $colorGris1;
+
+                #valorConvertido{
+                    width: calc(100% - 80px);
+                }
+                #tickerConvertido{
+                    width: 70px;
+                    margin-left: 10px;
+                }
+            }
+            #resto{
+                grid-area: resto;
+                text-align: center;
+            }
+            #confirmacionCompra{
+                grid-area: confirmacion;
+                @include boton (150px, 40px, $colorVerde2, $colorVerde3);
+            }
+            #compra{
+                grid-area: compra;
+                margin: 0 auto;
+                color: $colorGris0;
+
+                p{
+                    height: 35px;
+                    min-width: 260px;
+                    padding: 0px 10px;
+                    line-height: 30px;
+                }
+                .exito{
+                    background-color: $colorVerde3;
+                    box-shadow: 0px 0px 2px $colorVerde3;
+                }
+                .error{
+                    background-color: $colorRojo3;
+                    box-shadow: 0px 0px 2px $colorRojo3;
+                }
+            }
+        }
+    }
+}
+
+
+
+footer{
+    width: 100%;
+    height: 30px;
+    background-color: $colorGris6;
+    color: $colorGris0;
+    text-align: center;
+}
+
+
+
+#panelUser{
+    width: 420px;
+    height: calc(100vh - 30px);
+    position: absolute;
+    top: 0px;
+    right:-420px;
+    z-index: 10;
+    background-image: $gradienteUser;
+    color: $colorGris0;
+
+    #salir{
+        position: relative;
+        font-size: $titulo;
+        top: 15px;
+        left: 25px;
+        transition: transform 0.5s ease-in;
+
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+
+    #panelUser__user{
+        @include flexbox(column, space-between, center);
+        min-width: 250px;
+        max-width: 280px;
+        height: 50px;
+        margin: 0px auto;
+        padding: 7px 10px;
+        background-color: $colorVioleta3;
+        box-shadow: 0px 0px 10px $colorVioleta3;
+
+
+        #panelUser__nombre{
+            margin-bottom: 5px;
+            font-size: $subtitulo;
+            font-weight: 500;
+            font-family: $fuenteTitulo;
+            line-height: 30px;
+        }
+        // #panelUser__id{
+        //     font-size: $cuerpoLg;
+        //     font-weight: 400;
+        //     font-family: $fuenteGeneral;
+        //     color: $colorGris2;
+        // }
+    }
+
+    #depositos{
+        @include flexbox (column, center, center);
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+
+        h2{
+            grid-area: titulo;
+            font-size: $subtitulo;
+        }
+        .dr{
+            grid-area: ingreso;
+            @include grids(10px, 10px, center, center);
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 60px 40px;
+            grid-template-areas: 
+                "ingreso ingreso"
+                "deposito retiro";
+            width: 100%;
+            margin: 25px 0px;
+            .input{
+                grid-area: ingreso;
+                font-size: $titulo;
+                
+                #deposito-retiro{
+                    height: 40px;
+                    width: calc(100% - 70px);
+                    font-size: $display;
+                    text-align: right;
+                    color: $colorGris0;
+                    background-color: transparent;
+                    border: none;
+                    border-bottom: 1px solid $colorGris1;
+
+                    &::placeholder{
+                        font-size: $display;
+                    }
+                    &::step{
+                        display: none;
+                    }
+
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+            .dr__boton{
+                @include boton (150px, 40px, $colorVioleta3, $colorVioleta4);
+            }
+            #botonDeposito{
+                grid-area: deposito;
+            }
+            #botonRetiro{
+                grid-area: retiro
+            }
+
+        }
+    }
+    .adquisicion{
+        @include grids(10px, 0px, center, baseline);
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 30px);
+        width: 100%;
+        margin: 0 auto;
+        padding: 15px 10px 5px 10px;
+        border: 1px solid $colorGris2;
+
+        p{
+            height: 100%;
+            padding-left: 10px;
+        }
+        #dineroRestante{
+            color: $colorGris2;
+        }
+        h5{
+            color: $colorGris3;
+        }
+    }
+}
+
+
+
+.panelUser__animation{
+    animation: traslacion 0.7s ease;
+}
+
+@keyframes traslacion{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100%);
+    }
+}
+
+#panelUser__abierto{
+    transform: translateX(-100%)
 }
