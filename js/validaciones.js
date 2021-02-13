@@ -1,35 +1,18 @@
-// // Validacion de ingreso de datos 
-// function validacionIngresoString(ingreso){
-//     let nombreOk;
-//     if(ingreso == null || ingreso == ""){
-//         let validacionEntrada = false;
+function validarOperacionDR (mensaje){
+    let nodoPadre, elemento, contenido;
+    elemento = document.createElement('p');
+    contenido = document.createTextNode(mensaje);
+    elemento.appendChild(contenido);
 
-//         while(validacionEntrada == false){
-//             ingreso = prompt('Por favor complete la casilla con su nombre.');
-//             if (ingreso != null && ingreso != ""){
-//                 validacionEntrada = true;
-//             }
-//         }  
-//     }
-//     nombreOk = ingreso.trim();
-//     return nombreOk;
-// }
-
-
-// Validar que alcance el dinero de cuenta para la compra de criptos
-function validacionDisponibilidad(dineroDisponible, dineroParaRestar){
-    if(dineroDisponible < dineroParaRestar){
-        while (dineroDisponible < dineroParaCompra || dineroDisponible == null){
-            alert('Usted no dispone de fondos suficientes')
-            dineroParaCompra = parseInt(prompt('Ingrese cantidad de dinero para compra'));
-            if(dineroDisponible >= dineroParaRestar){
-                return dineroParaRestar;
-            }
-        }
-    } else{
-        return dineroParaRestar;
-    }
+    //nodoPadre.appendChild(elemento);
+    elemento.setAttribute('id', 'confirmacion');
+    
+    nodoPadre = document.getElementsByClassName('dr');
+    nodoPadre[0].append(elemento)
+    
+    setTimeout(() => {
+        nodoPadre[0].removeChild(elemento)
+    }, 2500);
 }
-
 
 

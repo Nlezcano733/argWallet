@@ -32,9 +32,9 @@ function Billetera (nombre, divisa, cripto, billeteraTotal, cantidadDivisa, cant
     this.cantidadCripto = cantidadCripto
 }
 
-function BilleteraParcial (divisa, cantidad){
+function BilleteraParcial (divisa, billeteraTotal){
     this.divisa = divisa;
-    this.cantidad = cantidad;
+    this.billeteraTotal = parseInt(billeteraTotal);
 }
 
 // ------------------------------------ //
