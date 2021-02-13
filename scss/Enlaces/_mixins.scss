@@ -35,3 +35,23 @@
         outline: none;
     }
 }
+
+@mixin botonDeshabilitado($width, $height, $colorPrincipal){
+    width: $width;
+    height: $height;
+    margin: 0 auto;
+    color: $colorGris4;
+    background-color: $colorPrincipal;
+    border: none;
+    font-size: $cuerpo;
+    line-height: 1.5em;
+    
+    &:active{
+        outline: none;
+        box-shadow: 0px 0px 5px $colorGris7 inset;
+    }
+
+    &:focus{
+        outline: none;
+    }
+}

@@ -1,31 +1,3 @@
-//FUNCIONES PARA VALIDACIÓN DE DIVISAS
-
-//Consultamos que tipo de divisa de va a ingresar
-function cambioDinero(){
-
-    let divisa = false;
-    let moneda;
-
-    while(divisa == false){
-        moneda = prompt("Que tipo de moneda quiere ingresar", "ARS - USD - EURO");
-        moneda = moneda.toUpperCase();
-
-        if(moneda == ars.ticker){
-            moneda = ars.value;
-            divisa = true;
-        } else if(moneda == usd.ticker){
-            moneda = usd.value;
-            divisa = true;
-        } else if(moneda == euro.ticker){
-            moneda = euro.value;
-            divisa = true;
-        } else{
-            alert("La divisa ingresada no es valida");
-        }
-    }
-    return moneda;
-}
-
 //PASAMOS AL USUARIO LA MONEDA ENTERA
 function objetoCompleto (divisa, array){ 
     let i, arrayDivisas;

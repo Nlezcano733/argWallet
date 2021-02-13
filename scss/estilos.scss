@@ -76,6 +76,9 @@ body{
                 box-shadow: 0px 0px 5px $colorGris7 inset;
             }
         }
+        #cantidadBilletera{
+            font-weight: 400;
+        }
     }
 
     .navbar__user{
@@ -87,7 +90,7 @@ body{
         #userIn{
             height: 100%;
             padding: 10px 12px;
-            border-left: 2px solid $colorAzul3;
+            border-right: 2px solid $colorAzul3;
             cursor:pointer;
             transition: all 0.1s linear;
 
@@ -483,11 +486,11 @@ footer{
 
 
 #panelUser{
-    width: 420px;
+    width: 320px;
     height: calc(100vh - 30px);
     position: absolute;
     top: 0px;
-    right:-420px;
+    left: -320px;
     z-index: 10;
     background-image: $gradienteUser;
     color: $colorGris0;
@@ -506,10 +509,11 @@ footer{
 
     #panelUser__user{
         @include flexbox(column, space-between, center);
-        min-width: 250px;
+        min-width: 200px;
         max-width: 280px;
         height: 50px;
         margin: 0px auto;
+        margin-top: 20px;
         padding: 7px 10px;
         background-color: $colorVioleta3;
         box-shadow: 0px 0px 10px $colorVioleta3;
@@ -544,12 +548,44 @@ footer{
             grid-area: ingreso;
             @include grids(10px, 10px, center, center);
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: 60px 40px;
+            grid-template-rows: 30px 60px 40px 30px;
             grid-template-areas: 
+                "seleccion seleccion"
                 "ingreso ingreso"
-                "deposito retiro";
+                "deposito retiro"
+                "confirmacion confirmacion";
             width: 100%;
             margin: 25px 0px;
+            .seleccionMoneda{
+                grid-area: seleccion;
+                @include flexbox(row, space-around, center);
+                height: 30px;
+                width: 100%;
+
+                #tituloMonedaElegida{
+                    font-size: $cuerpoLg;
+                }
+                #tipoCambio{
+                    width: 80px;
+                    height: 30px;
+                    color: $colorGris0;
+                    background-color: transparent;
+                    border: none;
+                    border-bottom: 1px solid $colorGris1;
+                    font-size: $cuerpo;
+
+                    &:hover{
+                        background-color: $fondoTranslucido;
+                    }
+                    &:focus{
+                        outline: none;
+                    }
+
+                    option{
+                        background-color: $colorVioleta3;
+                    }
+                }
+            }
             .input{
                 grid-area: ingreso;
                 font-size: $titulo;
@@ -585,7 +621,16 @@ footer{
             #botonRetiro{
                 grid-area: retiro
             }
-
+            #botonDeshabilitado{
+                grid-area: retiro;
+                @include botonDeshabilitado(150px, 40px, $colorVioleta4);
+            }
+            
+            #confirmacion{
+                grid-area: confirmacion;
+                font-size: $cuerpo;
+                color: $colorGris2;
+            }
         }
     }
     .adquisicion{
@@ -609,22 +654,39 @@ footer{
         }
     }
 }
-
-
-
-.panelUser__animation{
-    animation: traslacion 0.7s ease;
-}
-
-@keyframes traslacion{
-    from{
-        transform: translateX(0);
+    .panelUser__animationApertura{
+        animation: traslacionApertura 0.5s linear;
     }
-    to{
+
+    @keyframes traslacionApertura{
+        from{
+            transform: translateX(0px);
+        }
+        to{
+            transform: translateX(320px);
+        }
+    }
+
+    .panelUser__animationCierre{
+        animation: traslacionCierre 0.5s linear;
+    }
+
+    @keyframes traslacionCierre{
+        from{
+            transform: translateX(320px);
+        }
+        to{
+            transform: translateX(0px);
+        }
+    }
+
+    .panelUser__abierto{
+        transform: translateX(100%)
+    }
+    .panelUser__cerrado{
         transform: translateX(-100%);
     }
-}
 
-#panelUser__abierto{
-    transform: translateX(-100%)
-}
+
+
+

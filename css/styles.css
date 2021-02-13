@@ -97,6 +97,9 @@ body {
   outline: none;
   box-shadow: 0px 0px 5px #333333 inset;
 }
+#navbar .navbar__moneda #cantidadBilletera {
+  font-weight: 400;
+}
 #navbar .navbar__user {
   display: flex;
   flex-direction: row;
@@ -108,7 +111,7 @@ body {
 #navbar .navbar__user #userIn {
   height: 100%;
   padding: 10px 12px;
-  border-left: 2px solid #7692b7;
+  border-right: 2px solid #7692b7;
   cursor: pointer;
   transition: all 0.1s linear;
 }
@@ -251,10 +254,6 @@ main #panel #logoCripto {
 }
 main #panel #logoCripto img {
   width: 100%;
-  margin-top: 30px;
-}
-#navbar #moneda {
-  width: fit-content;
 }
 main #panel #nombreCripto {
   grid-area: nombre;
@@ -535,11 +534,11 @@ footer {
 }
 
 #panelUser {
-  width: 420px;
+  width: 320px;
   height: calc(100vh - 30px);
   position: absolute;
   top: 0px;
-  right: -420px;
+  left: -320px;
   z-index: 10;
   background-image: linear-gradient(to right, #7908FF, #5F06CC);
   color: #ffffff;
@@ -559,10 +558,11 @@ footer {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  min-width: 250px;
+  min-width: 200px;
   max-width: 280px;
   height: 50px;
   margin: 0px auto;
+  margin-top: 20px;
   padding: 7px 10px;
   background-color: #5F06CC;
   box-shadow: 0px 0px 10px #5F06CC;
@@ -595,10 +595,40 @@ footer {
   justify-content: center;
   align-items: center;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 60px 40px;
-  grid-template-areas: "ingreso ingreso" "deposito retiro";
+  grid-template-rows: 30px 60px 40px 30px;
+  grid-template-areas: "seleccion seleccion" "ingreso ingreso" "deposito retiro" "confirmacion confirmacion";
   width: 100%;
   margin: 25px 0px;
+}
+#panelUser #depositos .dr .seleccionMoneda {
+  grid-area: seleccion;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+}
+#panelUser #depositos .dr .seleccionMoneda #tituloMonedaElegida {
+  font-size: 18px;
+}
+#panelUser #depositos .dr .seleccionMoneda #tipoCambio {
+  width: 80px;
+  height: 30px;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #dddddd;
+  font-size: 16px;
+}
+#panelUser #depositos .dr .seleccionMoneda #tipoCambio:hover {
+  background-color: #7708ff66;
+}
+#panelUser #depositos .dr .seleccionMoneda #tipoCambio:focus {
+  outline: none;
+}
+#panelUser #depositos .dr .seleccionMoneda #tipoCambio option {
+  background-color: #5F06CC;
 }
 #panelUser #depositos .dr .input {
   grid-area: ingreso;
@@ -650,6 +680,29 @@ footer {
 #panelUser #depositos .dr #botonRetiro {
   grid-area: retiro;
 }
+#panelUser #depositos .dr #botonDeshabilitado {
+  grid-area: retiro;
+  width: 150px;
+  height: 40px;
+  margin: 0 auto;
+  color: #808080;
+  background-color: #3B0480;
+  border: none;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+#panelUser #depositos .dr #botonDeshabilitado:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+#panelUser #depositos .dr #botonDeshabilitado:focus {
+  outline: none;
+}
+#panelUser #depositos .dr #confirmacion {
+  grid-area: confirmacion;
+  font-size: 16px;
+  color: #bbbbbb;
+}
 #panelUser .adquisicion {
   display: grid;
   grid-column-gap: 10px;
@@ -674,19 +727,35 @@ footer {
   color: #999999;
 }
 
-.panelUser__animation {
-  animation: traslacion 0.7s ease;
+.panelUser__animationApertura {
+  animation: traslacionApertura 0.5s linear;
 }
 
-@keyframes traslacion {
+@keyframes traslacionApertura {
   from {
-    transform: translateX(0);
+    transform: translateX(0px);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(320px);
   }
 }
-#panelUser__abierto {
+.panelUser__animationCierre {
+  animation: traslacionCierre 0.5s linear;
+}
+
+@keyframes traslacionCierre {
+  from {
+    transform: translateX(320px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
+.panelUser__abierto {
+  transform: translateX(100%);
+}
+
+.panelUser__cerrado {
   transform: translateX(-100%);
 }
 

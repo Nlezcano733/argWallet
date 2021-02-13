@@ -14,19 +14,19 @@
     <header>
         <img class="logoPpal" src="assets/imagenes/Recurso 2.png" alt="ArgWallet">
         <div id="navbar">
+            <section class="navbar__user">
+                <i id="userIn" class="far fa-user"></i>
+                <!-- <i id="logIn" class="fas fa-sign-in-alt"></i> -->
+                <p>Depositar / extraer </p>
+                <!-- <p>Bienvenido <span id="idUser"></span></p> -->
+            </section>
             <section class="navbar__moneda">
                 <div class="cantidadDinero">
                     <i class="fas fa-money-bill"></i>
-                    <p><span id="simboloMonedaUsada">$</span id="cantidadBilletera">1000000,00</p>
+                    <p id="cantidadBilletera">$ 00,00</p>
                 </div>
                 <i id="cantidadVisible" class="fas fa-eye"></i>
                 <!-- <i class="fas fa-eye-slash"></i> -->
-            </section>
-            <section class="navbar__user">
-                <p>Depositar / extraer </p>
-                <!-- <p>Bienvenido <span id="idUser"></span></p> -->
-                <i id="userIn" class="far fa-user"></i>
-                <!-- <i id="logIn" class="fas fa-sign-in-alt"></i> -->
             </section>
         </div>
     </header>
@@ -125,7 +125,7 @@
     </main>
 
 
-    <aside id="panelUser" class="">
+    <aside id="panelUser">
         <i id="salir" class="fas fa-times"></i>
         <div id="panelUser__user">
             <p id="panelUser__nombre">Invitado</p>
@@ -133,13 +133,21 @@
         </div>
         <div id="depositos">
             <h2>Depositar - Retirar dinero en cuenta</h2>
-            <form class="dr">
+            <form class="dr" id="dr">
+                <div class="seleccionMoneda">
+                    <p id="tituloMonedaElegida">Tipo de moneda:</p>
+                    <select name="tipoCambio" id="tipoCambio" >
+                        <option value="ARS">ARS</option>
+                        <option value="USD">USD</option>
+                        <option value="EURO">EURO</option>
+                    </select>
+                </div>
                 <div class="input">
                     <label for="deposito-retiro" id="monedaDR">$</label>
                     <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00">
                 </div>
                 <input type="button" value="depositar" class="dr__boton" id="botonDeposito">
-                <input type="button" value="retirar" class="dr__boton" id="botonRetiro">
+                <input type="button" value="retirar" class="dr__boton " id="botonDeshabilitado">
             </form>            
             <!-- <div class="adquisicion">
                 <h3>Cripto adquirida:</h3>
@@ -158,10 +166,10 @@
     </footer>
     <script src="js/objetosJSON.js"></script>
     <script src="js/objetos-variables.js"></script>
-    <script src="js/validaciones.js"></script>
-    <script src="js/funciones.js"></script>
     <script src="js/manipulacionDOM.js"></script>
-    <!-- <script src="js/algoritmos.js"></script> -->
+    <!-- <script src="js/funciones.js"></script> -->
+    <script src="js/procedimiento.js"></script>
+    <script src="js/algoritmos.js"></script>
 </body>
 
 </html>
