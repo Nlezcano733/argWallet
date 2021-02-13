@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,44 +9,167 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>ArgWallet</title>
 </head>
+
 <body>
     <header>
         <img class="logoPpal" src="assets/imagenes/Recurso 2.png" alt="ArgWallet">
         <div id="navbar">
-            <i class="fas fa-bars" id="menuHamburguesa"></i>
-            <div id="moneda">
-                <i class="fas fa-money-bill"></i>
-                <p id="divisaTicker">ARS</p>
-                <!-- <i class="fas fa-chevron-down"></i> -->
-            </div>
+            <section class="navbar__user">
+                <i id="userIn" class="far fa-user"></i>
+                <!-- <i id="logIn" class="fas fa-sign-in-alt"></i> -->
+                <p>Depositar / extraer </p>
+                <!-- <p>Bienvenido <span id="idUser"></span></p> -->
+            </section>
+            <section class="navbar__moneda">
+                <div class="cantidadDinero">
+                    <i class="fas fa-money-bill"></i>
+                    <p id="cantidadBilletera">$ 00,00</p>
+                </div>
+                <i id="cantidadVisible" class="fas fa-eye"></i>
+                <!-- <i class="fas fa-eye-slash"></i> -->
+            </section>
         </div>
-        <section class="intro">
-            <div class="descripcion">
-                <h1>Operar criptomonedas nunca fue tan sencillo.</h1>
-                <p>
-                    Compré, vendé y calculá el valor de tus criptos favoritas en
-                    un solo lugar y con pocos clicks de distancia.
-                </p>
-            </div>
-            <!-- <input type="button" value="Comenzar"> -->
-            <div class="activo">
-                <h2>Billetera de activos</h2>
-                <div class="activo__informacion" id="divisa">
-                    <h3 class="activo__informacion--nombre">ARS</h3>
-                    <h4 class="activo__informacion--cantidad">$ 0,00</h4>
-                    <h5 class="activo__informacion--conversion">USD 0,00</h5>
-                </div>
-                <div class="activo__informacion" id="cripto">
-                    <h3 class="activo__informacion--nombre">BTC</h3>
-                    <h4 class="activo__informacion--cantidad">$ 0,00</h4>
-                    <h5 class="activo__informacion--conversion">USD 0,00</h5>
-                </div>
-            </div>
-        </section>
     </header>
 
-    <script src="js/validaciones.js"></script>
-    <script src="js/funciones.js"></script>
+
+    <main>
+        <section id="mainAside">
+            <h2>Listado de criptomonedas</h2>
+            <article id="listadoCriptos">
+                <div class="cripto">
+                    <div class="imagenCripto" id="#1-image">
+                        <img src="assets/imagenes/iconoNegro.png" alt="bitcoin">
+                    </div>
+                    <h3 class="nombreCripto" id="#1-name">Bitcoin</h3>
+                    <h4 class="cambioCripto" id="#2-exchange">BTC/USD</h4>
+                    <p class="valorCripto" id="#quantity">$10000</p>
+                </div>
+            </article>
+        </section>
+
+        <section id="panel">
+            <div id="logoCripto">
+                <img src="assets/imagenes/iconoNegro.png" alt="bticoin">
+            </div>
+            <div id="nombreCripto">
+                <h1 id="nombre">Bitcoin</h1>
+                <h2 id="ticker">BTC</h2>
+            </div>
+
+
+            <div id="transaccion">
+                <h2 class="titulo">Realizar transaccion de criptomoneda</h2>
+                <form>
+                    <label for="divisa" id="conversorSimbolo">$</label>
+                    <input type="number" name="divisa" placeholder="0,00" id="ingresoDivisa">
+                </form>
+
+                <div class="boton" role="button" id="cambioConversion">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+
+                <div class="boton" role="button" id="igual">
+                <i class="fas fa-equals"></i>
+                </div>
+
+                <div id="resultado">
+                    <p id="valorConvertido">0,00 </p>
+                    <p id="tickerConvertido">BTC</p>
+                </div>  
+                <div id="resto">
+                    <p>Dinero restante para compra es: $20000</p>
+                </div>
+                <input type="button" value="Confirmar compra" id="confirmacionCompra">
+                <div id="compra">
+                    <!-- <p class="error">¡Su compra ha sido realizada con exito!</p> -->
+                </div>
+            </div>
+
+            <div id="cotizacion">
+                <h3 id="conversion">BTC/USD</h3>
+                <h4 id="compra">Compra</h4>
+                <p id="valorCompra">$000,00</p>
+                <h4 id="venta">Venta</h4>
+                <p id="valorVenta">$45000,00</p>
+                <div class="monedas">
+                    <ul id="opcion1">ARS</ul>
+                    <ul id="opcion2">USD</ul>
+                    <ul id="opcion3">EURO</ul>
+                </div>
+            </div>
+            <div class="infoMercado">
+                <div>
+                    <h3>Market Cap:</h3>
+                    <p id="marketCap">$840302030</p>
+                </div>
+                <div>
+                    <h3>Suministro circulante:</h3>
+                    <p id="cirSupply">0 BTC</p>
+                </div>
+                <div>
+                    <h4>Maximo circulante</h4>
+                    <p id="maxSupply">1232 BTC</p>
+                </div>
+            </div>
+            <article id="resumen">
+                <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla quae cupiditate, numquam quod cumque
+                blanditiis eius exercitationem reiciendis aperiam laudantium amet perspiciatis quisquam eos
+                excepturi velit error sapiente officiis beatae! -->
+            </article>
+        </section>
+        <section>
+            <p></p>
+        </section>
+        <div>
+        </div>
+    </main>
+
+
+    <aside id="panelUser">
+        <i id="salir" class="fas fa-times"></i>
+        <div id="panelUser__user">
+            <p id="panelUser__nombre">Invitado</p>
+            <!-- <p id="panelUser__id">nlezcano732</p> -->
+        </div>
+        <div id="depositos">
+            <h2>Depositar - Retirar dinero en cuenta</h2>
+            <form class="dr" id="dr">
+                <div class="seleccionMoneda">
+                    <p id="tituloMonedaElegida">Tipo de moneda:</p>
+                    <select name="tipoCambio" id="tipoCambio" >
+                        <option value="ARS">ARS</option>
+                        <option value="USD">USD</option>
+                        <option value="EURO">EURO</option>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="deposito-retiro" id="monedaDR">$</label>
+                    <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00">
+                </div>
+                <input type="button" value="depositar" class="dr__boton" id="botonDeposito">
+                <input type="button" value="retirar" class="dr__boton " id="botonDeshabilitado">
+            </form>            
+            <!-- <div class="adquisicion">
+                <h3>Cripto adquirida:</h3>
+                <p id="nombreAdquisicion">Bitcoin</p>
+                <h4>Cantidad:</h4>
+                <p id="cantidadAdquisicion">0000,00 BTC</p>
+                <h5>Dinero Utilizado:</h5>
+                <p id="dineroRestante">$ 0,00</p>
+            </div> -->
+
+        </div>
+    </aside>
+
+    <footer>
+        <p>Desarrollado por &copy; Nlezcano  - Febrero 2021</p>
+    </footer>
+    <script src="js/objetosJSON.js"></script>
+    <script src="js/objetos-variables.js"></script>
+    <script src="js/manipulacionDOM.js"></script>
+    <!-- <script src="js/funciones.js"></script> -->
+    <script src="js/procedimiento.js"></script>
     <script src="js/algoritmos.js"></script>
 </body>
+
 </html>

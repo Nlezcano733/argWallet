@@ -1,31 +1,3 @@
-//FUNCIONES PARA VALIDACIÓN DE DIVISAS
-
-//Consultamos que tipo de divisa de va a ingresar
-function cambioDinero(){
-
-    let divisa = false;
-    let moneda;
-
-    while(divisa == false){
-        moneda = prompt("Que tipo de moneda quiere ingresar", "ARS - USD - EURO");
-        moneda = moneda.toUpperCase();
-
-        if(moneda == ars.ticker){
-            moneda = ars.value;
-            divisa = true;
-        } else if(moneda == usd.ticker){
-            moneda = usd.value;
-            divisa = true;
-        } else if(moneda == euro.ticker){
-            moneda = euro.value;
-            divisa = true;
-        } else{
-            alert("La divisa ingresada no es valida");
-        }
-    }
-    return moneda;
-}
-
 //PASAMOS AL USUARIO LA MONEDA ENTERA
 function objetoCompleto (divisa, array){ 
     let i, arrayDivisas;
@@ -177,28 +149,4 @@ function conversionRefencia ( {cantidadDivisa}, {cantidadCripto}, divisaConversi
     billeteraEnDolares.push(criptoEnDolares);
 
     return billeteraEnDolares;
-}
-
-function modificarValores (classTexto, divisa, cripto){ // Modificador debe ser array con listado de cripto de usuario
-    let elemento = document.getElementsByClassName(classTexto);
-
-    elemento[0].innerHTML = divisa;
-    elemento[1].innerHTML = cripto;
-}
-function modificarId (idtexto, texto){
-    let elemento = document.getElementById(idtexto);
-    elemento.innerHTML = texto;
-}
-
-function agregarNodos (idPadre, atributo, nombreAtributo, { billeteraTotal }){
-    let etiqueta, contenido, nodoPrincipal;
-
-    etiqueta = document.createElement('p');
-    etiqueta.setAttribute(atributo, nombreAtributo); 
-
-    contenido = document.createTextNode(billeteraTotal); 
-    etiqueta.appendChild(contenido);
-
-    nodoPrincipal = document.getElementById(idPadre);
-    nodoPrincipal.appendChild(etiqueta);
 }

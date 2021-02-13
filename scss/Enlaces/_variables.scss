@@ -32,12 +32,16 @@ $colorGris8: #1a1a1a;
 
 $colorVerde0: #68Fb5f;
 $colorVerde1: #29fa1d;
-$colorVerde2: #11df05;
+$colorVerde2: #14b10b;
 $colorVerde3: #097c02;
 
 $colorRojo0: #ff3d44;
-$colorRojo0: #ff1b23;
-$colorRojo0: #e70008;
-$colorRojo0: #920005;
+$colorRojo1: #ff1b23;
+$colorRojo2: #e70008;
+$colorRojo3: #920005;
 
-/*$gradienteAzul: linear-gradient(to bottom, $celeste2, $celeste3);*/
+
+$gradienteHeader: linear-gradient(to top, $colorAzul3, $colorAzul5);
+$gradienteAside: radial-gradient(circle at left bottom, $colorVioleta2, $colorAzul3);
+$gradienteUser: linear-gradient(to right, $colorVioleta2, $colorVioleta3);
+$fondoTranslucido: #7708ff66;

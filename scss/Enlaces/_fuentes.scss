@@ -1,26 +1,27 @@
 @font-face{
     font-family: Ebirma;
-    src: url("../../assets/fuentes/ebrima.ttf") format("Truetype");
-    font-weight: 400;
+    src: url("../assets/fuentes/ebrima.ttf") format("Truetype");
+    font-weight: normal;
     font-style: normal;
 }
 @font-face{
     font-family: Lato;
-    src:url(../../assets/fuentes/Lato/Lato-Regular.ttf) format("Truetype");
-    font-weight: 400;
+    src:url("../assets/fuentes/Lato/Lato-Regular.ttf") format("Truetype");
+    font-weight: normal;
     font-style: normal;
 }
 
 @font-face{
     font-family: Roboto;
-    src: url(../../assets/fuentes/Roboto/Roboto-Medium.ttf) format("Truetype");
-    font-weight: 600;
+    src: url("../assets/fuentes/Roboto/Roboto-Medium.ttf") format("Truetype");
+    font-weight: normal;
     font-style: normal;
 }
 
-$fuenteGeneral: Lato, sans-serif, verdana;
-$fuenteLogo: Ebirma, sans-serif;
-$fuenteTitulo: Roboto, sans-serif, verdana;
+$fuenteGeneral: Ebirma, sans-serif, verdana;
+$fuenteTitulo: Lato, sans-serif, verdana;
+$fuenteSubtitulo: Roboto, sans-serif, verdana;
+
 
 
 $cuerpoSm: 14px;
@@ -31,3 +32,4 @@ $titulo: 24px;
 $display: 30px;
 $displayLg: 34px;
 $jumbo: 38px;
+$jumboXl: 46px;
