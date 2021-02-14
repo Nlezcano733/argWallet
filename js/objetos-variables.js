@@ -1,4 +1,5 @@
-let ingresoDinero, nombreUsuario, monedaDivisa, monedaUsuario, dineroCuenta;
+// let ingresoDinero, nombreUsuario, monedaDivisa, monedaUsuario, dineroCuenta;
+let panelUsuario, monedaDeposito, botonOjo;
 
 // --------- CREACION DE CONSTRUCTORES ---------- //
 
@@ -53,12 +54,12 @@ Divisas.prototype.conversion = function ({value}){
 
 // --------- CREAMOS OBJETOS ---------- //
 
-let bitcoin = new Cripto ('Bitcoin', 'BTC', 5900000.00, 6);
-let ethereum = new Cripto ('Ethereum', 'ETH', 259999.13, 5);
-let litecoin = new Cripto ('Litecoin', 'LTC', 22499.40, 2);
-let tether = new Cripto ('Tether', 'USDT', 156, 2);
+// let bitcoin = new Cripto ('Bitcoin', 'BTC', 5900000.00, 6);
+// let ethereum = new Cripto ('Ethereum', 'ETH', 259999.13, 5);
+// let litecoin = new Cripto ('Litecoin', 'LTC', 22499.40, 2);
+// let tether = new Cripto ('Tether', 'USDT', 156, 2);
 
-let carteraCriptos = [bitcoin, ethereum, litecoin, tether];
+// let carteraCriptos = [bitcoin, ethereum, litecoin, tether];
 
 // ---------------------------------------- //
 

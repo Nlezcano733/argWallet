@@ -171,7 +171,7 @@ main #mainAside #listadoCriptos .cripto {
   color: #ffffff;
   direction: ltr;
   display: grid;
-  grid-column-gap: 15px;
+  grid-column-gap: 0px;
   grid-row-gap: 0px;
   justify-content: flex-start;
   align-items: center;
@@ -199,7 +199,7 @@ main #mainAside #listadoCriptos .cripto .imagenCripto {
   overflow: hidden;
 }
 main #mainAside #listadoCriptos .cripto .imagenCripto img {
-  width: 100%;
+  width: 80%;
 }
 main #mainAside #listadoCriptos .cripto .nombreCripto {
   grid-area: nombre;
@@ -612,6 +612,9 @@ footer {
 #panelUser #depositos .dr .seleccionMoneda #tituloMonedaElegida {
   font-size: 18px;
 }
+#panelUser #depositos .dr .seleccionMoneda #monedaElegida {
+  font-size: 18px;
+}
 #panelUser #depositos .dr .seleccionMoneda #tipoCambio {
   width: 80px;
   height: 30px;
@@ -627,7 +630,7 @@ footer {
 #panelUser #depositos .dr .seleccionMoneda #tipoCambio:focus {
   outline: none;
 }
-#panelUser #depositos .dr .seleccionMoneda #tipoCambio option {
+#panelUser #depositos .dr .seleccionMoneda #tipoCambio .opcionMoneda {
   background-color: #5F06CC;
 }
 #panelUser #depositos .dr .input {

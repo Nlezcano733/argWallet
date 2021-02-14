@@ -9,10 +9,16 @@ function validarOperacionDR (mensaje){
     
     nodoPadre = document.getElementsByClassName('dr');
     nodoPadre[0].append(elemento)
-    
+
     setTimeout(() => {
         nodoPadre[0].removeChild(elemento)
     }, 2500);
 }
 
-
+function validacionNumeroReal (){
+    valorInput = document.getElementById('deposito-retiro').value 
+    if(valorInput <= 0 || valorInput == "" || valorInput == null){
+        validarOperacionDR('Ingrese un numero real.')
+        valorInput = "";
+    } 
+}

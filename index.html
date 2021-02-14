@@ -36,14 +36,14 @@
         <section id="mainAside">
             <h2>Listado de criptomonedas</h2>
             <article id="listadoCriptos">
-                <div class="cripto">
+            <!-- <div class="cripto" id="cripto">
                     <div class="imagenCripto" id="#1-image">
                         <img src="assets/imagenes/iconoNegro.png" alt="bitcoin">
                     </div>
                     <h3 class="nombreCripto" id="#1-name">Bitcoin</h3>
                     <h4 class="cambioCripto" id="#2-exchange">BTC/USD</h4>
                     <p class="valorCripto" id="#quantity">$10000</p>
-                </div>
+                </div> -->
             </article>
         </section>
 
@@ -137,9 +137,9 @@
                 <div class="seleccionMoneda">
                     <p id="tituloMonedaElegida">Tipo de moneda:</p>
                     <select name="tipoCambio" id="tipoCambio" >
-                        <option value="ARS">ARS</option>
-                        <option value="USD">USD</option>
-                        <option value="EURO">EURO</option>
+                        <option class="opcionMoneda" value="ARS">ARS</option>
+                        <option class="opcionMoneda" value="USD" >USD</option>
+                        <option class="opcionMoneda" value="EURO">EURO</option>
                     </select>
                 </div>
                 <div class="input">
@@ -164,7 +164,7 @@
     <footer>
         <p>Desarrollado por &copy; Nlezcano  - Febrero 2021</p>
     </footer>
-    <script src="js/objetosJSON.js"></script>
+    <script src="js/objetoJson.js"></script>
     <script src="js/objetos-variables.js"></script>
     <script src="js/validaciones.js"></script>
     <script src="js/manipulacionDOM.js"></script>

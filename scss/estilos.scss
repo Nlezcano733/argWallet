@@ -148,7 +148,7 @@ main{
                 color: $colorGris0;
                 direction: ltr;
 
-                @include grids(15px, 0px, flex-start, center);
+                @include grids(0px, 0px, flex-start, center);
                 grid-template-columns: 60px 1fr 1fr;
                 grid-template-rows: 2fr 32px;
                 grid-template-areas:
@@ -176,7 +176,7 @@ main{
                     overflow: hidden;
 
                     img{
-                        width: 100%;
+                        width: 80%;
                     }
                 }
                 .nombreCripto{
@@ -565,6 +565,10 @@ footer{
                 #tituloMonedaElegida{
                     font-size: $cuerpoLg;
                 }
+                #monedaElegida{
+                    font-size: $cuerpoLg;
+                }
+
                 #tipoCambio{
                     width: 80px;
                     height: 30px;
@@ -581,7 +585,7 @@ footer{
                         outline: none;
                     }
 
-                    option{
+                    .opcionMoneda{
                         background-color: $colorVioleta3;
                     }
                 }

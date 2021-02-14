@@ -1,11 +1,11 @@
 
 // ----------------- COMIENZO ALGORITMO CON DOM ---------------------- //
 let billetera = new BilleteraParcial('ARS', 0); //divisa, cripto, billeteraTotal, cantidadDivisa, cantidadCripto
-let validacion = false;
+let carteraCriptos = [];
 
 panelUsuario = aperturaPanelUser('userIn', 'salir');
 monedaDeposito = depositar('botonDeposito');
-// monedaRetiro = retirar('botonRetiro');
-// mostrarBilletera();
-// mostrarOcultar();
-let prueba = presionaOjo();
+depositarAutomatico = eventoInput();
+botonOjo = presionaOjo();
+criptoJson = tomarJson();
+opcionCripto();

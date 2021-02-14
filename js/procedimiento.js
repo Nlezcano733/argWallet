@@ -7,10 +7,9 @@ function crearBilletera(input, moneda){
 
 function sumarBilletera(input, {billeteraTotal}, moneda){
     let dineroIngresado, cantidadSumada;
-
     dineroIngresado = parseInt(input);
-    cantidadSumada = dineroIngresado + billeteraTotal;
 
+    cantidadSumada = dineroIngresado + billeteraTotal;
     billetera = new BilleteraParcial(moneda, cantidadSumada);
     validarOperacionDR('movimiento exitoso')
 }
@@ -20,13 +19,15 @@ function restarBilletera(input){
     dineroIngresado = parseInt(input);
     billeteraActual = billetera.billeteraTotal;
 
-    if (dineroIngresado < billeteraActual){
+    if (dineroIngresado <= billeteraActual){
         cantidadRestante = billeteraActual - dineroIngresado;
         billetera = new BilleteraParcial (billetera.divisa, cantidadRestante);
         validarOperacionDR('Movimiento exitoso')
-    } else{
+    } 
+    if (dineroIngresado > billeteraActual){
         validarOperacionDR ('No dispone de fondos suficientes');
     }
+    habilitarSeleccionMoneda();
 }
 
 
@@ -39,4 +40,18 @@ function objetoCompleto ({divisa}, array){
         }
     }
     return arrayDivisas;
+}
+
+// --------------------------------------------------- //
+
+function tomarJson(){
+    let i;
+    let listadoJson = JSON.stringify(LISTA_CRIPTOS)   // Primero se debe pasara string todos los valores json
+    let objetos = JSON.parse(listadoJson);       //luego de debe parsear para poder utilizar los valores
+
+    for (i=0;i<objetos.length; i++){
+        let objetosSeparados = objetos[i];
+        objetoCripto = objetosSeparados;
+        carteraCriptos.push(objetoCripto)
+    }
 }
