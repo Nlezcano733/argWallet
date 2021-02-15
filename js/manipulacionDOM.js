@@ -38,7 +38,7 @@ function depositar(boton) {
     botonPresionado.addEventListener('click', () =>{
         divisaIngresada = document.getElementById('tipoCambio').value;
         inputNumber = document.getElementById('deposito-retiro').value;
-            depositarBilletera(inputNumber, billetera, divisaIngresada);
+        depositarBilletera(inputNumber, billetera, divisaIngresada);
     });
 
 }
@@ -75,20 +75,27 @@ function depositarBilletera(input, billetera, moneda){
 }
 
 function habilitarBoton(){
-    let boton = document.getElementsByClassName('dr__boton');
-    boton[1].setAttribute('id', 'botonRetiro');
+        let boton = document.getElementsByClassName('dr__boton');
+        boton[1].setAttribute('id', 'botonRetiro');
+}
+
+function deshabilitarBoton(){
+    if(billetera.billeteraTotal == 0){
+        let boton = document.getElementsByClassName('dr__boton');
+        boton[1].setAttribute('id', 'botonDeshabilitado');
+    }
 }
 
 function bloquearSeleccionMoneda(){
     let opciones;
     let monedaUsada = billetera.divisa;
     opciones = document.getElementsByClassName('opcionMoneda');
-    for (let i=0; i < opciones.length; i++){
-        opciones[i].setAttribute('disabled', '');
-        if(opciones[i].value == monedaUsada){
-            opciones[i].removeAttribute('disabled')
+        for (let i=0; i < opciones.length; i++){
+            opciones[i].setAttribute('disabled', '');
+            if(opciones[i].value == monedaUsada){
+                opciones[i].removeAttribute('disabled')
+            }
         }
-    }
 }
 
 function habilitarSeleccionMoneda (){
@@ -100,6 +107,7 @@ function habilitarSeleccionMoneda (){
         for (let i=0; i < opciones.length; i++){
                 opciones[i].removeAttribute('disabled')
         }
+        deshabilitarBoton();
     }
 }
 
@@ -138,7 +146,6 @@ function presionaOjo(){
     let ojo;
     ojo = document.getElementById('cantidadVisible'); 
     ojo.addEventListener('click', mostrarOcultar);
-
     return document.getElementById('cantidadBilletera').innerHTML;
 }
 
@@ -163,21 +170,23 @@ function mostrarOcultar(){
 
 // ------------------------------------------------- //
 
-function crearDiv (tipoIdPadre, idPadre, i, attr, nombreAttr){
+// FUNCIONES GENERICAS
+function crearDivIdPadre (idPadre, attr, nombreAttr){
     let nuevoNodo, nodoPadre;
-    if(tipoIdPadre == 'id'){
-        nodoPadre = document.getElementById(idPadre);
-        nuevoNodo = document.createElement('div');
-        nuevoNodo.setAttribute(attr, nombreAttr);
-        nodoPadre.appendChild(nuevoNodo);
-    } 
-    if (tipoIdPadre == 'class'){
-        nodoPadre = document.getElementsByClassName(idPadre);
-        nuevoNodo = document.createElement('div');
-        nuevoNodo.setAttribute(attr, nombreAttr);
-        nodoPadre[i].appendChild(nuevoNodo);
-    }
+    nodoPadre = document.getElementById(idPadre);
+    nuevoNodo = document.createElement('div');
+    nuevoNodo.setAttribute(attr, nombreAttr);
+    nodoPadre.appendChild(nuevoNodo);
 }
+
+function crearDivClassPadre (idPadre, attr, nombreAttr, i){
+    let nuevoNodo, nodoPadre;
+    nodoPadre = document.getElementsByClassName(idPadre);
+    nuevoNodo = document.createElement('div');
+    nuevoNodo.setAttribute(attr, nombreAttr);
+    nodoPadre[i].appendChild(nuevoNodo);
+}
+
 
 function crearElemento (padre, tag, attr, nombreAttr, contenido, i){
     let nuevoNodo, nodoPadre;
@@ -190,8 +199,22 @@ function crearElemento (padre, tag, attr, nombreAttr, contenido, i){
     nodoPadre[i].appendChild(nuevoNodo);
 }
 
+function modificarElemento(elemento, contenido){
+    let nodo;
+    nodo = document.getElementById(elemento),
+    nodo.innerHTML = contenido
+}
 
+function modificarSimbolos(id){
+    let objetoDivisa = objetoCompleto(billetera, carteraDivisas);
+    modificarElemento(id, objetoDivisa.simbolo)
+}
 
+function modificarFoto(nodoImagen, direccion){
+    let nodo;
+    nodo = document.getElementById(nodoImagen);
+    nodo.setAttribute('src', direccion);
+}
 
 function capturarEvento (event){
     console.log(event.which);
@@ -199,21 +222,20 @@ function capturarEvento (event){
 
 // ------------------------------------------------------------- //
 
+//SELECCION DE CRIPTOMONEDA
 function opcionCripto (){
-    let i, idPadre;
-    // idPadre = document.getElementById('listadoCriptos');
-
+    let i;
 
     for(i=0; i < carteraCriptos.length; i++){
         let carteraPosicion = carteraCriptos[i];
         let nuevoNodo, nodoPadre;
 
         let redondearValor = parseFloat((carteraPosicion.valor_ars).toFixed(2))
-        crearDiv('id', 'listadoCriptos', i, 'class', 'cripto');
+        crearDivIdPadre('listadoCriptos','class', 'cripto');
         crearElemento('cripto', 'h3', 'class', 'nombreCripto', carteraPosicion.nombre, i);
         crearElemento('cripto', 'h4', 'class', 'cambioCripto', `${carteraPosicion.ticker}/${billetera.divisa}`, i);
         crearElemento('cripto', 'p', 'class', 'valorCripto', `$ ${redondearValor}`, i)
-        crearDiv('class', 'cripto', i, 'class', 'imagenCripto');
+        crearDivClassPadre('cripto','class', 'imagenCripto', i);
 
 
         nodoPadre = document.getElementsByClassName('imagenCripto');
@@ -224,4 +246,42 @@ function opcionCripto (){
 }
 
 
-        // crearElemento('imagenCripto', 'img', 'src', carteraPosicion.logo, i)
+function separacionCriptos (){
+    let criptoSeleccionada, i, posicion;
+    criptoSeleccionada = document.getElementsByClassName('cripto');
+    for(i=0; carteraCriptos.length; i++){
+        posicion = criptoSeleccionada [i];
+        seleccionCripto(posicion, i);
+    };
+}
+
+function seleccionCripto(div, posicion){
+    let monedaElegida;
+    div.addEventListener('click', ()=>{
+        for(let i=0; i< carteraCriptos.length; i++){
+            monedaElegida = carteraCriptos[i];
+            if(posicion == i){
+                mostrarPanel(monedaElegida)
+                modificarFoto('logo', monedaElegida.logo);
+
+            }
+        }
+    });
+}
+
+function mostrarPanel(posicion){
+    let valorRedondeado = tratamientoCripto(posicion, 'ARS')
+    let valorCompra = compraComision(valorRedondeado);
+
+    modificarElemento('nombre',posicion.nombre);
+    modificarElemento('ticker',posicion.ticker);
+    modificarElemento('tickerConvertido',posicion.ticker);
+    modificarElemento('conversion',`${posicion.ticker}/${billetera.divisa}`);
+    modificarElemento('valorCompra',valorCompra);
+    modificarElemento('valorVenta',valorRedondeado);
+    modificarElemento('market_cap',posicion.market_cap);
+    modificarElemento('circSupply',`${posicion.circ_supply} ${posicion.ticker}`);
+    modificarElemento('maxSupply',`${posicion.max_supply} ${posicion.ticker}`);
+}
+
+

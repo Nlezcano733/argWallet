@@ -5,8 +5,10 @@ const LISTA_CRIPTOS = [
         "market_ranking": 1,
         "market_cap": 856179121954,
         "valor_usd": 45929.50015,
-        "valor_ars": 7165002.00350,
+        "valor_ars": 7165002.01350,
         "valor_euro": 56169.25248,
+        "circ_supply": 18629531,
+        "max_supply": 21000000,
         "logo": "assets/imagenes/btc.png",
         "decimales": 6
     },
@@ -18,6 +20,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 1712.40100,
         "valor_ars": 267134.40500,
         "valor_euro": 2019.60573,
+        "circ_supply": 114681863,
+        "max_supply": '--',
         "logo": "assets/imagenes/eth.png",
         "decimales": 5
     },
@@ -29,6 +33,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 1.00,
         "valor_ars": 156.00,
         "valor_euro": 1.17,
+        "circ_supply": 32095698985,
+        "max_supply": 32095698985,
         "logo": "assets/imagenes/usdt.png",
         "decimales": 2
     },
@@ -40,6 +46,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 23.41,
         "valor_ars": 3651.96,
         "valor_euro": 27.61,
+        "circ_supply": 963118731,
+        "max_supply": 1044069558,
         "logo": "assets/imagenes/dot.png",
         "decimales": 2
     },
@@ -51,6 +59,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 0.68050,
         "valor_ars": 106.1580,
         "valor_euro": 0.80258,
+        "circ_supply": 31912711696 ,
+        "max_supply":  45000000000,
         "logo": "assets/imagenes/ada.png",
         "decimales": 5
     },
@@ -62,6 +72,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 0.45277,
         "valor_ars": 70.63227,
         "valor_euro": 0.53399,
+        "circ_supply": 45674844189,
+        "max_supply": 100000000000,
         "logo": "assets/imagenes/xrp.png",
         "decimales": 5
     },
@@ -73,6 +85,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 79.9020,
         "valor_ars": 12464.7120,
         "valor_euro": 94.2364,
+        "circ_supply": 147883948,
+        "max_supply": 179883948,
         "logo": "assets/imagenes/bnb.png",
         "decimales": 4
     },
@@ -84,6 +98,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 164.69,
         "valor_ars": 25691.64,
         "valor_euro": 194.23,
+        "circ_supply": 66492441 ,
+        "max_supply": 84000000,
         "logo": "assets/imagenes/ltc.png",
         "decimales": 2
     },
@@ -95,6 +111,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 0.079193,
         "valor_ars": 12.3541080,
         "valor_euro": 0.0934002,
+        "circ_supply": 128386783421,
+        "max_supply": '--',
         "logo": "assets/imagenes/doge.png",
         "decimales": 7
     },
@@ -106,6 +124,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 25.0401,
         "valor_ars": 3906.2404,
         "valor_euro": 29.5322,
+        "circ_supply": 407009556,
+        "max_supply": 1000000000,
         "logo": "assets/imagenes/link.png",
         "decimales": 4
     },
@@ -117,6 +137,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 476.83,
         "valor_ars": 74385.48,
         "valor_euro": 562.37,
+        "circ_supply": 18656206,
+        "max_supply": 21000000,
         "logo": "assets/imagenes/bch.png",
         "decimales": 2
     },
@@ -128,6 +150,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 0.38977,
         "valor_ars": 59.43241,
         "valor_euro": 0.45969,
+        "circ_supply": 22397093627,
+        "max_supply": 50000000000,
         "logo": "assets/imagenes/xlm.png",
         "decimales": 5
     },
@@ -139,6 +163,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 0.996895,
         "valor_ars": 155.515620,
         "valor_euro": 1.175737,
+        "circ_supply": 7424704645,
+        "max_supply": 7424704645,
         "logo": "assets/imagenes/usdc.png",
         "decimales": 6
     },
@@ -150,6 +176,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 479.901,
         "valor_ars": 74864.566,
         "valor_euro": 565.995,
+        "circ_supply": 12389945,
+        "max_supply": 16000000,
         "logo": "assets/imagenes/aave.png",
         "decimales": 3
     },
@@ -161,6 +189,8 @@ const LISTA_CRIPTOS = [
         "valor_usd": 18.9702,
         "valor_ars": 2959.3512,
         "valor_euro": 22.9734,
+        "circ_supply": 299228026,
+        "max_supply": 1000000000,
         "logo": "assets/imagenes/uni.png",
         "decimales": 4
     }

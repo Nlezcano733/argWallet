@@ -175,7 +175,7 @@ main #mainAside #listadoCriptos .cripto {
   grid-row-gap: 0px;
   justify-content: flex-start;
   align-items: center;
-  grid-template-columns: 60px 1fr 1fr;
+  grid-template-columns: 60px 1fr 1.2fr;
   grid-template-rows: 2fr 32px;
   grid-template-areas: "imagen nombre nombre" "imagen cambio valor";
   background-color: #7708ff66;
@@ -237,7 +237,7 @@ main #panel {
   justify-content: center;
   align-items: start;
   grid-template-rows: 125px 100px 1fr 90px;
-  grid-template-columns: 100px 420px 1fr;
+  grid-template-columns: 100px 400px 1fr;
   grid-template-areas: "imagen nombre cotizacion" "compra compra detalles" "compra compra info" "adquisicion adquisicion info";
   width: calc(100vw - 320px);
   height: calc(100vh - 120px);
@@ -252,7 +252,7 @@ main #panel #logoCripto {
   overflow: hidden;
   align-self: center;
 }
-main #panel #logoCripto img {
+main #panel #logoCripto #logo {
   width: 100%;
 }
 main #panel #nombreCripto {
@@ -281,7 +281,7 @@ main #panel #cotizacion {
   grid-row-gap: 0px;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr 80px;
+  grid-template-columns: 1fr 1fr 65px;
   grid-template-rows: 35px 30px 60px;
   grid-template-areas: "conversion conversion ." "compra venta monedas" "precioCompra precioVenta monedas";
   width: 100%;
@@ -367,7 +367,7 @@ main #panel .infoMercado div {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 300px;
+  width: 400px;
   margin-bottom: 10px;
 }
 main #panel .infoMercado div p {
@@ -479,7 +479,7 @@ main #panel #transaccion #resultado #tickerConvertido {
   width: 70px;
   margin-left: 10px;
 }
-main #panel #transaccion #resto {
+main #panel #transaccion .resto {
   grid-area: resto;
   text-align: center;
 }

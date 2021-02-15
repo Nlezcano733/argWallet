@@ -49,11 +49,11 @@
 
         <section id="panel">
             <div id="logoCripto">
-                <img src="assets/imagenes/iconoNegro.png" alt="bticoin">
+                <img id="logo" src="assets/imagenes/iconoNegro.png" alt="bticoin">
             </div>
             <div id="nombreCripto">
-                <h1 id="nombre">Bitcoin</h1>
-                <h2 id="ticker">BTC</h2>
+                <h1 id="nombre">Seleccione una criptomoneda</h1>
+                <h2 id="ticker"></h2>
             </div>
 
 
@@ -74,10 +74,10 @@
 
                 <div id="resultado">
                     <p id="valorConvertido">0,00 </p>
-                    <p id="tickerConvertido">BTC</p>
+                    <p id="tickerConvertido">---</p>
                 </div>  
-                <div id="resto">
-                    <p>Dinero restante para compra es: $20000</p>
+                <div class="resto">
+                    <!-- <p>Dinero restante para compra es: $20000</p> -->
                 </div>
                 <input type="button" value="Confirmar compra" id="confirmacionCompra">
                 <div id="compra">
@@ -86,11 +86,11 @@
             </div>
 
             <div id="cotizacion">
-                <h3 id="conversion">BTC/USD</h3>
+                <h3 id="conversion">--/--</h3>
                 <h4 id="compra">Compra</h4>
-                <p id="valorCompra">$000,00</p>
+                <p id="valorCompra">$--</p>
                 <h4 id="venta">Venta</h4>
-                <p id="valorVenta">$45000,00</p>
+                <p id="valorVenta">$--</p>
                 <div class="monedas">
                     <ul id="opcion1">ARS</ul>
                     <ul id="opcion2">USD</ul>
@@ -100,15 +100,15 @@
             <div class="infoMercado">
                 <div>
                     <h3>Market Cap:</h3>
-                    <p id="marketCap">$840302030</p>
+                    <p id="market_cap"><span id="simboloMKTCap">$</span>---</p>
                 </div>
                 <div>
-                    <h3>Suministro circulante:</h3>
-                    <p id="cirSupply">0 BTC</p>
+                    <h4>Suministro circulante:</h4>
+                    <p id="circSupply">--</p>
                 </div>
                 <div>
-                    <h4>Maximo circulante</h4>
-                    <p id="maxSupply">1232 BTC</p>
+                    <h4>Maximo circulante:</h4>
+                    <p id="maxSupply">--</p>
                 </div>
             </div>
             <article id="resumen">
@@ -144,7 +144,7 @@
                 </div>
                 <div class="input">
                     <label for="deposito-retiro" id="monedaDR">$</label>
-                    <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00">
+                    <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00" min="0">
                 </div>
                 <input type="button" value="depositar" class="dr__boton" id="botonDeposito">
                 <input type="button" value="retirar" class="dr__boton " id="botonDeshabilitado">

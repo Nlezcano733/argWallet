@@ -149,7 +149,7 @@ main{
                 direction: ltr;
 
                 @include grids(0px, 0px, flex-start, center);
-                grid-template-columns: 60px 1fr 1fr;
+                grid-template-columns: 60px 1fr 1.2fr;
                 grid-template-rows: 2fr 32px;
                 grid-template-areas:
                     "imagen nombre nombre"
@@ -218,7 +218,7 @@ main{
     #panel{
         @include grids(40px, 15px, center, start);
         grid-template-rows: 125px 100px 1fr 90px;
-        grid-template-columns: 100px 420px 1fr;
+        grid-template-columns: 100px 400px 1fr;
         grid-template-areas: 
             "imagen nombre cotizacion"
             "compra compra detalles"
@@ -233,7 +233,7 @@ main{
             @include flexbox (row, center, center);
             overflow: hidden;
             align-self: center;
-            img{
+            #logo{
                 width: 100%;
             }
         }
@@ -258,7 +258,7 @@ main{
 
         #cotizacion {
             @include  grids (0px, 0px, center, center);
-            grid-template-columns: 1fr 1fr 80px;
+            grid-template-columns: 1fr 1fr 65px;
             grid-template-rows: 35px 30px 60px;
             grid-template-areas:
                 "conversion conversion ."
@@ -342,7 +342,7 @@ main{
 
             div{
                 @include flexbox (row, flex-start, center);
-                width: 300px;
+                width: 400px;
                 margin-bottom: 10px;
 
                 p{
@@ -441,7 +441,7 @@ main{
                     margin-left: 10px;
                 }
             }
-            #resto{
+            .resto{
                 grid-area: resto;
                 text-align: center;
             }
