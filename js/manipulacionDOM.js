@@ -31,14 +31,15 @@ function cerrarPanel (){
 //DEPOSITO DE DINERO
 function depositar(boton) {
     let botonPresionado, divisaIngresada, inputNumber;
-
     botonPresionado = document.getElementById(boton);
-    let numeroReal = validacionNumeroReal();
-    console.log(numeroReal)
+    validacionNumeroReal();
+
     botonPresionado.addEventListener('click', () =>{
         divisaIngresada = document.getElementById('tipoCambio').value;
         inputNumber = document.getElementById('deposito-retiro').value;
-        depositarBilletera(inputNumber, billetera, divisaIngresada);
+        billetera = obtenerStorage('billetera');
+
+        depositarBilletera(inputNumber, divisaIngresada, billetera);
     });
 
 }
@@ -52,23 +53,25 @@ function eventoInput (){
 function capturarEnter  (event){
     if (event.which == 13) {
         event.preventDefault();
-
         divisaIngresada = document.getElementById('tipoCambio').value;
         inputNumber = document.getElementById('deposito-retiro').value;
-        depositarBilletera(inputNumber, billetera, divisaIngresada);
+        depositarBilletera(inputNumber, divisaIngresada, billetera);
     }
 }
 
-
-function depositarBilletera(input, billetera, moneda){
+function depositarBilletera(input, moneda, billetera){
     let cantidad = parseInt(billetera.billeteraTotal);
-    if(cantidad == 0){
+    
+    if(cantidad == 0 && input != ""){
         crearBilletera(input, moneda);
         habilitarBoton();
         bloquearSeleccionMoneda();
-    } else{
+    } else if(cantidad > 0 && input != ""){
         sumarBilletera(input, billetera, moneda);
+    } else{
+        validarOperacionDR('Ingrese un valor Real')
     }
+
     document.getElementById('deposito-retiro').value = "";
     retirar('botonRetiro');
     mostrarBilletera();
@@ -87,15 +90,17 @@ function deshabilitarBoton(){
 }
 
 function bloquearSeleccionMoneda(){
+    billetera = obtenerStorage('billetera');
     let opciones;
     let monedaUsada = billetera.divisa;
+
     opciones = document.getElementsByClassName('opcionMoneda');
-        for (let i=0; i < opciones.length; i++){
-            opciones[i].setAttribute('disabled', '');
-            if(opciones[i].value == monedaUsada){
-                opciones[i].removeAttribute('disabled')
-            }
+    for (let i=0; i < opciones.length; i++){
+        opciones[i].setAttribute('disabled', '');
+        if(opciones[i].value == monedaUsada){
+            opciones[i].removeAttribute('disabled');
         }
+    }
 }
 
 function habilitarSeleccionMoneda (){
@@ -263,7 +268,7 @@ function seleccionCripto(div, posicion){
             if(posicion == i){
                 mostrarPanel(monedaElegida)
                 modificarFoto('logo', monedaElegida.logo);
-
+                criptoToStorage(monedaElegida)
             }
         }
     });

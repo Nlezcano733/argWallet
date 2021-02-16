@@ -1,12 +1,20 @@
 function crearBilletera(input, moneda){
     let dineroIngresado;
-    dineroIngresado = parseInt(input);
-    billetera = new BilleteraParcial (moneda, input);
-    let objetoMonedaElegida = objetoCompleto(billetera, carteraDivisas);
+    if(input != null || input != ""){
+        dineroIngresado = parseInt(input);
+        billetera = new BilleteraParcial (moneda, input);
+        billeteraToStorage();
 
-    habilitarBoton();
-    bloquearSeleccionMoneda();
-    validarOperacionDR('Movimiento exitoso')
+        objetoMoneda = objetoCompleto(billetera, carteraDivisas);
+        objetoMonedaToStorage(objetoMoneda);
+
+        habilitarBoton();
+        bloquearSeleccionMoneda();
+        validarOperacionDR('Movimiento exitoso')
+    } else{
+        validarOperacionDR('Ingrese un valor real.')
+        input = "";
+    }
 }
 
 function sumarBilletera(input, {billeteraTotal}, moneda){
@@ -15,6 +23,7 @@ function sumarBilletera(input, {billeteraTotal}, moneda){
     
     cantidadSumada = dineroIngresado + billeteraTotal;
     billetera = new BilleteraParcial(moneda, cantidadSumada);
+    billeteraToStorage();
     validarOperacionDR('movimiento exitoso')
 }
 
@@ -26,6 +35,7 @@ function restarBilletera(input){
     if (dineroIngresado <= billeteraActual){
         cantidadRestante = billeteraActual - dineroIngresado;
         billetera = new BilleteraParcial (billetera.divisa, cantidadRestante);
+        billeteraToStorage();
         validarOperacionDR('Movimiento exitoso')
     } 
     if (dineroIngresado > billeteraActual){
@@ -91,3 +101,24 @@ function conversionEntreMonedas (valorMoneda){
     return conversionEnDivisas;
 }
 
+// -------------------------------------------------- //
+function obtenerStorage(key){
+    let objetoObtenido = localStorage.getItem(key);
+    objeto = JSON.parse(objetoObtenido);
+    return objeto;
+}
+
+function criptoToStorage(cripto){
+    let criptoElegida = JSON.stringify(cripto);
+    sessionStorage.setItem('cripto', criptoElegida);
+}
+
+function billeteraToStorage(){
+    let billeteraActual = JSON.stringify(billetera);
+    localStorage.setItem('billetera', billeteraActual);
+}
+
+function objetoMonedaToStorage(moneda){
+    let monedaElegida = JSON.stringify(moneda);
+    localStorage.setItem('moneda', monedaElegida);
+}
