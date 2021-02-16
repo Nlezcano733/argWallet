@@ -67,7 +67,6 @@ function depositarBilletera(input, moneda, billetera){
         habilitarBoton();
         bloquearSeleccionMoneda();
         opcionCriptoReducido();
-        // opcionCripto();
     } else if(cantidad > 0 && input != ""){
         sumarBilletera(input, billetera, moneda);
     } else{
