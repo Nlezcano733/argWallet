@@ -2,10 +2,12 @@
 // ----------------- COMIENZO ALGORITMO CON DOM ---------------------- //
 let billetera, objetoMoneda;
 
-billetera = obtenerStorage('billetera')
-if(billetera == null){
-    billetera = new BilleteraParcial('ARS', 0);
-}
+// billetera = obtenerStorage('billetera')
+// if(billetera == null || billetera == ""){
+//     billetera = new BilleteraParcial('ARS', 0);
+// }
+
+billetera = billeteraInicial();
 if(billetera.billeteraTotal > 0){
     habilitarBoton();
     bloquearSeleccionMoneda();

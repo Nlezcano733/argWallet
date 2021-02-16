@@ -171,11 +171,11 @@ main #mainAside #listadoCriptos .cripto {
   color: #ffffff;
   direction: ltr;
   display: grid;
-  grid-column-gap: 0px;
+  grid-column-gap: 5px;
   grid-row-gap: 0px;
   justify-content: flex-start;
   align-items: center;
-  grid-template-columns: 60px 1fr 1.2fr;
+  grid-template-columns: 55px 1fr 1.2fr;
   grid-template-rows: 2fr 32px;
   grid-template-areas: "imagen nombre nombre" "imagen cambio valor";
   background-color: #7708ff66;

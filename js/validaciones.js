@@ -22,3 +22,19 @@ function validacionNumeroReal (){
         valorInput = "";
     } 
 }
+
+function billeteraInicial(){
+    billetera = obtenerStorage('billetera')
+    if(billetera == null || billetera == ""){
+        billetera = new BilleteraParcial('ARS', 0);
+    }
+    return billetera
+}
+
+function monedaInicial(){
+    moneda = obtenerStorage('moneda');
+    if(moneda == null || moneda == ''){
+        moneda = carteraDivisas[0]
+    }
+    return moneda;
+}

@@ -148,8 +148,8 @@ main{
                 color: $colorGris0;
                 direction: ltr;
 
-                @include grids(0px, 0px, flex-start, center);
-                grid-template-columns: 60px 1fr 1.2fr;
+                @include grids(5px, 0px, flex-start, center);
+                grid-template-columns: 55px 1fr 1.2fr;
                 grid-template-rows: 2fr 32px;
                 grid-template-areas:
                     "imagen nombre nombre"

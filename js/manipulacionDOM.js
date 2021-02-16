@@ -37,7 +37,7 @@ function depositar(boton) {
     botonPresionado.addEventListener('click', () =>{
         divisaIngresada = document.getElementById('tipoCambio').value;
         inputNumber = document.getElementById('deposito-retiro').value;
-        billetera = obtenerStorage('billetera');
+        billetera = billeteraInicial();
 
         depositarBilletera(inputNumber, divisaIngresada, billetera);
     });
@@ -66,6 +66,8 @@ function depositarBilletera(input, moneda, billetera){
         crearBilletera(input, moneda);
         habilitarBoton();
         bloquearSeleccionMoneda();
+        opcionCriptoReducido();
+        // opcionCripto();
     } else if(cantidad > 0 && input != ""){
         sumarBilletera(input, billetera, moneda);
     } else{
@@ -90,7 +92,7 @@ function deshabilitarBoton(){
 }
 
 function bloquearSeleccionMoneda(){
-    billetera = obtenerStorage('billetera');
+    billetera = billeteraInicial();
     let opciones;
     let monedaUsada = billetera.divisa;
 
@@ -210,10 +212,17 @@ function modificarElemento(elemento, contenido){
     nodo.innerHTML = contenido
 }
 
-function modificarSimbolos(id){
+function modificarSimbolos(id, modificador){
+    billetera = billeteraInicial();
     let objetoDivisa = objetoCompleto(billetera, carteraDivisas);
-    modificarElemento(id, objetoDivisa.simbolo)
+    if(modificador == 'simbolo'){
+        modificarElemento(id, objetoDivisa.simbolo)
+    } 
+    if(modificador == 'divisa'){
+        modificarElemento(id, billetera.divisa)
+    }
 }
+
 
 function modificarFoto(nodoImagen, direccion){
     let nodo;
@@ -234,12 +243,17 @@ function opcionCripto (){
     for(i=0; i < carteraCriptos.length; i++){
         let carteraPosicion = carteraCriptos[i];
         let nuevoNodo, nodoPadre;
+        billetera = billeteraInicial();
+        moneda = obtenerStorage('moneda');
+        
+        let valorCripto = elegirValor(moneda.ticker, carteraPosicion);
+        valorCripto = parseFloat(valorCripto.toFixed(2));
+        let valorCompra = compraComision(valorCripto);
 
-        let redondearValor = parseFloat((carteraPosicion.valor_ars).toFixed(2))
         crearDivIdPadre('listadoCriptos','class', 'cripto');
         crearElemento('cripto', 'h3', 'class', 'nombreCripto', carteraPosicion.nombre, i);
         crearElemento('cripto', 'h4', 'class', 'cambioCripto', `${carteraPosicion.ticker}/${billetera.divisa}`, i);
-        crearElemento('cripto', 'p', 'class', 'valorCripto', `$ ${redondearValor}`, i)
+        crearElemento('cripto', 'p', 'class', 'valorCripto', `${moneda.simbolo} ${valorCompra}`, i)
         crearDivClassPadre('cripto','class', 'imagenCripto', i);
 
 
@@ -250,6 +264,26 @@ function opcionCripto (){
     }
 }
 
+function opcionCriptoReducido (){
+    let i;
+
+    for(i=0; i < carteraCriptos.length; i++){
+        let carteraPosicion = carteraCriptos[i];
+        let nodoCambio, nodoValor;
+        billetera = billeteraInicial();
+        moneda = obtenerStorage('moneda');
+        
+        let valorCripto = elegirValor(moneda.ticker, carteraPosicion);
+        valorCripto = parseFloat(valorCripto.toFixed(2));
+        let valorCompra = compraComision(valorCripto);
+        
+        nodoCambio = document.getElementsByClassName('cambioCripto'),
+        nodoCambio.innerHTML = `${carteraPosicion.ticker}/${billetera.divisa}`;
+        nodoValor = document.getElementsByClassName('valorCripto');
+        nodoValor.innerHTML = `${moneda.simbolo}${valorCompra}`
+    }
+
+}
 
 function separacionCriptos (){
     let criptoSeleccionada, i, posicion;
@@ -275,18 +309,26 @@ function seleccionCripto(div, posicion){
 }
 
 function mostrarPanel(posicion){
-    let valorRedondeado = tratamientoCripto(posicion, 'ARS')
-    let valorCompra = compraComision(valorRedondeado);
+    // let valorRedondeado = tratamientoCripto(posicion, 'ARS')
+    let valorCripto = elegirValor(objetoMoneda.ticker, posicion);
+    let valorCompra = compraComision(valorCripto);
+    let marketCap = actualizarMarketCap (posicion)
+
+    valorCompra = parseFloat(valorCompra.toFixed(posicion.decimales));
+    valorCripto = parseFloat(valorCripto.toFixed(posicion.decimales));
 
     modificarElemento('nombre',posicion.nombre);
     modificarElemento('ticker',posicion.ticker);
     modificarElemento('tickerConvertido',posicion.ticker);
-    modificarElemento('conversion',`${posicion.ticker}/${billetera.divisa}`);
     modificarElemento('valorCompra',valorCompra);
-    modificarElemento('valorVenta',valorRedondeado);
-    modificarElemento('market_cap',posicion.market_cap);
+    modificarElemento('valorVenta',valorCripto);
+    modificarElemento('conversion',`${posicion.ticker}/${billetera.divisa}`);
+    modificarElemento('valorCompra',`${moneda.simbolo}${valorCompra}`);
+    modificarElemento('valorVenta',`${moneda.simbolo}${valorCripto}`);
+    modificarElemento('market_cap',`${moneda.simbolo} ${marketCap}`);
     modificarElemento('circSupply',`${posicion.circ_supply} ${posicion.ticker}`);
     modificarElemento('maxSupply',`${posicion.max_supply} ${posicion.ticker}`);
 }
+
 
 

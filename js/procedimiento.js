@@ -1,5 +1,6 @@
 function crearBilletera(input, moneda){
     let dineroIngresado;
+
     if(input != null || input != ""){
         dineroIngresado = parseInt(input);
         billetera = new BilleteraParcial (moneda, input);
@@ -10,7 +11,8 @@ function crearBilletera(input, moneda){
 
         habilitarBoton();
         bloquearSeleccionMoneda();
-        validarOperacionDR('Movimiento exitoso')
+        // validarOperacionDR('Movimiento exitoso')
+        validarOperacionDR('Actualice la pagina para ver valores actualizados')
     } else{
         validarOperacionDR('Ingrese un valor real.')
         input = "";
@@ -70,6 +72,13 @@ function tomarJson(){
     }
 }
 
+function actualizarMarketCap (posicion){
+    moneda = obtenerStorage('moneda')
+    marketCapPesos = posicion.market_cap * usd.value;
+    marketCapActualizado = parseFloat((marketCapPesos / moneda.value).toFixed(0));
+    return marketCapActualizado;
+}
+
 // --------------------------------------------------- //
 
 function tratamientoCripto (posicion, moneda){
@@ -121,4 +130,18 @@ function billeteraToStorage(){
 function objetoMonedaToStorage(moneda){
     let monedaElegida = JSON.stringify(moneda);
     localStorage.setItem('moneda', monedaElegida);
+}
+
+// -------------------------------------------------------//
+
+function elegirValor (moneda, cripto){
+    if (moneda == carteraDivisas[0].ticker){
+        return cripto.valor_ars
+    }
+    if(moneda == carteraDivisas[1].ticker){
+        return cripto.valor_usd
+    }
+    if(moneda == carteraDivisas[2].ticker){
+        return cripto.valor_euro
+    }
 }
