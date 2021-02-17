@@ -11,10 +11,9 @@ function crearBilletera(input, moneda){
 
         habilitarBoton();
         bloquearSeleccionMoneda();
-        // validarOperacionDR('Movimiento exitoso')
-        validarOperacionDR('Actualice la pagina para ver valores actualizados')
+        validarOperacion('Actualice la pagina para ver valores actualizados', 'dr')
     } else{
-        validarOperacionDR('Ingrese un valor real.')
+        validarOperacion('Ingrese un valor real.', 'dr');
         input = "";
     }
 }
@@ -26,7 +25,7 @@ function sumarBilletera(input, {billeteraTotal}, moneda){
     cantidadSumada = dineroIngresado + billeteraTotal;
     billetera = new BilleteraParcial(moneda, cantidadSumada);
     billeteraToStorage();
-    validarOperacionDR('movimiento exitoso')
+    validarOperacion('movimiento exitoso', 'dr');
 }
 
 function restarBilletera(input){
@@ -38,10 +37,10 @@ function restarBilletera(input){
         cantidadRestante = billeteraActual - dineroIngresado;
         billetera = new BilleteraParcial (billetera.divisa, cantidadRestante);
         billeteraToStorage();
-        validarOperacionDR('Movimiento exitoso')
+        validarOperacion('Movimiento exitoso', 'dr')
     } 
     if (dineroIngresado > billeteraActual){
-        validarOperacionDR ('No dispone de fondos suficientes');
+        validarOperacion('No dispone de fondos suficientes', 'dr');
     }
     habilitarSeleccionMoneda();
 }
@@ -62,8 +61,8 @@ function objetoCompleto ({divisa}, array){
 
 function tomarJson(){
     let i;
-    let listadoJson = JSON.stringify(LISTA_CRIPTOS)   // Primero se debe pasara string todos los valores json
-    let objetos = JSON.parse(listadoJson);       //luego de debe parsear para poder utilizar los valores
+    let listadoJson = JSON.stringify(LISTA_CRIPTOS);
+    let objetos = JSON.parse(listadoJson); 
 
     for (i=0;i<objetos.length; i++){
         let objetosSeparados = objetos[i];
@@ -116,6 +115,11 @@ function obtenerStorage(key){
     objeto = JSON.parse(objetoObtenido);
     return objeto;
 }
+function obtenerSessionStorage(key){
+    let objetoContenido = sessionStorage.getItem(key);
+    objeto = JSON.parse(objetoContenido);
+    return objeto;
+}
 
 function criptoToStorage(cripto){
     let criptoElegida = JSON.stringify(cripto);
@@ -134,7 +138,9 @@ function objetoMonedaToStorage(moneda){
 
 // -------------------------------------------------------//
 
-function elegirValor (moneda, cripto){
+function elegirValor (cripto){
+    let moneda = obtenerStorage('moneda');
+    moneda = moneda.ticker;
     if (moneda == carteraDivisas[0].ticker){
         return cripto.valor_ars
     }
@@ -144,4 +150,11 @@ function elegirValor (moneda, cripto){
     if(moneda == carteraDivisas[2].ticker){
         return cripto.valor_euro
     }
+}
+
+function conversionMonedacripto (cantidad){
+    let cripto = obtenerSessionStorage('cripto');
+    let criptoElegida = elegirValor(cripto);
+    let conversion = parseFloat((cantidad / criptoElegida).toFixed(cripto.decimales));
+    return conversion
 }

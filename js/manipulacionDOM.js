@@ -70,7 +70,7 @@ function depositarBilletera(input, moneda, billetera){
     } else if(cantidad > 0 && input != ""){
         sumarBilletera(input, billetera, moneda);
     } else{
-        validarOperacionDR('Ingrese un valor Real')
+        validarOperacion('Ingrese un valor Real', 'dr');
     }
 
     document.getElementById('deposito-retiro').value = "";
@@ -245,7 +245,7 @@ function opcionCripto (){
         billetera = billeteraInicial();
         moneda = obtenerStorage('moneda');
         
-        let valorCripto = elegirValor(moneda.ticker, carteraPosicion);
+        let valorCripto = elegirValor(carteraPosicion);
         valorCripto = parseFloat(valorCripto.toFixed(2));
         let valorCompra = compraComision(valorCripto);
 
@@ -272,7 +272,7 @@ function opcionCriptoReducido (){
         billetera = billeteraInicial();
         moneda = obtenerStorage('moneda');
         
-        let valorCripto = elegirValor(moneda.ticker, carteraPosicion);
+        let valorCripto = elegirValor(carteraPosicion);
         valorCripto = parseFloat(valorCripto.toFixed(2));
         let valorCompra = compraComision(valorCripto);
         
@@ -301,15 +301,15 @@ function seleccionCripto(div, posicion){
             if(posicion == i){
                 mostrarPanel(monedaElegida)
                 modificarFoto('logo', monedaElegida.logo);
-                criptoToStorage(monedaElegida)
+                criptoToStorage(monedaElegida);
+                realizarConversion();
             }
         }
     });
 }
 
 function mostrarPanel(posicion){
-    // let valorRedondeado = tratamientoCripto(posicion, 'ARS')
-    let valorCripto = elegirValor(objetoMoneda.ticker, posicion);
+    let valorCripto = elegirValor(posicion);
     let valorCompra = compraComision(valorCripto);
     let marketCap = actualizarMarketCap (posicion)
 
@@ -318,6 +318,7 @@ function mostrarPanel(posicion){
 
     modificarElemento('nombre',posicion.nombre);
     modificarElemento('ticker',posicion.ticker);
+    modificarElemento('conversorSimbolo', moneda.simbolo);
     modificarElemento('tickerConvertido',posicion.ticker);
     modificarElemento('valorCompra',valorCompra);
     modificarElemento('valorVenta',valorCripto);
@@ -327,7 +328,68 @@ function mostrarPanel(posicion){
     modificarElemento('market_cap',`${moneda.simbolo} ${marketCap}`);
     modificarElemento('circSupply',`${posicion.circ_supply} ${posicion.ticker}`);
     modificarElemento('maxSupply',`${posicion.max_supply} ${posicion.ticker}`);
+
 }
 
+// --------------------------------------------------- //
 
+function realizarConversion (){
+    let input, igual, conversion;
+    let validar = false;
+    input = document.getElementById('ingresoDivisa');
+    igual = document.getElementById('igual');
 
+    input.addEventListener('keypress',()=> {return validar = true});
+
+    igual.addEventListener('click', () =>{
+        if(validar = true){
+            conversion = conversionMonedacripto(input.value);
+            modificarElemento('valorConvertido', conversion);
+            realizarConversion();
+        }
+        confirmarCompra();
+    })
+}
+
+function confirmarCompra(){
+    let botonCompra;
+    botonCompra = document.getElementById('confirmacionCompra');
+    botonCompra.addEventListener('click', validacionCompra)
+}
+
+function validacionCompra(){
+    let input;
+    billetera = billeteraInicial();
+    input = document.getElementById('ingresoDivisa').value;
+    conversion = document.getElementById('valorConvertido');
+    cantidad = billetera.billeteraTotal;
+
+    if(cantidad >= input){
+        billeteraActual = cantidad - input;
+        billetera = new BilleteraParcial(billetera.divisa, billeteraActual);
+        billeteraToStorage()
+        validarOperacion('movimiento exitoso.', 'resto');
+        modificarHeader(moneda)
+        MostrarCompra();
+        input=""
+    } else{
+        validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', 'resto');
+    }
+}
+
+function MostrarCompra (){
+    let conversion;
+    cripto = obtenerSessionStorage('cripto');
+    cantidadGastada = document.getElementById('ingresoDivisa').value;
+    conversion = document.getElementById('valorConvertido').innerHTML;
+    console.log(conversion);
+    cantidad = parseFloat(conversion);
+
+    crearDivIdPadre ('depositos', 'class', 'adquisicion');
+    crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', 0);
+    crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', cripto.ticker, 0);
+    crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', 0);
+    crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', cantidad, 0);
+    crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', 0);
+    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${cantidadGastada}`, 0);
+}
