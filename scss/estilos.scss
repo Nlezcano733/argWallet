@@ -148,8 +148,8 @@ main{
                 color: $colorGris0;
                 direction: ltr;
 
-                @include grids(0px, 0px, flex-start, center);
-                grid-template-columns: 60px 1fr 1.2fr;
+                @include grids(5px, 0px, flex-start, center);
+                grid-template-columns: 55px 1fr 1.2fr;
                 grid-template-rows: 2fr 32px;
                 grid-template-areas:
                     "imagen nombre nombre"
@@ -638,8 +638,8 @@ footer{
         }
     }
     .adquisicion{
-        @include grids(10px, 0px, center, baseline);
-        grid-template-columns: repeat(2, 1fr);
+        @include grids(10px, 0px, start, baseline);
+        grid-template-columns: 1.5fr 1fr;
         grid-template-rows: repeat(3, 30px);
         width: 100%;
         margin: 0 auto;
@@ -650,7 +650,7 @@ footer{
             height: 100%;
             padding-left: 10px;
         }
-        #dineroRestante{
+        .dineroRestante{
             color: $colorGris2;
         }
         h5{
