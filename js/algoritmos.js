@@ -1,6 +1,6 @@
 
 // ----------------- COMIENZO ALGORITMO CON DOM ---------------------- //
-let billetera, objetoMoneda;
+let billetera, objetoMoneda, i;
 
 
 billetera = billeteraInicial();

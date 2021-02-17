@@ -203,6 +203,7 @@ function crearElemento (padre, tag, attr, nombreAttr, contenido, i){
     nuevoNodo.appendChild(contenidoTexto);
     nuevoNodo.setAttribute(attr, nombreAttr);
     nodoPadre[i].appendChild(nuevoNodo);
+    i++
 }
 
 function modificarElemento(elemento, contenido){
@@ -363,33 +364,42 @@ function validacionCompra(){
     input = document.getElementById('ingresoDivisa').value;
     conversion = document.getElementById('valorConvertido');
     cantidad = billetera.billeteraTotal;
-
     if(cantidad >= input){
         billeteraActual = cantidad - input;
         billetera = new BilleteraParcial(billetera.divisa, billeteraActual);
         billeteraToStorage()
         validarOperacion('movimiento exitoso.', 'resto');
         modificarHeader(moneda)
-        MostrarCompra();
+        let pos = sumaDePosiciones(i)
+        i = pos ++;
+        // MostrarCompra();
         input=""
     } else{
         validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', 'resto');
     }
 }
 
-function MostrarCompra (){
+function MostrarCompra (i){
     let conversion;
     cripto = obtenerSessionStorage('cripto');
     cantidadGastada = document.getElementById('ingresoDivisa').value;
     conversion = document.getElementById('valorConvertido').innerHTML;
-    console.log(conversion);
     cantidad = parseFloat(conversion);
 
-    crearDivIdPadre ('depositos', 'class', 'adquisicion');
-    crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', 0);
-    crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', cripto.ticker, 0);
-    crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', 0);
-    crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', cantidad, 0);
-    crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', 0);
-    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${cantidadGastada}`, 0);
+    crearDivIdPadre ('compras', 'class', 'adquisicion');
+    crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', i);
+    crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', cripto.ticker, i);
+    crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', i);
+    crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', cantidad, i);
+    crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', i);
+    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${cantidadGastada}`, i);
+}
+
+function sumaDePosiciones(i){
+    if(i== undefined){
+        i=0;
+    }
+    console.log(i)
+    MostrarCompra(i);
+    return i++;
 }

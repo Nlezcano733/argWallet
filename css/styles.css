@@ -531,6 +531,7 @@ footer {
   background-color: #4d4d4d;
   color: #ffffff;
   text-align: center;
+  z-index: 1000;
 }
 
 #panelUser {
@@ -598,7 +599,7 @@ footer {
   grid-template-rows: 30px 60px 40px 30px;
   grid-template-areas: "seleccion seleccion" "ingreso ingreso" "deposito retiro" "confirmacion confirmacion";
   width: 100%;
-  margin: 25px 0px;
+  margin: 5px 0px;
 }
 #panelUser #depositos .dr .seleccionMoneda {
   grid-area: seleccion;
@@ -706,7 +707,27 @@ footer {
   font-size: 16px;
   color: #bbbbbb;
 }
-#panelUser .adquisicion {
+#panelUser #compras {
+  width: 90%;
+  height: 245px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+}
+#panelUser #compras::-webkit-scrollbar {
+  width: 5px;
+}
+#panelUser #compras::-webkit-scrollbar:active {
+  width: 10px;
+}
+#panelUser #compras::-webkit-scrollbar-thumb {
+  background-color: #5F06CC;
+  border-radius: 10px;
+}
+#panelUser #compras .adquisicion {
   display: grid;
   grid-column-gap: 10px;
   grid-row-gap: 0px;
@@ -715,18 +736,19 @@ footer {
   grid-template-columns: 1.5fr 1fr;
   grid-template-rows: repeat(3, 30px);
   width: 100%;
-  margin: 0 auto;
+  height: 115px;
+  margin: 5px auto;
   padding: 15px 10px 5px 10px;
   border: 1px solid #bbbbbb;
 }
-#panelUser .adquisicion p {
+#panelUser #compras .adquisicion p {
   height: 100%;
   padding-left: 10px;
 }
-#panelUser .adquisicion .dineroRestante {
+#panelUser #compras .adquisicion .dineroRestante {
   color: #bbbbbb;
 }
-#panelUser .adquisicion h5 {
+#panelUser #compras .adquisicion h5 {
   color: #999999;
 }
 
