@@ -131,11 +131,20 @@ function billeteraToStorage(){
     localStorage.setItem('billetera', billeteraActual);
 }
 
+function billeteraCompletaToStorage(){
+    let billeteraFinal = JSON.stringify(billeteraCompleta);
+    localStorage.setItem('billeteraCompleta', billeteraFinal);
+}
+
 function objetoMonedaToStorage(moneda){
     let monedaElegida = JSON.stringify(moneda);
     localStorage.setItem('moneda', monedaElegida);
 }
 
+function compraToStorage(compra){
+    let criptoComprada = JSON.stringify(compra);
+    sessionStorage.setItem('compra', criptoComprada);
+}
 // -------------------------------------------------------//
 
 function elegirValor (cripto){

@@ -1,7 +1,8 @@
 
 // ----------------- COMIENZO ALGORITMO CON DOM ---------------------- //
-let billetera, objetoMoneda, i;
+let billetera, objetoMoneda, billeteraCompleta;
 
+billeteraCompleta = billeteraCompletaInicial ();
 
 billetera = billeteraInicial();
 if(billetera.billeteraTotal > 0){

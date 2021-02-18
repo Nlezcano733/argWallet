@@ -358,48 +358,56 @@ function confirmarCompra(){
     botonCompra.addEventListener('click', validacionCompra)
 }
 
+
 function validacionCompra(){
     let input;
     billetera = billeteraInicial();
+
     input = document.getElementById('ingresoDivisa').value;
     conversion = document.getElementById('valorConvertido');
+    cripto = obtenerSessionStorage('cripto');
+    moneda = obtenerStorage('moneda');
+
+    let compra = parseFloat(conversion.innerHTML);
+    let gasto = parseFloat(input);
+
     cantidad = billetera.billeteraTotal;
+
     if(cantidad >= input){
         billeteraActual = cantidad - input;
         billetera = new BilleteraParcial(billetera.divisa, billeteraActual);
         billeteraToStorage()
         validarOperacion('movimiento exitoso.', 'resto');
-        modificarHeader(moneda)
-        let pos = sumaDePosiciones(i)
-        i = pos ++;
+        modificarHeader(moneda);
+
+        compra = new Compra(cripto.ticker, compra, gasto, moneda.nombre);
+        compraToStorage(compra);
+        crearBilleteraCompleta();
         // MostrarCompra();
-        input=""
+        input="";
     } else{
         validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', 'resto');
     }
 }
 
-function MostrarCompra (i){
-    let conversion;
+
+function MostrarCompra (){
+    let conversion, compra;
     cripto = obtenerSessionStorage('cripto');
     cantidadGastada = document.getElementById('ingresoDivisa').value;
     conversion = document.getElementById('valorConvertido').innerHTML;
-    cantidad = parseFloat(conversion);
+
+    cantidadComprada = parseFloat(conversion);
+    cantidadGastada = parseFloat(cantidadGastada);
 
     crearDivIdPadre ('compras', 'class', 'adquisicion');
-    crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', i);
-    crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', cripto.ticker, i);
-    crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', i);
-    crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', cantidad, i);
-    crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', i);
-    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${cantidadGastada}`, i);
-}
+    crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', 0);
+    crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', cripto.ticker, 0);
+    crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', 0);
+    crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', cantidadComprada, 0);
+    crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', 0);
+    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${cantidadGastada}`, 0);
 
-function sumaDePosiciones(i){
-    if(i== undefined){
-        i=0;
-    }
-    console.log(i)
-    MostrarCompra(i);
-    return i++;
+    compra = new Compra(cripto.ticker, cantidadComprada, cantidadGastada, moneda.nombre);
+    compraToStorage(compra);
 }

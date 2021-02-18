@@ -30,10 +30,49 @@ function billeteraInicial(){
     return billetera
 }
 
+function billeteraCompletaInicial(){
+    billeteraCompleta = obtenerStorage('billeteraCompleta');
+    if(billeteraCompleta == null || billeteraCompleta == ""){
+        billetera = new Billetera('ARS', 'undefined', ars, 0, 0, 0);
+    }
+    return billeteraCompleta;
+}
+
 function monedaInicial(){
     moneda = obtenerStorage('moneda');
     if(moneda == null || moneda == ''){
         moneda = carteraDivisas[0]
     }
     return moneda;
+}
+
+
+function crearBilleteraCompleta(){
+    billeteraCompleta = obtenerStorage('billeteraCompleta');
+    compra = obtenerSessionStorage('compra');
+    billetera = obtenerStorage('billetera');
+    moneda = obtenerStorage('moneda');
+
+    if(billeteraCompleta == null){
+        compraArray = [compra];
+        billeteraCompleta = new Billetera (billetera.divisa, moneda.simbolo, billetera.billeteraTotal, compra.monedaValor, compraArray)
+        billeteraCompletaToStorage();
+    } else{
+        comprasEnBilletera = billeteraCompleta.arrayCompras;
+        comprasEnBilletera.push(compra);
+        compraArray = comprasEnBilletera;
+
+        let gastoTotal = compra.monedaValor + billeteraCompleta.cantidadDivisa;
+
+        billeteraCompleta = new Billetera (billetera.divisa, moneda.simbolo, billetera.billeteraTotal, gastoTotal, compraArray);
+        billeteraCompletaToStorage();
+    }
+}
+
+
+function arrayTipoCripto(tipo, cantidad){
+    let array = [];
+    objeto = new Compra(tipo, cantidad);
+    array.push(objeto);
+    return array
 }
