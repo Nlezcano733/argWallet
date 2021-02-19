@@ -25,7 +25,7 @@ presionaOjo();
 
 // DEPOSITOS Y RETIROS -- VALIDACION DE ACCIONES
 monedaDeposito = depositar('botonDeposito');
-depositarAutomatico = eventoInput();
+depositarAutomatico = eventoInput('deposito-retiro', );
 
 // MOSTRAMOS COMPRAS
 let arrayComprasRealizadas = billeteraCompleta.arrayCompras;

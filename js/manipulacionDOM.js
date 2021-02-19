@@ -32,25 +32,27 @@ function cerrarPanel (){
 function depositar(boton) {
     let botonPresionado, divisaIngresada, inputNumber;
     botonPresionado = document.getElementById(boton);
-    validacionNumeroReal();
 
     botonPresionado.addEventListener('click', () =>{
-        divisaIngresada = document.getElementById('tipoCambio').value;
-        inputNumber = document.getElementById('deposito-retiro').value;
-        billetera = billeteraInicial();
+        let validacion = validacionNumeroReal('deposito-retiro', 'dr');
+        if(validacion == true){
+            divisaIngresada = document.getElementById('tipoCambio').value;
+            inputNumber = document.getElementById('deposito-retiro').value;
+            billetera = billeteraInicial();
 
-        depositarBilletera(inputNumber, divisaIngresada, billetera);
+            depositarBilletera(inputNumber, divisaIngresada, billetera);
+        }
     });
 
 }
 
-function eventoInput (){
+function eventoInput (id, funcion){
     let input;
-    input = document.getElementById('deposito-retiro')
-    input.addEventListener('keypress', capturarEnter)
+    input = document.getElementById(id)
+    input.addEventListener('keypress', funcion)
 }
 
-function capturarEnter  (event){
+function depositarConEnter  (event){
     if (event.which == 13) {
         event.preventDefault();
         divisaIngresada = document.getElementById('tipoCambio').value;
@@ -337,18 +339,13 @@ function mostrarPanel(posicion){
 
 function realizarConversion (){
     let input, igual, conversion;
-    let validar = false;
     input = document.getElementById('ingresoDivisa');
+
     igual = document.getElementById('igual');
-
-    input.addEventListener('keypress',()=> {return validar = true});
-
     igual.addEventListener('click', () =>{
-        if(validar = true){
-            conversion = conversionMonedacripto(input.value);
-            modificarElemento('valorConvertido', conversion);
-            realizarConversion();
-        }
+        conversion = conversionMonedacripto(input.value);
+        modificarElemento('valorConvertido', conversion);
+        realizarConversion();
         confirmarCompra();
     })
 }
@@ -381,7 +378,7 @@ function validacionCompra(){
         validarOperacion('movimiento exitoso.', 'resto');
         mostrarBilletera();
 
-        compra = new Compra(cripto.ticker, compra, moneda.nombre, gasto);
+        compra = new Compra(cripto.ticker, compra, moneda.nombre, moneda.simbolo, gasto);
         compraToStorage(compra);
         crearBilleteraCompleta();
         sumarCompra();
@@ -400,7 +397,7 @@ function mostrarCompra (){
 
     for(let i=0; i<billeteraArray.length; i++){
         let objetoPosicion = billeteraArray[i];
-        armadoDeCompras(i, objetoPosicion, moneda);
+        armadoDeCompras(i, objetoPosicion);
     }
 }
 
@@ -412,17 +409,17 @@ function sumarCompra (){
         
     for(let i=posicionActual-1; i<posicionActual; i++){
         let objetoPosicion = billeteraArray[i];
-        armadoDeCompras(i, objetoPosicion, moneda);
+        armadoDeCompras(i, objetoPosicion);
     }
 
 }
 
-function armadoDeCompras (i, objetoPosicion, moneda){
+function armadoDeCompras (i, objetoPosicion){
     crearDivIdPadre ('compras', 'class', 'adquisicion');
     crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', i);
     crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', objetoPosicion.tipo, i);
     crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', i);
     crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', objetoPosicion.cantidad, i);
     crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', i);
-    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${objetoPosicion.valor}`, i);
+    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${objetoPosicion.monedaValor}: ${objetoPosicion.monedaSimbolo} ${objetoPosicion.valor}`, i);
 }

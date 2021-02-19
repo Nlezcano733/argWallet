@@ -1,3 +1,10 @@
+function prevenirEnter (event){
+    if (event.which == 13) {
+        event.preventDefault();
+    }
+}
+
+
 function validarOperacion (mensaje, className){
     let nodoPadre, elemento, contenido;
     elemento = document.createElement('p');
@@ -14,12 +21,15 @@ function validarOperacion (mensaje, className){
 }
 
 
-function validacionNumeroReal (){
-    valorInput = document.getElementById('deposito-retiro').value 
-    if(valorInput <= 0 || valorInput == "" || valorInput == null){
-        validarOperacion('Ingrese un numero real.', 'dr');
-        valorInput = "";
-    } 
+function validacionNumeroReal (input, nodoMensaje){
+    valorInput = document.getElementById(input) 
+    if(valorInput.value <= 0 || valorInput.value == "" || valorInput.value == null){
+        validarOperacion('Ingrese un numero real.', nodoMensaje);
+        valorInput.value = "";
+        return false;
+    } else{
+        return true;
+    }
 }
 
 function billeteraInicial(){
@@ -35,7 +45,6 @@ function billeteraCompletaInicial(){
     if(billeteraCompleta == null || billeteraCompleta == ""){
         billeteraCompleta = new Billetera('ARS', 'undefined', ars, 0, 0, 0);
     }
-    console.log(billeteraCompleta)
     return billeteraCompleta;
 }
 
@@ -68,12 +77,4 @@ function crearBilleteraCompleta(){
         billeteraCompleta = new Billetera (billetera.divisa, moneda.simbolo, billetera.billeteraTotal, gastoTotal, compraArray);
         billeteraCompletaToStorage();
     }
-}
-
-
-function arrayTipoCripto(tipo, cantidad){
-    let array = [];
-    objeto = new Compra(tipo, cantidad);
-    array.push(objeto);
-    return array
 }

@@ -31,15 +31,16 @@ Divisas.prototype.conversion = function ({value}){
 
 // --------------------------------------- //
 let ars = new Divisas ('Pesos', 'ARS', 1, '$');
-let usd = new Divisas ('Dolares', 'USD', 156, '$');
-let euro = new Divisas ('Euros', 'EURO', 184, '€');
+let usd = new Divisas ('Dolar', 'USD', 156, '$');
+let euro = new Divisas ('Euro', 'EURO', 184, '€');
 
 let carteraDivisas = [ars, usd, euro];
 // --------------------------------------- //
 
-function Compra(tipo, cantidad, monedaValor, valor){
+function Compra(tipo, cantidad, monedaValor, monedaSimbolo, valor){
     this.tipo = tipo,
     this.cantidad = cantidad,
     this.monedaValor = monedaValor
+    this.monedaSimbolo = monedaSimbolo,
     this.valor = valor
 }

@@ -52,7 +52,7 @@
                 <h2 class="titulo">Realizar transaccion de criptomoneda</h2>
                 <form>
                     <label for="divisa" id="conversorSimbolo">$</label>
-                    <input type="number" name="divisa" placeholder="0,00" id="ingresoDivisa">
+                    <input type="number" name="divisa" placeholder="0,00" id="ingresoDivisa" min="0" max="9999">
                 </form>
 
                 <div class="boton" role="button" id="cambioConversion">
@@ -130,7 +130,7 @@
                 </div>
                 <div class="input">
                     <label for="deposito-retiro" id="monedaDR">$</label>
-                    <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00" min="0">
+                    <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00" min="0" max="99999">
                 </div>
                 <input type="button" value="depositar" class="dr__boton" id="botonDeposito">
                 <input type="button" value="retirar" class="dr__boton " id="botonDeshabilitado">
