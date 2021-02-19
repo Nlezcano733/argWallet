@@ -27,6 +27,11 @@ presionaOjo();
 monedaDeposito = depositar('botonDeposito');
 depositarAutomatico = eventoInput();
 
+// MOSTRAMOS COMPRAS
+let arrayComprasRealizadas = billeteraCompleta.arrayCompras;
+if(arrayComprasRealizadas.length > 0){
+    mostrarCompra();
+}
 // ARMADO DE LISTADO DINAMICO DE CRIPTOS
 tomarJson();
 opcionCripto();

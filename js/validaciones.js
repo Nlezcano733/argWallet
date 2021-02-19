@@ -33,8 +33,9 @@ function billeteraInicial(){
 function billeteraCompletaInicial(){
     billeteraCompleta = obtenerStorage('billeteraCompleta');
     if(billeteraCompleta == null || billeteraCompleta == ""){
-        billetera = new Billetera('ARS', 'undefined', ars, 0, 0, 0);
+        billeteraCompleta = new Billetera('ARS', 'undefined', ars, 0, 0, 0);
     }
+    console.log(billeteraCompleta)
     return billeteraCompleta;
 }
 
@@ -55,14 +56,14 @@ function crearBilleteraCompleta(){
 
     if(billeteraCompleta == null){
         compraArray = [compra];
-        billeteraCompleta = new Billetera (billetera.divisa, moneda.simbolo, billetera.billeteraTotal, compra.monedaValor, compraArray)
+        billeteraCompleta = new Billetera (billetera.divisa, moneda.simbolo, billetera.billeteraTotal, compra.valor, compraArray)
         billeteraCompletaToStorage();
     } else{
         comprasEnBilletera = billeteraCompleta.arrayCompras;
         comprasEnBilletera.push(compra);
         compraArray = comprasEnBilletera;
 
-        let gastoTotal = compra.monedaValor + billeteraCompleta.cantidadDivisa;
+        let gastoTotal = compra.valor + billeteraCompleta.cantidadDivisa;
 
         billeteraCompleta = new Billetera (billetera.divisa, moneda.simbolo, billetera.billeteraTotal, gastoTotal, compraArray);
         billeteraCompletaToStorage();

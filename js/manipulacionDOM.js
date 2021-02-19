@@ -143,7 +143,8 @@ function mostrarBilletera (){
 
 function modificarHeader({simbolo}){
     let mostrador;
-    let billeteraActual = billetera.billeteraTotal;
+    let billeteraActual = obtenerStorage('billetera');
+    billeteraActual = billetera.billeteraTotal;
     mostrador = document.getElementById('cantidadBilletera');
     mostrador.innerHTML = `${simbolo} ${billeteraActual},00`;
 }
@@ -355,7 +356,7 @@ function realizarConversion (){
 function confirmarCompra(){
     let botonCompra;
     botonCompra = document.getElementById('confirmacionCompra');
-    botonCompra.addEventListener('click', validacionCompra)
+    botonCompra.addEventListener('click', validacionCompra);
 }
 
 
@@ -363,51 +364,65 @@ function validacionCompra(){
     let input;
     billetera = billeteraInicial();
 
-    input = document.getElementById('ingresoDivisa').value;
+    input = document.getElementById('ingresoDivisa');
     conversion = document.getElementById('valorConvertido');
     cripto = obtenerSessionStorage('cripto');
     moneda = obtenerStorage('moneda');
 
     let compra = parseFloat(conversion.innerHTML);
-    let gasto = parseFloat(input);
+    let gasto = parseFloat(input.value);
 
     cantidad = billetera.billeteraTotal;
 
-    if(cantidad >= input){
-        billeteraActual = cantidad - input;
+    if(cantidad >= input.value){
+        billeteraActual = cantidad - input.value;
         billetera = new BilleteraParcial(billetera.divisa, billeteraActual);
         billeteraToStorage()
         validarOperacion('movimiento exitoso.', 'resto');
-        modificarHeader(moneda);
+        mostrarBilletera();
 
-        compra = new Compra(cripto.ticker, compra, gasto, moneda.nombre);
+        compra = new Compra(cripto.ticker, compra, moneda.nombre, gasto);
         compraToStorage(compra);
         crearBilleteraCompleta();
-        // MostrarCompra();
-        input="";
+        sumarCompra();
     } else{
         validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', 'resto');
+    }
+    input.value = "";
+}
+
+
+function mostrarCompra (){
+    billeteraCompleta = obtenerStorage('billeteraCompleta');
+    moneda = obtenerStorage('moneda');
+
+    billeteraArray = billeteraCompleta.arrayCompras;
+
+    for(let i=0; i<billeteraArray.length; i++){
+        let objetoPosicion = billeteraArray[i];
+        armadoDeCompras(i, objetoPosicion, moneda);
     }
 }
 
 
-function MostrarCompra (){
-    let conversion, compra;
-    cripto = obtenerSessionStorage('cripto');
-    cantidadGastada = document.getElementById('ingresoDivisa').value;
-    conversion = document.getElementById('valorConvertido').innerHTML;
+function sumarCompra (){
+    let billeteraCompleta = obtenerStorage('billeteraCompleta');
+    let posicionActual = billeteraCompleta.arrayCompras.length;
+    let billeteraArray = billeteraCompleta.arrayCompras;
+        
+    for(let i=posicionActual-1; i<posicionActual; i++){
+        let objetoPosicion = billeteraArray[i];
+        armadoDeCompras(i, objetoPosicion, moneda);
+    }
 
-    cantidadComprada = parseFloat(conversion);
-    cantidadGastada = parseFloat(cantidadGastada);
+}
 
+function armadoDeCompras (i, objetoPosicion, moneda){
     crearDivIdPadre ('compras', 'class', 'adquisicion');
-    crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', 0);
-    crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', cripto.ticker, 0);
-    crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', 0);
-    crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', cantidadComprada, 0);
-    crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', 0);
-    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${cantidadGastada}`, 0);
-
-    compra = new Compra(cripto.ticker, cantidadComprada, cantidadGastada, moneda.nombre);
-    compraToStorage(compra);
+    crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', i);
+    crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', objetoPosicion.tipo, i);
+    crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', i);
+    crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', objetoPosicion.cantidad, i);
+    crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', i);
+    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${objetoPosicion.valor}`, i);
 }

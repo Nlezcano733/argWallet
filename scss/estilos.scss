@@ -642,7 +642,7 @@ footer{
         width: 90%;
         height: 245px;
         margin: 0 auto;
-        @include flexbox(column, center, center);
+        @include flexbox(column, flex-start, center);
         overflow-y: scroll;
         
         &::-webkit-scrollbar{
