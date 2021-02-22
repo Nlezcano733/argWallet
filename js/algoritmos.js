@@ -53,36 +53,39 @@ let carteraCriptos = [];
 // ----------------- COMIENZO ALGORITMO CON DOM ---------------------- //
 
 
-billeteraCompleta = billeteraCompletaInicial ();
+$(()=>{
 
-billetera = billeteraInicial();
-if(billetera.billeteraTotal > 0){
-    habilitarBoton();
-    bloquearSeleccionMoneda();
-    
-    retirar('botonRetiro');
-}
+    billeteraCompleta = billeteraCompletaInicial ();
 
-objetoMoneda = objetoCompleto(billetera, carteraDivisas);
-objetoMonedaToStorage(objetoMoneda);
+    billetera = billeteraInicial();
+    if(billetera.billeteraTotal > 0){
+        habilitarBoton();
+        bloquearSeleccionMoneda();
+        
+        retirar('botonRetiro');
+    }
 
-// ARMADO DE ESTRUCTURA DINAMICA -- HEADER
-panelUsuario = aperturaPanelUser('userIn', 'salir');
-mostrarBilletera();
-presionaOjo();
+    objetoMoneda = objetoCompleto(billetera, carteraDivisas);
+    objetoMonedaToStorage(objetoMoneda);
+
+    // ARMADO DE ESTRUCTURA DINAMICA -- HEADER
+    panelUsuario = aperturaPanelUser('userIn', 'salir');
+    mostrarBilletera();
+    presionaOjo();
 
 
-// DEPOSITOS Y RETIROS -- VALIDACION DE ACCIONES
-monedaDeposito = depositar('botonDeposito');
-depositarAutomatico = eventoInput('deposito-retiro', );
+    // DEPOSITOS Y RETIROS -- VALIDACION DE ACCIONES
+    monedaDeposito = depositar('botonDeposito');
+    depositarAutomatico = eventoInput('deposito-retiro', );
 
-// MOSTRAMOS COMPRAS
-let arrayComprasRealizadas = billeteraCompleta.arrayCompras;
-if(arrayComprasRealizadas.length > 0){
-    mostrarCompra();
-}
-// ARMADO DE LISTADO DINAMICO DE CRIPTOS
-tomarJson();
-opcionCripto();
-separacionCriptos();
-realizarConversion();
+    // MOSTRAMOS COMPRAS
+    let arrayComprasRealizadas = billeteraCompleta.arrayCompras;
+    if(arrayComprasRealizadas.length > 0){
+        mostrarCompra();
+    }
+    // ARMADO DE LISTADO DINAMICO DE CRIPTOS
+    tomarJson(carteraCriptos);
+    opcionCripto();
+    separacionCriptos();
+    realizarConversion();
+});
