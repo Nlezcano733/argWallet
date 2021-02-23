@@ -16,12 +16,11 @@
 @mixin boton ($width, $height, $colorPrincipal, $colorSecundario){
     width: $width;
     height: $height;
-    margin: 0 auto;
     color: $colorGris0;
     background-color: $colorPrincipal;
     border: 2px solid $colorSecundario;
     font-size: $cuerpo;
-    line-height: 1.5em;
+    text-align: center;
     transition: background-color 0.2s ease-in;
 
     &:hover{

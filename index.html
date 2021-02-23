@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="assets/imagenes/iconoNegro.png" />
+    <link rel="icon" type="image/png" href="assets/imagenes/iconoBlanco.png" />
     <script defer src="https://kit.fontawesome.com/bd03cec16f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">
     <title>ArgWallet</title>
@@ -12,141 +13,87 @@
 
 <body>
     <header>
-        <img class="logoPpal" src="assets/imagenes/Recurso 2.png" alt="ArgWallet">
-        <div id="navbar">
-            <section class="navbar__user">
-                <i id="userIn" class="far fa-user"></i>
-                <!-- <i id="logIn" class="fas fa-sign-in-alt"></i> -->
-                <p>Depositar / extraer </p>
-                <!-- <p>Bienvenido <span id="idUser"></span></p> -->
-            </section>
-            <section class="navbar__moneda">
-                <div class="cantidadDinero">
-                    <i class="fas fa-money-bill"></i>
-                    <p id="cantidadBilletera">$ 00,00</p>
-                </div>
-                <i id="cantidadVisible" class="fas fa-eye-slash"></i>
-            </section>
+        <h1><strong>Arg</strong>WALLET</h1>
+        <div id="navBar">
+            <a href="#">Inicio</a>
+            <a href="#informacion">Información</a>
+            <a href="#mercado">Mercado</a>
+            <a href="#ingreso" id="btnIngreso" role="button">Ingresar</a>
         </div>
     </header>
-
-
-    <main>
-        <section id="mainAside">
-            <h2>Listado de criptomonedas</h2>
-            <article id="listadoCriptos">
-            </article>
-        </section>
-
-        <section id="panel">
-            <div id="logoCripto">
-                <img id="logo" src="assets/imagenes/iconoNegro.png" alt="bticoin">
-            </div>
-            <div id="nombreCripto">
-                <h1 id="nombre">Seleccione una criptomoneda</h1>
-                <h2 id="ticker"></h2>
-            </div>
-
-
-            <div id="transaccion">
-                <h2 class="titulo">Realizar transaccion de criptomoneda</h2>
-                <form>
-                    <label for="divisa" id="conversorSimbolo">$</label>
-                    <input type="number" name="divisa" placeholder="0,00" id="ingresoDivisa" min="0" max="9999">
-                </form>
-
-                <div class="boton" role="button" id="cambioConversion">
-                    <i class="fas fa-exchange-alt"></i>
-                </div>
-
-                <div class="boton" role="button" id="igual">
-                <i class="fas fa-equals"></i>
-                </div>
-
-                <div id="resultado">
-                    <p id="valorConvertido">0,00 </p>
-                    <p id="tickerConvertido">---</p>
-                </div>  
-                <div class="resto">
-                    <!-- <p>Dinero restante para compra es: $20000</p> -->
-                </div>
-                <input type="button" value="Confirmar compra" id="confirmacionCompra">
-                <div id="compra">
-                    <!-- <p class="error">¡Su compra ha sido realizada con exito!</p> -->
-                </div>
-            </div>
-
-            <div id="cotizacion">
-                <h3 id="conversion">--/--</h3>
-                <h4 id="compra">Compra</h4>
-                <p id="valorCompra">$--</p>
-                <h4 id="venta">Venta</h4>
-                <p id="valorVenta">$--</p>
-                <div class="monedas">
-                    <ul id="opcion1">ARS</ul>
-                    <ul id="opcion2">USD</ul>
-                    <ul id="opcion3">EURO</ul>
-                </div>
-            </div>
-            <div class="infoMercado">
-                <div>
-                    <h3>Market Cap:</h3>
-                    <p id="market_cap"><span id="simboloMKTCap">$</span>---</p>
-                </div>
-                <div>
-                    <h4>Suministro circulante:</h4>
-                    <p id="circSupply">--</p>
-                </div>
-                <div>
-                    <h4>Maximo circulante:</h4>
-                    <p id="maxSupply">--</p>
-                </div>
-            </div>
-            <article id="resumen">
-                <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla quae cupiditate, numquam quod cumque
-                blanditiis eius exercitationem reiciendis aperiam laudantium amet perspiciatis quisquam eos
-                excepturi velit error sapiente officiis beatae! -->
-            </article>
-        </section>
-    </main>
-
-
-    <aside id="panelUser">
-        <i id="salir" class="fas fa-times"></i>
-        <div id="panelUser__user">
-            <p id="panelUser__nombre">Invitado</p>
-            <!-- <p id="panelUser__id">nlezcano732</p> -->
-        </div>
-        <div id="depositos">
-            <h2>Depositar - Retirar dinero en cuenta</h2>
-            <form class="dr" id="dr">
-                <div class="seleccionMoneda">
-                    <p id="tituloMonedaElegida">Tipo de moneda:</p>
-                    <select name="tipoCambio" id="tipoCambio" >
-                        <option class="opcionMoneda" value="ARS">ARS</option>
-                        <option class="opcionMoneda" value="USD" >USD</option>
-                        <option class="opcionMoneda" value="EURO">EURO</option>
-                    </select>
-                </div>
-                <div class="input">
-                    <label for="deposito-retiro" id="monedaDR">$</label>
-                    <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00" min="0" max="99999">
-                </div>
-                <input type="button" value="depositar" class="dr__boton" id="botonDeposito">
-                <input type="button" value="retirar" class="dr__boton " id="botonDeshabilitado">
-            </form>
-        </div>
-        <div id="compras"></div>
+    <aside id="redes">
+        <a href="#"><i class="far fa-moon"></i></a>
+        <a target="blank" href="https://github.com/Nlezcano733"><i class="fab fa-github-alt"></i></a>
+        <a target="blank" href="https://www.linkedin.com/in/nlezcano/"><i class="fab fa-linkedin"></i></a>
     </aside>
-
+    <section id="inicio">
+        <div id="intro">
+            <h2>Conectate al mundo Cripto</h2>
+            <p>Encontra las principales criptomonedas en un solo lugar. Comprá y vendé los activos de mayor crecimiento
+                del mercado con pocos clicks de distancia. <strong>Unite a la cripto revolucion</strong></p>
+        </div>
+        <img src="assets/imagenes/btc.png" alt="bitcoin" id="imagenCripto">
+        <div id="listado">
+            <p id="tituloImagenMostrada">Bitcoin (BTC)</p>
+            <img src="assets/imagenes/btc.png" alt="Bitcoin" id="imagenMostrada">
+        </div>
+    </section>
+    <section id="informacion">
+        <div class="cuerpoInfo">
+            <h2 id="tituloInfo">Deposita tus ahorros de manera segura</h2>
+            <div id="textoInfo">
+                <p>Tus ahorros se mantienen de forma segura en nuestra plataforma para que puedas operar y mantenerte al tanto
+                    con total confianza.
+                </p>
+                <p>En tu cuenta se verán los balances de los depósitos con varias monedas acorde a tus necesidades o planes de
+                    inversion.
+                    La seguridad es un factor importante, por lo que la información de tu billetera y tus transacciones quedaran
+                    guardadas en tu navegador.
+                </p>
+            </div>
+        </div>
+        <img src="assets/imagenes/ahorro.png" alt="Depositar ahorros" id="imagenInfo">
+    </section>
+    <section id="mercado">
+        <table id="listaMercado" cellspacing="0px">
+            <tr id="cabeceraTabla">
+                <th>Nombre</th>
+                <th>Par</th>
+                <th>precio</th>
+                <th>24h Cambio</th>
+                <th>max 24h</th>
+                <th>min 24h</th>
+                <th>24h vol</th>
+                <th>
+                    <select id="divisaLista">
+                        <option>ARS</option>
+                        <option>USD</option>
+                        <option>EURO</option>
+                    </select>
+                </th>
+            </tr>
+            <tr class="criptoNombre">
+                <td>
+                    <div class="nombreCompletoLista">
+                        <img src="assets/imagenes/doge.png" alt="Bitcoin" class="imagenCripto">
+                        <p class="nombreCriptoLista">Doge-coin (DOGE)</p>
+                    </div>
+                </td>
+                <td class="parLista">BTC/ARS</td>
+                <td class="precioLista">47000</td>
+                <td class="cambioLista">-10,47%</td>
+                <td class="maxLista">47400</td>
+                <td class="minLista">46900</td>
+                <td class="volLista">1203M</td>
+                <td>
+                    <a href="#" class="btnCompra" role="button">Compra</a>
+                </td>
+            </tr>
+        </table>
+    </section>
     <footer>
-        <p>Desarrollado por &copy; Nlezcano  - Febrero 2021</p>
+        <p>Desarrollado por NLezcano - Febrero 2021</p>
     </footer>
-    <script src="js/objetoJson.js"></script>
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/validaciones.js"></script>
-    <script src="js/manipulacionDOM.js"></script>
-    <script src="js/funciones.js"></script>
-    <script src="js/algoritmos.js"></script>
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 $colorAzul0: #dae2ec;
-$colorAzul1: #b9c7da;
+$colorAzul1: #cdd4e7;
 $colorAzul2: #97adc9;
 $colorAzul3: #7692b7;
 $colorAzul4: #5678a4;
@@ -20,7 +20,7 @@ $colorVioleta5: #1d023e;
 //$azulTranslucido: #455f83bb;
 $azulTranslucido: #7692b777;
 
-$colorGris0: #ffffff;
+$colorGris0: #f6f6f6;
 $colorGris1: #dddddd;
 $colorGris2: #bbbbbb;
 $colorGris3: #999999;
@@ -45,3 +45,5 @@ $gradienteHeader: linear-gradient(to top, $colorAzul3, $colorAzul5);
 $gradienteAside: radial-gradient(circle at left bottom, $colorVioleta2, $colorAzul3);
 $gradienteUser: linear-gradient(to right, $colorVioleta2, $colorVioleta3);
 $fondoTranslucido: #7708ff66;
+
+$bg-header: #f6f6f63f;

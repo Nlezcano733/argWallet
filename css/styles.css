@@ -5,8 +5,8 @@
   font-style: normal;
 }
 @font-face {
-  font-family: Lato;
-  src: url("../assets/fuentes/Lato/Lato-Regular.ttf") format("Truetype");
+  font-family: Noto_sans;
+  src: url("../assets/fuentes/Noto_Sans/NotoSans-Regular.ttf") format("Truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -17,771 +17,318 @@
   font-style: normal;
 }
 * {
-  padding: 0px;
-  margin: 0px;
   box-sizing: border-box;
-  font-family: Ebirma, sans-serif, verdana;
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: Lato, sans-serif, verdana;
-}
-
-p, a {
-  font-family: Ebirma, sans-serif, verdana;
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
-  background-color: #dddddd;
-  width: 100vw;
-  overflow: hidden;
-}
-
-.logoPpal {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: block;
-  height: 70px;
-  margin: 0px auto;
-}
-
-#navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 90px;
   width: 100%;
-  padding: 5px 50px;
-  background-image: linear-gradient(to top, #7692b7, #455f83);
-  color: #ffffff;
-}
-#navbar section {
-  height: 40px;
-  width: fit-content;
-  font-size: 18px;
-  background-color: #5678a4;
-  box-shadow: 0px 0px 5px #5678a4;
-}
-#navbar .navbar__moneda {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 220px;
-}
-#navbar .navbar__moneda .cantidadDinero {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: fit-content;
-  margin: 8px 20px 8px 10px;
-}
-#navbar .navbar__moneda .cantidadDinero i {
-  margin-right: 10px;
-}
-#navbar .navbar__moneda #cantidadVisible {
-  height: 100%;
-  padding: 11px 10px;
-  border-left: 2px solid #7692b7;
-  cursor: pointer;
-  transition: all 0.1s linear;
-}
-#navbar .navbar__moneda #cantidadVisible:hover {
-  background-color: #455f83;
-}
-#navbar .navbar__moneda #cantidadVisible:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-#navbar .navbar__moneda #cantidadBilletera {
-  font-weight: 400;
-}
-#navbar .navbar__user {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 220px;
-  max-width: 320px;
-}
-#navbar .navbar__user #userIn {
-  height: 100%;
-  padding: 10px 12px;
-  border-right: 2px solid #7692b7;
-  cursor: pointer;
-  transition: all 0.1s linear;
-}
-#navbar .navbar__user #userIn:hover {
-  background-color: #455f83;
-}
-#navbar .navbar__user #userIn:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-#navbar .navbar__user p {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-main {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-main #mainAside {
-  grid-area: aside;
-  height: calc(100vh - 120px);
-  width: 320px;
-  padding-top: 15px;
-  background-image: radial-gradient(circle at left bottom, #7908FF, #7692b7);
-  box-shadow: 0px 15px 20px 0px #7692b7 inset;
-  border-top: 3px solid #7692b7;
-}
-main #mainAside h2 {
-  height: 50px;
-  padding-bottom: 15px;
-  font-family: Lato, sans-serif, verdana;
-  font-size: 24px;
-  font-weight: 800;
-  text-align: center;
-  color: #ffffff;
-  border-bottom: 2px solid #7692b7;
-}
-main #mainAside #listadoCriptos {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
-  height: calc(100% - 50px);
-  padding: 10px 5px;
-  overflow-y: scroll;
-  direction: rtl;
-}
-main #mainAside #listadoCriptos .cripto {
-  width: 260px;
-  height: 80px;
-  padding: 5px 10px;
-  margin-top: 15px;
-  color: #ffffff;
-  direction: ltr;
-  display: grid;
-  grid-column-gap: 5px;
-  grid-row-gap: 0px;
-  justify-content: flex-start;
-  align-items: center;
-  grid-template-columns: 55px 1fr 1.2fr;
-  grid-template-rows: 2fr 32px;
-  grid-template-areas: "imagen nombre nombre" "imagen cambio valor";
-  background-color: #7708ff66;
-  box-shadow: 0px 0px 7px #7908FF;
-  border-radius: 5px;
-  transition: background-color 0.2s ease-in;
-  cursor: pointer;
-}
-main #mainAside #listadoCriptos .cripto:hover {
-  background-color: #5F06CC;
-}
-main #mainAside #listadoCriptos .cripto:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-main #mainAside #listadoCriptos .cripto .imagenCripto {
-  grid-area: imagen;
-  width: 60px;
-  height: 100%;
-  padding-top: 12px;
-  overflow: hidden;
-}
-main #mainAside #listadoCriptos .cripto .imagenCripto img {
-  width: 80%;
-}
-main #mainAside #listadoCriptos .cripto .nombreCripto {
-  grid-area: nombre;
-  font-family: Lato, sans-serif, verdana;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.7px;
-}
-main #mainAside #listadoCriptos .cripto .cambioCripto {
-  grid-area: cambio;
+  background-color: #f6f6f6;
+  color: #334761;
+  font-family: Roboto, sans-serif, verdana;
   font-size: 16px;
-  font-family: Ebirma, sans-serif, verdana;
-  font-weight: 400;
 }
-main #mainAside #listadoCriptos .cripto .valorCripto {
-  grid-area: valor;
-}
-main #mainAside #listadoCriptos .cripto .marketCapCripto {
-  grid-area: marketCap;
-}
-main #mainAside #listadoCriptos::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 5px;
 }
-main #mainAside #listadoCriptos::-webkit-scrollbar:active {
+body::-webkit-scrollbar:active {
   width: 10px;
 }
-main #mainAside #listadoCriptos::-webkit-scrollbar-thumb {
-  background-color: #5F06CC;
+body::-webkit-scrollbar-thumb {
+  background-color: #7692b7;
   border-radius: 10px;
 }
-main #panel {
-  display: grid;
-  grid-column-gap: 40px;
-  grid-row-gap: 15px;
-  justify-content: center;
-  align-items: start;
-  grid-template-rows: 125px 100px 1fr 90px;
-  grid-template-columns: 100px 400px 1fr;
-  grid-template-areas: "imagen nombre cotizacion" "compra compra detalles" "compra compra info" "adquisicion adquisicion info";
-  width: calc(100vw - 320px);
-  height: calc(100vh - 120px);
-  padding: 30px;
-  color: #333333;
-}
-main #panel #logoCripto {
+
+header {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  overflow: hidden;
-  align-self: center;
-}
-main #panel #logoCripto #logo {
+  height: 70px;
   width: 100%;
+  padding: 0px 80px;
+  position: fixed;
+  background-color: #f6f6f63f;
+  z-index: 1000;
 }
-main #panel #nombreCripto {
-  grid-area: nombre;
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: baseline;
-  width: 100%;
-}
-main #panel #nombreCripto #nombre {
-  font-size: 46px;
-  font-weight: 200;
+header h1 {
   width: fit-content;
-}
-main #panel #nombreCripto #ticker {
+  padding: 0px;
+  font-family: Ebirma, sans-serif, verdana;
   font-size: 24px;
-  font-weight: 200;
-  width: fit-content;
-  margin-left: 15px;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
-main #panel #cotizacion {
-  display: grid;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  justify-content: center;
+header #navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  grid-template-columns: 1fr 1fr 65px;
-  grid-template-rows: 35px 30px 60px;
-  grid-template-areas: "conversion conversion ." "compra venta monedas" "precioCompra precioVenta monedas";
-  width: 100%;
+  width: 480px;
   height: 100%;
-  margin: 0 auto;
-  background-image: linear-gradient(to top, #7692b7, #455f83);
-  color: #ffffff;
-  box-shadow: 0px 0px 20px #bbbbbb;
-  border-radius: 8px;
+}
+header #navBar a {
+  color: #334761;
+  text-decoration: none;
+  transition: all 0, 3s linear;
+}
+header #navBar a:hover {
+  color: #212f40;
+}
+header #navBar a:visited {
+  color: #334761;
+}
+header #navBar #btnIngreso {
+  margin: 0px;
+  width: 100px;
+  height: 35px;
+  color: #f6f6f6;
+  background-color: #455f83;
+  border: 2px solid #334761;
+  font-size: 16px;
   text-align: center;
-}
-main #panel #cotizacion p, main #panel #cotizacion h4 {
-  height: 100%;
-  background-color: #dddddd;
-  color: #1a1a1a;
-}
-main #panel #cotizacion p {
-  font-family: Roboto, sans-serif, verdana;
-  font-size: 24px;
-  line-height: 50px;
-  border-top: 1px solid #bbbbbb;
-}
-main #panel #cotizacion h4 {
-  font-size: 20px;
+  transition: background-color 0.2s ease-in;
   line-height: 30px;
-  font-weight: 400;
-  color: #999999;
+  color: #dddddd;
 }
-main #panel #cotizacion #conversion {
-  grid-area: conversion;
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 400;
+header #navBar #btnIngreso:hover {
+  background-color: #334761;
 }
-main #panel #cotizacion #compra {
-  grid-area: compra;
+header #navBar #btnIngreso:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
 }
-main #panel #cotizacion #venta {
-  grid-area: venta;
+header #navBar #btnIngreso:focus {
+  outline: none;
 }
-main #panel #cotizacion #valorCompra {
-  grid-area: precioCompra;
-  border-bottom-left-radius: 8px;
-}
-main #panel #cotizacion #valorVenta {
-  grid-area: precioVenta;
-}
-main #panel #cotizacion .monedas {
-  grid-area: monedas;
+
+#redes {
+  position: fixed;
+  left: 30px;
+  top: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 100%;
+  width: fit-content;
+  height: 140px;
+  z-index: 1000;
+}
+#redes i {
+  font-size: 18px;
+  color: #334761;
+  transition: all 0.1s linear;
+}
+#redes i:hover {
+  transform: scale(1.2);
+}
+#redes i:first-child:active {
+  color: #D3F325;
+}
+
+section {
   width: 100%;
+  height: 100vh;
+  padding: 80px 80px;
 }
-main #panel #cotizacion .monedas ul {
-  width: 100%;
-  height: 100%;
-  line-height: 25px;
-  border-top: 1px solid #bbbbbb;
-  cursor: pointer;
+
+#inicio {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr) 200px;
+  grid-template-rows: auto;
+  grid-template-areas: "intro imagen lista";
+  background-image: url(../assets/imagenes/backgroung-1.jpg);
+  background-size: cover;
+  background-position: center;
 }
-main #panel #cotizacion .monedas ul:hover {
-  background-color: #5678a4;
-  border-bottom-right-radius: 8px;
-}
-main #panel #cotizacion .monedas ul:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-main #panel .infoMercado {
-  grid-area: detalles;
+#inicio #intro {
+  grid-area: "intro";
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: 100%;
-}
-main #panel .infoMercado div {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 400px;
-  margin-bottom: 10px;
-}
-main #panel .infoMercado div p {
-  margin-left: 10px;
-}
-main #panel .infoMercado div h3 {
-  font-size: 20px;
-  font-weight: 700;
-}
-main #panel .infoMercado div h4 {
-  color: #4d4d4d;
-}
-main #panel #resumen {
-  grid-area: info;
-}
-main #panel #transaccion {
-  grid-area: compra;
-  display: grid;
-  grid-column-gap: 20px;
-  grid-row-gap: 10px;
   justify-content: center;
-  align-items: center;
-  grid-template-columns: 1fr 50px 1fr;
-  grid-template-rows: 60px repeat(3, 30px) 50px 40px;
-  grid-template-areas: "titulo titulo titulo" "ingreso cambio resultado" "ingreso igual resultado" "resto resto resto" "confirmacion confirmacion confirmacion" "compra compra compra";
-  height: 100%;
-  width: 100%;
+  align-items: flex-start;
+  height: 80%;
+  width: 90%;
+  margin-top: 5%;
+  margin-bottom: 15%;
 }
-main #panel #transaccion .titulo {
-  grid-area: titulo;
-  text-align: center;
+#inicio #intro h2 {
+  font-family: Noto_sans, sans-serif, verdana;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px;
 }
-main #panel #transaccion form {
-  grid-area: ingreso;
+#inicio #intro p {
+  font-size: 18px;
+  line-height: 1.7em;
+}
+#inicio #imagenCripto {
+  grid-area: imagen;
+  width: 70%;
+}
+#inicio #listado {
+  grid-area: lista;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  height: 100%;
 }
-main #panel #transaccion form #conversorSimbolo {
-  font-size: 30px;
-  font-weight: 400;
-  width: 40px;
-  margin-right: 10px;
+#inicio #listado p {
+  margin-right: 20px;
 }
-main #panel #transaccion form #ingresoDivisa {
-  height: 40px;
-  width: calc(100% - 70px);
-  font-size: 30px;
-  text-align: right;
-  color: #333333;
+#inicio #listado img {
+  width: 50px;
+}
+
+#informacion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-around;
+  background-color: #cdd4e7;
+  position: relative;
+}
+#informacion .cuerpoInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 600px;
+  height: 450px;
+}
+#informacion .cuerpoInfo #tituloInfo {
+  font-family: Noto_sans, sans-serif, verdana;
+  font-size: display;
+  margin-bottom: 40px;
+}
+#informacion .cuerpoInfo #textoInfo {
+  width: 550px;
+  font-size: 16px;
+  line-height: 1.6em;
+}
+#informacion #imagenInfo {
+  position: absolute;
+  top: 18%;
+  right: 80px;
+  width: 50%;
+  mix-blend-mode: darken;
+}
+
+#mercado {
+  display: block;
+  height: calc(100vh - 35px);
+  padding-bottom: 20px;
+  background-color: #cdd4e7;
+}
+#mercado #listaMercado {
+  display: block;
+  height: 100%;
+  overflow-y: scroll;
+}
+#mercado #listaMercado::-webkit-scrollbar {
+  width: 5px;
+}
+#mercado #listaMercado::-webkit-scrollbar:active {
+  width: 10px;
+}
+#mercado #listaMercado::-webkit-scrollbar-thumb {
+  background-color: #97adc9;
+  border-radius: 10px;
+}
+#mercado #listaMercado tr {
+  text-align: left;
+  border: none;
+}
+#mercado #listaMercado tr th {
+  width: calc(100% / 8);
+  height: 50px;
+  padding: 2px 20px;
+  padding-left: 20px;
   background-color: #dddddd;
   border: none;
-  border-bottom: 1px solid #999999;
 }
-main #panel #transaccion form #ingresoDivisa::placeholder {
-  font-size: 30px;
-}
-main #panel #transaccion form #ingresoDivisa::step {
-  display: none;
-}
-main #panel #transaccion form #ingresoDivisa:focus {
-  outline: none;
-}
-main #panel #transaccion .boton {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  color: #ffffff;
-  background-color: #bbbbbb;
-  border: 2px solid #808080;
+#mercado #listaMercado tr th #divisaLista {
+  width: 80px;
+  height: 35px;
+  color: #f6f6f6;
+  background-color: #455f83;
+  border: 2px solid #334761;
   font-size: 16px;
-  line-height: 1.5em;
-  transition: background-color 0.2s ease-in;
   text-align: center;
+  transition: background-color 0.2s ease-in;
+  font-size: 16px;
+  font-weight: bold;
 }
-main #panel #transaccion .boton:hover {
-  background-color: #808080;
+#mercado #listaMercado tr th #divisaLista:hover {
+  background-color: #334761;
 }
-main #panel #transaccion .boton:active {
+#mercado #listaMercado tr th #divisaLista:active {
   outline: none;
   box-shadow: 0px 0px 5px #333333 inset;
 }
-main #panel #transaccion .boton:focus {
+#mercado #listaMercado tr th #divisaLista:focus {
   outline: none;
 }
-main #panel #transaccion #cambioConversion {
-  grid-area: cambio;
+#mercado #listaMercado tr td {
+  width: auto;
+  height: 45px;
+  padding: 2px 10px;
+  padding-left: 20px;
+  background-color: #cdd4e7;
+  border-bottom: 1px solid #7692b7;
 }
-main #panel #transaccion #igual {
-  grid-area: igual;
+#mercado #listaMercado tr td:first-child {
+  padding-left: 5px;
 }
-main #panel #transaccion #resultado {
-  grid-area: resultado;
-  height: 40px;
-  width: 100%;
+#mercado #listaMercado tr td:first-child .nombreCompletoLista {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  font-size: 30px;
-  color: #333333;
-  background-color: #dddddd;
+  width: 200px;
 }
-main #panel #transaccion #resultado #valorConvertido {
-  width: calc(100% - 80px);
+#mercado #listaMercado tr td:first-child .nombreCompletoLista img {
+  width: 30px;
+  margin-right: 5px;
 }
-main #panel #transaccion #resultado #tickerConvertido {
-  width: 70px;
-  margin-left: 10px;
-}
-main #panel #transaccion .resto {
-  grid-area: resto;
-  text-align: center;
-}
-main #panel #transaccion #confirmacionCompra {
-  grid-area: confirmacion;
-  width: 150px;
-  height: 40px;
-  margin: 0 auto;
-  color: #ffffff;
-  background-color: #14b10b;
-  border: 2px solid #097c02;
+#mercado #listaMercado tr td .btnCompra {
+  width: 100px;
+  height: 50px;
+  color: #f6f6f6;
+  background-color: #455f83;
+  border: 2px solid #334761;
   font-size: 16px;
-  line-height: 1.5em;
+  text-align: center;
   transition: background-color 0.2s ease-in;
+  padding: 5px 10px;
+  line-height: 20px;
+  text-decoration: none;
+  text-align: right;
 }
-main #panel #transaccion #confirmacionCompra:hover {
-  background-color: #097c02;
+#mercado #listaMercado tr td .btnCompra:hover {
+  background-color: #334761;
 }
-main #panel #transaccion #confirmacionCompra:active {
+#mercado #listaMercado tr td .btnCompra:active {
   outline: none;
   box-shadow: 0px 0px 5px #333333 inset;
 }
-main #panel #transaccion #confirmacionCompra:focus {
+#mercado #listaMercado tr td .btnCompra:focus {
   outline: none;
-}
-main #panel #transaccion #compra {
-  grid-area: compra;
-  margin: 0 auto;
-  color: #ffffff;
-}
-main #panel #transaccion #compra p {
-  height: 35px;
-  min-width: 260px;
-  padding: 0px 10px;
-  line-height: 30px;
-}
-main #panel #transaccion #compra .exito {
-  background-color: #097c02;
-  box-shadow: 0px 0px 2px #097c02;
-}
-main #panel #transaccion #compra .error {
-  background-color: #920005;
-  box-shadow: 0px 0px 2px #920005;
 }
 
 footer {
-  width: 100%;
-  height: 30px;
-  background-color: #4d4d4d;
-  color: #ffffff;
+  height: 35px;
+  padding: 5px;
+  background-color: #7692b7;
+  color: #10161e;
   text-align: center;
   z-index: 1000;
-}
-
-#panelUser {
-  width: 320px;
-  height: calc(100vh - 30px);
-  position: absolute;
-  top: 0px;
-  left: -320px;
-  z-index: 10;
-  background-image: linear-gradient(to right, #7908FF, #5F06CC);
-  color: #ffffff;
-}
-#panelUser #salir {
-  position: relative;
-  font-size: 24px;
-  top: 15px;
-  left: 25px;
-  transition: transform 0.5s ease-in;
-}
-#panelUser #salir:hover {
-  transform: scale(1.2);
-}
-#panelUser #panelUser__user {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 200px;
-  max-width: 280px;
-  height: 50px;
-  margin: 0px auto;
-  margin-top: 20px;
-  padding: 7px 10px;
-  background-color: #5F06CC;
-  box-shadow: 0px 0px 10px #5F06CC;
-}
-#panelUser #panelUser__user #panelUser__nombre {
-  margin-bottom: 5px;
-  font-size: 20px;
-  font-weight: 500;
-  font-family: Lato, sans-serif, verdana;
-  line-height: 30px;
-}
-#panelUser #depositos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-}
-#panelUser #depositos h2 {
-  grid-area: titulo;
-  font-size: 20px;
-}
-#panelUser #depositos .dr {
-  grid-area: ingreso;
-  display: grid;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 30px 60px 40px 30px;
-  grid-template-areas: "seleccion seleccion" "ingreso ingreso" "deposito retiro" "confirmacion confirmacion";
-  width: 100%;
-  margin: 5px 0px;
-}
-#panelUser #depositos .dr .seleccionMoneda {
-  grid-area: seleccion;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 30px;
-  width: 100%;
-}
-#panelUser #depositos .dr .seleccionMoneda #tituloMonedaElegida {
-  font-size: 18px;
-}
-#panelUser #depositos .dr .seleccionMoneda #monedaElegida {
-  font-size: 18px;
-}
-#panelUser #depositos .dr .seleccionMoneda #tipoCambio {
-  width: 80px;
-  height: 30px;
-  color: #ffffff;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #dddddd;
-  font-size: 16px;
-}
-#panelUser #depositos .dr .seleccionMoneda #tipoCambio:hover {
-  background-color: #7708ff66;
-}
-#panelUser #depositos .dr .seleccionMoneda #tipoCambio:focus {
-  outline: none;
-}
-#panelUser #depositos .dr .seleccionMoneda #tipoCambio .opcionMoneda {
-  background-color: #5F06CC;
-}
-#panelUser #depositos .dr .input {
-  grid-area: ingreso;
-  font-size: 24px;
-}
-#panelUser #depositos .dr .input #deposito-retiro {
-  height: 40px;
-  width: calc(100% - 70px);
-  font-size: 30px;
-  text-align: right;
-  color: #ffffff;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #dddddd;
-}
-#panelUser #depositos .dr .input #deposito-retiro::placeholder {
-  font-size: 30px;
-}
-#panelUser #depositos .dr .input #deposito-retiro::step {
-  display: none;
-}
-#panelUser #depositos .dr .input #deposito-retiro:focus {
-  outline: none;
-}
-#panelUser #depositos .dr .dr__boton {
-  width: 150px;
-  height: 40px;
-  margin: 0 auto;
-  color: #ffffff;
-  background-color: #5F06CC;
-  border: 2px solid #3B0480;
-  font-size: 16px;
-  line-height: 1.5em;
-  transition: background-color 0.2s ease-in;
-}
-#panelUser #depositos .dr .dr__boton:hover {
-  background-color: #3B0480;
-}
-#panelUser #depositos .dr .dr__boton:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-#panelUser #depositos .dr .dr__boton:focus {
-  outline: none;
-}
-#panelUser #depositos .dr #botonDeposito {
-  grid-area: deposito;
-}
-#panelUser #depositos .dr #botonRetiro {
-  grid-area: retiro;
-}
-#panelUser #depositos .dr #botonDeshabilitado {
-  grid-area: retiro;
-  width: 150px;
-  height: 40px;
-  margin: 0 auto;
-  color: #808080;
-  background-color: #3B0480;
-  border: none;
-  font-size: 16px;
-  line-height: 1.5em;
-}
-#panelUser #depositos .dr #botonDeshabilitado:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-#panelUser #depositos .dr #botonDeshabilitado:focus {
-  outline: none;
-}
-#panelUser #depositos .dr #confirmacion {
-  grid-area: confirmacion;
-  font-size: 16px;
-  color: #bbbbbb;
-}
-#panelUser #compras {
-  width: 90%;
-  height: 245px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-y: scroll;
-}
-#panelUser #compras::-webkit-scrollbar {
-  width: 5px;
-}
-#panelUser #compras::-webkit-scrollbar:active {
-  width: 10px;
-}
-#panelUser #compras::-webkit-scrollbar-thumb {
-  background-color: #5F06CC;
-  border-radius: 10px;
-}
-#panelUser #compras .adquisicion {
-  display: grid;
-  grid-column-gap: 5px;
-  grid-row-gap: 0px;
-  justify-content: start;
-  align-items: baseline;
-  grid-template-columns: 1.2fr 1fr;
-  grid-template-rows: repeat(3, 30px);
-  width: 100%;
-  height: 115px;
-  margin: 5px auto;
-  padding: 15px 5px 5px 5px;
-  border: 1px solid #bbbbbb;
-}
-#panelUser #compras .adquisicion p {
-  height: 100%;
-  padding-left: 10px;
-}
-#panelUser #compras .adquisicion .dineroRestante {
-  color: #bbbbbb;
-}
-#panelUser #compras .adquisicion h5 {
-  color: #999999;
-}
-
-.panelUser__animationApertura {
-  animation: traslacionApertura 0.5s linear;
-}
-
-@keyframes traslacionApertura {
-  from {
-    transform: translateX(0px);
-  }
-  to {
-    transform: translateX(320px);
-  }
-}
-.panelUser__animationCierre {
-  animation: traslacionCierre 0.5s linear;
-}
-
-@keyframes traslacionCierre {
-  from {
-    transform: translateX(320px);
-  }
-  to {
-    transform: translateX(0px);
-  }
-}
-.panelUser__abierto {
-  transform: translateX(100%);
-}
-
-.panelUser__cerrado {
-  transform: translateX(-100%);
 }
 
 /*# sourceMappingURL=styles.css.map */
