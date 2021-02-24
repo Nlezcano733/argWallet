@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -21,27 +21,34 @@
             <a href="conversor.html" id="btnIngreso" role="button">Ingresar</a>
         </div>
     </header>
+
     <aside id="redes">
-        <a href="#"><i class="far fa-moon"></i></a>
+        <a href="#" id="darkMode"><i class="far fa-moon"></i></a>
         <a target="blank" href="https://github.com/Nlezcano733"><i class="fab fa-github-alt"></i></a>
         <a target="blank" href="https://www.linkedin.com/in/nlezcano/"><i class="fab fa-linkedin"></i></a>
     </aside>
+
     <section id="inicio">
-        <div id="intro">
+
+        <div id="inicio__intro">
             <h2>Conectate al mundo Cripto</h2>
             <p>Encontra las principales criptomonedas en un solo lugar. Comprá y vendé los activos de mayor crecimiento
                 del mercado con pocos clicks de distancia. <strong>Unite a la cripto revolucion</strong></p>
         </div>
-        <img src="assets/imagenes/btc.png" alt="bitcoin" id="imagenCripto">
-        <div id="listado">
-            <p id="tituloImagenMostrada">Bitcoin (BTC)</p>
-            <img src="assets/imagenes/btc.png" alt="Bitcoin" id="imagenMostrada">
+
+        <img src="assets/imagenes/btc.png" alt="bitcoin" id="inicio__imagenCripto">
+
+        <div id="inicio__listado">
+            <p class="inicio__listado--nombre">Bitcoin (BTC)</p>
+            <img src="assets/imagenes/btc.png" alt="Bitcoin" class="inicio__listado--imagen">
         </div>
+
     </section>
-    <section id="informacion">
-        <div class="cuerpoInfo">
-            <h2 id="tituloInfo">Deposita tus ahorros de manera segura</h2>
-            <div id="textoInfo">
+
+    <section id="info">
+        <div class="info__cuerpoInfo">
+            <h2 class="info__cuerpoInfo--titulo">Deposita tus ahorros de manera segura</h2>
+            <div class="info__cuerpoInfo--texto">
                 <p>Tus ahorros se mantienen de forma segura en nuestra plataforma para que puedas operar y mantenerte al tanto
                     con total confianza.
                 </p>
@@ -52,11 +59,12 @@
                 </p>
             </div>
         </div>
-        <img src="assets/imagenes/ahorro.png" alt="Depositar ahorros" id="imagenInfo">
+        <img src="assets/imagenes/ahorro.png" alt="Depositar ahorros" class="info__imagen">
     </section>
+
     <section id="mercado">
-        <table id="listaMercado" cellspacing="0px">
-            <tr id="cabeceraTabla">
+        <table id="mercado__lista" cellspacing="0px">
+            <tr id="lista__cabecera">
                 <th>Nombre</th>
                 <th>Par</th>
                 <th>precio</th>
@@ -65,35 +73,37 @@
                 <th>min 24h</th>
                 <th>24h vol</th>
                 <th>
-                    <select id="divisaLista">
+                    <select id="lista__cabecera--divisas">
                         <option>ARS</option>
                         <option>USD</option>
                         <option>EURO</option>
                     </select>
                 </th>
             </tr>
-            <tr class="criptoNombre">
+            <tr class="lista__cripto">
                 <td>
-                    <div class="nombreCompletoLista">
+                    <div class="lista__cripto--nombre">
                         <img src="assets/imagenes/doge.png" alt="Bitcoin" class="imagenCripto">
                         <p class="nombreCriptoLista">Doge-coin (DOGE)</p>
                     </div>
                 </td>
-                <td class="parLista">BTC/ARS</td>
-                <td class="precioLista">47000</td>
-                <td class="cambioLista">-10,47%</td>
-                <td class="maxLista">47400</td>
-                <td class="minLista">46900</td>
-                <td class="volLista">1203M</td>
+                <td class="lista__cripto--par">BTC/ARS</td>
+                <td class="lista__cripto--precio">47000</td>
+                <td class="lista__cripto--cambio">-10,47%</td>
+                <td class="lista__cripto--max">47400</td>
+                <td class="lista__cripto--min">46900</td>
+                <td class="lista__cripto--vol">1203M</td>
                 <td>
-                    <a href="#" class="btnCompra" role="button">Compra</a>
+                    <a href="#" class="lista__cripto--btn" role="button">Ver</a>
                 </td>
             </tr>
         </table>
     </section>
+
     <footer>
         <p>Desarrollado por NLezcano - Febrero 2021</p>
     </footer>
+
 </body>
 
 </html>

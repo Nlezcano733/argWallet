@@ -7,12 +7,12 @@
     margin: 0px;
     padding: 0px;
 }
-h1, h2, h3, h4, h5{
-    font-family: $fuenteTitulo;
-}
-p, a{
-    font-family: $fuenteGeneralConversor;
-}
+// h1, h2, h3, h4, h5{
+//     font-family: $fuenteTitulo;
+// }
+// p, a{
+//     font-family: $fuenteGeneralConversor;
+// }
 
 body{
     width: 100%;
@@ -20,7 +20,7 @@ body{
     color: $colorAzul6;
     font-family: $fuenteGeneral;
     font-size: 16px;
-        
+        j
     &::-webkit-scrollbar{
             width: 5px;
     }
@@ -93,7 +93,7 @@ header{
             transform: scale(1.2);
         }
     }
-    i:first-child{
+    #darkMode{
         &:active{
             color: #D3F325;
         }
@@ -115,7 +115,7 @@ section{
     background-size: cover;
     background-position: center;
 
-    #intro{
+    #inicio__intro{
         grid-area: 'intro';
         @include flexbox(column, center, flex-start);
         height: 80%;
@@ -134,40 +134,42 @@ section{
             line-height: 1.7em;
         }
     }
-    #imagenCripto{
+
+    #inicio__imagenCripto{
         grid-area: imagen;
         width: 70%;
     }
-    #listado{
+
+    #inicio__listado{
         grid-area: lista;
         @include flexbox(row, flex-end, center);
         height: 100%;
-        p{
+        .inicio__listado--nombre{
             margin-right: 20px;
         }
-        img{
+        .inicio__listado--imagen{
             width: 50px;
         }
     }
 }
 
-#informacion{
+#info{
     @include flexbox(column, center, space-around);
     background-color: $colorAzul1;
     position: relative;
 
-    .cuerpoInfo{
+    .info__cuerpoInfo{
         @include flexbox(column, center, flex-start);
         width: 600px;
         height: 450px;
 
-        #tituloInfo{
+        .info__cuerpoInfo--titulo{
             font-family: $fuenteTitulo;
             font-size: display;
             margin-bottom: 40px;
         }
 
-        #textoInfo{
+        .info__cuerpoInfo--texto{
             width: 550px;
             font-size: $cuerpo;
             line-height: 1.6em;
@@ -175,7 +177,7 @@ section{
 
     }
 
-    #imagenInfo{
+    .info__imagen{
         position: absolute;
         top: 18%;
         right: 80px;
@@ -190,7 +192,7 @@ section{
     padding-bottom: 20px;
     background-color: $colorAzul1;
 
-    #listaMercado{
+    #mercado__lista{
         display: block;
         height: 100%;
         overflow-y: scroll;
@@ -207,7 +209,7 @@ section{
             border-radius: 10px;
         }
 
-        tr{
+        #lista__cabecera{
             text-align: left;
             border: none;
 
@@ -219,12 +221,16 @@ section{
                 background-color: $colorGris1;
                 border: none;
 
-                #divisaLista{
+                #lista__cabecera--divisas{
                     @include boton(80px, 35px, $colorAzul5, $colorAzul6);
                     font-size: $cuerpo;
                     font-weight: bold;
                 }
             }
+        }
+        .lista__cripto{
+            text-align: left;
+
             td{
                 width: auto;
                 height: 45px;
@@ -233,31 +239,31 @@ section{
                 background-color: $colorAzul1;
                 border-bottom: 1px solid $colorAzul3;
 
-                &:first-child{
-                    padding-left: 5px;
-
-                    .nombreCompletoLista{
-                        @include flexbox(row, space-around, center);
-                        width: 200px;
-                        img{
-                            width: 30px;
-                            margin-right: 5px;
-                        }
+                .lista__cripto--nombre{
+                    @include flexbox(row, flex-start, center);
+                    width: 200px;
+                    p{
+                        font-family: $fuenteGeneral;
+                    }
+                    img{
+                        width: 30px;
+                        margin-right: 10px;
                     }
                 }
 
-
-                .btnCompra{
-                    @include boton(100px, 50px, $colorAzul5, $colorAzul6);
+                .lista__cripto--btn{
+                    display: block;
+                    @include boton(80px, 30px, $colorAzul5, $colorAzul6);
                     padding: 5px 10px;
-                    line-height: 20px;
+                    line-height: 15px;
                     text-decoration: none;
-                    text-align: right;
+                    text-align: center;
                 }
             }
         }
     }
 }
+
 
 
 .conversor{
@@ -473,7 +479,7 @@ section{
     #panel{
         @include grids(40px, 15px, center, start);
         grid-template-rows: 125px 100px 1fr 90px;
-        grid-template-columns: 100px 400px 1fr;
+        grid-template-columns: 100px 400px 370px;
         grid-template-areas: 
             "imagen nombre cotizacion"
             "compra compra detalles"
@@ -513,12 +519,12 @@ section{
 
         #cotizacion {
             @include  grids (0px, 0px, center, center);
-            grid-template-columns: 1fr 1fr 65px;
+            grid-template-columns: 1fr 1fr;
             grid-template-rows: 35px 30px 60px;
             grid-template-areas:
-                "conversion conversion ."
-                "compra venta monedas"
-                "precioCompra precioVenta monedas";
+                "conversion conversion"
+                "compra venta"
+                "precioCompra precioVenta";
             width: 100%;
             height: 100%;
             margin: 0 auto;

@@ -28,22 +28,14 @@
   padding: 0px;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: Noto_sans, sans-serif, verdana;
-}
-
-p, a {
-  font-family: Lato, sans-serif, verdana;
-}
-
 body {
   width: 100%;
   background-color: #f6f6f6;
   color: #334761;
-  font-family: Roboto, sans-serif, verdana;
+  font-family: Lato, sans-serif, verdana;
   font-size: 16px;
 }
-body::-webkit-scrollbar {
+j body::-webkit-scrollbar {
   width: 5px;
 }
 body::-webkit-scrollbar:active {
@@ -137,7 +129,7 @@ header #navBar #btnIngreso:focus {
 #redes i:hover {
   transform: scale(1.2);
 }
-#redes i:first-child:active {
+#redes #darkMode:active {
   color: #D3F325;
 }
 
@@ -160,7 +152,7 @@ section {
   background-size: cover;
   background-position: center;
 }
-#inicio #intro {
+#inicio #inicio__intro {
   grid-area: "intro";
   display: flex;
   flex-direction: column;
@@ -171,21 +163,21 @@ section {
   margin-top: 5%;
   margin-bottom: 15%;
 }
-#inicio #intro h2 {
+#inicio #inicio__intro h2 {
   font-family: Noto_sans, sans-serif, verdana;
   font-weight: bold;
   font-size: 30px;
   margin-bottom: 30px;
 }
-#inicio #intro p {
+#inicio #inicio__intro p {
   font-size: 18px;
   line-height: 1.7em;
 }
-#inicio #imagenCripto {
+#inicio #inicio__imagenCripto {
   grid-area: imagen;
   width: 70%;
 }
-#inicio #listado {
+#inicio #inicio__listado {
   grid-area: lista;
   display: flex;
   flex-direction: row;
@@ -193,14 +185,14 @@ section {
   align-items: center;
   height: 100%;
 }
-#inicio #listado p {
+#inicio #inicio__listado .inicio__listado--nombre {
   margin-right: 20px;
 }
-#inicio #listado img {
+#inicio #inicio__listado .inicio__listado--imagen {
   width: 50px;
 }
 
-#informacion {
+#info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -208,7 +200,7 @@ section {
   background-color: #cdd4e7;
   position: relative;
 }
-#informacion .cuerpoInfo {
+#info .info__cuerpoInfo {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -216,17 +208,17 @@ section {
   width: 600px;
   height: 450px;
 }
-#informacion .cuerpoInfo #tituloInfo {
+#info .info__cuerpoInfo .info__cuerpoInfo--titulo {
   font-family: Noto_sans, sans-serif, verdana;
   font-size: display;
   margin-bottom: 40px;
 }
-#informacion .cuerpoInfo #textoInfo {
+#info .info__cuerpoInfo .info__cuerpoInfo--texto {
   width: 550px;
   font-size: 16px;
   line-height: 1.6em;
 }
-#informacion #imagenInfo {
+#info .info__imagen {
   position: absolute;
   top: 18%;
   right: 80px;
@@ -240,26 +232,26 @@ section {
   padding-bottom: 20px;
   background-color: #cdd4e7;
 }
-#mercado #listaMercado {
+#mercado #mercado__lista {
   display: block;
   height: 100%;
   overflow-y: scroll;
 }
-#mercado #listaMercado::-webkit-scrollbar {
+#mercado #mercado__lista::-webkit-scrollbar {
   width: 5px;
 }
-#mercado #listaMercado::-webkit-scrollbar:active {
+#mercado #mercado__lista::-webkit-scrollbar:active {
   width: 10px;
 }
-#mercado #listaMercado::-webkit-scrollbar-thumb {
+#mercado #mercado__lista::-webkit-scrollbar-thumb {
   background-color: #97adc9;
   border-radius: 10px;
 }
-#mercado #listaMercado tr {
+#mercado #mercado__lista #lista__cabecera {
   text-align: left;
   border: none;
 }
-#mercado #listaMercado tr th {
+#mercado #mercado__lista #lista__cabecera th {
   width: calc(100% / 8);
   height: 50px;
   padding: 2px 20px;
@@ -267,7 +259,7 @@ section {
   background-color: #dddddd;
   border: none;
 }
-#mercado #listaMercado tr th #divisaLista {
+#mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas {
   width: 80px;
   height: 35px;
   color: #f6f6f6;
@@ -279,17 +271,20 @@ section {
   font-size: 16px;
   font-weight: bold;
 }
-#mercado #listaMercado tr th #divisaLista:hover {
+#mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas:hover {
   background-color: #334761;
 }
-#mercado #listaMercado tr th #divisaLista:active {
+#mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas:active {
   outline: none;
   box-shadow: 0px 0px 5px #333333 inset;
 }
-#mercado #listaMercado tr th #divisaLista:focus {
+#mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas:focus {
   outline: none;
 }
-#mercado #listaMercado tr td {
+#mercado #mercado__lista .lista__cripto {
+  text-align: left;
+}
+#mercado #mercado__lista .lista__cripto td {
   width: auto;
   height: 45px;
   padding: 2px 10px;
@@ -297,23 +292,24 @@ section {
   background-color: #cdd4e7;
   border-bottom: 1px solid #7692b7;
 }
-#mercado #listaMercado tr td:first-child {
-  padding-left: 5px;
-}
-#mercado #listaMercado tr td:first-child .nombreCompletoLista {
+#mercado #mercado__lista .lista__cripto td .lista__cripto--nombre {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   width: 200px;
 }
-#mercado #listaMercado tr td:first-child .nombreCompletoLista img {
-  width: 30px;
-  margin-right: 5px;
+#mercado #mercado__lista .lista__cripto td .lista__cripto--nombre p {
+  font-family: Lato, sans-serif, verdana;
 }
-#mercado #listaMercado tr td .btnCompra {
-  width: 100px;
-  height: 50px;
+#mercado #mercado__lista .lista__cripto td .lista__cripto--nombre img {
+  width: 30px;
+  margin-right: 10px;
+}
+#mercado #mercado__lista .lista__cripto td .lista__cripto--btn {
+  display: block;
+  width: 80px;
+  height: 30px;
   color: #f6f6f6;
   background-color: #455f83;
   border: 2px solid #334761;
@@ -321,18 +317,18 @@ section {
   text-align: center;
   transition: background-color 0.2s ease-in;
   padding: 5px 10px;
-  line-height: 20px;
+  line-height: 15px;
   text-decoration: none;
-  text-align: right;
+  text-align: center;
 }
-#mercado #listaMercado tr td .btnCompra:hover {
+#mercado #mercado__lista .lista__cripto td .lista__cripto--btn:hover {
   background-color: #334761;
 }
-#mercado #listaMercado tr td .btnCompra:active {
+#mercado #mercado__lista .lista__cripto td .lista__cripto--btn:active {
   outline: none;
   box-shadow: 0px 0px 5px #333333 inset;
 }
-#mercado #listaMercado tr td .btnCompra:focus {
+#mercado #mercado__lista .lista__cripto td .lista__cripto--btn:focus {
   outline: none;
 }
 
@@ -526,7 +522,7 @@ section {
 .conversor main #mainAside #listadoCriptos .cripto .cambioCripto {
   grid-area: cambio;
   font-size: 16px;
-  font-family: Lato, sans-serif, verdana;
+  font-family: Roboto, sans-serif, verdana;
   font-weight: 400;
 }
 .conversor main #mainAside #listadoCriptos .cripto .valorCripto {
@@ -552,7 +548,7 @@ section {
   justify-content: center;
   align-items: start;
   grid-template-rows: 125px 100px 1fr 90px;
-  grid-template-columns: 100px 400px 1fr;
+  grid-template-columns: 100px 400px 370px;
   grid-template-areas: "imagen nombre cotizacion" "compra compra detalles" "compra compra info" "adquisicion adquisicion info";
   width: calc(100vw - 320px);
   height: calc(100vh - 120px);
@@ -596,9 +592,9 @@ section {
   grid-row-gap: 0px;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr 65px;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 35px 30px 60px;
-  grid-template-areas: "conversion conversion ." "compra venta monedas" "precioCompra precioVenta monedas";
+  grid-template-areas: "conversion conversion" "compra venta" "precioCompra precioVenta";
   width: 100%;
   height: 100%;
   margin: 0 auto;
