@@ -11,9 +11,9 @@ function crearBilletera(input, moneda){
 
         habilitarBoton();
         bloquearSeleccionMoneda();
-        validarOperacion('Actualice la pagina para ver valores actualizados', 'dr')
+        validarOperacion('Actualice la pagina para ver valores actualizados', '#dr')
     } else{
-        validarOperacion('Ingrese un valor real.', 'dr');
+        validarOperacion('Ingrese un valor real.', '#dr');
         input = "";
     }
 }
@@ -25,7 +25,7 @@ function sumarBilletera(input, {billeteraTotal}, moneda){
     cantidadSumada = dineroIngresado + billeteraTotal;
     billetera = new BilleteraParcial(moneda, cantidadSumada);
     billeteraToStorage();
-    validarOperacion('movimiento exitoso', 'dr');
+    validarOperacion('movimiento exitoso', '#dr');
 }
 
 function restarBilletera(input){
@@ -37,10 +37,10 @@ function restarBilletera(input){
         cantidadRestante = billeteraActual - dineroIngresado;
         billetera = new BilleteraParcial (billetera.divisa, cantidadRestante);
         billeteraToStorage();
-        validarOperacion('Movimiento exitoso', 'dr')
+        validarOperacion('Movimiento exitoso', '#dr')
     } 
     if (dineroIngresado > billeteraActual){
-        validarOperacion('No dispone de fondos suficientes', 'dr');
+        validarOperacion('No dispone de fondos suficientes', '#dr');
     }
     habilitarSeleccionMoneda();
 }
