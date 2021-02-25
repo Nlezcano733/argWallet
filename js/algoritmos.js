@@ -1,16 +1,14 @@
-// ----------------- COMIENZO ALGORITMO CON DOM ---------------------- //
-
-let billetera, objetoMoneda, i, panelUsuario, monedaDeposito, botonOjo;
+let panelUsuario, monedaDeposito, botonOjo, compra;
+let billetera, objetoMoneda, billeteraCompleta;
 
 // --------- CREACION DE CONSTRUCTORES ---------- //
 
-function Billetera (nombre, divisa, cripto, billeteraTotal, cantidadDivisa, cantidadCripto){
-    this.nombre = nombre,
+function Billetera (divisa, divisaObjeto, billeteraTotal, cantidadDivisa, arrayCompras){
     this.divisa = divisa,
-    this.cripto = cripto,
-    this.billeteraTotal = billeteraTotal,
-    this.cantidadDivisa = cantidadDivisa,
-    this.cantidadCripto = cantidadCripto
+    this.divisaObjeto = divisaObjeto;
+    this.billeteraTotal = parseFloat(billeteraTotal),
+    this.cantidadDivisa = parseFloat(cantidadDivisa),
+    this.arrayCompras = arrayCompras
 }
 
 function BilleteraParcial (divisa, billeteraTotal){
@@ -28,49 +26,66 @@ function Divisas (nombre, ticker, value, simbolo){
 }
 
 Divisas.prototype.conversion = function ({value}){
-        return parseFloat((this.value / value).toFixed(4));
+    return parseFloat((this.value / value).toFixed(4));
 }
-
 
 // --------------------------------------- //
 let ars = new Divisas ('Pesos', 'ARS', 1, '$');
-let usd = new Divisas ('Dolares', 'USD', 156, '$');
-let euro = new Divisas ('Euros', 'EURO', 184, '€');
+let usd = new Divisas ('Dolar', 'USD', 156, '$');
+let euro = new Divisas ('Euro', 'EURO', 184, '€');
 
 let carteraDivisas = [ars, usd, euro];
 // --------------------------------------- //
 
+function Compra(tipo, cantidad, monedaValor, monedaSimbolo, valor){
+    this.tipo = tipo,
+    this.cantidad = cantidad,
+    this.monedaValor = monedaValor
+    this.monedaSimbolo = monedaSimbolo,
+    this.valor = valor
+}
+
+
 let carteraCriptos = [];
 
 
+// ----------------- COMIENZO ALGORITMO CON DOM ---------------------- //
+
 $(()=>{
+
+    billeteraCompleta = billeteraCompletaInicial ();
 
     billetera = billeteraInicial();
     if(billetera.billeteraTotal > 0){
         habilitarBoton();
         bloquearSeleccionMoneda();
-        
-        retirar('botonRetiro');
+
+        retirar('#botonRetiro');
     }
 
     objetoMoneda = objetoCompleto(billetera, carteraDivisas);
     objetoMonedaToStorage(objetoMoneda);
 
-    
-
     // ARMADO DE ESTRUCTURA DINAMICA -- HEADER
-    panelUsuario = aperturaPanelUser('userIn', 'salir');
+    panelUsuario = aperturaPanelUser('#userIn', '#salir');
     mostrarBilletera();
-    presionaOjo();
-
 
     // DEPOSITOS Y RETIROS -- VALIDACION DE ACCIONES
-    monedaDeposito = depositar('botonDeposito');
-    depositarAutomatico = eventoInput();
+    monedaDeposito = depositar();
+    depositarAutomatico = eventoInput('#deposito-retiro');
+    
+    // REALIZAR COMPRAS DE CRIPTOS
+    $('#confirmacionCompra').click(validacionCompra);
+    $('#ingresoDivisa').val('');
 
+    // MOSTRAMOS COMPRAS
+    let arrayComprasRealizadas = billeteraCompleta.arrayCompras;
+    if(arrayComprasRealizadas.length > 0){
+        mostrarCompra();
+    }
     // ARMADO DE LISTADO DINAMICO DE CRIPTOS
     tomarJson(carteraCriptos);
     opcionCripto();
     separacionCriptos();
     realizarConversion();
-})
+});

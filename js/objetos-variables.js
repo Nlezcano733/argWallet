@@ -1,15 +1,14 @@
-// let ingresoDinero, nombreUsuario, monedaDivisa, monedaUsuario, dineroCuenta;
-let panelUsuario, monedaDeposito, botonOjo;
+let panelUsuario, monedaDeposito, botonOjo, compra;
 
 // --------- CREACION DE CONSTRUCTORES ---------- //
 
-function Billetera (nombre, divisa, cripto, billeteraTotal, cantidadDivisa, cantidadCripto){
-    this.nombre = nombre,
+function Billetera (divisa, divisaObjeto, billeteraTotal, cantidadDivisa, arrayCompras){
     this.divisa = divisa,
-    this.cripto = cripto,
-    this.billeteraTotal = billeteraTotal,
-    this.cantidadDivisa = cantidadDivisa,
-    this.cantidadCripto = cantidadCripto
+    this.divisaObjeto = divisaObjeto;
+    this.billeteraTotal = parseFloat(billeteraTotal), // cantidad de dinero total
+    this.cantidadDivisa = parseFloat(cantidadDivisa), // cantidad de plata que queda
+    this.arrayCompras = arrayCompras
+    // this.arrayCantidadCripto = arrayCantidadCripto
 }
 
 function BilleteraParcial (divisa, billeteraTotal){
@@ -27,14 +26,21 @@ function Divisas (nombre, ticker, value, simbolo){
 }
 
 Divisas.prototype.conversion = function ({value}){
-        return parseFloat((this.value / value).toFixed(4));
+    return parseFloat((this.value / value).toFixed(4));
 }
-
 
 // --------------------------------------- //
 let ars = new Divisas ('Pesos', 'ARS', 1, '$');
-let usd = new Divisas ('Dolares', 'USD', 156, '$');
-let euro = new Divisas ('Euros', 'EURO', 184, '€');
+let usd = new Divisas ('Dolar', 'USD', 156, '$');
+let euro = new Divisas ('Euro', 'EURO', 184, '€');
 
 let carteraDivisas = [ars, usd, euro];
 // --------------------------------------- //
+
+function Compra(tipo, cantidad, monedaValor, monedaSimbolo, valor){
+    this.tipo = tipo,
+    this.cantidad = cantidad,
+    this.monedaValor = monedaValor
+    this.monedaSimbolo = monedaSimbolo,
+    this.valor = valor
+}

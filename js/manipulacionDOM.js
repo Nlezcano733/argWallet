@@ -1,27 +1,29 @@
 function aperturaPanelUser(ingresar, salir){
     let apertura, cierre;
-    apertura = document.getElementById(ingresar);
-    cierre = document.getElementById(salir);
+    apertura = $(ingresar);
+    cierre = $(salir);
 
-    apertura.addEventListener('click', abrirPanel)
-    cierre.addEventListener('click', cerrarPanel)
+    $(apertura).click(abrirPanel);
+    $(cierre).click(cerrarPanel);
 }
 
 function abrirPanel(){
     let panelUser;
-    panelUser = document.getElementById('panelUser');
-    panelUser.setAttribute('class', 'panelUser__animationApertura');
+    panelUser = $('#panelUser');
+    $(panelUser).attr('class', 'panelUser__animationApertura');
+
     setTimeout(() => {
-        panelUser.setAttribute('class', 'panelUser__abierto');
+        $(panelUser).attr('class', 'panelUser__abierto');
     }, 500);
 }
 
 function cerrarPanel (){
     let panelUser;
-    panelUser = document.getElementById('panelUser');
-    panelUser.setAttribute('class', 'panelUser__animationCierre');
+    panelUser = $('#panelUser');
+    $(panelUser).attr('class', 'panelUser__animationCierre');
+
     setTimeout(() => {
-        panelUser.setAttribute('class', 'panelUser__cerrado')
+        $(panelUser).attr('class', 'panelUser__cerrado');
     }, 500);
 }
 
@@ -29,32 +31,30 @@ function cerrarPanel (){
 
 
 //DEPOSITO DE DINERO
-function depositar(boton) {
-    let botonPresionado, divisaIngresada, inputNumber;
-    botonPresionado = document.getElementById(boton);
-    validacionNumeroReal();
+function depositar() {
+    let divisaIngresada, inputNumber;
 
-    botonPresionado.addEventListener('click', () =>{
-        divisaIngresada = document.getElementById('tipoCambio').value;
-        inputNumber = document.getElementById('deposito-retiro').value;
+    $('#botonDeposito').click(()=>{
+        monedaSeleccionada = $('.opcionMoneda:selected');
+
+        divisaIngresada = $(monedaSeleccionada).val();
+        inputNumber = $('#deposito-retiro').val();
         billetera = billeteraInicial();
-
         depositarBilletera(inputNumber, divisaIngresada, billetera);
-    });
-
+    })
 }
 
-function eventoInput (){
+function eventoInput (id){
     let input;
-    input = document.getElementById('deposito-retiro')
-    input.addEventListener('keypress', capturarEnter)
+    input = $(id);
+    $(input).keypress(depositarConEnter);
 }
 
-function capturarEnter  (event){
+function depositarConEnter  (event){
     if (event.which == 13) {
         event.preventDefault();
-        divisaIngresada = document.getElementById('tipoCambio').value;
-        inputNumber = document.getElementById('deposito-retiro').value;
+        divisaIngresada = $('#tipoCambio').val();
+        inputNumber = $('#deposito-retiro').val()
         depositarBilletera(inputNumber, divisaIngresada, billetera);
     }
 }
@@ -70,23 +70,26 @@ function depositarBilletera(input, moneda, billetera){
     } else if(cantidad > 0 && input != ""){
         sumarBilletera(input, billetera, moneda);
     } else{
-        validarOperacion('Ingrese un valor Real', 'dr');
+        validarOperacion('Ingrese un valor Real', '#dr');
     }
 
-    document.getElementById('deposito-retiro').value = "";
-    retirar('botonRetiro');
-    mostrarBilletera();
+    $('#deposito-retiro').val('');
+    retirar('#botonRetiro');
+    let billeteraParaOcultar = mostrarBilletera();
+    presionaOjo(billeteraParaOcultar);
+
 }
 
 function habilitarBoton(){
-        let boton = document.getElementsByClassName('dr__boton');
-        boton[1].setAttribute('id', 'botonRetiro');
+        let boton;
+        boton = $('.dr__boton');
+        $(boton[1]).attr('id', 'botonRetiro')
 }
 
 function deshabilitarBoton(){
     if(billetera.billeteraTotal == 0){
-        let boton = document.getElementsByClassName('dr__boton');
-        boton[1].setAttribute('id', 'botonDeshabilitado');
+        boton = $('.dr__boton');
+        $(boton[1]).attr('id', 'botonDeshabilitado')
     }
 }
 
@@ -95,11 +98,12 @@ function bloquearSeleccionMoneda(){
     let opciones;
     let monedaUsada = billetera.divisa;
 
-    opciones = document.getElementsByClassName('opcionMoneda');
+    opciones = $('.opcionMoneda');
     for (let i=0; i < opciones.length; i++){
-        opciones[i].setAttribute('disabled', '');
-        if(opciones[i].value == monedaUsada){
-            opciones[i].removeAttribute('disabled');
+        $(opciones[i]).attr('disabled', '');
+        valorOpcion = $(opciones[i]).val();
+        if(valorOpcion == monedaUsada){
+            $(opciones[i]).removeAttr('disabled');
         }
     }
 }
@@ -108,10 +112,10 @@ function habilitarSeleccionMoneda (){
     let opciones;
     let cantidadVerificar = billetera.billeteraTotal;
 
-    opciones = document.getElementsByClassName('opcionMoneda');
+    opciones = $('.opcionMoneda');
     if(cantidadVerificar === 0){
         for (let i=0; i < opciones.length; i++){
-                opciones[i].removeAttribute('disabled')
+            opciones[i].removeAttr('disabled')
         }
         deshabilitarBoton();
     }
@@ -124,11 +128,13 @@ function retirar(boton){
     let botonPresionado, inputNumber;
 
     botonPresionado = document.getElementById(boton);
-    botonPresionado.addEventListener('click', () =>{
-        inputNumber = document.getElementById('deposito-retiro').value;
+    botonPresionado = $(boton);
+    $(botonPresionado).click(()=>{
+        inputNumber = $('#deposito-retiro').val();
         restarBilletera(inputNumber);
-        mostrarBilletera();
-        document.getElementById('deposito-retiro').value = "";
+        let billeteraParaOcultar = mostrarBilletera();
+        presionaOjo(billeteraParaOcultar);
+        $('#deposito-retiro').val('');
     })
 }
 
@@ -137,39 +143,41 @@ function retirar(boton){
 // MOSTRAR EN HEADER
 function mostrarBilletera (){
     let objetoDivisa = objetoCompleto(billetera, carteraDivisas);
-    modificarHeader(objetoDivisa);
-    botonOjo = presionaOjo();
+    let cantidadBilleteraMostrada = modificarHeader(objetoDivisa);
+    presionaOjo(cantidadBilleteraMostrada);
+    return cantidadBilleteraMostrada;
 }
+
 
 function modificarHeader({simbolo}){
-    let mostrador;
-    let billeteraActual = billetera.billeteraTotal;
-    mostrador = document.getElementById('cantidadBilletera');
-    mostrador.innerHTML = `${simbolo} ${billeteraActual},00`;
+    let billeteraActual = obtenerStorage('billetera');
+    billeteraActual = billetera.billeteraTotal;
+    textoParaMostrar = `${simbolo} ${billeteraActual},00`;
+    mostrador = $('#cantidadBilletera').text(textoParaMostrar);
+    return textoParaMostrar;
 }
  
-function presionaOjo(){
-    let ojo;
-    ojo = document.getElementById('cantidadVisible'); 
-    ojo.addEventListener('click', mostrarOcultar);
-    return document.getElementById('cantidadBilletera').innerHTML;
+function presionaOjo(mostrador){
+    $('#cantidadVisible').click(()=>{
+        mostrarOcultar(mostrador);
+    });
 }
 
 
-function mostrarOcultar(){
-    let mostrador, ojo, mensajeOculto, mostradorRetorno;
+function mostrarOcultar(dineroMostrado){
+    console.log(dineroMostrado);
+    let mostrador, ojo, mensajeOculto, billetera;
+    billetera = obtenerStorage('billetera');
     mensajeOculto = '**********'
-    mostrador = document.getElementById('cantidadBilletera').innerHTML;
-    ojo = document.getElementById('cantidadVisible')
+    mostrador = $('#cantidadBilletera').text();
+    ojo = $('#cantidadVisible');
 
     if(mostrador != mensajeOculto){
-        ojo.setAttribute('class', 'fas fa-eye');
-        mostrador = document.getElementById('cantidadBilletera').innerHTML = '**********';
-        presionaOjo();
+        $(ojo).attr('class', 'fas fa-eye');
+        $('#cantidadBilletera').text(mensajeOculto);
     } else{
-        ojo.setAttribute('class', 'fas fa-eye-slash');
-        mostrador = document.getElementById('cantidadBilletera').innerHTML = botonOjo;
-        presionaOjo();
+        $(ojo).attr('class', 'fas fa-eye-slash');
+        mostrador = $('#cantidadBilletera').text(dineroMostrado);
     }
 }
 
@@ -179,37 +187,35 @@ function mostrarOcultar(){
 // FUNCIONES GENERICAS
 function crearDivIdPadre (idPadre, attr, nombreAttr){
     let nuevoNodo, nodoPadre;
-    nodoPadre = document.getElementById(idPadre);
+    nodoPadre = $(idPadre);
     nuevoNodo = document.createElement('div');
-    nuevoNodo.setAttribute(attr, nombreAttr);
-    nodoPadre.appendChild(nuevoNodo);
+    $(nuevoNodo).attr(attr, nombreAttr);
+    $(nodoPadre).append(nuevoNodo);
 }
 
-function crearDivClassPadre (idPadre, attr, nombreAttr, i){
+function crearDivClassPadre (classPadre, attr, nombreAttr, i){
     let nuevoNodo, nodoPadre;
-    nodoPadre = document.getElementsByClassName(idPadre);
+    nodoPadre = $(classPadre);
     nuevoNodo = document.createElement('div');
-    nuevoNodo.setAttribute(attr, nombreAttr);
-    nodoPadre[i].appendChild(nuevoNodo);
+    $(nuevoNodo).attr(attr, nombreAttr);
+    $(nodoPadre[i]).append(nuevoNodo);
 }
 
 
 function crearElemento (padre, tag, attr, nombreAttr, contenido, i){
     let nuevoNodo, nodoPadre;
-
-    nodoPadre = document.getElementsByClassName(padre);
+    nodoPadre = $(padre);
     nuevoNodo = document.createElement(tag);
     contenidoTexto = document.createTextNode(contenido);
-    nuevoNodo.appendChild(contenidoTexto);
-    nuevoNodo.setAttribute(attr, nombreAttr);
-    nodoPadre[i].appendChild(nuevoNodo);
-    i++
+
+    $(nuevoNodo).append(contenidoTexto);
+    $(nuevoNodo).attr(attr, nombreAttr);
+    $(nodoPadre[i]).append(nuevoNodo);
 }
 
+
 function modificarElemento(elemento, contenido){
-    let nodo;
-    nodo = document.getElementById(elemento),
-    nodo.innerHTML = contenido
+     $(elemento).text(contenido)
 }
 
 function modificarSimbolos(id, modificador){
@@ -226,8 +232,7 @@ function modificarSimbolos(id, modificador){
 
 function modificarFoto(nodoImagen, direccion){
     let nodo;
-    nodo = document.getElementById(nodoImagen);
-    nodo.setAttribute('src', direccion);
+    nodo = $(nodoImagen).attr('src', direccion);
 }
 
 function capturarEvento (event){
@@ -250,11 +255,12 @@ function opcionCripto (){
         valorCripto = parseFloat(valorCripto.toFixed(2));
         let valorCompra = compraComision(valorCripto);
 
-        crearDivIdPadre('listadoCriptos','class', 'cripto');
-        crearElemento('cripto', 'h3', 'class', 'nombreCripto', carteraPosicion.nombre, i);
-        crearElemento('cripto', 'h4', 'class', 'cambioCripto', `${carteraPosicion.ticker}/${billetera.divisa}`, i);
-        crearElemento('cripto', 'p', 'class', 'valorCripto', `${moneda.simbolo} ${valorCompra}`, i)
-        crearDivClassPadre('cripto','class', 'imagenCripto', i);
+        crearDivIdPadre('#listadoCriptos','class', 'cripto');
+
+        crearElemento('.cripto', 'h3', 'class', 'nombreCripto', carteraPosicion.nombre, i);
+        crearElemento('.cripto', 'h4', 'class', 'cambioCripto', `${carteraPosicion.ticker}/${billetera.divisa}`, i);
+        crearElemento('.cripto', 'p', 'class', 'valorCripto', `${moneda.simbolo} ${valorCompra}`, i)
+        crearDivClassPadre('.cripto','class', 'imagenCripto', i);
 
 
         nodoPadre = document.getElementsByClassName('imagenCripto');
@@ -296,14 +302,20 @@ function separacionCriptos (){
 
 function seleccionCripto(div, posicion){
     let monedaElegida;
+    let input;
+
     div.addEventListener('click', ()=>{
         for(let i=0; i< carteraCriptos.length; i++){
             monedaElegida = carteraCriptos[i];
             if(posicion == i){
                 mostrarPanel(monedaElegida)
-                modificarFoto('logo', monedaElegida.logo);
+                modificarFoto('#logo', monedaElegida.logo);
                 criptoToStorage(monedaElegida);
-                realizarConversion();
+
+                // realizarConversion();
+                $('#ingresoDivisa').keypress(conversionDinamica);
+                $('#ingresoDivisa').val('');
+                conversionCambioCripto();
             }
         }
     });
@@ -317,89 +329,112 @@ function mostrarPanel(posicion){
     valorCompra = parseFloat(valorCompra.toFixed(posicion.decimales));
     valorCripto = parseFloat(valorCripto.toFixed(posicion.decimales));
 
-    modificarElemento('nombre',posicion.nombre);
-    modificarElemento('ticker',posicion.ticker);
-    modificarElemento('conversorSimbolo', moneda.simbolo);
-    modificarElemento('tickerConvertido',posicion.ticker);
-    modificarElemento('valorCompra',valorCompra);
-    modificarElemento('valorVenta',valorCripto);
-    modificarElemento('conversion',`${posicion.ticker}/${billetera.divisa}`);
-    modificarElemento('valorCompra',`${moneda.simbolo}${valorCompra}`);
-    modificarElemento('valorVenta',`${moneda.simbolo}${valorCripto}`);
-    modificarElemento('market_cap',`${moneda.simbolo} ${marketCap}`);
-    modificarElemento('circSupply',`${posicion.circ_supply} ${posicion.ticker}`);
-    modificarElemento('maxSupply',`${posicion.max_supply} ${posicion.ticker}`);
+    modificarElemento('#nombre',posicion.nombre);
+    modificarElemento('#ticker',posicion.ticker);
+    modificarElemento('#conversorSimbolo', moneda.simbolo);
+    modificarElemento('#tickerConvertido',posicion.ticker);
+    modificarElemento('#valorCompra',valorCompra);
+    modificarElemento('#valorVenta',valorCripto);
+    modificarElemento('#conversion',`${posicion.ticker}/${billetera.divisa}`);
+    modificarElemento('#valorCompra',`${moneda.simbolo}${valorCompra}`);
+    modificarElemento('#valorVenta',`${moneda.simbolo}${valorCripto}`);
+    modificarElemento('#market_cap',`${moneda.simbolo} ${marketCap}`);
+    modificarElemento('#circSupply',`${posicion.circ_supply} ${posicion.ticker}`);
+    modificarElemento('#maxSupply',`${posicion.max_supply} ${posicion.ticker}`);
 
 }
 
 // --------------------------------------------------- //
 
-function realizarConversion (){
-    let input, igual, conversion;
-    let validar = false;
-    input = document.getElementById('ingresoDivisa');
-    igual = document.getElementById('igual');
+// function realizarConversion (){
+//     $('#ingresoDivisa').keypress(conversionDinamica);
+// }
 
-    input.addEventListener('keypress',()=> {return validar = true});
+function conversionDinamica(event){
 
-    igual.addEventListener('click', () =>{
-        if(validar = true){
-            conversion = conversionMonedacripto(input.value);
-            modificarElemento('valorConvertido', conversion);
-            realizarConversion();
-        }
-        confirmarCompra();
-    })
+    input = $('#ingresoDivisa').val();
+    let teclaPresionada = event.key;
+    valorATomar = input + teclaPresionada;
+
+    conversion = conversionMonedacripto(valorATomar);
+    modificarElemento('#valorConvertido', conversion);
 }
 
-function confirmarCompra(){
-    let botonCompra;
-    botonCompra = document.getElementById('confirmacionCompra');
-    botonCompra.addEventListener('click', validacionCompra)
+function conversionCambioCripto(){
+    input = $('#ingresoDivisa').val();
+    conversionMonedacripto(input);
 }
 
 function validacionCompra(){
-    let input;
+    let valorInput, conversion, billeteraParaOcultar;
     billetera = billeteraInicial();
-    input = document.getElementById('ingresoDivisa').value;
-    conversion = document.getElementById('valorConvertido');
+
+    valorInput = $('#ingresoDivisa').val();
+    conversion = $('#valorConvertido').text();
+
+    cripto = obtenerSessionStorage('cripto');
+    moneda = obtenerStorage('moneda');
+
+    let compra = parseFloat(conversion);
+    let gasto = parseFloat(valorInput);
     cantidad = billetera.billeteraTotal;
-    if(cantidad >= input){
-        billeteraActual = cantidad - input;
+
+    if(valorInput == "" || valorInput == undefined){
+        validarOperacion('Ingrese un valor real', '.resto');
+
+    } else if(cantidad >= valorInput){
+        billeteraActual = cantidad - valorInput;
         billetera = new BilleteraParcial(billetera.divisa, billeteraActual);
         billeteraToStorage()
-        validarOperacion('movimiento exitoso.', 'resto');
-        modificarHeader(moneda)
-        let pos = sumaDePosiciones(i)
-        i = pos ++;
-        // MostrarCompra();
-        input=""
+        validarOperacion('movimiento exitoso.', '.resto');
+        billeteraParaOcultar = mostrarBilletera();
+        presionaOjo(billeteraParaOcultar);
+
+        compra = new Compra(cripto.ticker, compra, moneda.nombre, moneda.simbolo, gasto);
+        compraToStorage(compra);
+        crearBilleteraCompleta();
+        sumarCompra();
+
+        $('#ingresoDivisa').val('0,00')
+        $('#valorConvertido').text('0,00')
+
     } else{
-        validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', 'resto');
+        validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', '.resto');
     }
 }
 
-function MostrarCompra (i){
-    let conversion;
-    cripto = obtenerSessionStorage('cripto');
-    cantidadGastada = document.getElementById('ingresoDivisa').value;
-    conversion = document.getElementById('valorConvertido').innerHTML;
-    cantidad = parseFloat(conversion);
 
-    crearDivIdPadre ('compras', 'class', 'adquisicion');
-    crearElemento('adquisicion', 'h3','class','', 'Cripto adquirida: ', i);
-    crearElemento('adquisicion', 'p', 'class', 'nombreAdquisicion', cripto.ticker, i);
-    crearElemento('adquisicion', 'h4', 'class', '', 'cantidad: ', i);
-    crearElemento('adquisicion', 'p', 'class', 'cantidadAdquisicion', cantidad, i);
-    crearElemento('adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', i);
-    crearElemento('adquisicion', 'p', 'class', 'dineroRestante', `${moneda.simbolo} ${cantidadGastada}`, i);
+function mostrarCompra (){
+    billeteraCompleta = obtenerStorage('billeteraCompleta');
+    moneda = obtenerStorage('moneda');
+
+    billeteraArray = billeteraCompleta.arrayCompras;
+
+    for(let i=0; i<billeteraArray.length; i++){
+        let objetoPosicion = billeteraArray[i];
+        armadoDeCompras(i, objetoPosicion);
+    }
 }
 
-function sumaDePosiciones(i){
-    if(i== undefined){
-        i=0;
+
+function sumarCompra (){
+    let billeteraCompleta = obtenerStorage('billeteraCompleta');
+    let posicionActual = billeteraCompleta.arrayCompras.length;
+    let billeteraArray = billeteraCompleta.arrayCompras;
+        
+    for(let i=posicionActual-1; i<posicionActual; i++){
+        let objetoPosicion = billeteraArray[i];
+        armadoDeCompras(i, objetoPosicion)
     }
-    console.log(i)
-    MostrarCompra(i);
-    return i++;
+
+}
+
+function armadoDeCompras (i, objetoPosicion){
+    crearDivIdPadre ('#compras', 'class', 'adquisicion');
+    crearElemento('.adquisicion', 'h3','class','', 'Cripto adquirida: ', i);
+    crearElemento('.adquisicion', 'p', 'class', 'nombreAdquisicion', objetoPosicion.tipo, i);
+    crearElemento('.adquisicion', 'h4', 'class', '', 'cantidad: ', i);
+    crearElemento('.adquisicion', 'p', 'class', 'cantidadAdquisicion', objetoPosicion.cantidad, i);
+    crearElemento('.adquisicion', 'h5', 'class', '', 'Dinero utilizado: ', i);
+    crearElemento('.adquisicion', 'p', 'class', 'dineroRestante', `${objetoPosicion.monedaValor}: ${objetoPosicion.monedaSimbolo} ${objetoPosicion.valor}`, i);
 }

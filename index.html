@@ -52,7 +52,7 @@
                 <h2 class="titulo">Realizar transaccion de criptomoneda</h2>
                 <form>
                     <label for="divisa" id="conversorSimbolo">$</label>
-                    <input type="number" name="divisa" placeholder="0,00" id="ingresoDivisa">
+                    <input type="number" name="divisa" placeholder="0,00" id="ingresoDivisa" min="0" max="9999">
                 </form>
 
                 <div class="boton" role="button" id="cambioConversion">
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="boton" role="button" id="igual">
-                <i class="fas fa-equals"></i>
+                <i class="fas fa-equals" ></i>
                 </div>
 
                 <div id="resultado">
@@ -68,12 +68,8 @@
                     <p id="tickerConvertido">---</p>
                 </div>  
                 <div class="resto">
-                    <!-- <p>Dinero restante para compra es: $20000</p> -->
                 </div>
                 <input type="button" value="Confirmar compra" id="confirmacionCompra">
-                <div id="compra">
-                    <!-- <p class="error">¡Su compra ha sido realizada con exito!</p> -->
-                </div>
             </div>
 
             <div id="cotizacion">
@@ -130,7 +126,7 @@
                 </div>
                 <div class="input">
                     <label for="deposito-retiro" id="monedaDR">$</label>
-                    <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00" min="0">
+                    <input type="number" id="deposito-retiro" name="deposito-retiro" placeholder="00,00" min="0" max="99999">
                 </div>
                 <input type="button" value="depositar" class="dr__boton" id="botonDeposito">
                 <input type="button" value="retirar" class="dr__boton " id="botonDeshabilitado">
@@ -144,11 +140,13 @@
     </footer>
     <script src="js/objetoJson.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
+<<<<<<< HEAD
     <!-- <script src="js/objetos-variables.js"></script> -->
+=======
+>>>>>>> development
     <script src="js/validaciones.js"></script>
     <script src="js/manipulacionDOM.js"></script>
-    <script src="js/procedimiento.js"></script>
+    <script src="js/funciones.js"></script>
     <script src="js/algoritmos.js"></script>
 </body>
-
 </html>
