@@ -14,7 +14,7 @@ function crearBilletera(input, moneda){
         validarOperacion('Actualice la pagina para ver valores actualizados', '#dr')
     } else{
         validarOperacion('Ingrese un valor real.', '#dr');
-        input = "";
+        $(input).val('');
     }
 }
 
@@ -162,8 +162,13 @@ function elegirValor (cripto){
 }
 
 function conversionMonedacripto (cantidad){
-    let cripto = obtenerSessionStorage('cripto');
-    let criptoElegida = elegirValor(cripto);
-    let conversion = parseFloat((cantidad / criptoElegida).toFixed(cripto.decimales));
-    return conversion
+    if(cantidad > 0){
+        let cripto = obtenerSessionStorage('cripto');
+        let criptoElegida = elegirValor(cripto);
+        let conversion = parseFloat((cantidad / criptoElegida).toFixed(cripto.decimales));
+        return conversion
+    } else {
+        $('#valorConvertido').text('0,00');
+        $(cantidad).val('');
+    }
 }

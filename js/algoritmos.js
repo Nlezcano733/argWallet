@@ -51,7 +51,6 @@ let carteraCriptos = [];
 
 // ----------------- COMIENZO ALGORITMO CON DOM ---------------------- //
 
-
 $(()=>{
 
     billeteraCompleta = billeteraCompletaInicial ();
@@ -74,6 +73,10 @@ $(()=>{
     // DEPOSITOS Y RETIROS -- VALIDACION DE ACCIONES
     monedaDeposito = depositar();
     depositarAutomatico = eventoInput('#deposito-retiro');
+    
+    // REALIZAR COMPRAS DE CRIPTOS
+    $('#confirmacionCompra').click(validacionCompra);
+    $('#ingresoDivisa').val('');
 
     // MOSTRAMOS COMPRAS
     let arrayComprasRealizadas = billeteraCompleta.arrayCompras;
@@ -86,7 +89,3 @@ $(()=>{
     separacionCriptos();
     realizarConversion();
 });
-
-function prueba (){
-    console.log('mensaje de prueba de evento')
-}
