@@ -59,7 +59,7 @@ function objetoCompleto ({divisa}, array){
 
 // --------------------------------------------------- //
 
-function tomarJson(){
+function tomarJson(carteraCriptos){
     let i;
     let listadoJson = JSON.stringify(LISTA_CRIPTOS);
     let objetos = JSON.parse(listadoJson); 
@@ -69,6 +69,7 @@ function tomarJson(){
         objetoCripto = objetosSeparados;
         carteraCriptos.push(objetoCripto)
     }
+    return carteraCriptos
 }
 
 function actualizarMarketCap (posicion){
