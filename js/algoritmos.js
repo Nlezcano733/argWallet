@@ -6,10 +6,9 @@ let billetera, objetoMoneda, billeteraCompleta;
 function Billetera (divisa, divisaObjeto, billeteraTotal, cantidadDivisa, arrayCompras){
     this.divisa = divisa,
     this.divisaObjeto = divisaObjeto;
-    this.billeteraTotal = parseFloat(billeteraTotal), // cantidad de dinero total
-    this.cantidadDivisa = parseFloat(cantidadDivisa), // cantidad de plata que queda
+    this.billeteraTotal = parseFloat(billeteraTotal),
+    this.cantidadDivisa = parseFloat(cantidadDivisa),
     this.arrayCompras = arrayCompras
-    // this.arrayCantidadCripto = arrayCantidadCripto
 }
 
 function BilleteraParcial (divisa, billeteraTotal){
@@ -61,22 +60,20 @@ $(()=>{
     if(billetera.billeteraTotal > 0){
         habilitarBoton();
         bloquearSeleccionMoneda();
-        
-        retirar('botonRetiro');
+
+        retirar('#botonRetiro');
     }
 
     objetoMoneda = objetoCompleto(billetera, carteraDivisas);
     objetoMonedaToStorage(objetoMoneda);
 
     // ARMADO DE ESTRUCTURA DINAMICA -- HEADER
-    panelUsuario = aperturaPanelUser('userIn', 'salir');
+    panelUsuario = aperturaPanelUser('#userIn', '#salir');
     mostrarBilletera();
-    presionaOjo();
-
 
     // DEPOSITOS Y RETIROS -- VALIDACION DE ACCIONES
-    monedaDeposito = depositar('botonDeposito');
-    depositarAutomatico = eventoInput('deposito-retiro', );
+    monedaDeposito = depositar();
+    depositarAutomatico = eventoInput('#deposito-retiro');
 
     // MOSTRAMOS COMPRAS
     let arrayComprasRealizadas = billeteraCompleta.arrayCompras;
@@ -89,3 +86,7 @@ $(()=>{
     separacionCriptos();
     realizarConversion();
 });
+
+function prueba (){
+    console.log('mensaje de prueba de evento')
+}
