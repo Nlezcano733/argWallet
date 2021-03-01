@@ -21,6 +21,7 @@
     border: 2px solid $colorSecundario;
     font-size: $cuerpo;
     text-align: center;
+    cursor: pointer;
     transition: background-color 0.2s ease-in;
 
     &:hover{

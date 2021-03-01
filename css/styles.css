@@ -30,12 +30,14 @@
 
 body {
   width: 100%;
+  position: relative;
   background-color: #f6f6f6;
   color: #334761;
   font-family: Lato, sans-serif, verdana;
   font-size: 16px;
+  overflow-x: hidden;
 }
-j body::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 5px;
 }
 body::-webkit-scrollbar:active {
@@ -74,16 +76,28 @@ header #navBar {
   width: 480px;
   height: 100%;
 }
-header #navBar a {
+header #navBar input {
+  padding-bottom: 5px;
   color: #334761;
+  background-color: transparent;
+  outline: none;
+  border: none;
   text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
   transition: all 0, 3s linear;
 }
-header #navBar a:hover {
+header #navBar input:hover {
   color: #212f40;
 }
-header #navBar a:visited {
+header #navBar input:visited {
   color: #334761;
+}
+header #navBar input:active {
+  transform: scale(0.95);
+}
+header #navBar .actual {
+  border-bottom: 3px solid #334761;
 }
 header #navBar #btnIngreso {
   margin: 0px;
@@ -94,8 +108,10 @@ header #navBar #btnIngreso {
   border: 2px solid #334761;
   font-size: 16px;
   text-align: center;
+  cursor: pointer;
   transition: background-color 0.2s ease-in;
   line-height: 30px;
+  text-decoration: none;
   color: #dddddd;
 }
 header #navBar #btnIngreso:hover {
@@ -133,10 +149,137 @@ header #navBar #btnIngreso:focus {
   color: #D3F325;
 }
 
+.panelIngreso {
+  display: none;
+  height: 460px;
+  width: 400px;
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  padding: 20px 30px;
+  background-color: #f6f6f6;
+  box-shadow: 0px 0px 10px #bbbbbb;
+  z-index: 20000;
+  transform: translateX(-50%);
+}
+.panelIngreso .panelIngreso__salir {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 20px;
+  transition: all 0.2s ease-out;
+}
+.panelIngreso .panelIngreso__salir:hover {
+  transform: scale(1.05);
+}
+.panelIngreso .panelIngreso__atras {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 20px;
+  transition: all 0.2s ease-out;
+}
+.panelIngreso .panelIngreso__atras:hover {
+  transform: scale(1.05);
+}
+.panelIngreso h2 {
+  font-family: Noto_sans, sans-serif, verdana;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+.panelIngreso div {
+  margin-bottom: 20px;
+}
+.panelIngreso div .panelIngreso__label {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.panelIngreso div .panelIngreso__input {
+  width: 100%;
+  height: 30px;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 5px;
+  color: #808080;
+  border: 1px solid #5678a4;
+  outline: none;
+  transition: all 0.2s ease-out;
+}
+.panelIngreso div .panelIngreso__input:hover {
+  box-shadow: 0px 0px 5px #7692b7;
+}
+.panelIngreso div .panelIngreso__input:focus {
+  color: #1a1a1a;
+  box-shadow: 0px 0px 5px #7692b7;
+}
+.panelIngreso .panelIngreso__btn {
+  width: 90px;
+  height: 30px;
+  color: #f6f6f6;
+  background-color: #455f83;
+  border: 2px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-bottom: 20px;
+}
+.panelIngreso .panelIngreso__btn:hover {
+  background-color: #334761;
+}
+.panelIngreso .panelIngreso__btn:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+.panelIngreso .panelIngreso__btn:focus {
+  outline: none;
+}
+.panelIngreso .panelIngreso__extra .panelIngreso__extra--text {
+  display: inline-block;
+  margin-right: 10px;
+  color: #808080;
+}
+.panelIngreso .panelIngreso__extra .panelIngreso__extra--enlace {
+  color: #212f40;
+  cursor: pointer;
+  transition: all 0, 3s ease-out;
+}
+.panelIngreso .panelIngreso__extra .panelIngreso__extra--enlace:hover {
+  color: #10161e;
+}
+.panelIngreso .panelIngreso__extra .panelIngreso__extra--enlace:active {
+  transform: scale(0.9);
+}
+.panelIngreso h3 {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Ebirma, sans-serif, verdana;
+  font-size: 24px;
+  color: #bbbbbb;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.panelIngreso h3 strong {
+  font-weight: bolder;
+}
+
 section {
   width: 100%;
   height: 100vh;
   padding: 80px 80px;
+}
+
+.sectionScroll {
+  height: 100vh;
+  padding: 80px 80px;
+  padding: 0px;
+  margin: 0px;
 }
 
 #inicio {
@@ -145,7 +288,7 @@ section {
   grid-row-gap: 0px;
   justify-content: start;
   align-items: center;
-  grid-template-columns: repeat(2, 1fr) 200px;
+  grid-template-columns: repeat(2, 1fr) 250px;
   grid-template-rows: auto;
   grid-template-areas: "intro imagen lista";
   background-image: url(../assets/imagenes/backgroung-1.jpg);
@@ -160,8 +303,8 @@ section {
   align-items: flex-start;
   height: 80%;
   width: 90%;
-  margin-top: 5%;
-  margin-bottom: 15%;
+  margin-top: -25%;
+  margin-bottom: 0%;
 }
 #inicio #inicio__intro h2 {
   font-family: Noto_sans, sans-serif, verdana;
@@ -180,16 +323,32 @@ section {
 #inicio #inicio__listado {
   grid-area: lista;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
   height: 100%;
+  width: 100%;
+  padding-top: 20px;
 }
-#inicio #inicio__listado .inicio__listado--nombre {
+#inicio #inicio__listado .inicio__listado--cripto {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+  transition: all 1s ease-out 2s;
+}
+#inicio #inicio__listado .inicio__listado--cripto .inicio__listado--nombre {
   margin-right: 20px;
+  width: fit-content;
 }
-#inicio #inicio__listado .inicio__listado--imagen {
-  width: 50px;
+#inicio #inicio__listado .inicio__listado--cripto .inicio__listado--imagen {
+  width: 60px;
+  padding: 0px 10px;
+}
+#inicio #inicio__listado .resaltar {
+  transform: scale(1.2);
+  font-weight: bold;
 }
 
 #info {
@@ -200,36 +359,56 @@ section {
   background-color: #cdd4e7;
   position: relative;
 }
-#info .info__cuerpoInfo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 600px;
-  height: 450px;
+#info #infoDiv {
+  height: 85vh;
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 15vh;
 }
-#info .info__cuerpoInfo .info__cuerpoInfo--titulo {
+#info #infoDiv .info__cuerpoInfo {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  justify-content: start;
+  align-items: start;
+  grid-template-columns: 450px 1fr;
+  grid-template-rows: 60px auto;
+  grid-template-areas: "titulo imagen" "contenido imagen";
+  width: 600px;
+  height: 400px;
+  margin-top: 50px;
+}
+#info #infoDiv .info__cuerpoInfo:active {
+  outline: none;
+}
+#info #infoDiv .info__cuerpoInfo .info__cuerpoInfo--titulo {
+  grid-area: titulo;
+  align-self: center;
   font-family: Noto_sans, sans-serif, verdana;
   font-size: display;
   margin-bottom: 40px;
 }
-#info .info__cuerpoInfo .info__cuerpoInfo--texto {
-  width: 550px;
+#info #infoDiv .info__cuerpoInfo .info__cuerpoInfo--texto {
+  grid-area: contenido;
+  width: 400px;
   font-size: 16px;
   line-height: 1.6em;
 }
-#info .info__imagen {
-  position: absolute;
-  top: 18%;
-  right: 80px;
-  width: 50%;
+#info #infoDiv .info__cuerpoInfo .info__cuerpoInfo--texto p {
+  margin-bottom: 15px;
+}
+#info #infoDiv .info__cuerpoInfo .info__imagen {
+  grid-area: imagen;
+  width: 100%;
   mix-blend-mode: darken;
 }
 
 #mercado {
-  display: block;
+  width: 100%;
   height: calc(100vh - 35px);
+  padding: 80px 80px;
   padding-bottom: 20px;
+  display: block;
   background-color: #cdd4e7;
 }
 #mercado #mercado__lista {
@@ -267,6 +446,7 @@ section {
   border: 2px solid #334761;
   font-size: 16px;
   text-align: center;
+  cursor: pointer;
   transition: background-color 0.2s ease-in;
   font-size: 16px;
   font-weight: bold;
@@ -315,6 +495,7 @@ section {
   border: 2px solid #334761;
   font-size: 16px;
   text-align: center;
+  cursor: pointer;
   transition: background-color 0.2s ease-in;
   padding: 5px 10px;
   line-height: 15px;
@@ -333,6 +514,7 @@ section {
 }
 
 .conversor {
+  position: relative;
   background-color: #dddddd;
   width: 100vw;
   height: 10vh;
@@ -751,6 +933,7 @@ section {
   border: 2px solid #808080;
   font-size: 16px;
   text-align: center;
+  cursor: pointer;
   transition: background-color 0.2s ease-in;
   text-align: center;
 }
@@ -802,6 +985,7 @@ section {
   border: 2px solid #097c02;
   font-size: 16px;
   text-align: center;
+  cursor: pointer;
   transition: background-color 0.2s ease-in;
   margin: 0 auto;
 }
@@ -966,6 +1150,7 @@ section {
   border: 2px solid #3B0480;
   font-size: 16px;
   text-align: center;
+  cursor: pointer;
   transition: background-color 0.2s ease-in;
 }
 #panelUser #depositos .dr .dr__boton:hover {
@@ -1088,6 +1273,9 @@ section {
 }
 
 footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100vw;
   height: 35px;
   padding: 5px;
   background-color: #7692b7;

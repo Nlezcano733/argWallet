@@ -8,6 +8,8 @@
     <link rel="icon" type="image/png" href="assets/imagenes/iconoBlanco.png" />
     <script defer src="https://kit.fontawesome.com/bd03cec16f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
     <title>ArgWallet</title>
 </head>
 
@@ -15,10 +17,10 @@
     <header>
         <h1><strong>Arg</strong>WALLET</h1>
         <div id="navBar">
-            <a href="#">Inicio</a>
-            <a href="#informacion">Información</a>
-            <a href="#mercado">Mercado</a>
-            <a href="conversor.html" id="btnIngreso" role="button">Ingresar</a>
+            <input type="button" id="btnInicio" value="Inicio"> 
+            <input type="button" id="btnInfo" value="Información"> 
+            <input type="button" id="btnMercado" value="Mercados"> 
+            <a id="btnIngreso" role="button">Ingresar</a>
         </div>
     </header>
 
@@ -28,9 +30,55 @@
         <a target="blank" href="https://www.linkedin.com/in/nlezcano/"><i class="fab fa-linkedin"></i></a>
     </aside>
 
+    <div id="logIn" class="panelIngreso">
+        <h2>Iniciar Sesión</h2>
+        <a class="panelIngreso__salir"><i class="fas fa-times"></i></a>
+        <form>
+            <div>
+                <label for="idUsuario" class="panelIngreso__label">ID usuario</label>
+                <input type="text" name="idUsuario" id="idUsuario" class="panelIngreso__input">
+            </div>
+            <div>
+                <label for="passUsuario" class="panelIngreso__label">Contraseña</label>
+                <input type="password" name="passUsuario" id="passUsuario" class="panelIngreso__input">
+            </div>
+            <input type="button" id="btnRegistro" class="panelIngreso__btn" value="Ingresar">
+        </form>
+        <div class="panelIngreso__extra">
+            <p class="panelIngreso__extra--text">¿No tiene cuenta?</p>
+            <a class="panelIngreso__extra--enlace" id="solicitudRegistro">Registrarse</a>
+        </div>
+        <h3>Arg<strong>WALLET</strong></h3>
+    </div>
+    <div id="registro" class="panelIngreso">
+        <h2>Registro</h2>
+        <a class="panelIngreso__atras"><i class="fas fa-arrow-left"></i></a>
+        <a class="panelIngreso__salir"><i class="fas fa-times"></i></a>
+        <form>
+            <div>
+                <label for="nuevoNombre" class="panelIngreso__label">Nombre usuario</label>
+                <input type="text" name="nuevoNombre" id="nuevoNombre" class="panelIngreso__input">
+            </div>
+            <div>
+                <label for="nuevoId" class="panelIngreso__label">ID usuario</label>
+                <input type="text" name="nuevoId" id="nuevoId" class="panelIngreso__input">
+            </div>
+            <div>
+                <label for="nuevoPass" class="panelIngreso__label">Contraseña</label>
+                <input type="password" name="nuevoPass" id="nuevoPass" class="panelIngreso__input">
+            </div>
+            <input type="button" id="btnComenzar" class="panelIngreso__btn" value="Comenzar">
+        </form>
+        <div class="panelIngreso__extra">
+            <p class="panelIngreso__extra--text">*Pagina Demo: ningun dato será guardado en una base de datos. 
+            Toda la información quedará guardada en su propio navegador.</p>
+        </div>
+        <h3>Arg<strong>WALLET</strong></h3>
+    </div>
+
     <section id="inicio">
 
-        <div id="inicio__intro">
+        <div id="inicio__intro" class="sectionScroll">
             <h2>Conectate al mundo Cripto</h2>
             <p>Encontra las principales criptomonedas en un solo lugar. Comprá y vendé los activos de mayor crecimiento
                 del mercado con pocos clicks de distancia. <strong>Unite a la cripto revolucion</strong></p>
@@ -39,30 +87,72 @@
         <img src="assets/imagenes/btc.png" alt="bitcoin" id="inicio__imagenCripto">
 
         <div id="inicio__listado">
-            <p class="inicio__listado--nombre">Bitcoin (BTC)</p>
-            <img src="assets/imagenes/btc.png" alt="Bitcoin" class="inicio__listado--imagen">
+            <!-- <div class="inicio__listado--cripto">
+                <p class="inicio__listado--nombre">Bitcoin (BTC)</p>
+                <img src="assets/imagenes/btc.png" alt="Bitcoin" class="inicio__listado--imagen">
+            </div> -->
         </div>
 
     </section>
 
-    <section id="info">
-        <div class="info__cuerpoInfo">
-            <h2 class="info__cuerpoInfo--titulo">Deposita tus ahorros de manera segura</h2>
-            <div class="info__cuerpoInfo--texto">
-                <p>Tus ahorros se mantienen de forma segura en nuestra plataforma para que puedas operar y mantenerte al tanto
-                    con total confianza.
-                </p>
-                <p>En tu cuenta se verán los balances de los depósitos con varias monedas acorde a tus necesidades o planes de
-                    inversion.
-                    La seguridad es un factor importante, por lo que la información de tu billetera y tus transacciones quedaran
-                    guardadas en tu navegador.
-                </p>
+    <section id="info" class="sectionScroll">
+        <div id="infoDiv" class="single-item">
+            <div class="info__cuerpoInfo">
+                <h2 class="info__cuerpoInfo--titulo">Deposita tus ahorros de manera segura</h2>
+                <div class="info__cuerpoInfo--texto">
+                    <p>Tus ahorros se mantienen de forma segura en nuestra plataforma para que puedas operar y
+                        mantenerte al tanto
+                        con total confianza.
+                    </p>
+                    <p>En el panel de usuario, podrás ver tu cuenta, donde se reflejarán los movimientos y los balances
+                        de los depósitos con varias monedas acorde a tus necesidades o planes de inversion.
+                    </p>
+                    <p>
+                        La seguridad es un factor importante, por lo que la información de tu billetera y tus
+                        transacciones quedaran
+                        guardadas en tu navegador.
+                    </p>
+                </div>
+                <img src="assets/imagenes/ahorro.png" alt="Depositar ahorros" class="info__imagen">
+            </div>
+            <div class="info__cuerpoInfo">
+                <h2 class="info__cuerpoInfo--titulo">Obtené toda la información necesaria para operar</h2>
+                <div class="info__cuerpoInfo--texto">
+                    <p>En ArgWALLET sabemos que el análisis de los activos es necesario, por lo que la plataforma podrá
+                        brindarte toda la
+                        información que necesites.
+                    </p>
+                    <p>Con nuestro conversor dinamico podrás ver tanto la cantdidad de criptomonedas que podrás
+                        adquirir, como su valor en la
+                        moneda utilizada.
+                    </p>
+                    <p>Como el mercado es dinámico, tendrás la posibilidad de vender tus criptomonedas para acceder a
+                        otras
+                        cuando sea necesario. El analisis hace al inversor</p>
+                </div>
+                <img src="assets/imagenes/analizando.png" alt="Depositar ahorros" class="info__imagen">
+            </div>
+            <div class="info__cuerpoInfo">
+                <h2 class="info__cuerpoInfo--titulo">Disfruta de tus ahorros cuando quieras</h2>
+                <div class="info__cuerpoInfo--texto">
+                    <p>Como sabemos que los activos son una buena fuente de ahorro. También sabemos que es muy
+                        importante utilizar
+                        el fruto de esos ahorros.
+                    </p>
+                    <p>Vender tus criptomonedas y retirar tus ahorros es tan sencillo como comprarlas. Tu dinero estará
+                        disponible cuando
+                        lo necesites.
+                    </p>
+                    <p>Simplemente selecciona la criptomoneda que desees vender. De inmediato tendras tu dinero en tu
+                        billetera
+                        para que puedas retirar la cantidad que desees o para que puedas adquirir otros activos</p>
+                </div>
+                <img src="assets/imagenes/ganancias.png" alt="Depositar ahorros" class="info__imagen">
             </div>
         </div>
-        <img src="assets/imagenes/ahorro.png" alt="Depositar ahorros" class="info__imagen">
     </section>
 
-    <section id="mercado">
+    <section id="mercado" class="sectionScroll">
         <table id="mercado__lista" cellspacing="0px">
             <tr id="lista__cabecera">
                 <th>Nombre</th>
@@ -100,10 +190,16 @@
         </table>
     </section>
 
-    <footer>
+    <footer id="footer">
         <p>Desarrollado por NLezcano - Febrero 2021</p>
     </footer>
 
+    <script src="js/objetoJson.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery.scrollify.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/funcionesHome.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
