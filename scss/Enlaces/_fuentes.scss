@@ -5,8 +5,8 @@
     font-style: normal;
 }
 @font-face{
-    font-family: Lato;
-    src:url("../assets/fuentes/Lato/Lato-Regular.ttf") format("Truetype");
+    font-family: Noto_sans;
+    src:url("../assets/fuentes/Noto_Sans/NotoSans-Regular.ttf") format("Truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -17,10 +17,17 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face{
+    font-family: Lato;
+    src: url("../assets/fuentes/Lato/Lato-Regular.ttf") format("Truetype");
+    font-weight: normal;
+    font-style: normal;
+}
 
-$fuenteGeneral: Ebirma, sans-serif, verdana;
-$fuenteTitulo: Lato, sans-serif, verdana;
-$fuenteSubtitulo: Roboto, sans-serif, verdana;
+$fuenteLogo: Ebirma, sans-serif, verdana;
+$fuenteTitulo: Noto_sans, sans-serif, verdana;
+$fuenteGeneral: Lato, sans-serif, verdana;
+$fuenteGeneralConversor: Roboto, sans-serif, verdana;
 
 
 

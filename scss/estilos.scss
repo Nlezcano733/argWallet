@@ -2,23 +2,451 @@
 @import 'Enlaces/variables';
 @import 'Enlaces/fuentes';
 
-
 *{
-    padding: 0px;
-    margin: 0px;
     box-sizing: border-box;
-    font-family: $fuenteGeneral;
+    margin: 0px;
+    padding: 0px;
 }
-h1, h2, h3, h4, h5{
-    font-family: $fuenteTitulo;
-}
-p, a{
-    font-family: $fuenteGeneral;
-}
+// h1, h2, h3, h4, h5{
+//     font-family: $fuenteTitulo;
+// }
+// p, a{
+//     font-family: $fuenteGeneralConversor;
+// }
 
 body{
+    width: 100%;
+    position: relative;
+    background-color: $colorGris0;
+    color: $colorAzul6;
+    font-family: $fuenteGeneral;
+    font-size: 16px;
+    overflow-x: hidden;
+        
+    &::-webkit-scrollbar{
+            width: 5px;
+    }
+    &::-webkit-scrollbar:active{
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        background-color: $colorAzul3;
+        border-radius: 10px;
+    }
+}
+
+header{
+    @include flexbox (row, space-between, center);
+    height: 70px;
+    width: 100%;
+    padding: 0px 80px;
+    position: fixed;
+    background-color: $bg-header;
+    z-index: 1000;
+
+    h1{
+        width: fit-content;
+        padding: 0px;
+        font-family: $fuenteLogo;
+        font-size: $titulo;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+    #navBar{
+        @include flexbox (row, space-between, center);
+        width: 480px;
+        height: 100%;
+
+        input{
+            padding-bottom: 5px;
+            color: $colorAzul6;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            font-size: $cuerpo;
+            cursor: pointer;
+            transition: all 0,3s linear;
+
+            &:hover{
+                color: $colorAzul7;
+            }
+            &:visited{
+                color: $colorAzul6;
+            }
+            &:active{
+                transform: scale(0.95);
+            }
+
+        }
+        .actual{
+            border-bottom: 3px solid $colorAzul6;
+        }
+        #btnIngreso{
+            margin: 0px;
+            @include boton(100px, 35px, $colorAzul5, $colorAzul6);
+            line-height: 30px;
+            text-decoration: none;
+            color: $colorGris1;
+        }
+    }
+}
+
+#redes {
+    position: fixed;
+    left: 30px;
+    top: 70%;
+    @include flexbox(column, space-around, center);
+    width: fit-content;
+    height: 140px;
+    z-index: 1000;
+    i{
+        font-size: $cuerpoLg;
+        color: $colorAzul6;
+        transition: all 0.1s linear;
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+    #darkMode{
+        &:active{
+            color: #D3F325;
+        }
+    }
+}
+
+.panelIngreso{
+    display: none;
+    height: 460px;
+    width: 400px;
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    padding: 20px 30px;
+    background-color: $colorGris0;
+    box-shadow: 0px 0px 10px $colorGris2;
+    z-index: 20000;
+    transform: translateX(-50%);
+
+    .panelIngreso__salir{
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: $subtitulo;
+        transition: all 0.2s ease-out;
+
+        &:hover{
+            transform: scale(1.05);
+        }
+    }
+    .panelIngreso__atras{
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        font-size: $subtitulo;
+        transition: all 0.2s ease-out;
+
+        &:hover{
+            transform: scale(1.05);
+        }
+    }
+
+    h2{
+        font-family: $fuenteTitulo;
+        font-size: $display;
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+    div{
+        margin-bottom: 20px;
+
+        .panelIngreso__label{
+            display: block;
+            width: 100%;
+            font-size: $cuerpoLg;
+            margin-bottom: 5px;
+        }
+        .panelIngreso__input{
+            width: 100%;
+            height: 30px;
+            font-size: $cuerpo;
+            line-height: 20px;
+            padding: 5px;
+            color: $colorGris4;
+            border: 1px solid $colorAzul4;
+            outline: none;
+            transition: all 0.2s ease-out;
+
+            &:hover{
+                box-shadow: 0px 0px 5px $colorAzul3;
+            }
+            &:focus{
+                color: $colorGris8;
+                box-shadow: 0px 0px 5px $colorAzul3;
+            }
+        }
+    }
+    .panelIngreso__btn{
+        @include boton(90px, 30px, $colorAzul5, $colorAzul6);
+        margin-bottom: 20px;
+    }
+    .panelIngreso__extra{
+        .panelIngreso__extra--text{
+            display: inline-block;
+            margin-right: 10px;
+            color: $colorGris4;
+        }
+        .panelIngreso__extra--enlace{
+            color: $colorAzul7;
+            cursor: pointer;
+            transition: all 0,3s ease-out;
+
+            &:hover{
+                color: $colorAzul8;
+            }
+            &:active{
+                transform: scale(0.9);
+            }
+        }
+    }
+    h3{
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: $fuenteLogo;
+        font-size: $titulo;
+        color: $colorGris2;
+        text-align: center;
+        letter-spacing: 2px;
+        strong{
+            font-weight: bolder;
+        }
+    }
+}
+
+
+section{
+    width: 100%;
+    height: 100vh;
+    padding: 80px 80px;
+
+}
+
+.sectionScroll{
+    height: 100vh;
+    padding: 80px 80px;
+    padding: 0px;
+    margin: 0px;
+}
+
+#inicio{
+    @include grids(10px, 0px, start, center);
+    grid-template-columns: repeat(2, 1fr) 250px;
+    grid-template-rows: auto;
+    grid-template-areas: "intro imagen lista";
+    background-image: url(../assets/imagenes/backgroung-1.jpg);
+    background-size: cover;
+    background-position: center;
+
+    #inicio__intro{
+        grid-area: 'intro';
+        @include flexbox(column, center, flex-start);
+        height: 80%;
+        width: 90%;
+        margin-top: -25%;
+        margin-bottom: 0%;
+
+        h2{
+            font-family: $fuenteTitulo;
+            font-weight: bold;
+            font-size: $display;
+            margin-bottom: 30px;
+        }
+        p{
+            font-size: $cuerpoLg;
+            line-height: 1.7em;
+        }
+    }
+
+    #inicio__imagenCripto{
+        grid-area: imagen;
+        width: 70%;
+    }
+
+    #inicio__listado{
+        grid-area: lista;
+        @include flexbox(column, space-between, flex-end);
+        height: 100%;
+        width: 100%;
+        padding-top: 20px;
+
+        .inicio__listado--cripto{
+            @include flexbox (row, space-between, center);
+            width: fit-content;
+            transition: all 1s ease-out 2s;
+
+            .inicio__listado--nombre{
+                margin-right: 20px;
+                width: fit-content;
+            }
+            .inicio__listado--imagen{
+                width: 60px;
+                padding: 0px 10px;
+            }
+
+        }
+        .resaltar{
+            transform: scale(1.2);
+            font-weight: bold;
+        }
+    }
+}
+
+#info{
+    @include flexbox(column, center, space-around);
+    background-color: $colorAzul1;
+    position: relative;
+
+    #infoDiv{
+        height: 85vh;
+        width: 80vw;
+        margin: 0 auto;
+        margin-top: 15vh;
+
+
+        .info__cuerpoInfo{
+            @include grids (10px, 10px, start, start);
+            grid-template-columns: 450px 1fr;
+            grid-template-rows: 60px auto;
+            grid-template-areas: 
+                "titulo imagen"
+                "contenido imagen";
+            width: 600px;
+            height: 400px;
+            margin-top: 50px;
+
+            &:active{
+                outline: none;
+            }
+            .info__cuerpoInfo--titulo{
+                grid-area: titulo;
+                align-self: center;
+                font-family: $fuenteTitulo;
+                font-size: display;
+                margin-bottom: 40px;
+            }
+
+            .info__cuerpoInfo--texto{
+                grid-area: contenido;
+                width: 400px;
+                font-size: $cuerpo;
+                line-height: 1.6em;
+                p{
+                    margin-bottom: 15px;
+                }
+            }
+
+            .info__imagen{
+                grid-area: imagen;
+                width: 100%;
+                mix-blend-mode: darken;
+            }
+        }
+    }
+
+
+}
+
+#mercado{
+    width: 100%;
+    height: calc(100vh - 35px);
+    padding: 80px 80px;
+    padding-bottom: 20px;
+    display: block;
+    background-color: $colorAzul1;
+
+    #mercado__lista{
+        display: block;
+        height: 100%;
+        overflow-y: scroll;
+        
+        &::-webkit-scrollbar{
+                width: 5px;
+        }
+        &::-webkit-scrollbar:active{
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb{
+            background-color: $colorAzul2;
+            border-radius: 10px;
+        }
+
+        #lista__cabecera{
+            text-align: left;
+            border: none;
+
+            th{
+                width: calc(100% / 8);
+                height: 50px;
+                padding: 2px 20px;
+                padding-left: 20px;
+                background-color: $colorGris1;
+                border: none;
+
+                #lista__cabecera--divisas{
+                    @include boton(80px, 35px, $colorAzul5, $colorAzul6);
+                    font-size: $cuerpo;
+                    font-weight: bold;
+                }
+            }
+        }
+        .lista__cripto{
+            text-align: left;
+
+            td{
+                width: auto;
+                height: 45px;
+                padding: 2px 10px;
+                padding-left: 20px;
+                background-color: $colorAzul1;
+                border-bottom: 1px solid $colorAzul3;
+
+                .lista__cripto--nombre{
+                    @include flexbox(row, flex-start, center);
+                    width: 200px;
+                    p{
+                        font-family: $fuenteGeneral;
+                    }
+                    img{
+                        width: 30px;
+                        margin-right: 10px;
+                    }
+                }
+
+                .lista__cripto--btn{
+                    display: block;
+                    @include boton(80px, 30px, $colorAzul5, $colorAzul6);
+                    padding: 5px 10px;
+                    line-height: 15px;
+                    text-decoration: none;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+
+
+.conversor{
+    position: relative;
     background-color: $colorGris1;
     width: 100vw;
+    height: 10vh;
     overflow: hidden;
 }
 
@@ -32,90 +460,100 @@ body{
     margin: 0px auto;
 }
 
-#navbar{
-    @include flexbox(row, space-between, center);
+#conversor__header{
+    position: relative;
     height: 90px;
     width: 100%;
-    padding: 5px 50px;
-    background-image: $gradienteHeader;
-    color: $colorGris0;
+    padding: 0px;
 
-    section{
-        height: 40px;
-        width: fit-content;
-        font-size: $cuerpoLg;
-        background-color: $colorAzul4;
-        box-shadow: 0px 0px 5px $colorAzul4;
-
-    }
-    .navbar__moneda{
+    #navbarConversor{
         @include flexbox(row, space-between, center);
-        width: 220px;
+        height: 90px;
+        width: 100%;
+        padding: 5px 50px;
+        background-image: $gradienteHeader;
+        color: $colorGris0;
 
-        .cantidadDinero{
-            @include flexbox(row, flex-start, center);
+        section{
+            height: 40px;
             width: fit-content;
-            margin: 8px 20px 8px 10px;
+            font-size: $cuerpoLg;
+            background-color: $colorAzul4;
+            box-shadow: 0px 0px 5px $colorAzul4;
 
-            i{
+        }
+        .navbar__moneda{
+            @include flexbox(row, space-between, center);
+            width: 220px;
+            padding: 0px;
+
+            .cantidadDinero{
+                @include flexbox(row, flex-start, center);
+                width: fit-content;
+                margin: 8px 20px 8px 10px;
+
+                i{
+                    margin-right: 10px;
+                }
+            }
+            #cantidadVisible{
+                height: 100%;
+                padding: 11px 10px;
+                border-left: 2px solid $colorAzul3;
+
+                cursor:pointer;
+                transition: all 0.1s linear;
+                &:hover{
+                    background-color: $colorAzul5;
+                }
+                &:active{
+                    outline: none;
+                    box-shadow: 0px 0px 5px $colorGris7 inset;
+                }
+            }
+            #cantidadBilletera{
+                font-weight: 400;
+            }
+        }
+
+        .navbar__user{
+            @include flexbox(row, space-between, center);
+            min-width: 220px;
+            max-width: 320px;
+            padding: 0px;
+
+
+            #userIn{
+                height: 100%;
+                padding: 10px 12px;
+                border-right: 2px solid $colorAzul3;
+                cursor:pointer;
+                transition: all 0.1s linear;
+
+                &:hover{
+                    background-color: $colorAzul5;
+                }
+                &:active{
+                    outline: none;
+                    box-shadow: 0px 0px 5px $colorGris7 inset;
+                }
+            }
+            p{
+                margin-left: 10px;
                 margin-right: 10px;
             }
-        }
-        #cantidadVisible{
-            height: 100%;
-            padding: 11px 10px;
-            border-left: 2px solid $colorAzul3;
-
-            cursor:pointer;
-            transition: all 0.1s linear;
-            &:hover{
-                background-color: $colorAzul5;
-            }
-            &:active{
-                outline: none;
-                box-shadow: 0px 0px 5px $colorGris7 inset;
-            }
-        }
-        #cantidadBilletera{
-            font-weight: 400;
-        }
-    }
-
-    .navbar__user{
-        @include flexbox(row, space-between, center);
-        min-width: 220px;
-        max-width: 320px;
-
-
-        #userIn{
-            height: 100%;
-            padding: 10px 12px;
-            border-right: 2px solid $colorAzul3;
-            cursor:pointer;
-            transition: all 0.1s linear;
-
-            &:hover{
-                background-color: $colorAzul5;
-            }
-            &:active{
-                outline: none;
-                box-shadow: 0px 0px 5px $colorGris7 inset;
-            }
-        }
-        p{
-            margin-left: 10px;
-            margin-right: 10px;
         }
     }
 }
 
-main{
+.conversor main{
     @include flexbox (row,space-between, center);
     
     #mainAside{
         grid-area: aside;
         height: calc(100vh - 120px);
         width: 320px;
+        padding: 0px;
         padding-top: 15px;
         background-image: $gradienteAside;
         box-shadow: 0px 15px 20px 0px $colorAzul3 inset;
@@ -189,7 +627,7 @@ main{
                 .cambioCripto{
                     grid-area: cambio;
                     font-size: $cuerpo;
-                    font-family: $fuenteGeneral;
+                    font-family: $fuenteGeneralConversor;
                     font-weight: 400;
                 }
                 .valorCripto{
@@ -218,7 +656,7 @@ main{
     #panel{
         @include grids(40px, 15px, center, start);
         grid-template-rows: 125px 100px 1fr 90px;
-        grid-template-columns: 100px 400px 1fr;
+        grid-template-columns: 100px 400px 370px;
         grid-template-areas: 
             "imagen nombre cotizacion"
             "compra compra detalles"
@@ -258,12 +696,12 @@ main{
 
         #cotizacion {
             @include  grids (0px, 0px, center, center);
-            grid-template-columns: 1fr 1fr 65px;
+            grid-template-columns: 1fr 1fr;
             grid-template-rows: 35px 30px 60px;
             grid-template-areas:
-                "conversion conversion ."
-                "compra venta monedas"
-                "precioCompra precioVenta monedas";
+                "conversion conversion"
+                "compra venta"
+                "precioCompra precioVenta";
             width: 100%;
             height: 100%;
             margin: 0 auto;
@@ -279,7 +717,7 @@ main{
                 color: $colorGris8;
             }
             p{
-                font-family: $fuenteSubtitulo;
+                font-family: $fuenteTitulo;
                 font-size: $titulo;
                 line-height: 50px;
                 border-top: 1px solid $colorGris2;
@@ -448,6 +886,7 @@ main{
             #confirmacionCompra{
                 grid-area: confirmacion;
                 @include boton (150px, 40px, $colorVerde2, $colorVerde3);
+                margin: 0 auto;
             }
             #compra{
                 grid-area: compra;
@@ -474,25 +913,13 @@ main{
 }
 
 
-
-footer{
-    width: 100%;
-    height: 30px;
-    background-color: $colorGris6;
-    color: $colorGris0;
-    text-align: center;
-    z-index: 1000;
-}
-
-
-
 #panelUser{
     width: 320px;
     height: calc(100vh - 30px);
     position: absolute;
     top: 0px;
     left: -320px;
-    z-index: 10;
+    z-index: 2000;
     background-image: $gradienteUser;
     color: $colorGris0;
 
@@ -527,12 +954,6 @@ footer{
             font-family: $fuenteTitulo;
             line-height: 30px;
         }
-        // #panelUser__id{
-        //     font-size: $cuerpoLg;
-        //     font-weight: 400;
-        //     font-family: $fuenteGeneral;
-        //     color: $colorGris2;
-        // }
     }
 
     #depositos{
@@ -680,6 +1101,10 @@ footer{
 >>>>>>> development
             border: 1px solid $colorGris2;
 
+            h3{
+                font-size: $cuerpoLg;
+            }
+
             p{
                 height: 100%;
                 padding-left: 10px;
@@ -693,39 +1118,49 @@ footer{
         }
     }
 }
-    .panelUser__animationApertura{
-        animation: traslacionApertura 0.5s linear;
+.panelUser__animationApertura{
+    animation: traslacionApertura 0.5s linear;
+}
+
+@keyframes traslacionApertura{
+    from{
+        transform: translateX(0px);
     }
-
-    @keyframes traslacionApertura{
-        from{
-            transform: translateX(0px);
-        }
-        to{
-            transform: translateX(320px);
-        }
+    to{
+        transform: translateX(320px);
     }
+}
 
-    .panelUser__animationCierre{
-        animation: traslacionCierre 0.5s linear;
+.panelUser__animationCierre{
+    animation: traslacionCierre 0.5s linear;
+}
+
+@keyframes traslacionCierre{
+    from{
+        transform: translateX(320px);
     }
-
-    @keyframes traslacionCierre{
-        from{
-            transform: translateX(320px);
-        }
-        to{
-            transform: translateX(0px);
-        }
+    to{
+        transform: translateX(0px);
     }
+}
 
-    .panelUser__abierto{
-        transform: translateX(100%)
-    }
-    .panelUser__cerrado{
-        transform: translateX(-100%);
-    }
+.panelUser__abierto{
+    transform: translateX(100%)
+}
+.panelUser__cerrado{
+    transform: translateX(-100%);
+}
 
 
 
-
+footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100vw;
+    height: 35px;
+    padding: 5px;
+    background-color: $colorAzul3;
+    color: $colorAzul8;
+    text-align: center;
+    z-index: 1000;
+}
