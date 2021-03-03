@@ -240,6 +240,7 @@ section{
     padding: 80px 80px;
     padding: 0px;
     margin: 0px;
+
 }
 
 #inicio{
@@ -418,8 +419,11 @@ section{
                 .lista__cripto--nombre{
                     @include flexbox(row, flex-start, center);
                     width: 200px;
-                    p{
+                    .nombreCriptoLista{
                         font-family: $fuenteGeneral;
+                        padding: 0px;
+                        line-height: 45px;
+                        border: none;
                     }
                     img{
                         width: 30px;
@@ -442,6 +446,14 @@ section{
 
 
 
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+//--------------------------------------------------------------------//
+
+
+
 .conversor{
     position: relative;
     background-color: $colorGris1;
@@ -450,15 +462,15 @@ section{
     overflow: hidden;
 }
 
-.logoPpal{
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: block;
-    height: 70px;
-    margin: 0px auto;
-}
+// .logoPpal{
+//     // position: absolute;
+//     top: 10px;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     display: block;
+//     height: 70px;
+//     margin: 0px auto;
+// }
 
 #conversor__header{
     position: relative;
@@ -1063,11 +1075,7 @@ section{
         width: 90%;
         height: 245px;
         margin: 0 auto;
-<<<<<<< HEAD
-        @include flexbox(column, center, center);
-=======
         @include flexbox(column, flex-start, center);
->>>>>>> development
         overflow-y: scroll;
         
         &::-webkit-scrollbar{
@@ -1083,22 +1091,13 @@ section{
         }
 
         .adquisicion{
-<<<<<<< HEAD
-            @include grids(10px, 0px, start, baseline);
-            grid-template-columns: 1.5fr 1fr;
-=======
             @include grids(5px, 0px, start, baseline);
             grid-template-columns: 1.2fr 1fr;
->>>>>>> development
             grid-template-rows: repeat(3, 30px);
             width: 100%;
             height: 115px;
             margin: 5px auto;
-<<<<<<< HEAD
-            padding: 15px 10px 5px 10px;
-=======
             padding: 15px 5px 5px 5px;
->>>>>>> development
             border: 1px solid $colorGris2;
 
             h3{
@@ -1154,8 +1153,6 @@ section{
 
 
 footer{
-    position: absolute;
-    bottom: 0px;
     width: 100vw;
     height: 35px;
     padding: 5px;

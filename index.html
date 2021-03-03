@@ -36,17 +36,18 @@
         <form>
             <div>
                 <label for="idUsuario" class="panelIngreso__label">ID usuario</label>
-                <input type="text" name="idUsuario" id="idUsuario" class="panelIngreso__input">
+                <input type="text" name="idUsuario" id="idUsuario" class="panelIngreso__input" disabled>
             </div>
             <div>
                 <label for="passUsuario" class="panelIngreso__label">Contraseña</label>
-                <input type="password" name="passUsuario" id="passUsuario" class="panelIngreso__input">
+                <input type="password" name="passUsuario" id="passUsuario" class="panelIngreso__input" disabled>
             </div>
             <input type="button" id="btnRegistro" class="panelIngreso__btn" value="Ingresar">
         </form>
         <div class="panelIngreso__extra">
-            <p class="panelIngreso__extra--text">¿No tiene cuenta?</p>
-            <a class="panelIngreso__extra--enlace" id="solicitudRegistro">Registrarse</a>
+            <!-- <p class="panelIngreso__extra--text">¿No tiene cuenta?</p>
+            <a class="panelIngreso__extra--enlace" id="solicitudRegistro">Registrarse</a> -->
+            <p>Ingreso de usuario en desarrollo. Presione "Ingresar" para continuar</p>
         </div>
         <h3>Arg<strong>WALLET</strong></h3>
     </div>
@@ -57,15 +58,15 @@
         <form>
             <div>
                 <label for="nuevoNombre" class="panelIngreso__label">Nombre usuario</label>
-                <input type="text" name="nuevoNombre" id="nuevoNombre" class="panelIngreso__input">
+                <input type="text" name="nuevoNombre" id="nuevoNombre" class="panelIngreso__input" disabled>
             </div>
             <div>
                 <label for="nuevoId" class="panelIngreso__label">ID usuario</label>
-                <input type="text" name="nuevoId" id="nuevoId" class="panelIngreso__input">
+                <input type="text" name="nuevoId" id="nuevoId" class="panelIngreso__input" disabled>
             </div>
             <div>
                 <label for="nuevoPass" class="panelIngreso__label">Contraseña</label>
-                <input type="password" name="nuevoPass" id="nuevoPass" class="panelIngreso__input">
+                <input type="password" name="nuevoPass" id="nuevoPass" class="panelIngreso__input" disabled>
             </div>
             <input type="button" id="btnComenzar" class="panelIngreso__btn" value="Comenzar">
         </form>
@@ -157,7 +158,7 @@
             <tr id="lista__cabecera">
                 <th>Nombre</th>
                 <th>Par</th>
-                <th>precio</th>
+                <th>Precio</th>
                 <th>24h Cambio</th>
                 <th>max 24h</th>
                 <th>min 24h</th>
@@ -166,12 +167,12 @@
                     <select id="lista__cabecera--divisas">
                         <option>ARS</option>
                         <option>USD</option>
-                        <option>EURO</option>
+                        <option>EUR</option>
                     </select>
                 </th>
             </tr>
-            <tr class="lista__cripto">
-                <td>
+            <!-- <tr class="lista__cripto">
+                <td class="lista__cripto--td">
                     <div class="lista__cripto--nombre">
                         <img src="assets/imagenes/doge.png" alt="Bitcoin" class="imagenCripto">
                         <p class="nombreCriptoLista">Doge-coin (DOGE)</p>
@@ -186,13 +187,13 @@
                 <td>
                     <a href="#" class="lista__cripto--btn" role="button">Ver</a>
                 </td>
-            </tr>
+            </tr> -->
         </table>
     </section>
-
     <footer id="footer">
         <p>Desarrollado por NLezcano - Febrero 2021</p>
     </footer>
+
 
     <script src="js/objetoJson.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
