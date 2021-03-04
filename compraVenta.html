@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/imagenes/iconoBlanco.png" />
+    <script defer src="https://kit.fontawesome.com/bd03cec16f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>ArgWallet</title>
+</head>
+
+<body>
+    <header>
+        <h1><strong>Arg</strong>WALLET</h1>
+        <div id="conversor__navBar" class="navBar">
+            <input type="button" id="conversor__btnBilletera" value="Billetera">
+            <input type="button" id="conversor__btnMercado" value="Mercados"> 
+            <a href="index.html" id="conversor__btnLogOut" class="navBar__salir" role="button">Cerrar Sesion</a>
+        </div>
+    </header>
+    <section class="billeteraUser">
+
+        <div class="billeteraUser__info">
+            <i class="fas fa-user-circle"></i>
+            <p class="billeteraUser__info--id">Invitado</p>
+        </div>
+
+        <div class="billeteraUser__balance">
+            <p class="billeteraUser__balance--subtitulo">Balance total:</p>
+            <select class="billeteraUser__balance--divisas">
+                <option>ARS</option>
+                <option>USD</option>
+                <option>EUR</option>
+            </select>
+            <p class="billeteraUser__balance--cantidad">$ 10000000</p>
+            <i class="billeteraUser__balance--ojo fas fa-eye-slash"></i>
+        </div>
+    </section>
+
+    <main id="transaccion">
+
+        <div id="logoCripto">
+            <img id="logoCripto__img" src="assets/imagenes/btc.png" alt="bticoin">
+        </div>
+        <div id="nombreCripto">
+            <h1 id="nombreCripto__id">Wrapped Bitcoin</h1>
+            <h2 id="nombreCripto__tk">WBTC</h2>
+        </div> 
+        <!-- <div id="logoCripto">
+            <img id="logoCripto__img" src="assets/imagenes/iconoBlanco.png" alt="bticoin">
+        </div>
+        <div id="nombreCripto">
+            <h1 id="nombreCripto__id">Seleccione una criptomoneda</h1>
+            <h2 id="nombreCripto__tk"></h2>
+        </div>  -->
+
+        <section id="conversion">
+            <h2 id="conversion__titulo">Realizar transaccion de criptomoneda</h2>
+            <form id="conversion__ingreso">
+                <label for="divisa" id="conversion__ingreso--simbolo">$</label>
+                <input type="number" name="divisa" placeholder="0,00" id="conversion__ingreso--divisa" min="0" max="9999">
+            </form>
+
+            <i class="fas fa-exchange-alt" id="conversion__simboloCambio"></i>
+
+            <div id="conversion__convertido">
+                <p id="conversion__convertido--valor">0,00 </p>
+                <p id="conversion__convertido--ticker">---</p>
+            </div>  
+            <div id="btnConfirmacion">
+                <input type="button" value="Confirmar compra" id="confirmacionCompra">
+                <input type="button" value="Confirmar venta" id="confirmacionVenta">
+            </div>
+            <div id="conversion__confirmacion">
+                <p>Dinero restante para compra es: $20000</p>
+            </div>
+        </section>
+
+        <section id="infoCripto">
+            
+            <div id="infoCripto__cotizacion">
+                <h3 id="infoCripto__cotizacion--par">--/--</h3>
+                <select id="infoCripto__cotizacion--divisas">
+                    <option>ARS</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+                <h4 id="infoCripto__cotizacion--compra">Precio</h4>
+                <p id="infoCripto__cotizacion--valorCompra">$--</p>
+                <h4 id="infoCripto__cotizacion__cambio">Cambio 24h</h4>
+                <p id="infoCripto__cotizacion--valorCambio">--</p>
+                </div>
+            </div>
+
+            <div id="infoCripto__info">
+                <div>
+                    <h3>Market Cap:</h3>
+                    <p id="infoCripto__info--mktCap"><span id="infoCripto__info--mktCapSimbolo">$</span>---</p>
+                </div>
+                <div>
+                    <h3>Market Cap ranking:</h3>
+                    <p id="infoCripto__info--rank">--</p>
+                </div>
+                <div>
+                    <h4>Suministro circulante:</h4>
+                    <p id="infoCripto__info--circSupply">--</p>
+                </div>
+                <div>
+                    <h4>Maximo circulante:</h4>
+                    <p id="infoCripto__info--maxSupply">--</p>
+                </div>
+            </div>
+            <div id="infoCripto__valores">
+                <div>
+                    <h4>Máximo 24h:</h4>
+                    <p id="infoCripto__valores--max">--</p>
+                </div>
+                <div>
+                    <h4>Mínimo 24h:</h4>
+                    <p id="infoCripto__valores--min">--</p>
+                </div>
+                <div>
+                    <h4>Volumen 24h:</h4>
+                    <p id="infoCripto__valores--vol">--</p>
+                </div>
+                <div>
+                    <h4>Máximo histórico:</h4>
+                    <p id="infoCripto__valores--ath">--</p>
+                </div>
+                <div>
+                    <h4>Último máximo histórico:</h4>
+                    <p id="infoCripto__valores--dateAth">--</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <aside>
+        <div class="listado">
+            <img src="assets/imagenes/btc.png" alt="Bitcoin" class="listado__logoCripto" width="30px">
+            <!-- <p class="listado__nombreCripto">Bitcoin</p> -->
+        </div>
+    </aside>
+
+    <footer>
+        <p>Desarrollado por &copy; Nlezcano  - Febrero 2021</p>
+    </footer>
+</body>
+</html>

@@ -261,7 +261,7 @@ function volverALogIn(){
 
 function ingresoConversor(id){
     $(id).click(()=>{
-        $(location).attr('href', 'conversor.html');
+        $(location).attr('href', 'panelUsuario.html'); // Descartar cambios antes de commit
     })
 }
 

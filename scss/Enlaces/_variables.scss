@@ -8,6 +8,7 @@ $colorAzul6: #334761;
 $colorAzul7: #212f40;
 $colorAzul8: #10161e;
 
+
 $colorVioleta0: #b177fb;
 $colorVioleta1: #A154FF;
 $colorVioleta2: #7908FF;
@@ -20,7 +21,7 @@ $colorVioleta5: #1d023e;
 //$azulTranslucido: #455f83bb;
 $azulTranslucido: #7692b777;
 
-$colorGris0: #f6f6f6;
+$colorGris0: #eeeeee;
 $colorGris1: #dddddd;
 $colorGris2: #bbbbbb;
 $colorGris3: #999999;
@@ -44,6 +45,7 @@ $colorRojo3: #920005;
 $gradienteHeader: linear-gradient(to top, $colorAzul3, $colorAzul5);
 $gradienteAside: radial-gradient(circle at left bottom, $colorVioleta2, $colorAzul3);
 $gradienteUser: linear-gradient(to right, $colorVioleta2, $colorVioleta3);
+$grAzulVioleta: linear-gradient(to bottom, $colorAzul1 40%, $colorAzul5);
 $fondoTranslucido: #7708ff66;
 
 $bg-header: #f6f6f63f;

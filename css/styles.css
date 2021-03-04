@@ -31,7 +31,7 @@
 body {
   width: 100%;
   position: relative;
-  background-color: #f6f6f6;
+  background-color: #eeeeee;
   color: #334761;
   font-family: Lato, sans-serif, verdana;
   font-size: 16px;
@@ -57,6 +57,7 @@ header {
   width: 100%;
   padding: 0px 80px;
   position: fixed;
+  top: 0px;
   background-color: #f6f6f63f;
   z-index: 1000;
 }
@@ -68,7 +69,7 @@ header h1 {
   font-weight: 800;
   letter-spacing: 1px;
 }
-header #navBar {
+header .navBar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -76,7 +77,7 @@ header #navBar {
   width: 480px;
   height: 100%;
 }
-header #navBar input {
+header .navBar input {
   padding-bottom: 5px;
   color: #334761;
   background-color: transparent;
@@ -87,25 +88,22 @@ header #navBar input {
   cursor: pointer;
   transition: all 0, 3s linear;
 }
-header #navBar input:hover {
+header .navBar input:hover {
   color: #212f40;
 }
-header #navBar input:visited {
+header .navBar input:visited {
   color: #334761;
 }
-header #navBar input:active {
+header .navBar input:active {
   transform: scale(0.95);
 }
-header #navBar .actual {
-  border-bottom: 3px solid #334761;
-}
-header #navBar #btnIngreso {
+header .navBar #btnIngreso {
   margin: 0px;
-  width: 100px;
+  width: 110px;
   height: 35px;
-  color: #f6f6f6;
-  background-color: #455f83;
-  border: 2px solid #334761;
+  color: #eeeeee;
+  background-color: #5F06CC;
+  border: 2px solid #3B0480;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
@@ -114,15 +112,43 @@ header #navBar #btnIngreso {
   text-decoration: none;
   color: #dddddd;
 }
-header #navBar #btnIngreso:hover {
-  background-color: #334761;
+header .navBar #btnIngreso:hover {
+  background-color: #3B0480;
 }
-header #navBar #btnIngreso:active {
+header .navBar #btnIngreso:active {
   outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
 }
-header #navBar #btnIngreso:focus {
+header .navBar #btnIngreso:focus {
   outline: none;
+}
+header .navBar .navBar__salir {
+  margin: 0px;
+  width: 110px;
+  height: 35px;
+  color: #7908FF;
+  background-color: #eeeeee;
+  border: 1px solid #7908FF;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  line-height: 30px;
+  text-decoration: none;
+}
+header .navBar .navBar__salir:hover {
+  background-color: #7908FF;
+  color: #eeeeee;
+}
+header .navBar .navBar__salir:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+header .navBar .navBar__salir:focus {
+  outline: none;
+}
+header #conversor__navBar, header #user__navBar {
+  width: 370px;
 }
 
 #redes {
@@ -157,7 +183,7 @@ header #navBar #btnIngreso:focus {
   top: 100px;
   left: 50%;
   padding: 20px 30px;
-  background-color: #f6f6f6;
+  background-color: #eeeeee;
   box-shadow: 0px 0px 10px #bbbbbb;
   z-index: 20000;
   transform: translateX(-50%);
@@ -219,9 +245,9 @@ header #navBar #btnIngreso:focus {
 .panelIngreso .panelIngreso__btn {
   width: 90px;
   height: 30px;
-  color: #f6f6f6;
-  background-color: #455f83;
-  border: 2px solid #334761;
+  color: #eeeeee;
+  background-color: #5F06CC;
+  border: 2px solid #3B0480;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
@@ -229,11 +255,11 @@ header #navBar #btnIngreso:focus {
   margin-bottom: 20px;
 }
 .panelIngreso .panelIngreso__btn:hover {
-  background-color: #334761;
+  background-color: #3B0480;
 }
 .panelIngreso .panelIngreso__btn:active {
   outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
 }
 .panelIngreso .panelIngreso__btn:focus {
   outline: none;
@@ -269,20 +295,18 @@ header #navBar #btnIngreso:focus {
   font-weight: bolder;
 }
 
-section {
-  width: 100%;
-  height: 100vh;
-  padding: 80px 80px;
-}
-
 .sectionScroll {
   height: 100vh;
+  width: 100%;
   padding: 80px 80px;
   padding: 0px;
   margin: 0px;
 }
 
-#inicio {
+#inicio .contenidoInicio {
+  width: 100%;
+  height: 100vh;
+  padding: 80px 80px;
   display: grid;
   grid-column-gap: 10px;
   grid-row-gap: 0px;
@@ -295,7 +319,7 @@ section {
   background-size: cover;
   background-position: center;
 }
-#inicio #inicio__intro {
+#inicio .contenidoInicio #inicio__intro {
   grid-area: "intro";
   display: flex;
   flex-direction: column;
@@ -306,21 +330,21 @@ section {
   margin-top: -25%;
   margin-bottom: 0%;
 }
-#inicio #inicio__intro h2 {
+#inicio .contenidoInicio #inicio__intro h2 {
   font-family: Noto_sans, sans-serif, verdana;
   font-weight: bold;
   font-size: 30px;
   margin-bottom: 30px;
 }
-#inicio #inicio__intro p {
+#inicio .contenidoInicio #inicio__intro p {
   font-size: 18px;
   line-height: 1.7em;
 }
-#inicio #inicio__imagenCripto {
+#inicio .contenidoInicio #inicio__imagenCripto {
   grid-area: imagen;
   width: 70%;
 }
-#inicio #inicio__listado {
+#inicio .contenidoInicio #inicio__listado {
   grid-area: lista;
   display: flex;
   flex-direction: column;
@@ -330,7 +354,7 @@ section {
   width: 100%;
   padding-top: 20px;
 }
-#inicio #inicio__listado .inicio__listado--cripto {
+#inicio .contenidoInicio #inicio__listado .inicio__listado--cripto {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -338,15 +362,15 @@ section {
   width: fit-content;
   transition: all 1s ease-out 2s;
 }
-#inicio #inicio__listado .inicio__listado--cripto .inicio__listado--nombre {
+#inicio .contenidoInicio #inicio__listado .inicio__listado--cripto .inicio__listado--nombre {
   margin-right: 20px;
   width: fit-content;
 }
-#inicio #inicio__listado .inicio__listado--cripto .inicio__listado--imagen {
+#inicio .contenidoInicio #inicio__listado .inicio__listado--cripto .inicio__listado--imagen {
   width: 60px;
   padding: 0px 10px;
 }
-#inicio #inicio__listado .resaltar {
+#inicio .contenidoInicio #inicio__listado .resaltar {
   transform: scale(1.2);
   font-weight: bold;
 }
@@ -356,7 +380,6 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: space-around;
-  background-color: #cdd4e7;
   position: relative;
 }
 #info #infoDiv {
@@ -409,11 +432,10 @@ section {
   padding: 80px 80px;
   padding-bottom: 20px;
   display: block;
-  background-color: #cdd4e7;
 }
 #mercado #mercado__lista {
   display: block;
-  height: 100%;
+  height: 90%;
   overflow-y: scroll;
 }
 #mercado #mercado__lista::-webkit-scrollbar {
@@ -441,9 +463,9 @@ section {
 #mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas {
   width: 80px;
   height: 35px;
-  color: #f6f6f6;
-  background-color: #455f83;
-  border: 2px solid #334761;
+  color: #334761;
+  background-color: #dddddd;
+  border: 1px solid #334761;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
@@ -453,12 +475,15 @@ section {
 }
 #mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas:hover {
   background-color: #334761;
+  color: #eeeeee;
 }
 #mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas:active {
   outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
 }
 #mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
   outline: none;
 }
 #mercado #mercado__lista .lista__cripto {
@@ -469,7 +494,7 @@ section {
   height: 45px;
   padding: 2px 10px;
   padding-left: 20px;
-  background-color: #cdd4e7;
+  background-color: #eeeeee;
   border-bottom: 1px solid #7692b7;
 }
 #mercado #mercado__lista .lista__cripto td .lista__cripto--nombre {
@@ -493,9 +518,9 @@ section {
   display: block;
   width: 80px;
   height: 30px;
-  color: #f6f6f6;
-  background-color: #455f83;
-  border: 2px solid #334761;
+  color: #eeeeee;
+  background-color: #5F06CC;
+  border: 2px solid #3B0480;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
@@ -506,14 +531,799 @@ section {
   text-align: center;
 }
 #mercado #mercado__lista .lista__cripto td .lista__cripto--btn:hover {
-  background-color: #334761;
+  background-color: #3B0480;
 }
 #mercado #mercado__lista .lista__cripto td .lista__cripto--btn:active {
   outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
 }
 #mercado #mercado__lista .lista__cripto td .lista__cripto--btn:focus {
   outline: none;
+}
+
+.billeteraUser {
+  height: 70px;
+  width: 100vw;
+  margin-top: 70px;
+  padding: 10px 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #7692b7;
+}
+.billeteraUser .billeteraUser__info {
+  height: 100%;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.billeteraUser .billeteraUser__info i {
+  font-size: 38px;
+  color: #97adc9;
+}
+.billeteraUser .billeteraUser__info p {
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 35px;
+}
+.billeteraUser .billeteraUser__balance {
+  height: 100%;
+  width: 40%;
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 0px;
+  justify-content: end;
+  align-items: center;
+  grid-template-columns: 80px 1fr 1fr 25px;
+  grid-template-areas: "selector titulo cantidad ojo";
+  font-size: 18px;
+}
+.billeteraUser .billeteraUser__balance .billeteraUser__balance--subtitulo {
+  grid-area: titulo;
+  font-weight: bold;
+  margin-right: 20px;
+}
+.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas {
+  grid-area: selector;
+  width: 80px;
+  height: 35px;
+  color: #334761;
+  background-color: #eeeeee;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  font-size: 16px;
+  margin-right: 50px;
+}
+.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+.billeteraUser .billeteraUser__balance .billeteraUser__balance--cantidad {
+  grid-area: cantidad;
+  text-align: right;
+}
+.billeteraUser .billeteraUser__balance .billeteraUser__balance--ojo {
+  grid-area: ojo;
+}
+
+#depositoRetiro {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 80px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+#depositoRetiro .depositoRetiro__registro {
+  width: 30%;
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 0px;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: 70px repeat(2, 1fr);
+  grid-template-areas: "divisa cantidad conversion";
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas {
+  grid-area: divisa;
+  width: 80px;
+  height: 35px;
+  color: #334761;
+  background-color: #eeeeee;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#depositoRetiro .depositoRetiro__registro .depositoRetiro__registro--dinero {
+  grid-area: cantidad;
+  font-size: 18px;
+}
+#depositoRetiro .depositoRetiro__registro .depositoRetiro__registro--btc {
+  grid-area: conversion;
+  color: #808080;
+}
+#depositoRetiro .depositoRetiro__interaccion {
+  width: 40%;
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 0px;
+  justify-content: end;
+  align-items: center;
+  grid-template-columns: 1fr repeat(2, 90px);
+  grid-template-areas: "input deposito retiro";
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input {
+  grid-area: input;
+  position: relative;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--simbolo {
+  position: absolute;
+  left: 5px;
+  font-size: 20px;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad {
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
+  text-align: right;
+  color: #334761;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #334761;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad::placeholder {
+  font-size: 20px;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad::step {
+  display: none;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad:focus {
+  outline: none;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar {
+  grid-area: deposito;
+  width: 90px;
+  height: 30px;
+  color: #eeeeee;
+  background-color: #7908FF;
+  border: 2px solid #5F06CC;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar:hover {
+  background-color: #5F06CC;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar:focus {
+  outline: none;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar {
+  grid-area: retiro;
+  width: 90px;
+  height: 30px;
+  color: #5F06CC;
+  background-color: #eeeeee;
+  border: 1px solid #5F06CC;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:hover {
+  background-color: #5F06CC;
+  color: #eeeeee;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:focus {
+  outline: none;
+}
+
+#cartera {
+  width: 100%;
+  height: calc(100vh - 250px);
+  padding: 0px 80px;
+}
+#cartera h2 {
+  font-family: Noto_sans, sans-serif, verdana;
+}
+#cartera #cartera__lista {
+  width: 100%;
+  padding: 0px;
+  margin-top: 30px;
+}
+#cartera #cartera__lista .cartera__lista__posesion {
+  width: 100%;
+  height: 40px;
+  padding-bottom: 10px;
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 0px;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: repeat(2, 2fr) 150px 100px 150px 1fr 210px;
+  grid-template-areas: "nombre cantidad conversion cambio ganancias . input";
+  border-bottom: 1px solid #bbbbbb;
+}
+#cartera #cartera__lista .cartera__lista__posesion .nombre {
+  grid-area: nombre;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+#cartera #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--imagen {
+  width: 30px;
+  margin-right: 10px;
+}
+#cartera #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--nombre {
+  display: inline;
+  font-size: 18px;
+}
+#cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--cantidad {
+  grid-area: cantidad;
+}
+#cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--conversion {
+  grid-area: conversion;
+}
+#cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--cambio {
+  grid-area: cambio;
+}
+#cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--ganancias {
+  grid-area: ganancias;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input {
+  grid-area: input;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--compra {
+  width: 90px;
+  height: 30px;
+  color: #eeeeee;
+  background-color: #7908FF;
+  border: 2px solid #5F06CC;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--compra:hover {
+  background-color: #5F06CC;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--compra:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--compra:focus {
+  outline: none;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--venta {
+  width: 90px;
+  height: 30px;
+  color: #5F06CC;
+  background-color: #eeeeee;
+  border: 1px solid #5F06CC;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--venta:hover {
+  background-color: #5F06CC;
+  color: #eeeeee;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--venta:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--venta:focus {
+  outline: none;
+}
+
+#activos {
+  width: 100%;
+  height: calc(100vh - 35px);
+  padding: 50px 80px;
+  padding-bottom: 35px;
+}
+#activos #activos__lista {
+  display: block;
+  position: relative;
+  height: 93%;
+  overflow-y: scroll;
+}
+#activos #activos__lista::-webkit-scrollbar {
+  width: 5px;
+}
+#activos #activos__lista::-webkit-scrollbar:active {
+  width: 10px;
+}
+#activos #activos__lista::-webkit-scrollbar-thumb {
+  background-color: #97adc9;
+  border-radius: 10px;
+}
+#activos #activos__lista #activos__cabecera {
+  width: 100%;
+  height: 50px;
+  background-color: #dddddd;
+}
+#activos #activos__lista #activos__cabecera th {
+  width: calc(100% / 8);
+  height: 50px;
+  padding: 2px 20px;
+  padding-left: 20px;
+  text-align: left;
+  background-color: #dddddd;
+}
+#activos #activos__lista #activos__cabecera th:last-child {
+  width: 500px;
+}
+#activos #activos__lista #activos__cabecera th #activos__cabecera--divisas {
+  width: 90px;
+  height: 35px;
+  color: #334761;
+  background-color: #dddddd;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#activos #activos__lista #activos__cabecera th #activos__cabecera--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#activos #activos__lista #activos__cabecera th #activos__cabecera--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#activos #activos__lista #activos__cabecera th #activos__cabecera--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#activos #activos__lista .activo__cuerpo {
+  height: 45px;
+  text-align: left;
+}
+#activos #activos__lista .activo__cuerpo td {
+  width: calc(100% / 6);
+  height: 45px;
+  padding: 2px 10px;
+  padding-left: 20px;
+  text-align: left;
+  background-color: #eeeeee;
+  border-bottom: 1px solid #7692b7;
+}
+#activos #activos__lista .activo__cuerpo td .activo__cuerpo--nombre {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+}
+#activos #activos__lista .activo__cuerpo td .activo__cuerpo--nombre .nombreCriptoLista {
+  font-family: Lato, sans-serif, verdana;
+  padding: 0px;
+  line-height: 45px;
+  border: none;
+}
+#activos #activos__lista .activo__cuerpo td .activo__cuerpo--nombre img {
+  width: 30px;
+  margin-right: 10px;
+}
+#activos #activos__lista .activo__cuerpo td a {
+  display: inline-block;
+  padding: 5px 10px;
+  line-height: 15px;
+  text-decoration: none;
+  text-align: center;
+}
+#activos #activos__lista .activo__cuerpo td .activo__cuerpo--btn {
+  width: 90px;
+  height: 30px;
+  color: #3B0480;
+  background-color: #eeeeee;
+  border: 1px solid #3B0480;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#activos #activos__lista .activo__cuerpo td .activo__cuerpo--btn:hover {
+  background-color: #3B0480;
+  color: #eeeeee;
+}
+#activos #activos__lista .activo__cuerpo td .activo__cuerpo--btn:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#activos #activos__lista .activo__cuerpo td .activo__cuerpo--btn:focus {
+  outline: none;
+}
+
+#transaccion {
+  display: grid;
+  grid-column-gap: 50px;
+  grid-row-gap: 15px;
+  justify-content: start;
+  align-items: start;
+  grid-template-rows: 125px 1fr;
+  grid-template-columns: 100px 1fr 380px;
+  grid-template-areas: "imagen nombre info" "compra compra info";
+  width: 100%;
+  height: calc(100vh - 140px);
+  padding: 30px 80px;
+}
+#transaccion #logoCripto {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  align-self: center;
+}
+#transaccion #logoCripto #logoCripto__img {
+  width: 100%;
+}
+#transaccion #nombreCripto {
+  grid-area: nombre;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  width: 100%;
+}
+#transaccion #nombreCripto #nombreCripto__id {
+  font-size: 46px;
+  font-weight: 200;
+  width: fit-content;
+}
+#transaccion #nombreCripto #nombreCripto__tk {
+  font-size: 24px;
+  font-weight: 200;
+  width: fit-content;
+  margin-left: 15px;
+}
+#transaccion #infoCripto {
+  grid-area: info;
+}
+#transaccion #infoCripto #infoCripto__cotizacion {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 125px;
+  grid-template-rows: 35px 30px 60px;
+  grid-template-areas: "par selector" "titulo cambio" "precio porcentaje";
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 20px #bbbbbb;
+  text-align: center;
+}
+#transaccion #infoCripto #infoCripto__cotizacion p, #transaccion #infoCripto #infoCripto__cotizacion h4 {
+  height: 100%;
+  background-color: #dddddd;
+}
+#transaccion #infoCripto #infoCripto__cotizacion p {
+  font-family: Noto_sans, sans-serif, verdana;
+  font-size: 24px;
+  line-height: 50px;
+  border-top: 1px solid #bbbbbb;
+}
+#transaccion #infoCripto #infoCripto__cotizacion h4 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--par {
+  grid-area: par;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--divisas {
+  grid-area: selector;
+  width: 80px;
+  height: 35px;
+  color: #334761;
+  background-color: #eeeeee;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin: 0 auto;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--compra {
+  grid-area: titulo;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--valorCompra {
+  grid-area: precio;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--cambio {
+  grid-area: cambio;
+}
+#transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--valorCambio {
+  grid-area: porcentaje;
+}
+#transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 30px;
+}
+#transaccion #infoCripto #infoCripto__info div, #transaccion #infoCripto #infoCripto__valores div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 400px;
+  margin-bottom: 10px;
+}
+#transaccion #infoCripto #infoCripto__info div p, #transaccion #infoCripto #infoCripto__valores div p {
+  margin-left: 10px;
+}
+#transaccion #infoCripto #infoCripto__info div h3, #transaccion #infoCripto #infoCripto__valores div h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+#transaccion #infoCripto #infoCripto__info div h4, #transaccion #infoCripto #infoCripto__valores div h4 {
+  color: #4d4d4d;
+}
+#transaccion #conversion {
+  grid-area: compra;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-row-gap: 25px;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 50px 1fr;
+  grid-template-rows: 50px 50px 40px 50px 40px;
+  grid-template-areas: "titulo titulo titulo" "ingreso cambio resultado" "btnConfirmacion btnConfirmacion  btnConfirmacion" "confirmacion confirmacion confirmacion";
+  height: 100%;
+  width: 100%;
+  padding-right: 20px;
+}
+#transaccion #conversion #conversion__titulo {
+  grid-area: titulo;
+  text-align: center;
+}
+#transaccion #conversion #conversion__ingreso {
+  grid-area: ingreso;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#transaccion #conversion #conversion__ingreso #conversion__ingreso--simbolo {
+  font-size: 30px;
+  font-weight: 400;
+  width: 40px;
+  margin-right: 10px;
+}
+#transaccion #conversion #conversion__ingreso #conversion__ingreso--divisa {
+  height: 40px;
+  width: calc(100% - 70px);
+  font-size: 30px;
+  text-align: right;
+  color: #333333;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999999;
+}
+#transaccion #conversion #conversion__ingreso #conversion__ingreso--divisa::placeholder {
+  font-size: 30px;
+}
+#transaccion #conversion #conversion__ingreso #conversion__ingreso--divisa::step {
+  display: none;
+}
+#transaccion #conversion #conversion__ingreso #conversion__ingreso--divisa:focus {
+  outline: none;
+}
+#transaccion #conversion #conversion__simboloCambio {
+  grid-area: cambio;
+  margin-right: 5px;
+  padding: 0px;
+  text-align: center;
+}
+#transaccion #conversion #conversion__convertido {
+  grid-area: resultado;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  color: #333333;
+  background-color: transparent;
+}
+#transaccion #conversion #conversion__convertido #conversion__convertido--valor {
+  width: calc(100% - 80px);
+}
+#transaccion #conversion #conversion__convertido #conversion__convertido--ticker {
+  width: 70px;
+  margin-left: 10px;
+}
+#transaccion #conversion #conversion__confirmacion {
+  grid-area: confirmacion;
+  text-align: center;
+}
+#transaccion #conversion #btnConfirmacion {
+  grid-area: btnConfirmacion;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionCompra {
+  width: 150px;
+  height: 40px;
+  color: #eeeeee;
+  background-color: #14b10b;
+  border: 2px solid #097c02;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-right: 30px;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionCompra:hover {
+  background-color: #097c02;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionCompra:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionCompra:focus {
+  outline: none;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta {
+  width: 150px;
+  height: 40px;
+  color: #eeeeee;
+  background-color: #e70008;
+  border: 2px solid #920005;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-left: 30px;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:hover {
+  background-color: #920005;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:focus {
+  outline: none;
+}
+#transaccion #conversion #compra {
+  grid-area: compra;
+  margin: 0 auto;
+  color: #eeeeee;
+}
+#transaccion #conversion #compra p {
+  height: 35px;
+  min-width: 260px;
+  padding: 0px 10px;
+  line-height: 30px;
+}
+#transaccion #conversion #compra .exito {
+  background-color: #097c02;
+  box-shadow: 0px 0px 2px #097c02;
+}
+#transaccion #conversion #compra .error {
+  background-color: #920005;
+  box-shadow: 0px 0px 2px #920005;
+}
+
+aside {
+  position: fixed;
+  top: 140px;
+  left: 0px;
+  width: 50px;
+  height: calc(100vh - 140px);
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #cdd4e7;
+  color: #eeeeee;
+}
+aside .listado {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+aside .listado:hover {
+  background-color: #97adc9;
+}
+aside .listado:active {
+  box-shadow: 0px 0px 5px #7692b7 inset;
+}
+aside .listado .listado__logoCripto {
+  width: 30px;
+  margin-right: 10px;
+}
+aside .listado .listado__nombreCripto {
+  font-size: 18px;
+  text-shadow: 0px 0px 2px #bbbbbb;
 }
 
 .conversor {
@@ -539,7 +1349,7 @@ section {
   width: 100%;
   padding: 5px 50px;
   background-image: linear-gradient(to top, #7692b7, #455f83);
-  color: #f6f6f6;
+  color: #eeeeee;
 }
 #conversor__header #navbarConversor section {
   height: 40px;
@@ -635,7 +1445,7 @@ section {
   font-size: 24px;
   font-weight: 800;
   text-align: center;
-  color: #f6f6f6;
+  color: #eeeeee;
   border-bottom: 2px solid #7692b7;
 }
 .conversor main #mainAside #listadoCriptos {
@@ -654,7 +1464,7 @@ section {
   height: 80px;
   padding: 5px 10px;
   margin-top: 15px;
-  color: #f6f6f6;
+  color: #eeeeee;
   direction: ltr;
   display: grid;
   grid-column-gap: 5px;
@@ -716,301 +1526,6 @@ section {
   background-color: #5F06CC;
   border-radius: 10px;
 }
-.conversor main #panel {
-  display: grid;
-  grid-column-gap: 40px;
-  grid-row-gap: 15px;
-  justify-content: center;
-  align-items: start;
-  grid-template-rows: 125px 100px 1fr 90px;
-  grid-template-columns: 100px 400px 370px;
-  grid-template-areas: "imagen nombre cotizacion" "compra compra detalles" "compra compra info" "adquisicion adquisicion info";
-  width: calc(100vw - 320px);
-  height: calc(100vh - 120px);
-  padding: 30px;
-  color: #333333;
-}
-.conversor main #panel #logoCripto {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  align-self: center;
-}
-.conversor main #panel #logoCripto #logo {
-  width: 100%;
-}
-.conversor main #panel #nombreCripto {
-  grid-area: nombre;
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: baseline;
-  width: 100%;
-}
-.conversor main #panel #nombreCripto #nombre {
-  font-size: 46px;
-  font-weight: 200;
-  width: fit-content;
-}
-.conversor main #panel #nombreCripto #ticker {
-  font-size: 24px;
-  font-weight: 200;
-  width: fit-content;
-  margin-left: 15px;
-}
-.conversor main #panel #cotizacion {
-  display: grid;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 35px 30px 60px;
-  grid-template-areas: "conversion conversion" "compra venta" "precioCompra precioVenta";
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  background-image: linear-gradient(to top, #7692b7, #455f83);
-  color: #f6f6f6;
-  box-shadow: 0px 0px 20px #bbbbbb;
-  border-radius: 8px;
-  text-align: center;
-}
-.conversor main #panel #cotizacion p, .conversor main #panel #cotizacion h4 {
-  height: 100%;
-  background-color: #dddddd;
-  color: #1a1a1a;
-}
-.conversor main #panel #cotizacion p {
-  font-family: Noto_sans, sans-serif, verdana;
-  font-size: 24px;
-  line-height: 50px;
-  border-top: 1px solid #bbbbbb;
-}
-.conversor main #panel #cotizacion h4 {
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 400;
-  color: #999999;
-}
-.conversor main #panel #cotizacion #conversion {
-  grid-area: conversion;
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 400;
-}
-.conversor main #panel #cotizacion #compra {
-  grid-area: compra;
-}
-.conversor main #panel #cotizacion #venta {
-  grid-area: venta;
-}
-.conversor main #panel #cotizacion #valorCompra {
-  grid-area: precioCompra;
-  border-bottom-left-radius: 8px;
-}
-.conversor main #panel #cotizacion #valorVenta {
-  grid-area: precioVenta;
-}
-.conversor main #panel #cotizacion .monedas {
-  grid-area: monedas;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
-.conversor main #panel #cotizacion .monedas ul {
-  width: 100%;
-  height: 100%;
-  line-height: 25px;
-  border-top: 1px solid #bbbbbb;
-  cursor: pointer;
-}
-.conversor main #panel #cotizacion .monedas ul:hover {
-  background-color: #5678a4;
-  border-bottom-right-radius: 8px;
-}
-.conversor main #panel #cotizacion .monedas ul:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-.conversor main #panel .infoMercado {
-  grid-area: detalles;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: 100%;
-}
-.conversor main #panel .infoMercado div {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 400px;
-  margin-bottom: 10px;
-}
-.conversor main #panel .infoMercado div p {
-  margin-left: 10px;
-}
-.conversor main #panel .infoMercado div h3 {
-  font-size: 20px;
-  font-weight: 700;
-}
-.conversor main #panel .infoMercado div h4 {
-  color: #4d4d4d;
-}
-.conversor main #panel #resumen {
-  grid-area: info;
-}
-.conversor main #panel #transaccion {
-  grid-area: compra;
-  display: grid;
-  grid-column-gap: 20px;
-  grid-row-gap: 10px;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: 1fr 50px 1fr;
-  grid-template-rows: 60px repeat(3, 30px) 50px 40px;
-  grid-template-areas: "titulo titulo titulo" "ingreso cambio resultado" "ingreso igual resultado" "resto resto resto" "confirmacion confirmacion confirmacion" "compra compra compra";
-  height: 100%;
-  width: 100%;
-}
-.conversor main #panel #transaccion .titulo {
-  grid-area: titulo;
-  text-align: center;
-}
-.conversor main #panel #transaccion form {
-  grid-area: ingreso;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.conversor main #panel #transaccion form #conversorSimbolo {
-  font-size: 30px;
-  font-weight: 400;
-  width: 40px;
-  margin-right: 10px;
-}
-.conversor main #panel #transaccion form #ingresoDivisa {
-  height: 40px;
-  width: calc(100% - 70px);
-  font-size: 30px;
-  text-align: right;
-  color: #333333;
-  background-color: #dddddd;
-  border: none;
-  border-bottom: 1px solid #999999;
-}
-.conversor main #panel #transaccion form #ingresoDivisa::placeholder {
-  font-size: 30px;
-}
-.conversor main #panel #transaccion form #ingresoDivisa::step {
-  display: none;
-}
-.conversor main #panel #transaccion form #ingresoDivisa:focus {
-  outline: none;
-}
-.conversor main #panel #transaccion .boton {
-  width: 100%;
-  height: 100%;
-  color: #f6f6f6;
-  background-color: #bbbbbb;
-  border: 2px solid #808080;
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in;
-  text-align: center;
-}
-.conversor main #panel #transaccion .boton:hover {
-  background-color: #808080;
-}
-.conversor main #panel #transaccion .boton:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-.conversor main #panel #transaccion .boton:focus {
-  outline: none;
-}
-.conversor main #panel #transaccion #cambioConversion {
-  grid-area: cambio;
-}
-.conversor main #panel #transaccion #igual {
-  grid-area: igual;
-}
-.conversor main #panel #transaccion #resultado {
-  grid-area: resultado;
-  height: 40px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 30px;
-  color: #333333;
-  background-color: #dddddd;
-}
-.conversor main #panel #transaccion #resultado #valorConvertido {
-  width: calc(100% - 80px);
-}
-.conversor main #panel #transaccion #resultado #tickerConvertido {
-  width: 70px;
-  margin-left: 10px;
-}
-.conversor main #panel #transaccion .resto {
-  grid-area: resto;
-  text-align: center;
-}
-.conversor main #panel #transaccion #confirmacionCompra {
-  grid-area: confirmacion;
-  width: 150px;
-  height: 40px;
-  color: #f6f6f6;
-  background-color: #14b10b;
-  border: 2px solid #097c02;
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in;
-  margin: 0 auto;
-}
-.conversor main #panel #transaccion #confirmacionCompra:hover {
-  background-color: #097c02;
-}
-.conversor main #panel #transaccion #confirmacionCompra:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
-}
-.conversor main #panel #transaccion #confirmacionCompra:focus {
-  outline: none;
-}
-.conversor main #panel #transaccion #compra {
-  grid-area: compra;
-  margin: 0 auto;
-  color: #f6f6f6;
-}
-.conversor main #panel #transaccion #compra p {
-  height: 35px;
-  min-width: 260px;
-  padding: 0px 10px;
-  line-height: 30px;
-}
-.conversor main #panel #transaccion #compra .exito {
-  background-color: #097c02;
-  box-shadow: 0px 0px 2px #097c02;
-}
-.conversor main #panel #transaccion #compra .error {
-  background-color: #920005;
-  box-shadow: 0px 0px 2px #920005;
-}
 
 #panelUser {
   width: 320px;
@@ -1020,7 +1535,7 @@ section {
   left: -320px;
   z-index: 2000;
   background-image: linear-gradient(to right, #7908FF, #5F06CC);
-  color: #f6f6f6;
+  color: #eeeeee;
 }
 #panelUser #salir {
   position: relative;
@@ -1097,7 +1612,7 @@ section {
 #panelUser #depositos .dr .seleccionMoneda #tipoCambio {
   width: 80px;
   height: 30px;
-  color: #f6f6f6;
+  color: #eeeeee;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #dddddd;
@@ -1121,7 +1636,7 @@ section {
   width: calc(100% - 70px);
   font-size: 30px;
   text-align: right;
-  color: #f6f6f6;
+  color: #eeeeee;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #dddddd;
@@ -1138,7 +1653,7 @@ section {
 #panelUser #depositos .dr .dr__boton {
   width: 150px;
   height: 40px;
-  color: #f6f6f6;
+  color: #eeeeee;
   background-color: #5F06CC;
   border: 2px solid #3B0480;
   font-size: 16px;
@@ -1151,7 +1666,7 @@ section {
 }
 #panelUser #depositos .dr .dr__boton:active {
   outline: none;
-  box-shadow: 0px 0px 5px #333333 inset;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
 }
 #panelUser #depositos .dr .dr__boton:focus {
   outline: none;
@@ -1269,7 +1784,9 @@ footer {
   width: 100vw;
   height: 35px;
   padding: 5px;
-  background-color: #7692b7;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
   color: #10161e;
   text-align: center;
   z-index: 1000;

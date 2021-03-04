@@ -29,11 +29,36 @@
     }
     &:active{
         outline: none;
-        box-shadow: 0px 0px 5px $colorGris7 inset;
+        box-shadow: 0px 0px 5px $colorGris6 inset;
     }
     &:focus{
         outline: none;
     }
+}
+
+@mixin botonSecundario ($width, $height, $colorPrincipal, $colorSecundario) {
+    width: $width;
+    height: $height;
+    color: $colorSecundario;
+    background-color: $colorPrincipal;
+    border: 1px solid $colorSecundario;
+    font-size: $cuerpo;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+
+    &:hover{
+        background-color: $colorSecundario;
+        color: $colorPrincipal;
+    }
+    &:active{
+        outline: none;
+        box-shadow: 0px 0px 5px $colorGris6 inset;
+    }
+    &:focus{
+        outline: none;
+    }
+    
 }
 
 @mixin botonDeshabilitado($width, $height, $colorPrincipal){
@@ -49,6 +74,54 @@
     &:active{
         outline: none;
         box-shadow: 0px 0px 5px $colorGris7 inset;
+    }
+
+    &:focus{
+        outline: none;
+    }
+}
+
+@mixin selector ($width, $height, $colorPrincipal, $colorSecundario){
+    width: $width;
+    height: $height;
+    color: $colorSecundario;
+    background-color: $colorPrincipal;
+    border: 1px solid $colorSecundario;
+    font-size: $cuerpo;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+
+    &:hover{
+        background-color: $colorSecundario;
+        color: $colorGris0;
+    }
+    &:active{
+        outline: none;
+        box-shadow: 0px 0px 5px $colorGris6 inset;
+    }
+    &:focus{
+        background-color: $colorSecundario;
+        color: $colorGris0;
+        outline: none;
+    }
+}
+
+@mixin inputGrande ($width, $height, $colorPrincipal, $fuente){
+    width: $width;
+    height: $height;
+    font-size: $fuente;
+    text-align: right;
+    color: $colorPrincipal;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $colorPrincipal;
+
+    &::placeholder{
+        font-size: $fuente;
+    }
+    &::step{
+        display: none;
     }
 
     &:focus{
