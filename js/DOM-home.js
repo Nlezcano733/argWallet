@@ -363,7 +363,7 @@ function modificarElemento(elemento, contenido){
 function nombreDeCripto ({id}, {symbol}){
         nombre = primeraLetraMayuscula(id);
         let ticker = symbol.toUpperCase();
-        return `${nombre} (${ticker})`
+        return `${nombre}`
 }
 
 function primeraLetraMayuscula (string){
@@ -407,9 +407,9 @@ function crearTr(nodoPadre, nombreClase){
 function armarTr (logo, nombre, par, precio, cambio, max, min, vol, i){
 
     crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--td', '', i);
-    crearDivClassPadre('.lista__cripto--td', 'class', 'lista__cripto--nombre', i)
+    crearDivClassPadre('.lista__cripto--td', 'class', 'lista__cripto--nombre', i);
 
-    crearImagen('.lista__cripto--nombre', logo, 'class', 'imagenCripto', i)
+    crearImagen('.lista__cripto--nombre', logo, 'class', 'imagenCripto', i);
     crearElemento('.lista__cripto--nombre', 'td', 'class', 'nombreCriptoLista', nombre, i);
 
     crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--par', par, i);
@@ -419,14 +419,12 @@ function armarTr (logo, nombre, par, precio, cambio, max, min, vol, i){
     crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--min', min, i);
     crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--vol', vol, i);
 
-    crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--btnEspacio', '', i)
-    crearBtn('.lista__cripto--btnEspacio', 'class', 'lista__cripto--btn', i)
 }
 
 function crearDivClassPadre (classPadre, attr, nombreAttr, i){
     let nuevoNodo, nodoPadre;
     nodoPadre = $(classPadre);
-    nuevoNodo = document.createElement('div');
+    nuevoNodo = document.createElement('div'); 
     $(nuevoNodo).attr(attr, nombreAttr);
     $(nodoPadre[i]).append(nuevoNodo);
 }
