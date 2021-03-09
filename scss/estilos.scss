@@ -358,7 +358,7 @@ header{
 
 #mercado{
     width: 100%;
-    height: calc(100vh - 35px);
+    height: 100vh;
     padding: 80px 80px;
     padding-bottom: 20px;
     display: block;
@@ -794,7 +794,14 @@ header{
             font-weight: 200;
             width: fit-content;
             margin-left: 15px;
+        }           
+        #nombreCripto__divisas{
+            @include selector(70px, 30px, $colorGris0, $colorAzul6);
+            font-size: $cuerpoLg;
+            border: none;
+            margin-left: 10px;
         }
+
     }
 
     #infoCripto{
@@ -805,7 +812,7 @@ header{
             grid-template-columns: 1fr 125px;
             grid-template-rows: 35px 30px 60px;
             grid-template-areas:
-                "par selector"
+                "par par"
                 "titulo cambio"
                 "precio porcentaje";
             width: 100%;
@@ -836,11 +843,6 @@ header{
                 font-size: $cuerpoLg;
                 line-height: 28px;
                 font-weight: 400;
-            }
-            #infoCripto__cotizacion--divisas{
-                grid-area: selector;
-                @include selector(80px, 35px, $colorGris0, $colorAzul6);
-                margin: 0 auto;
             }
             #infoCripto__cotizacion--compra{
                 grid-area: titulo;
@@ -900,6 +902,7 @@ header{
             grid-area: titulo;
             text-align: center;
         }
+
         #conversion__ingreso{
             grid-area: ingreso;
             @include flexbox(row, space-between, center);
@@ -966,7 +969,7 @@ header{
             grid-area: btnConfirmacion;
             @include flexbox(row, center, center);
             padding: 0px;
-
+            
             #confirmacionCompra{
                 @include boton (150px, 40px, $colorVerde2, $colorVerde3);
                 margin-right: 30px

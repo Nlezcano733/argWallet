@@ -127,7 +127,7 @@ function armadoDePanelInicial(){
 }
 
 function armadoDePanelElegido(nombre){
-    let moneda = $('#infoCripto__cotizacion--divisas').val();
+    let moneda = $('#nombreCripto__divisas').val();
     moneda = moneda.toLowerCase()
 
     $.ajax({
@@ -149,7 +149,7 @@ function armadoDePanelElegido(nombre){
 }
 
 function armadoDePanelPorSelector(){
-    $('#infoCripto__cotizacion--divisas').change(()=>{
+    $('#nombreCripto__divisas').change(()=>{
         let cripto = obtenerSessionStorage('criptomoneda');
         nombre = cripto.id;
         armadoDePanelElegido(nombre)
@@ -197,5 +197,5 @@ function armadoDePanel(cripto, moneda){
 function valorSelectorInicial(){
     let moneda = obtenerSessionStorage('cripto');
     let monedaInicial = moneda[1];
-    $('#infoCripto__cotizacion--divisas').val(monedaInicial)
+    $('#nombreCripto__divisas').val(monedaInicial)
 }
