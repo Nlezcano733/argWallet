@@ -13,20 +13,16 @@ $(()=>{
     scrollFinal();
     slider();
 
-// -------------------------------------- //
 // HABILITAR EN CASO DE ARMAR LA LISTA CON OBJETO JSON
 // ver setInterval
 
     armadoDeLista();
     armadoDeCriptos();
     cambiarCriptoMostrada();
-// -------------------------------------- //
 
     mostrarPanelIngreso();
     //Funcion parcial hasta que se defina algoritmo logIn
     ingresoConversor('.panelIngreso__btn');
-
-// -------------------------------------- //
 
     getAjaxMercado();
     cambioMuestraDivisa();

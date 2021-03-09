@@ -2,14 +2,16 @@
 // ---------------PETICIONES AJAX---------------- //
 // ---------------------------------------------- //
 
-function getAjaxMercado(){
+function getAjaxMercado(moneda){
     $.ajax({
         url: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=ars&order=market_cap_desc&per_page=25&page=1&sparkline=false",
         type: "GET",
         dataType: "json"
     }).done((resultado)=>{
-        armadoDeTabla(resultado, 'ars');
+        armadoDeTabla(resultado, moneda);
     })
+
+    //pedido para armado de tabla al inicio de la carga de la pagina
 }
 
 function getAjaxModMercado(moneda){
@@ -20,6 +22,7 @@ function getAjaxModMercado(moneda){
     }).done((resultado)=>{
         modificarTabla(resultado, moneda);
     })
+    //pedido para modificar tabla ya creada segun cambios de selector de moneda
 }
 
 function getAjaxConvReferencia(moneda, cantidad){
@@ -32,107 +35,7 @@ function getAjaxConvReferencia(moneda, cantidad){
         let conversionBtc = convertirMonedaCriptoRef(cantidad, resultado);
         $('.depositoRetiro__registro--btc').text(`${conversionBtc} BTC`)
     })
-}
-
-// ---------------------------------------------- //
-// ---------INICIALIZACION DE BILLETERAS--------- //
-// ---------------------------------------------- //
-
-function billeterasTotalesInicial (){
-    billeteraPesos =  billeteraArsInicial()
-    billeteraDolares =  billeteraUsdInicial()
-    billeteraEuros =  billeteraEurInicial()
-
-    sumatoriaBilleteraTotal();
-    
-    billeteraCompleta = billeteraCompletaInicial()
-    billetera = billeteraInicial()
-}
-
-function billeteraCompletaInicial(){
-    billeteraCompleta = obtenerStorage('billeteraCompleta');
-    if(billeteraCompleta == null || billeteraCompleta == ""){
-        billeteraCompleta = new Billetera('ars', 'undefined', ars, 0, 0, 0);
-    }
-    return billeteraCompleta;
-    //Seteo de billetera nula para comenzar
-}
-
-function monedaInicial(){
-    moneda = obtenerStorage('moneda');
-    if(moneda == null || moneda == ''){
-        moneda = carteraDivisas[0]
-    }
-    return moneda;
-    //verifica si hay una moneda guardada
-}
-
-function billeteraInicial(){
-    billetera = obtenerStorage('billetera')
-    if(billetera == null || billetera == ""){
-        billetera = new BilleteraParcial(0, 0, 0);
-    }
-    return billetera
-    //verifica si hay billetera inicial parcial (moneda, cantidad)
-}
-
-function billeteraArsInicial(){
-    billeteraArs = obtenerStorage('billeteraArs')
-    if(billeteraArs == null || billeteraArs == ""){
-        billeteraArs = new BilleteraArs(0);
-    }
-    return billeteraArs
-}
-function billeteraUsdInicial(){ 
-    billeteraUsd = obtenerStorage('billeteraUsd')
-    if(billeteraUsd == null || billeteraUsd == ""){
-        billeteraUsd = new BilleteraUsd(0);
-    }
-    return billeteraUsd
-}
-function billeteraEurInicial(){
-    billeteraEur = obtenerStorage('billeteraEur')
-    if(billeteraEur == null || billeteraEur == ""){
-        billeteraEur = new BilleteraEur(0);
-    }
-    return billeteraEur
-}
-
-function objetoCompleto ({divisa}, array){
-    let i, arrayDivisas;
-    for(i=0; i< array.length; i++){
-        arrayDivisas = array[i];
-        if(divisa == arrayDivisas.ticker){ 
-            break;
-        }
-    }
-    return arrayDivisas;
-    // Devuelve el array de la divisa con la que se trabaja segun objeto Billetera
-}
-
-function objetoCompletoSelecto(selector, array){
-    let i, arrayDivisas;
-    for(i=0; i< array.length; i++){
-        arrayDivisas = array[i];
-        if(selector == arrayDivisas.ticker){
-            break;
-        }
-    }
-    return arrayDivisas;
-    // Devuelve el array de la divisa con la que se trabaja segun selector
-}
-
-
-function eleccionDeBilletera (moneda){
-    if(moneda == 'ars'){
-        return billeteraPesos
-    }
-    if(moneda == 'usd'){
-        return billeteraDolares
-    }
-    if(moneda == 'eur'){
-        return billeteraEuros
-    }
+    //pedido para actualizar valores de btc segun moneda y poder convertirlo segun la moneda y cantidad de la billetera seleccionada
 }
 
 
@@ -203,7 +106,6 @@ function habilitacionBtn(){
 
 // SUMA DE DINERO
 function sumarBilletera(input, billeteraElegida){
-    console.log('Sumar billetera')
     let dineroIngresado, cantidadSumada;
     dineroIngresado = parseInt(input);
 
@@ -256,7 +158,6 @@ function restarBilletera(input, billeteraElegida){
 // ---------------------------------------------- //
 
 function crearBilletera(input, moneda){
-    console.log('Crear billetera')
     let dineroIngresado;
 
     if(input != null || input != ""){
@@ -265,8 +166,6 @@ function crearBilletera(input, moneda){
         actualizarBilleterasStorage();
 
         objetoMoneda = objetoCompleto(billetera, carteraDivisas);
-        objetoMonedaToStorage(objetoMoneda);
-
     } else{
         validarOperacion('Ingrese un valor real.', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion');
         $(input).val('');
@@ -300,63 +199,3 @@ function elegirBilletera(moneda){
         return obtenerStorage('billeteraEur');
     }
 }
-
-
-// ---------------------------------------------- //
-// ----------UNIFICACION DE BILLETERAS----------- //
-// ---------------------------------------------- //
-
-function sumatoriaBilleteraTotal (){
-    let billeteraArs = obtenerStorage('billeteraArs');
-    let billeteraUsd = obtenerStorage('billeteraUsd');
-    let billeteraEur = obtenerStorage('billeteraEur');
-    let armadoDeBilletera;
-
-    if(billeteraArs == null && billeteraUsd == null && billeteraEur == null){
-        pesos = 0;
-        dolares = 0;
-        euros = 0;
-    } else{
-        pesos = billeteraArs.billeteraTotal;
-        dolares = billeteraUsd.billeteraTotal;
-        euros = billeteraEur.billeteraTotal;
-    }
-    armadoDeBilletera = conversionCadaValor(pesos, dolares, euros);
-    return armadoDeBilletera;
-}
-
-
-function conversionCadaValor (pesos, dolares, euros){
-    let sumatoria;
-    let valorPeso = carteraDivisas[0].value;
-    let valorDolar = carteraDivisas[1].value;
-    let valorEuro = carteraDivisas[2].value;
-    let monedaSumatoria = $('.billeteraUser__balance--divisas').val()
-    monedaSumatoria = monedaSumatoria.toLowerCase()
-
-    if(monedaSumatoria == 'ars'){
-        pesos = pesos;
-        dolares = dolares * valorDolar;
-        euros =  euros * valorEuro;
-        sumatoria = parseFloat(pesos + dolares + euros).toFixed(2);
-    }
-    if(monedaSumatoria == 'usd'){
-        pesos = pesos * (valorPeso/valorDolar);
-        dolares = dolares;
-        euros = euros * (valorEuro/valorDolar);
-        sumatoria = parseFloat(pesos + dolares + euros).toFixed(2);
-    }
-    if(monedaSumatoria == 'eur'){
-        pesos = pesos * (valorPeso/ valorEuro);
-        dolares = dolares * (valorDolar / valorEuro);
-        euros = euros;
-        sumatoria = parseFloat(pesos + dolares + euros).toFixed(2);
-    }
-    pesos = parseFloat(pesos).toFixed(3)
-    dolares = parseFloat(dolares).toFixed(3)
-    euros = parseFloat(euros).toFixed(3)
-
-    billetera = new BilleteraParcial(pesos, dolares, euros);
-    return sumatoria;
-}
-

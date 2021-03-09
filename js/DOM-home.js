@@ -1,3 +1,6 @@
+// TO DO - eliminar funciones tomarJson y tomarJsonHome luego de obtener peticion ajax
+// TO DO - eliminar archivo objetoJson.js
+
 function tomarJson() {
     let i;
     let listadoJson = JSON.stringify(LISTA_CRIPTOS);
@@ -22,25 +25,16 @@ function tomarJsonHome() {
     }
 }
 
-function getAjaxInicio (){
-    $.ajax({
-        url: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=ars&order=market_cap_desc&per_page=8&page=1&sparkline=false",
-        type: "GET",
-        dataType: "json"
-    }).done((resultado)=>{
-        for(i=0; i<8; i++){
-            let objetosSeparados = resultado[i];
-            let listadoGet = JSON.stringify(objetosSeparados);
-            let objetos = JSON.parse(listadoGet);
-            carteraMuestraInicio.push(objetos);
-        }
-        armadoDeLista();
-        armadoDeCriptos();
-        cambiarCriptoMostrada();
-    }).fail(()=>{
-        console.log('fallo')
-    })
-}
+// $.ajax({
+//         url: "criptoJSON.json",
+//         type: "GET",
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json"
+//     }).done((resultado)=>{
+//         console.log(resultado[0])
+//     }).fail(()=>{
+//         console.log('fallo')
+//     })
 
 // ------------------------------------------------------------------ //
 // ------------------------------------------------------------------ //
@@ -94,8 +88,8 @@ function armadoDeLista() {
 function armadoDeCriptos() {
     for (let i = 0; i < carteraMuestraInicio.length; i++) {
         let posicion = carteraMuestraInicio[i];
-        let nombre = posicion.nombre; // let nombre = posicion.id
-        let foto = posicion.logo; // let foto = posicion.image
+        let nombre = posicion.nombre;
+        let foto = posicion.logo;
         crearCriptosInicio(nombre, i)
         crearFotosInicio(foto, nombre, i);
     }
@@ -114,7 +108,7 @@ function cambiarCriptoMostrada(i) {
     $('#inicio__imagenCripto').fadeIn(2000, () => {
         let cripto = carteraMuestraInicio[i];
 
-        modificarFotoInicio('#inicio__imagenCripto', cripto.logo); // modificarFotoInicio('##inicio__imagenCripto', cripto.image)
+        modificarFotoInicio('#inicio__imagenCripto', cripto.logo);
         marcarCripto(i)
         i++;
         cambiarCriptoMostrada(i);
@@ -171,25 +165,6 @@ function avanzarNavbar() {
         avanzarBody('#mercado')
     });
 
-}
-
-function avanzarBody(ubicacion) {
-    $('html, body').animate({
-        scrollTop: $(ubicacion).offset().top
-    }, 1000);
-}
-
-function scrollify() {
-    $.scrollify({
-        section: '.sectionScroll'
-    });
-}
-
-function deshabilitarScrollify (){
-    $.scrollify.disable();
-}
-function habilitarScrollify(){
-    $.scrollify.enable();
 }
 
 function scrollFinal (){
@@ -261,7 +236,7 @@ function volverALogIn(){
 
 function ingresoConversor(id){
     $(id).click(()=>{
-        $(location).attr('href', 'panelUsuario.html'); // Descartar cambios antes de commit
+        $(location).attr('href', 'panelUsuario.html');
     })
 }
 
@@ -313,7 +288,7 @@ function armadoDeTabla(resultado, moneda){
 
         let criptoMax = cripto.high_24h;
         let criptoMin = cripto.low_24h;
-        let criptoVol = volumenOperado(cripto);
+        let criptoVol = grandesCantidades(cripto.total_volume);
 
         crearTr('tbody', 'lista__cripto');
         armarTr(criptoImagen, criptoNombre, criptoPar, criptoPrecio, criptoCambio, criptoMax, criptoMin, criptoVol, i);
@@ -332,7 +307,7 @@ function modificarTabla(resultado, moneda){
 
         let criptoMax = cripto.high_24h;
         let criptoMin = cripto.low_24h;
-        let criptoVol = volumenOperado(cripto);
+        let criptoVol = grandesCantidades(cripto.total_volume);
         
         modificarElementosDeTabla(criptoPar, criptoPrecio, criptoCambio, criptoMax, criptoMin, criptoVol, i);
         i++;
@@ -354,45 +329,6 @@ function modificarElementosDeTabla(par, precio, cambio, max, min, vol, i){
     modificarElemento(classMax[i], max)
     modificarElemento(classMin[i], min)
     modificarElemento(classVol[i], vol)
-}
-
-function modificarElemento(elemento, contenido){
-    $(elemento).text(contenido)
-}
-
-function nombreDeCripto ({id}, {symbol}){
-        nombre = primeraLetraMayuscula(id);
-        let ticker = symbol.toUpperCase();
-        return `${nombre}`
-}
-
-function primeraLetraMayuscula (string){
-    return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
-function parDeConversion ({symbol}, moneda){
-    let par = `${symbol}/${moneda}`
-    return par.toUpperCase();
-}
-
-function porcentajeDeCambio (cambio){
-    criptoCambio = parseFloat(cambio).toFixed(2)
-    return `${criptoCambio} %`
-}
-
-function volumenOperado ({total_volume}){
-    let criptoVol = total_volume;
-    let millon = 1000000;
-    let billon = millon * 1000;
-
-    if(criptoVol >= billon){
-        criptoVol = parseFloat(criptoVol / billon).toFixed(2);
-        return `${criptoVol} B`
-    }
-    if(criptoVol >= millon){
-        criptoVol = parseFloat(criptoVol / millon).toFixed(2);
-        return `${criptoVol} M`
-    }
 }
 
 function crearTr(nodoPadre, nombreClase){
@@ -419,49 +355,4 @@ function armarTr (logo, nombre, par, precio, cambio, max, min, vol, i){
     crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--min', min, i);
     crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--vol', vol, i);
 
-}
-
-function crearDivClassPadre (classPadre, attr, nombreAttr, i){
-    let nuevoNodo, nodoPadre;
-    nodoPadre = $(classPadre);
-    nuevoNodo = document.createElement('div'); 
-    $(nuevoNodo).attr(attr, nombreAttr);
-    $(nodoPadre[i]).append(nuevoNodo);
-}
-
-function crearElemento (padre, tag, attr, nombreAttr, contenido, i){
-    let nuevoNodo, nodoPadre;
-    nodoPadre = $(padre);
-    nuevoNodo = document.createElement(tag);
-    contenidoTexto = document.createTextNode(contenido);
-
-    $(nuevoNodo).append(contenidoTexto);
-    $(nuevoNodo).attr(attr, nombreAttr);
-    $(nodoPadre[i]).append(nuevoNodo);
-}
-
-
-function crearBtn (padre, attr, nombreAttr, i){
-    let nuevoNodo, nodoPadre;
-    nodoPadre = $(padre);
-    nuevoNodo = document.createElement('a');
-    contenidoTexto = document.createTextNode('Ver');
-    $(nuevoNodo).append(contenidoTexto);
-
-    $(nuevoNodo).attr('href', '#');
-    $(nuevoNodo).attr('role', 'button');
-    $(nuevoNodo).attr(attr, nombreAttr);
-
-    $(nodoPadre[i]).append(nuevoNodo)
-}
-
-function crearImagen (padre, direccion, attr, nombreAttr, i){
-    let nuevoNodo, nodoPadre;
-    nodoPadre = $(padre);
-    nuevoNodo = document.createElement('img');
-
-    $(nuevoNodo).attr('src', direccion);
-    $(nuevoNodo).attr(attr, nombreAttr);
-
-    $(nodoPadre[i]).append(nuevoNodo)
 }

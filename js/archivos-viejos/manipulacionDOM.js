@@ -270,7 +270,7 @@ function opcionCripto (){
     }
 }
 
-function opcionCriptoReducido (){
+function opcionCriptoReducido (){   //arma la lista de mainAside
     let i;
 
     for(i=0; i < carteraCriptos.length; i++){
@@ -300,6 +300,10 @@ function separacionCriptos (){
     };
 }
 
+
+//-------------------------------------------------- //
+//-------------COMIENZO DE CONVERSION--------------- //
+//-------------------------------------------------- //
 function seleccionCripto(div, posicion){
     let monedaElegida;
     let input;

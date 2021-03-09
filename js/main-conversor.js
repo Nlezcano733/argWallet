@@ -1,8 +1,8 @@
-let panelUsuario, monedaDeposito, botonOjo, compra;
+let panelUsuario, monedaDeposito, compra;
 let billetera, objetoMoneda, billeteraCompleta;
 let billeteraPesos, billeteraDolares, billeteraEuros;
 
-// --------- CREACION DE CONSTRUCTORES ---------- //
+// // --------- CREACION DE CONSTRUCTORES ---------- //
 
 function Billetera (divisa, divisaObjeto, billeteraTotal, cantidadDivisa, arrayCompras){
     this.divisa = divisa,
@@ -43,6 +43,7 @@ function Divisas (nombre, ticker, value, simbolo){
     this.simbolo = simbolo
 }
 
+
 // --------------------------------------- //
 let ars = new Divisas ('Pesos', 'ARS', 1, '$');
 let usd = new Divisas ('Dolar', 'USD', 156, '$');
@@ -54,25 +55,14 @@ let carteraDivisas = [ars, usd, euro];
 let carteraCriptos = [];
 
 $(()=>{
-    avanzarNavbar();
-    scrollify();
-    scrollFinal();
-
     valorSelectorInicial();
-    cambioMuestraDivisa();
-
     billeterasTotalesInicial();
-    mostrarbilleteraSeleccionada()
-
-    $('#ojoUser').click(mostrarOcultar)
-
     mostrarBilletera();
-    $('.billeteraUser__balance--divisas').change(mostrarBilletera)
-    $('#depositoRetiro__registro--divisas').change(mostrarbilleteraSeleccionada)
     
-    accionarDeposito();
-    eventoInput('#depositoRetiro__interaccion__input--cantidad');
+    $('#ojoUser').click(mostrarOcultar)
+    $('.billeteraUser__balance--divisas').change(mostrarBilletera)
 
-    habilitacionBtn()
-    $('#depositoRetiro__registro--divisas').change(habilitacionBtn)
+    getAjaxArmadoLista();
+    armadoDePanelInicial();
+    armadoDePanelPorSelector();
 })

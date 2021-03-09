@@ -2,7 +2,6 @@ function cambioPagina(boton, enlace){
     $(boton).click(()=>{
         window.location.href = enlace;
     })
-    //Preparar para DOM-conversor.js
 }
 
 function avanzarNavbar() {
@@ -16,30 +15,7 @@ function avanzarNavbar() {
 }
 
 
-// FUNCION REPETIDA (index )
-function avanzarBody(ubicacion) { 
-    $('html, body').animate({
-        scrollTop: $(ubicacion).offset().top
-    }, 1000);
-}
-
 // -------------------------------------- //
-
-
-// FUNCION REPETIDA - modificada - (index )
-function scrollify() {
-    $.scrollify({
-        section: '.scrollify',
-        setHeights: false
-    });
-}
-
-function deshabilitarScrollify (){
-    $.scrollify.disable();
-}
-function habilitarScrollify(){
-    $.scrollify.enable();
-}
 
 function scrollFinal (){
     let tabla = $('#activos__lista');
@@ -75,7 +51,6 @@ function habilitarScroll (){
 }
 
 
-
 // ---------------------------------------------- //
 // ---------------------------------------------- //
 // ---------------------------------------------- //
@@ -93,8 +68,10 @@ function cambioMuestraDivisa(){
 
 function armadoDeTabla(resultado, moneda){
     i=0
+    let arrayCriptos = [];
     resultado.forEach((cripto)=>{
-        let criptoNombre = nombreDeCripto(cripto, cripto);
+        
+        let criptoNombre = cripto.id;
         let criptoImagen = cripto.image;
         let criptoPar = parDeConversion(cripto, moneda);
 
@@ -104,12 +81,14 @@ function armadoDeTabla(resultado, moneda){
 
         let criptoMax = cripto.high_24h;
         let criptoMin = cripto.low_24h;
-        let criptoVol = volumenOperado(cripto);
+        let criptoVol = grandesCantidades(cripto.total_volume);
 
         crearTr('tbody', 'activo__cuerpo');
-        armarTr(criptoImagen, criptoPar, criptoPrecio, criptoCambio, criptoMax, criptoMin, criptoVol, i);
+        let criptoPosicion = armarTr(criptoNombre, criptoImagen, criptoPar, criptoPrecio, criptoCambio, criptoMax, criptoMin, criptoVol, i);
+        arrayCriptos.push(criptoPosicion)
         i++;
     })
+    accionarBtnLista()
 }
 
 function modificarTabla(resultado, moneda){
@@ -123,8 +102,8 @@ function modificarTabla(resultado, moneda){
 
         let criptoMax = cripto.high_24h;
         let criptoMin = cripto.low_24h;
-        let criptoVol = volumenOperado(cripto);
-        
+        let criptoVol = grandesCantidades(cripto.total_volume);
+
         modificarElementosDeTabla(criptoPar, criptoPrecio, criptoCambio, criptoMax, criptoMin, criptoVol, i);
         i++;
     })
@@ -145,60 +124,13 @@ function modificarElementosDeTabla(par, precio, cambio, max, min, vol, i){
     modificarElemento(classMax[i], max)
     modificarElemento(classMin[i], min)
     modificarElemento(classVol[i], vol)
-}
 
-
-// --------------------------------------------- //
-// FUNCIONES REPETIDAS (index)
-
-function nombreDeCripto ({id}, {symbol}){
-        nombre = primeraLetraMayuscula(id);
-        let ticker = symbol.toUpperCase();
-        return `${nombre} (${ticker})`
-}
-
-function primeraLetraMayuscula (string){
-    return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
-function parDeConversion ({symbol}, moneda){
-    let par = `${symbol}/${moneda}`
-    return par.toUpperCase();
-}
-
-function porcentajeDeCambio (cambio){
-    criptoCambio = parseFloat(cambio).toFixed(2)
-    return `${criptoCambio} %`
-}
-
-function volumenOperado ({total_volume}){
-    let criptoVol = total_volume;
-    let millon = 1000000;
-    let billon = millon * 1000;
-
-    if(criptoVol >= billon){
-        criptoVol = parseFloat(criptoVol / billon).toFixed(2);
-        return `${criptoVol} B`
-    }
-    if(criptoVol >= millon){
-        criptoVol = parseFloat(criptoVol / millon).toFixed(2);
-        return `${criptoVol} M`
-    }
-}
-
-function crearTr(nodoPadre, nombreClase){
-    let nuevoNodo;
-    padre = $(nodoPadre);
-
-    nuevoNodo = document.createElement('tr');
-    $(nuevoNodo).attr('class', nombreClase);
-    $(nodoPadre).append(nuevoNodo);
 }
 
 // --------------------------------------------- //
 
 
-function armarTr (logo, par, precio, cambio, max, min, vol, i){
+function armarTr (nombre, logo, par, precio, cambio, max, min, vol, i){
 
     crearElemento('.activo__cuerpo', 'td', 'class', 'activo__cuerpo__par', '', i);
     crearDivClassPadre('.activo__cuerpo__par', 'class', 'activo__cuerpo--nombre', i)
@@ -214,11 +146,12 @@ function armarTr (logo, par, precio, cambio, max, min, vol, i){
 
     crearElemento('.activo__cuerpo', 'td', 'class', 'activo__cuerpo--input', '', i)
     crearBtn('.activo__cuerpo--input', 'class', 'activo__cuerpo--btn', i)
+
+    let criptoPosicion = [nombre, logo];
+    return criptoPosicion;
 }
 
-
 // --------------------------------------------- //
-// FUNCIONES REPETIDAS (index)
 
 function crearBtn (padre, attr, nombreAttr, i){
     let nuevoNodo, nodoPadre;
@@ -232,9 +165,39 @@ function crearBtn (padre, attr, nombreAttr, i){
     $(nuevoNodo).attr(attr, nombreAttr);
 
     $(nodoPadre[i]).append(nuevoNodo)
+
 }
 
 
+function accionarBtnLista(){
+    for(let i=0; i<25; i++){
+        let btn = $('.activo__cuerpo--btn')
+        $(btn[i]).click(()=>{
+            btnLista(i)
+        })
+    }
+}
+
+function btnLista(i){
+    let par = $('.parCriptoLista');
+    parElegido = $(par[i]).text();
+    parElegido = parElegido.toLowerCase();
+    console.log(parElegido)
+    parElegido = parElegido.split('/');
+    parElegido = JSON.stringify(parElegido)
+    sessionStorage.setItem('cripto', parElegido);
+}
+
+function valorSelectorInicial(){
+    let moneda = obtenerSessionStorage('cripto');
+    if(moneda == null || moneda == undefined){
+        getAjaxMercado('ars')
+    }else{
+        let monedaInicial = moneda[1];  
+        $('#activos__cabecera--divisas').val(monedaInicial)
+        getAjaxMercado(monedaInicial)
+    }
+}
 
 // ---------------------------------------------- //
 // -------------DEPOSITO DE DINERO--------------- //
@@ -260,23 +223,13 @@ function eventoInput (id){
     $(input).keypress(depositarConEnter);
 }
 
+// ---------------------------------------------- //
+// ----------MOSTRAR/OCULTAR BILLETERAS---------- //
+// ---------------------------------------------- //
 
-function habilitarBoton(boton, habilitacion){
-    $(boton[1]).attr('id', habilitacion)
-}
-
-function deshabilitarBoton(boton){
-    if(billetera.billeteraTotal == 0){
-        boton = $('.dr__boton');
-        $(boton[1]).attr('id', 'botonDeshabilitado')
-    }
-}
-
-// ----------------------------------------------- //
-
-// MOSTRAR EN HEADER
 function mostrarBilletera (){
     let selector = $('.billeteraUser__balance--divisas').val();
+    selector = selector.toUpperCase();
     let balanceTotal
 
     balanceTotal = sumatoriaBilleteraTotal();
@@ -288,19 +241,20 @@ function mostrarBilletera (){
 
 function mostrarbilleteraSeleccionada (){
     let selector = $('#depositoRetiro__registro--divisas').val();
-    selectorValor = selector.toLowerCase();
+    selectorValor = selector.toUpperCase();
     let balanceTotal
 
-    if(selectorValor == 'ars'){
+    if(selector == 'ars'){
         balanceTotal = billeteraPesos.billeteraTotal;
-    } else if (selectorValor == 'usd'){
+    } else if (selector == 'usd'){
         balanceTotal = billeteraDolares.billeteraTotal;
     } else{
         balanceTotal = billeteraEuros.billeteraTotal;
     }
 
-    objetoDivisaElegida = objetoCompletoSelecto(selector, carteraDivisas);
+    objetoDivisaElegida = objetoCompletoSelecto(selectorValor, carteraDivisas);
     cantidadBilleteraMostrada = modificarCantidad(objetoDivisaElegida, balanceTotal, '.depositoRetiro__registro--dinero');
+    modificarElemento('#depositoRetiro__interaccion__input--simbolo', objetoDivisaElegida.simbolo)
     getAjaxConvReferencia(selector, balanceTotal)
 
 }
@@ -327,7 +281,6 @@ function convertirMonedaCriptoRef(cantidad, cripto){
 function mostrarOcultar (){
     let mensajeOculto = '**************';
     let ojo = $('#ojoUser');
-    console.log('se llamo')
 
     let selectorBalance = $('.billeteraUser__balance--divisas');
     let selectorRegistro = $('#depositoRetiro__registro--divisas');
@@ -336,7 +289,6 @@ function mostrarOcultar (){
     let cantidadBalance = sumatoriaBilleteraTotal();
 
     if(mostrador != mensajeOculto){
-        console.log('if')
         $(ojo).attr('class', 'fas fa-eye');
         $(selectorBalance).attr('disabled', '')
         $(selectorRegistro).attr('disabled', '')
@@ -344,7 +296,6 @@ function mostrarOcultar (){
         $('.depositoRetiro__registro--dinero').text(mensajeOculto);
         $('.depositoRetiro__registro--btc').text(mensajeOculto);
     } else{
-        console.log('else')
         $(ojo).attr('class', 'fas fa-eye-slash');
         $(selectorBalance).removeAttr('disabled', '')
         $(selectorRegistro).removeAttr('disabled', '')
