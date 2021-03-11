@@ -64,7 +64,7 @@ function depositarBilletera(input, moneda){
     moneda = moneda.toLowerCase()
     let billeteraUsada = eleccionDeBilletera(moneda);
     cantidad = billeteraUsada.billeteraTotal;
-    let claseBoton = $('.depositoRetiro');
+    // let claseBoton = $('.depositoRetiro');
     
     if(cantidad == 0 && input != ""){
         crearBilletera(input, moneda);
@@ -113,7 +113,7 @@ function sumarBilletera(input, billeteraElegida){
     billeteraActual = billeteraParaSumar.billeteraTotal;
     cantidadSumada = dineroIngresado + billeteraActual;
 
-    actualizacionBilleteras(cantidadSumada);
+    actualizacionBilleteras('#depositoRetiro__registro--divisas', cantidadSumada);
     actualizarBilleterasStorage();
     mostrarbilleteraSeleccionada();
     validarOperacion('movimiento exitoso', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion');
@@ -142,7 +142,7 @@ function restarBilletera(input, billeteraElegida){
     if (dineroIngresado <= billeteraActual){
         cantidadRestante = billeteraActual - dineroIngresado;
         habilitacionBtn();
-        actualizacionBilleteras(cantidadRestante);
+        actualizacionBilleteras('#depositoRetiro__registro--divisas', cantidadRestante);
         actualizarBilleterasStorage();
         mostrarbilleteraSeleccionada();
         validarOperacion('Movimiento exitoso', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion')
@@ -162,7 +162,7 @@ function crearBilletera(input, moneda){
 
     if(input != null || input != ""){
         dineroIngresado = parseInt(input);
-        actualizacionBilleteras(dineroIngresado);
+        actualizacionBilleteras('#depositoRetiro__registro--divisas', dineroIngresado);
         actualizarBilleterasStorage();
 
         objetoMoneda = objetoCompleto(billetera, carteraDivisas);
@@ -173,29 +173,17 @@ function crearBilletera(input, moneda){
     //Crea una billetera parcial y la almacena en storage
 }
 
-function actualizacionBilleteras(cantidad){
-    let selector = $('#depositoRetiro__registro--divisas').val();
-    selector = selector.toLowerCase()
+// function actualizacionBilleteras(cantidad){
+//     let selector = $('#depositoRetiro__registro--divisas').val();
+//     selector = selector.toLowerCase()
 
-    if(selector == 'ars'){
-        billeteraPesos =  new BilleteraArs(cantidad)
-    }
-    if(selector == 'usd'){
-        billeteraDolares =  new BilleteraUsd(cantidad)
-    }
-    if(selector == 'eur'){
-        billeteraEuros =  new BilleteraEur(cantidad)
-    }
-}
-
-function elegirBilletera(moneda){
-    if(moneda == 'ars'){
-        return obtenerStorage('billeteraArs');
-    }
-    if(moneda == 'usd'){
-        return obtenerStorage('billeteraUsd');
-    }
-    if(moneda == 'eur'){
-        return obtenerStorage('billeteraEur');
-    }
-}
+//     if(selector == 'ars'){
+//         billeteraPesos =  new BilleteraArs(cantidad)
+//     }
+//     if(selector == 'usd'){
+//         billeteraDolares =  new BilleteraUsd(cantidad)
+//     }
+//     if(selector == 'eur'){
+//         billeteraEuros =  new BilleteraEur(cantidad)
+//     }
+// }

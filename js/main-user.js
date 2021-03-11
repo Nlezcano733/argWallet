@@ -1,22 +1,22 @@
-let panelUsuario, monedaDeposito, botonOjo, compra;
+let panelUsuario, monedaDeposito, compra, arrayCompras;
 let billetera, objetoMoneda, billeteraCompleta;
 let billeteraPesos, billeteraDolares, billeteraEuros;
 
 // --------- CREACION DE CONSTRUCTORES ---------- //
 
-function Billetera (divisa, divisaObjeto, billeteraTotal, cantidadDivisa, arrayCompras){
-    this.divisa = divisa,
-    this.divisaObjeto = divisaObjeto;
-    this.billeteraTotal = parseFloat(billeteraTotal),
-    this.cantidadDivisa = parseFloat(cantidadDivisa),
-    this.arrayCompras = arrayCompras
-}
+// function Billetera (divisa, divisaObjeto, billeteraTotal, cantidadDivisa, arrayCompras){
+//     this.divisa = divisa,
+//     this.divisaObjeto = divisaObjeto;
+//     this.billeteraTotal = parseFloat(billeteraTotal),
+//     this.cantidadDivisa = parseFloat(cantidadDivisa),
+//     this.arrayCompras = arrayCompras
+// }
 
-function BilleteraParcial (cantidadPesos, cantidadDolares, cantidadEuros){
-    this.billeteraArs = parseFloat(cantidadPesos),
-    this.billeteraUsd = parseFloat(cantidadDolares),
-    this.billeteraEur = parseFloat(cantidadEuros)
-}
+// function BilleteraParcial (cantidadPesos, cantidadDolares, cantidadEuros){
+//     this.billeteraArs = parseFloat(cantidadPesos),
+//     this.billeteraUsd = parseFloat(cantidadDolares),
+//     this.billeteraEur = parseFloat(cantidadEuros)
+// }
 
 function BilleteraArs (billeteraTotal){
     this.divisa = 'ars'

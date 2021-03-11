@@ -4,19 +4,23 @@ let billeteraPesos, billeteraDolares, billeteraEuros;
 
 // // --------- CREACION DE CONSTRUCTORES ---------- //
 
-function Billetera (divisa, divisaObjeto, billeteraTotal, cantidadDivisa, arrayCompras){
-    this.divisa = divisa,
-    this.divisaObjeto = divisaObjeto;
-    this.billeteraTotal = parseFloat(billeteraTotal),
-    this.cantidadDivisa = parseFloat(cantidadDivisa),
-    this.arrayCompras = arrayCompras
-}
+// function Billetera (divisa, cantidadPesos, cantidadDolares, cantidadEuros, monedaInversion, montoInversion, arrayCompras){
+//     this.divisa = divisa, //contiene divisa en la que se esta convirtiendo
+//     this.billeteraArs = parseFloat(cantidadPesos),
+//     this.billeteraUsd = parseFloat(cantidadDolares),
+//     this.billeteraEur = parseFloat(cantidadEuros),
+//     this.monedaInversion = monedaInversion, //el tipo de cambio en el que se convierte el monto de inversion
+//     this.montoInversion = montoInversion,   //cantidad de inversion en base a la moneda en la que se muestra
+//     this.arrayCompras = arrayCompras 
+//     // array compras cuenta con tk de cripto/cantidad de criptos compradas/billeteraUsada/precio pagado (ver)
+// }
 
-function BilleteraParcial (cantidadPesos, cantidadDolares, cantidadEuros){
-    this.billeteraArs = parseFloat(cantidadPesos),
-    this.billeteraUsd = parseFloat(cantidadDolares),
-    this.billeteraEur = parseFloat(cantidadEuros)
-}
+// function BilleteraParcial (divisa,cantidadPesos, cantidadDolares, cantidadEuros){
+//     this.divisa = divisa,
+//     this.billeteraArs = parseFloat(cantidadPesos),
+//     this.billeteraUsd = parseFloat(cantidadDolares),
+//     this.billeteraEur = parseFloat(cantidadEuros)
+// }
 
 function BilleteraArs (billeteraTotal){
     this.divisa = 'ars'
@@ -34,6 +38,12 @@ function BilleteraEur (billeteraTotal){
     this.billeteraTotal = parseInt(billeteraTotal);
 }
 
+function Compra(tipo, cantidad, moneda, gasto){
+    this.tipo = tipo,
+    this.cantidad = cantidad,
+    this.moneda = moneda,
+    this.gasto = gasto
+}
 // ------------------------------------ //
 
 function Divisas (nombre, ticker, value, simbolo){
@@ -53,6 +63,7 @@ let carteraDivisas = [ars, usd, euro];
 // --------------------------------------- //
 
 let carteraCriptos = [];
+let arrayCompras = [];
 
 $(()=>{
     valorSelectorInicial();
@@ -65,4 +76,9 @@ $(()=>{
     getAjaxArmadoLista();
     armadoDePanelInicial();
     armadoDePanelPorSelector();
+    
+    $('#conversion__ingreso--divisa').keypress(conversionDinamica);
+    // $('#conversion__ingreso--divisa').blur(accionarBtnCompraVenta)
+    accionarBtnCompraVenta();
+    // $('#conversion__ingreso--divisa').val('');
 })

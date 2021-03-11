@@ -430,7 +430,6 @@ function sumarCompra (){
         let objetoPosicion = billeteraArray[i];
         armadoDeCompras(i, objetoPosicion)
     }
-
 }
 
 function armadoDeCompras (i, objetoPosicion){

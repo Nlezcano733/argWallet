@@ -92,6 +92,9 @@ function accionarBtnLista(){
         let btn = $('.listado')
         $(btn[i]).click(()=>{
             btnLista(i)
+            $('#conversion__ingreso--divisa').keypress(conversionDinamica);
+            $('#conversion__ingreso--divisa').val('');
+            $('#conversion__convertido--valor').text('0,00')
         })
     }
 }
@@ -198,4 +201,18 @@ function valorSelectorInicial(){
     let moneda = obtenerSessionStorage('cripto');
     let monedaInicial = moneda[1];
     $('#nombreCripto__divisas').val(monedaInicial)
+}
+
+
+// ----------------------------------------------//
+// ---------CONVERSION DE CRIPTOMONEDAS--------- //
+// ----------------------------------------------// 
+
+function conversionDinamica(event){
+    input = $('#conversion__ingreso--divisa').val();
+    let teclaPresionada = event.key;
+    valorATomar = input + teclaPresionada;
+
+    conversion = conversionMonedacripto(valorATomar);
+    modificarElemento('#conversion__convertido--valor', conversion);
 }

@@ -265,13 +265,6 @@ function modificarCantidad({simbolo}, cantidadTotal, ubicacion){
     return textoParaMostrar;
 }
 
-function modificarMonedaSelecta({simbolo}){
-    let billeteraActual = obtenerStorage('billetera');
-    billeteraActual = billetera.billeteraTotal;
-    
-    textoParaMostrar = `${simbolo} ${billeteraActual},00`;
-}
-
 function convertirMonedaCriptoRef(cantidad, cripto){
     let criptoValor = cripto[0].current_price;
     criptoValor = parseFloat((cantidad / criptoValor)).toFixed(4);

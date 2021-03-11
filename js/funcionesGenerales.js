@@ -103,7 +103,6 @@ function crearImagen (padre, direccion, attr, nombreAttr, i){
 }
 
 function modificarFoto(nodoImagen, direccion){
-    let nodo;
     nodo = $(nodoImagen).attr('src', direccion);
 }
 
@@ -194,7 +193,6 @@ function criptoCompletoToStorage(cripto){
 }
 
 function actualizarBilleterasStorage(){
-    billeteraToStorage();
     if(billeteraPesos){
         billeteraArsToStorage();
     }
@@ -206,9 +204,22 @@ function actualizarBilleterasStorage(){
     }
 }
 
-function billeteraToStorage(){
-    let billeteraActual = JSON.stringify(billetera);
-    localStorage.setItem('billetera', billeteraActual);
+function actualizacionBilleteras(moneda, cantidad){
+    let selector = $(moneda).val();
+    selector = selector.toLowerCase()
+
+    if(selector == 'ars'){
+        billeteraPesos =  new BilleteraArs(cantidad)
+        billeteraArsToStorage()
+    }
+    if(selector == 'usd'){
+        billeteraDolares =  new BilleteraUsd(cantidad)
+        billeteraUsdToStorage()
+    }
+    if(selector == 'eur'){
+        billeteraEuros =  new BilleteraEur(cantidad)
+        billeteraEurToStorage()
+    }
 }
 
 function billeteraArsToStorage(){
@@ -224,20 +235,15 @@ function billeteraEurToStorage(){
     localStorage.setItem('billeteraEur', billeteraEur);
 }
 
-function billeteraCompletaToStorage(){
-    let billeteraFinal = JSON.stringify(billeteraCompleta);
-    localStorage.setItem('billeteraCompleta', billeteraFinal);
+function arrayComprasToStorage(){
+    let array = JSON.stringify(arrayCompras);
+    localStorage.setItem('listaCompras', array);
 }
-
-// function objetoMonedaToStorage(moneda){
-//     let monedaElegida = JSON.stringify(moneda);
-//     localStorage.setItem('moneda', monedaElegida);
-// }
-
 function compraToStorage(compra){
     let criptoComprada = JSON.stringify(compra);
     sessionStorage.setItem('compra', criptoComprada);
 }
+
 
 
 // -------------------------------------------- //
@@ -248,29 +254,9 @@ function billeterasTotalesInicial (){
     billeteraPesos =  billeteraArsInicial()
     billeteraDolares =  billeteraUsdInicial()
     billeteraEuros =  billeteraEurInicial()
+    arrayCompras = arrayComprasInicial();
 
     sumatoriaBilleteraTotal();
-    
-    billeteraCompleta = billeteraCompletaInicial()
-    billetera = billeteraInicial()
-}
-
-function billeteraCompletaInicial(){
-    billeteraCompleta = obtenerStorage('billeteraCompleta');
-    if(billeteraCompleta == null || billeteraCompleta == ""){
-        billeteraCompleta = new Billetera('ars', 'undefined', ars, 0, 0, 0);
-    }
-    return billeteraCompleta;
-    //Seteo de billetera nula para comenzar
-}
-
-function billeteraInicial(){
-    billetera = obtenerStorage('billetera')
-    if(billetera == null || billetera == ""){
-        billetera = new BilleteraParcial(0, 0, 0);
-    }
-    return billetera
-    //verifica si hay billetera inicial parcial (moneda, cantidad)
 }
 
 function billeteraArsInicial(){
@@ -293,6 +279,14 @@ function billeteraEurInicial(){
         billeteraEur = new BilleteraEur(0);
     }
     return billeteraEur
+}
+
+function arrayComprasInicial(){
+    array = obtenerStorage('listaCompras')
+    if(array == null){
+        array = []
+    }
+    return array
 }
 
 function objetoCompleto (divisa, array){
@@ -333,6 +327,18 @@ function eleccionDeBilletera (moneda){
 }
 
 
+function elegirBilletera(moneda){
+    if(moneda == 'ars'){
+        return obtenerStorage('billeteraArs');
+    }
+    if(moneda == 'usd'){
+        return obtenerStorage('billeteraUsd');
+    }
+    if(moneda == 'eur'){
+        return obtenerStorage('billeteraEur');
+    }
+}
+
 // -------------------------------------------- //
 //            UNIFICACION DE BILLETERA          //
 // -------------------------------------------- //
@@ -358,8 +364,6 @@ function sumatoriaBilleteraTotal (){
 
 
 function conversionCadaValor (pesos, dolares, euros){
-    
-    // billetera = new BilleteraParcial(pesos, dolares, euros)
     let sumatoria;
     let valorPeso = carteraDivisas[0].value;
     let valorDolar = carteraDivisas[1].value;
@@ -389,19 +393,6 @@ function conversionCadaValor (pesos, dolares, euros){
     dolares = parseFloat(dolares).toFixed(3)
     euros = parseFloat(euros).toFixed(3)
 
-    billetera = new BilleteraParcial(pesos, dolares, euros);
-    billeteraToStorage()
     return sumatoria;
 }
-
-function objetoCompletoSelecto(selector, array){
-    let i, arrayDivisas;
-    for(i=0; i< array.length; i++){
-        arrayDivisas = array[i];
-        if(selector == arrayDivisas.ticker){
-            break;
-        }
-    }
-    return arrayDivisas;
-    // Devuelve el array de la divisa con la que se trabaja segun selector
-}
+ 
