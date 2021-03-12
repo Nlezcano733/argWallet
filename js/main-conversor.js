@@ -38,7 +38,7 @@ function BilleteraEur (billeteraTotal){
     this.billeteraTotal = parseInt(billeteraTotal);
 }
 
-function Compra(tipo, cantidad, moneda, gasto){
+function Transaccion(tipo, cantidad, moneda, gasto){
     this.tipo = tipo,
     this.cantidad = cantidad,
     this.moneda = moneda,
@@ -78,7 +78,6 @@ $(()=>{
     armadoDePanelPorSelector();
     
     $('#conversion__ingreso--divisa').keypress(conversionDinamica);
-    // $('#conversion__ingreso--divisa').blur(accionarBtnCompraVenta)
-    accionarBtnCompraVenta();
-    // $('#conversion__ingreso--divisa').val('');
+    accionarBtnCompra();
+    accionarBtnVenta();
 })

@@ -244,6 +244,17 @@ function compraToStorage(compra){
     sessionStorage.setItem('compra', criptoComprada);
 }
 
+function ventaToStorage(venta){
+    let criptoVendida = JSON.stringify(venta);
+    sessionStorage.setItem('venta', criptoVendida);
+}
+
+function actualizarComprasStorage(arrayNuevo){
+    localStorage.removeItem('listaCriptos');
+    let nuevo = JSON.stringify(arrayNuevo);
+    localStorage.setItem('listaCompras', nuevo)
+}
+
 
 
 // -------------------------------------------- //

@@ -1345,6 +1345,26 @@ header #conversor__navBar, header #user__navBar {
 #transaccion #conversion #btnConfirmacion #confirmacionVenta:focus {
   outline: none;
 }
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled {
+  width: 150px;
+  height: 40px;
+  margin: 0 auto;
+  color: #808080;
+  background-color: #920005;
+  border: 1px solid #920005;
+  border: none;
+  font-size: 16px;
+  line-height: 1.5em;
+  margin: 0px;
+  margin-left: 30px;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:focus {
+  outline: none;
+}
 #transaccion #conversion #compra {
   grid-area: compra;
   margin: 0 auto;

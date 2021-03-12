@@ -892,8 +892,8 @@ header{
         grid-template-areas: 
             "titulo titulo titulo"
             "ingreso cambio resultado"
-            "btnConfirmacion btnConfirmacion  btnConfirmacion" // btnConfirmacion --> confirmacion
-            "confirmacion confirmacion confirmacion"; //Confirmacion --> resto
+            "btnConfirmacion btnConfirmacion  btnConfirmacion"
+            "confirmacion confirmacion confirmacion";
         height: 100%;
         width: 100%;
         padding-right: 20px;
@@ -937,14 +937,14 @@ header{
             }
         }
 
-        #conversion__simboloCambio{ // se quita #igual -- ver js
+        #conversion__simboloCambio{
             grid-area: cambio;
             margin-right: 5px;
             padding: 0px;
             text-align: center;
         }
 
-        #conversion__convertido{ // reemplaza resultado
+        #conversion__convertido{
             grid-area: resultado;
             height: 40px;
             width: 100%;
@@ -961,7 +961,7 @@ header{
                 margin-left: 10px;
             }
         }
-        #conversion__confirmacion{ //  reemplaza .resto
+        #conversion__confirmacion{
             grid-area: confirmacion;
             text-align: center;
         }
@@ -978,6 +978,12 @@ header{
             #confirmacionVenta{
                 @include boton (150px, 40px, $colorRojo2, $colorRojo3);
                 margin-left: 30px;
+
+                &:disabled{
+                    @include botonDeshabilitado(150px, 40px, $colorRojo3, $colorRojo3);
+                    margin: 0px;
+                    margin-left: 30px;
+                }
             }
             
         }

@@ -92,6 +92,7 @@ function accionarBtnLista(){
         let btn = $('.listado')
         $(btn[i]).click(()=>{
             btnLista(i)
+            // activacionBtnVenta()
             $('#conversion__ingreso--divisa').keypress(conversionDinamica);
             $('#conversion__ingreso--divisa').val('');
             $('#conversion__convertido--valor').text('0,00')
@@ -124,6 +125,8 @@ function armadoDePanelInicial(){
             if(tk == cripto.symbol){
                 armadoDePanel(cripto, moneda);
                 criptoCompletoToStorage(cripto);
+
+                activacionBtnVenta();
             }
         })
     })
@@ -146,6 +149,8 @@ function armadoDePanelElegido(nombre){
                 let parElegido = [cripto.symbol, moneda];
                 parElegido = JSON.stringify(parElegido)
                 sessionStorage.setItem('cripto', parElegido);
+
+                activacionBtnVenta()
             }
         })
     })
@@ -156,6 +161,8 @@ function armadoDePanelPorSelector(){
         let cripto = obtenerSessionStorage('criptomoneda');
         nombre = cripto.id;
         armadoDePanelElegido(nombre)
+        $('#conversion__ingreso--divisa').val('');
+        $('#conversion__convertido--valor').text('0,00')
     })
 }
 
@@ -215,4 +222,14 @@ function conversionDinamica(event){
 
     conversion = conversionMonedacripto(valorATomar);
     modificarElemento('#conversion__convertido--valor', conversion);
+}
+
+function activacionBtnVenta(){
+    let criptoCliente = obtenerCriptoDeBilletera();
+    console.log(criptoCliente)
+    if(criptoCliente == undefined){
+        $('#confirmacionVenta').attr('disabled', '');
+    } else{
+        $('#confirmacionVenta').removeAttr('disabled');
+    }
 }
