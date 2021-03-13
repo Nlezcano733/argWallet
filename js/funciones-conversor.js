@@ -16,6 +16,8 @@ function accionarBtnCompra(){
         let conversion = $('#conversion__convertido--valor').text();
 
         validacionCompra(selector, valorInput, conversion);
+        $('#conversion__ingreso--divisa').val('');
+        $('#conversion__convertido--valor').text('0,00')
     })
 }
 
@@ -30,6 +32,8 @@ function accionarBtnVenta(){
 
             validacionVenta(selector, valorInput, criptoCliente, conversion);
         })
+    } else{
+        $('#confirmacionVenta').off('click')
     }
 }
 
@@ -63,7 +67,11 @@ function validacionCompra(selector, input, conversion){
         compraToStorage(compra);
         agregarCompras();
 
+        activacionBtnVenta();
+
         validarOperacion('movimiento exitoso.', '#conversion__confirmacion--texto');
+        $('#conversion__ingreso--divisa').val('');
+        $('#conversion__convertido--valor').text('0,00')
 
     } else{
         validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', '#conversion__confirmacion--texto');
@@ -177,10 +185,20 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
             return descontarVenta(criptoCliente, venta, input, selector)
         })
         let objetoDescontado = nuevoArray[0];
-        let listaBilletera = agregarVentas(objetoDescontado, billetera);
-        actualizarComprasStorage(listaBilletera)
+        if(objetoDescontado.gasto > 0){
+            listaBilletera = agregarQuitarCompra(objetoDescontado, true)
+        } else{
+            listaBilletera = agregarQuitarCompra(objetoDescontado, false)
+        }
+
+        if(listaBilletera.length > 0){
+            actualizarComprasStorage(listaBilletera)
+        } else{
+            localStorage.removeItem('listaCompras')
+        }
         
         let billeteraActual = ingresoBilletera(billetera, venta);
+        console.log(billeteraActual)
         actualizacionBilleteras('#nombreCripto__divisas', billeteraActual);
         billeteraParaOcultar = mostrarBilletera();
 
@@ -191,10 +209,15 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
         venta = new Transaccion(tk, venta, moneda, input);
         ventaToStorage(venta);
 
+
         validarOperacion('movimiento exitoso.', '#conversion__confirmacion--texto');
+        $('#conversion__ingreso--divisa').val('');
+        $('#conversion__convertido--valor').text('0,00');
 
     } else{
-        validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', '#conversion__confirmacion--texto');
+        validarOperacion('No dispone de fondos necesarios, vuelva a intentarlo.', '#conversion__confirmacion--texto');
+        $('#conversion__ingreso--divisa').val('');
+        $('#conversion__convertido--valor').text('0,00');
     }
 }
 
@@ -204,10 +227,13 @@ function obtenerCriptoDeBilletera (){
     let cripto = obtenerSessionStorage('criptomoneda')
     let tk = cripto.symbol.toUpperCase();
 
-    for(i=0; i<arrayCompras.length;i++){
-        let posicion = arrayCompras[i];
-        if(posicion.tipo == tk){
-            return posicion
+
+    if(arrayCompras != null){
+        for(i=0; i<arrayCompras.length;i++){
+            let posicion = arrayCompras[i];
+            if(posicion.tipo == tk){
+                return posicion
+            }
         }
     }
 }
@@ -265,13 +291,17 @@ function ingresoBilletera({billeteraTotal}, cantidad){
     return billeteraTotal + conversion
 }
 
-function agregarVentas(cripto){
+
+function agregarQuitarCompra(cripto, verif){
     let array = obtenerStorage('listaCompras');
     for(i=0;i<array.length;i++){
         let posicion = array[i];
-        if(posicion.tipo == cripto.tipo){
+        if(posicion.tipo == cripto.tipo && verif == true){
             array.splice(i, 1, cripto)
-            return array
+        }
+        if(posicion.tipo == cripto.tipo && verif == false){
+            array.splice(i, 1)
         }
     }
+    return array
 }

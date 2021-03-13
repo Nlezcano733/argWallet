@@ -36,12 +36,10 @@ function mostrarOcultar (){
     let cantidadBalance = sumatoriaBilleteraTotal();
 
     if(mostrador != mensajeOculto){
-        console.log('if')
         $(ojo).attr('class', 'fas fa-eye');
         $(selectorBalance).attr('disabled', '')
         $('.billeteraUser__balance--cantidad').text(mensajeOculto);
     } else{
-        console.log('else')
         $(ojo).attr('class', 'fas fa-eye-slash');
         $(selectorBalance).removeAttr('disabled', '')
         $('.billeteraUser__balance--cantidad').text(cantidadBalance);
@@ -92,7 +90,6 @@ function accionarBtnLista(){
         let btn = $('.listado')
         $(btn[i]).click(()=>{
             btnLista(i)
-            // activacionBtnVenta()
             $('#conversion__ingreso--divisa').keypress(conversionDinamica);
             $('#conversion__ingreso--divisa').val('');
             $('#conversion__convertido--valor').text('0,00')
@@ -105,6 +102,7 @@ function btnLista(i){
     nombreElegido = $(nombre[i]).text();
     nombre = nombreElegido.toLowerCase();
     armadoDePanelElegido(nombre);
+    $('#confirmacionVenta').off('click')
 }
 
 // ----------------------------------------------//
@@ -125,8 +123,6 @@ function armadoDePanelInicial(){
             if(tk == cripto.symbol){
                 armadoDePanel(cripto, moneda);
                 criptoCompletoToStorage(cripto);
-
-                activacionBtnVenta();
             }
         })
     })
@@ -150,7 +146,7 @@ function armadoDePanelElegido(nombre){
                 parElegido = JSON.stringify(parElegido)
                 sessionStorage.setItem('cripto', parElegido);
 
-                activacionBtnVenta()
+                activacionBtnVenta();
             }
         })
     })
@@ -226,10 +222,11 @@ function conversionDinamica(event){
 
 function activacionBtnVenta(){
     let criptoCliente = obtenerCriptoDeBilletera();
-    console.log(criptoCliente)
     if(criptoCliente == undefined){
         $('#confirmacionVenta').attr('disabled', '');
+        $('#confirmacionVenta').off('click')
     } else{
         $('#confirmacionVenta').removeAttr('disabled');
+        accionarBtnVenta();
     }
 }
