@@ -138,7 +138,7 @@ function slider() {
     $('.single-item').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 10000,
         appendArrows: $('#info'),
         dots: true,

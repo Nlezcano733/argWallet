@@ -9,40 +9,38 @@ $('#conversor__btnMercado').click(()=>{
 // --------------MODIFICAR HEADER--------------- //
 // ----------------------------------------------//
 
-function mostrarBilletera (){
-    let selector = $('.billeteraUser__balance--divisas').val();
-    let balanceTotal
+function mostrarBilletera(){
+    let billeteraTotal = obtenerArrayDeBilleteras();
+    let elemento = $('.billeteraUser__balance__billetera--cantidad')
+    let posicion;
 
-    balanceTotal = sumatoriaBilleteraTotal();
-
-    let objetoDivisaElegida = objetoCompletoSelecto(selector, carteraDivisas);
-    cantidadBilleteraMostrada = modificarCantidad(objetoDivisaElegida, balanceTotal, '.billeteraUser__balance--cantidad');
-
+    for(i=0; i<billeteraTotal.length; i++){
+        posicion = billeteraTotal[i];
+        if(posicion.billeteraTotal == 0 || posicion.billeteraTotal == null){
+            modificarElemento(elemento[i], `${posicion.simbolo}0,00`)
+        } else{
+            let cantidad = grandesCantidades(posicion.billeteraTotal)
+            modificarElemento(elemento[i], `${posicion.simbolo}${cantidad}`)
+        }
+    }
 }
-
-function modificarCantidad({simbolo}, cantidadTotal, ubicacion){
-    textoParaMostrar = `${simbolo} ${cantidadTotal}`;
-    mostrador = $(ubicacion).text(textoParaMostrar);
-    return textoParaMostrar;
-}
-
 
 function mostrarOcultar (){
+    let mostrador = $('#pesos__cantidad').text()
     let mensajeOculto = '**************';
     let ojo = $('#ojoUser');
-    let selectorBalance = $('.billeteraUser__balance--divisas');
 
-    let mostrador = $('.billeteraUser__balance--cantidad').text()
-    let cantidadBalance = sumatoriaBilleteraTotal();
+    let billeteras = obtenerArrayDeBilleteras();
+    let cantidades = textoCantidad(billeteras);
 
     if(mostrador != mensajeOculto){
         $(ojo).attr('class', 'fas fa-eye');
-        $(selectorBalance).attr('disabled', '')
-        $('.billeteraUser__balance--cantidad').text(mensajeOculto);
+        $('.billeteraUser__balance__billetera--cantidad').text(mensajeOculto);
     } else{
         $(ojo).attr('class', 'fas fa-eye-slash');
-        $(selectorBalance).removeAttr('disabled', '')
-        $('.billeteraUser__balance--cantidad').text(cantidadBalance);
+        $('#pesos__cantidad').text(cantidades[0])
+        $('#dolares__cantidad').text(cantidades[1])
+        $('#euros__cantidad').text(cantidades[2])
     }  
 }
 

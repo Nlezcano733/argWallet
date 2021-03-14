@@ -4,20 +4,6 @@ let billeteraPesos, billeteraDolares, billeteraEuros;
 
 // --------- CREACION DE CONSTRUCTORES ---------- //
 
-// function Billetera (divisa, divisaObjeto, billeteraTotal, cantidadDivisa, arrayCompras){
-//     this.divisa = divisa,
-//     this.divisaObjeto = divisaObjeto;
-//     this.billeteraTotal = parseFloat(billeteraTotal),
-//     this.cantidadDivisa = parseFloat(cantidadDivisa),
-//     this.arrayCompras = arrayCompras
-// }
-
-// function BilleteraParcial (cantidadPesos, cantidadDolares, cantidadEuros){
-//     this.billeteraArs = parseFloat(cantidadPesos),
-//     this.billeteraUsd = parseFloat(cantidadDolares),
-//     this.billeteraEur = parseFloat(cantidadEuros)
-// }
-
 function BilleteraArs (billeteraTotal){
     this.divisa = 'ars'
     this.simbolo = '$',
@@ -62,12 +48,9 @@ $(()=>{
     cambioMuestraDivisa();
 
     billeterasTotalesInicial();
-    mostrarbilleteraSeleccionada()
-
     $('#ojoUser').click(mostrarOcultar)
 
     mostrarBilletera();
-    $('.billeteraUser__balance--divisas').change(mostrarBilletera)
     $('#depositoRetiro__registro--divisas').change(mostrarbilleteraSeleccionada)
     
     accionarDeposito();

@@ -38,7 +38,6 @@ function getAjaxConvReferencia(moneda, cantidad){
     //pedido para actualizar valores de btc segun moneda y poder convertirlo segun la moneda y cantidad de la billetera seleccionada
 }
 
-
 // ---------------------------------------------- //
 // -------------DEPOSITO DE DINERO--------------- //
 // ---------------------------------------------- //
@@ -59,12 +58,10 @@ function depositarConEnter  (event){
     }
 }
 
-
 function depositarBilletera(input, moneda){
     moneda = moneda.toLowerCase()
     let billeteraUsada = eleccionDeBilletera(moneda);
     cantidad = billeteraUsada.billeteraTotal;
-    // let claseBoton = $('.depositoRetiro');
     
     if(cantidad == 0 && input != ""){
         crearBilletera(input, moneda);
@@ -145,6 +142,10 @@ function restarBilletera(input, billeteraElegida){
         actualizacionBilleteras('#depositoRetiro__registro--divisas', cantidadRestante);
         actualizarBilleterasStorage();
         mostrarbilleteraSeleccionada();
+
+        if(cantidadRestante == 0){
+            habilitacionBtn();
+        }
         validarOperacion('Movimiento exitoso', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion')
     } 
     if (dineroIngresado > billeteraActual){
@@ -157,7 +158,7 @@ function restarBilletera(input, billeteraElegida){
 // -------------ARMADO DE BILLETERAS------------- //
 // ---------------------------------------------- //
 
-function crearBilletera(input, moneda){
+function crearBilletera(input){
     let dineroIngresado;
 
     if(input != null || input != ""){

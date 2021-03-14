@@ -117,7 +117,6 @@ function modificarElementosDeTabla(par, precio, cambio, max, min, vol, i){
     let classMin = $('.activo__cuerpo--min')
     let classVol = $('.activo__cuerpo--vol')
 
-
     modificarElemento(classPar[i], par)
     modificarElemento(classPrecio[i], precio)
     modificarElemento(classCambio[i], cambio)
@@ -128,7 +127,6 @@ function modificarElementosDeTabla(par, precio, cambio, max, min, vol, i){
 }
 
 // --------------------------------------------- //
-
 
 function armarTr (nombre, logo, par, precio, cambio, max, min, vol, i){
 
@@ -168,7 +166,6 @@ function crearBtn (padre, attr, nombreAttr, i){
 
 }
 
-
 function accionarBtnLista(){
     for(let i=0; i<25; i++){
         let btn = $('.activo__cuerpo--btn')
@@ -182,7 +179,6 @@ function btnLista(i){
     let par = $('.parCriptoLista');
     parElegido = $(par[i]).text();
     parElegido = parElegido.toLowerCase();
-    console.log(parElegido)
     parElegido = parElegido.split('/');
     parElegido = JSON.stringify(parElegido)
     sessionStorage.setItem('cripto', parElegido);
@@ -227,16 +223,20 @@ function eventoInput (id){
 // ----------MOSTRAR/OCULTAR BILLETERAS---------- //
 // ---------------------------------------------- //
 
-function mostrarBilletera (){
-    let selector = $('.billeteraUser__balance--divisas').val();
-    selector = selector.toUpperCase();
-    let balanceTotal
+function mostrarBilletera(){
+    let billeteraTotal = obtenerArrayDeBilleteras();
+    let elemento = $('.billeteraUser__balance__billetera--cantidad')
+    let posicion;
 
-    balanceTotal = sumatoriaBilleteraTotal();
-
-    let objetoDivisaElegida = objetoCompletoSelecto(selector, carteraDivisas);
-    cantidadBilleteraMostrada = modificarCantidad(objetoDivisaElegida, balanceTotal, '.billeteraUser__balance--cantidad');
-
+    for(i=0; i<billeteraTotal.length; i++){
+        posicion = billeteraTotal[i];
+        if(posicion.billeteraTotal == 0 || posicion.billeteraTotal == null){
+            modificarElemento(elemento[i], `${posicion.simbolo}0,00`)
+        } else{
+            let cantidad = grandesCantidades(posicion.billeteraTotal)
+            modificarElemento(elemento[i], `${posicion.simbolo}${cantidad}`)
+        }
+    }
 }
 
 function mostrarbilleteraSeleccionada (){
@@ -251,18 +251,7 @@ function mostrarbilleteraSeleccionada (){
     } else{
         balanceTotal = billeteraEuros.billeteraTotal;
     }
-
-    objetoDivisaElegida = objetoCompletoSelecto(selectorValor, carteraDivisas);
-    cantidadBilleteraMostrada = modificarCantidad(objetoDivisaElegida, balanceTotal, '.depositoRetiro__registro--dinero');
-    modificarElemento('#depositoRetiro__interaccion__input--simbolo', objetoDivisaElegida.simbolo)
     getAjaxConvReferencia(selector, balanceTotal)
-
-}
-
-function modificarCantidad({simbolo}, cantidadTotal, ubicacion){
-    textoParaMostrar = `${simbolo} ${cantidadTotal}`;
-    mostrador = $(ubicacion).text(textoParaMostrar);
-    return textoParaMostrar;
 }
 
 function convertirMonedaCriptoRef(cantidad, cripto){
@@ -273,29 +262,29 @@ function convertirMonedaCriptoRef(cantidad, cripto){
 
 function mostrarOcultar (){
     // TO DO - ocultar valores de criptos compradas cuando se cree la lista
+    let mostrador = $('#pesos__cantidad').text()
+    let selectorRegistro = $('#depositoRetiro__registro--divisas');
+
     let mensajeOculto = '**************';
     let ojo = $('#ojoUser');
 
-    let selectorBalance = $('.billeteraUser__balance--divisas');
-    let selectorRegistro = $('#depositoRetiro__registro--divisas');
-
-    let mostrador = $('.billeteraUser__balance--cantidad').text()
-    let cantidadBalance = sumatoriaBilleteraTotal();
+    let billeteras = obtenerArrayDeBilleteras();
+    let cantidades = textoCantidad(billeteras);
 
     if(mostrador != mensajeOculto){
         $(ojo).attr('class', 'fas fa-eye');
-        $(selectorBalance).attr('disabled', '')
         $(selectorRegistro).attr('disabled', '')
-        $('.billeteraUser__balance--cantidad').text(mensajeOculto);
-        $('.depositoRetiro__registro--dinero').text(mensajeOculto);
+        $('.billeteraUser__balance__billetera--cantidad').text(mensajeOculto);
         $('.depositoRetiro__registro--btc').text(mensajeOculto);
     } else{
         $(ojo).attr('class', 'fas fa-eye-slash');
-        $(selectorBalance).removeAttr('disabled', '')
         $(selectorRegistro).removeAttr('disabled', '')
-        $('.billeteraUser__balance--cantidad').text(cantidadBalance);
         mostrarbilleteraSeleccionada();
+        $('#pesos__cantidad').text(cantidades[0])
+        $('#dolares__cantidad').text(cantidades[1])
+        $('#euros__cantidad').text(cantidades[2])
     }  
 }
+
 
 // ------------------------------------------------- //

@@ -198,7 +198,6 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
         }
         
         let billeteraActual = ingresoBilletera(billetera, venta);
-        console.log(billeteraActual)
         actualizacionBilleteras('#nombreCripto__divisas', billeteraActual);
         billeteraParaOcultar = mostrarBilletera();
 
@@ -208,7 +207,6 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
 
         venta = new Transaccion(tk, venta, moneda, input);
         ventaToStorage(venta);
-
 
         validarOperacion('movimiento exitoso.', '#conversion__confirmacion--texto');
         $('#conversion__ingreso--divisa').val('');
@@ -304,16 +302,6 @@ function agregarQuitarCompra(cripto, verif){
     }
     return array
 }
-
-// $('#conversion__ingreso--divisa').focus(()=>{
-//     cripto = obtenerCriptoDeBilletera();
-//     console.log(cripto)
-
-//     if(cripto == undefined){
-//         crearElemento('#conversion__confirmacion', 'p', 'id', 'conversion__confirmacion--texto', 'contenido', 0);
-//     }
-// })
-
 
 function mostrarCantidadCriptos (){
     let arrayCompras = obtenerStorage('listaCompras')

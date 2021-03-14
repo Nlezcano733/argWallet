@@ -106,11 +106,6 @@ function modificarFoto(nodoImagen, direccion){
     nodo = $(nodoImagen).attr('src', direccion);
 }
 
-function capturarEvento (event){
-    console.log(event.which);
-}
-
-
 
 // -------------------------------------------- //
 //            FUNCIONES SOBRE ACTIVO            //
@@ -149,6 +144,7 @@ function grandesCantidades (cantidad){
         criptoVol = parseFloat(criptoVol / millon).toFixed(2);
         return `${criptoVol} M`
     }
+    return cantidad
 }
 
 function formateoFecha(fecha){
@@ -164,6 +160,19 @@ function crearTr(nodoPadre, nombreClase){
     nuevoNodo = document.createElement('tr');
     $(nuevoNodo).attr('class', nombreClase);
     $(nodoPadre).append(nuevoNodo);
+}
+
+function textoCantidad (array){
+    let arrayTexto = [];
+    for(i=0; i<array.length;i++){
+        simbolo = array[i].simbolo;
+        billeteraTotal = array[i].billeteraTotal;
+        cantidad = grandesCantidades(billeteraTotal)
+        texto = `${simbolo}${cantidad}`
+        arrayTexto.push(texto)
+    }
+    console.log(arrayTexto)
+    return arrayTexto;
 }
 
 
@@ -235,6 +244,13 @@ function billeteraEurToStorage(){
     localStorage.setItem('billeteraEur', billeteraEur);
 }
 
+function obtenerArrayDeBilleteras(){
+    let pesos = obtenerStorage('billeteraArs')
+    let dolares = obtenerStorage('billeteraUsd')
+    let euros = obtenerStorage('billeteraEur')
+    return [pesos, dolares, euros]
+}
+
 function arrayComprasToStorage(){
     let array = JSON.stringify(arrayCompras);
     localStorage.setItem('listaCompras', array);
@@ -267,7 +283,6 @@ function billeterasTotalesInicial (){
     billeteraEuros =  billeteraEurInicial()
     arrayCompras = arrayComprasInicial();
 
-    sumatoriaBilleteraTotal();
 }
 
 function billeteraArsInicial(){
@@ -349,61 +364,3 @@ function elegirBilletera(moneda){
         return obtenerStorage('billeteraEur');
     }
 }
-
-// -------------------------------------------- //
-//            UNIFICACION DE BILLETERA          //
-// -------------------------------------------- //
-
-function sumatoriaBilleteraTotal (){
-    let billeteraArs = obtenerStorage('billeteraArs');
-    let billeteraUsd = obtenerStorage('billeteraUsd');
-    let billeteraEur = obtenerStorage('billeteraEur');
-    let armadoDeBilletera;
-
-    if(billeteraArs == null && billeteraUsd == null && billeteraEur == null){
-        pesos = 0;
-        dolares = 0;
-        euros = 0;
-    } else{
-        pesos = billeteraArs.billeteraTotal;
-        dolares = billeteraUsd.billeteraTotal;
-        euros = billeteraEur.billeteraTotal;
-    }
-    armadoDeBilletera = conversionCadaValor(pesos, dolares, euros);
-    return armadoDeBilletera;
-}
-
-
-function conversionCadaValor (pesos, dolares, euros){
-    let sumatoria;
-    let valorPeso = carteraDivisas[0].value;
-    let valorDolar = carteraDivisas[1].value;
-    let valorEuro = carteraDivisas[2].value;
-    let monedaSumatoria = $('.billeteraUser__balance--divisas').val()
-    monedaSumatoria = monedaSumatoria.toLowerCase()
-
-    if(monedaSumatoria == 'ars'){
-        pesos = pesos;
-        dolares = dolares * valorDolar;
-        euros =  euros * valorEuro;
-        sumatoria = parseFloat(pesos + dolares + euros).toFixed(2);
-    }
-    if(monedaSumatoria == 'usd'){
-        pesos = pesos * (valorPeso/valorDolar);
-        dolares = dolares;
-        euros = euros * (valorEuro/valorDolar);
-        sumatoria = parseFloat(pesos + dolares + euros).toFixed(2);
-    }
-    if(monedaSumatoria == 'eur'){
-        pesos = pesos * (valorPeso/ valorEuro);
-        dolares = dolares * (valorDolar / valorEuro);
-        euros = euros;
-        sumatoria = parseFloat(pesos + dolares + euros).toFixed(2);
-    }
-    pesos = parseFloat(pesos).toFixed(3)
-    dolares = parseFloat(dolares).toFixed(3)
-    euros = parseFloat(euros).toFixed(3)
-
-    return sumatoria;
-}
- 
