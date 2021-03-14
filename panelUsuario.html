@@ -28,13 +28,25 @@
         </div>
 
         <div class="billeteraUser__balance">
-            <p class="billeteraUser__balance--subtitulo">Balance total:</p>
+            <div class="billeteraUser__balance__billetera" id="pesos">
+                <h2 class="billeteraUser__balance__billetera--moneda">ARS</h2>
+                <p class="billeteraUser__balance__billetera--cantidad" id="pesos__cantidad">$ 1000,00</p>
+            </div>
+            <div class="billeteraUser__balance__billetera" id="dolares">
+                <h2 class="billeteraUser__balance__billetera--moneda">USD</h2>
+                <p class="billeteraUser__balance__billetera--cantidad" id="dolares__cantidad">$ 0,00</p>
+            </div>
+            <div class="billeteraUser__balance__billetera" id="euros">
+                <h2 class="billeteraUser__balance__billetera--moneda">EUR</h2>
+                <p class="billeteraUser__balance__billetera--cantidad" id="euros__cantidad">€ 0,00</p>
+            </div>
+            <!-- <p class="billeteraUser__balance--subtitulo">Balance total:</p>
             <select class="billeteraUser__balance--divisas">
                 <option value="ars">ARS</option>
                 <option value="usd">USD</option>
                 <option value="eur">EUR</option>
             </select>
-            <p class="billeteraUser__balance--cantidad">$ 0.00</p>
+            <p class="billeteraUser__balance--cantidad">$ 0.00</p> -->
             <i id="ojoUser" class="fas fa-eye-slash"></i>
         </div>
     </section>
@@ -46,7 +58,7 @@
                 <option value="usd">USD</option>
                 <option value="eur">EUR</option>
             </select>
-            <p class="depositoRetiro__registro--dinero">$ 0</p>
+            <!-- <p class="depositoRetiro__registro--dinero">$ 0</p> -->
             <p class="depositoRetiro__registro--btc"> 0 BTC</p>
         </div>
         <div class="depositoRetiro__interaccion">
@@ -98,22 +110,6 @@
                     </select>
                 </th>
             </tr>
-            <!-- <tr class="activo__cuerpo">
-                <td class="activo__cuerpo__par">
-                    <div class="activo__cuerpo--nombre">
-                        <img src="assets/imagenes/doge.png" alt="Bitcoin" class="imagenCripto">
-                        <p class="parCriptoLista">BTC/ARS</p>
-                    </div>
-                </td>
-                <td class="activo__cuerpo--precio">47000</td>
-                <td class="activo__cuerpo--cambio">-10,47%</td>
-                <td class="activo__cuerpo--max">47400</td>
-                <td class="activo__cuerpo--min">46900</td>
-                <td class="activo__cuerpo--vol">1203M</td>
-                <td class="activo__cuerpo--input">
-                    <a href="#" class="activo__cuerpo--btn" role="button">Operar</a>
-                </td>
-            </tr> -->
         </table>
     </section>
 

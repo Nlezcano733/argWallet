@@ -154,13 +154,13 @@ header #conversor__navBar, header #user__navBar {
 #redes {
   position: fixed;
   left: 30px;
-  top: 70%;
+  top: 75%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: fit-content;
-  height: 140px;
+  height: 100px;
   background-color: transparent;
   z-index: 1000;
 }
@@ -171,9 +171,6 @@ header #conversor__navBar, header #user__navBar {
 }
 #redes i:hover {
   transform: scale(1.2);
-}
-#redes #darkMode:active {
-  color: #D3F325;
 }
 
 .panelIngreso {
@@ -566,74 +563,43 @@ header #conversor__navBar, header #user__navBar {
 }
 .billeteraUser .billeteraUser__balance {
   height: 100%;
-  width: 40%;
+  width: 50%;
   display: grid;
-  grid-column-gap: 30px;
+  grid-column-gap: 0px;
   grid-row-gap: 0px;
   justify-content: end;
   align-items: center;
-  grid-template-columns: 80px 1fr 1fr 25px;
-  grid-template-areas: "selector titulo cantidad ojo";
+  grid-template-columns: repeat(3, 1fr) 25px;
+  grid-template-areas: "pesos dolares euros ojo";
   font-size: 18px;
 }
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--subtitulo {
-  grid-area: titulo;
-  font-weight: bold;
-  margin-right: 20px;
+.billeteraUser .billeteraUser__balance #pesos {
+  grid-area: pesos;
 }
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas {
-  grid-area: selector;
-  width: 80px;
-  height: 35px;
-  color: #334761;
-  background-color: #eeeeee;
-  border: 1px solid #334761;
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in;
-  font-size: 16px;
-  margin-right: 50px;
+.billeteraUser .billeteraUser__balance #dolares {
+  grid-area: dolares;
 }
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:hover {
-  background-color: #334761;
-  color: #eeeeee;
+.billeteraUser .billeteraUser__balance #euros {
+  grid-area: euros;
 }
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #4d4d4d inset;
+.billeteraUser .billeteraUser__balance .billeteraUser__balance__billetera {
+  height: 100%;
+  padding-right: 15px;
+  margin-right: 15px;
+  border-right: 1px solid #bbbbbb;
 }
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:focus {
-  background-color: #334761;
-  color: #eeeeee;
-  outline: none;
+.billeteraUser .billeteraUser__balance .billeteraUser__balance__billetera .billeteraUser__balance__billetera--moneda {
+  display: inline-block;
+  width: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: Lato, sans-serif, verdana;
+  line-height: 2.5em;
 }
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:disabled {
-  width: 80px;
-  height: 35px;
-  color: #999999;
-  background-color: #eeeeee;
-  border: 1px solid #999999;
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in;
-}
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:disabled:hover {
-  background-color: #999999;
-  color: #eeeeee;
-}
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:disabled:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #4d4d4d inset;
-}
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--divisas:disabled:focus {
-  background-color: #999999;
-  color: #eeeeee;
-  outline: none;
-}
-.billeteraUser .billeteraUser__balance .billeteraUser__balance--cantidad {
-  grid-area: cantidad;
+.billeteraUser .billeteraUser__balance .billeteraUser__balance__billetera .billeteraUser__balance__billetera--cantidad {
+  display: inline-block;
+  width: calc(100% - 55px);
+  margin-left: 10px;
   text-align: right;
 }
 .billeteraUser .billeteraUser__balance #ojoUser, .billeteraUser .billeteraUser__balance #ojoConversor {
@@ -659,8 +625,8 @@ header #conversor__navBar, header #user__navBar {
   grid-row-gap: 0px;
   justify-content: start;
   align-items: center;
-  grid-template-columns: 70px repeat(2, 1fr);
-  grid-template-areas: "divisa cantidad conversion";
+  grid-template-columns: 70px 1fr;
+  grid-template-areas: "divisa conversion";
 }
 #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas {
   grid-area: divisa;
