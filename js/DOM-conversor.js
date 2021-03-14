@@ -102,7 +102,7 @@ function btnLista(i){
     nombreElegido = $(nombre[i]).text();
     nombre = nombreElegido.toLowerCase();
     armadoDePanelElegido(nombre);
-    $('#confirmacionVenta').off('click')
+    $('#confirmacionVenta').off('click');
 }
 
 // ----------------------------------------------//

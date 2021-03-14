@@ -272,6 +272,7 @@ function convertirMonedaCriptoRef(cantidad, cripto){
 }
 
 function mostrarOcultar (){
+    // TO DO - ocultar valores de criptos compradas cuando se cree la lista
     let mensajeOculto = '**************';
     let ojo = $('#ojoUser');
 

@@ -1293,6 +1293,9 @@ header #conversor__navBar, header #user__navBar {
   grid-area: confirmacion;
   text-align: center;
 }
+#transaccion #conversion #conversion__confirmacion #conversion__confirmacion--cantidad {
+  display: none;
+}
 #transaccion #conversion #btnConfirmacion {
   grid-area: btnConfirmacion;
   display: flex;

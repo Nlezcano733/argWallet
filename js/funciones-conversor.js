@@ -227,7 +227,6 @@ function obtenerCriptoDeBilletera (){
     let cripto = obtenerSessionStorage('criptomoneda')
     let tk = cripto.symbol.toUpperCase();
 
-
     if(arrayCompras != null){
         for(i=0; i<arrayCompras.length;i++){
             let posicion = arrayCompras[i];
@@ -304,4 +303,33 @@ function agregarQuitarCompra(cripto, verif){
         }
     }
     return array
+}
+
+// $('#conversion__ingreso--divisa').focus(()=>{
+//     cripto = obtenerCriptoDeBilletera();
+//     console.log(cripto)
+
+//     if(cripto == undefined){
+//         crearElemento('#conversion__confirmacion', 'p', 'id', 'conversion__confirmacion--texto', 'contenido', 0);
+//     }
+// })
+
+
+function mostrarCantidadCriptos (){
+    let arrayCompras = obtenerStorage('listaCompras')
+    let cripto = obtenerSessionStorage('criptomoneda')
+    let tk = cripto.symbol.toUpperCase();
+
+    if(arrayCompras != null){
+        for(i=0; i<arrayCompras.length;i++){
+            let posicion = arrayCompras[i];
+            if(posicion.tipo == tk){
+                let mensaje = `Usted dispone ${posicion.cantidad} ${posicion.tipo}`
+                modificarElemento('#conversion__confirmacion--cantidad', mensaje);
+                break;
+            } else{
+                modificarElemento('#conversion__confirmacion--cantidad', '');
+            }
+        }
+    }
 }

@@ -173,17 +173,3 @@ function crearBilletera(input, moneda){
     //Crea una billetera parcial y la almacena en storage
 }
 
-// function actualizacionBilleteras(cantidad){
-//     let selector = $('#depositoRetiro__registro--divisas').val();
-//     selector = selector.toLowerCase()
-
-//     if(selector == 'ars'){
-//         billeteraPesos =  new BilleteraArs(cantidad)
-//     }
-//     if(selector == 'usd'){
-//         billeteraDolares =  new BilleteraUsd(cantidad)
-//     }
-//     if(selector == 'eur'){
-//         billeteraEuros =  new BilleteraEur(cantidad)
-//     }
-// }

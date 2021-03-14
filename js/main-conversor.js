@@ -58,8 +58,16 @@ $(()=>{
     armadoDePanelInicial();
     armadoDePanelPorSelector();
     
+    $('#conversion__ingreso--divisa').focus(()=>{
+        mostrarCantidadCriptos();
+        $('#conversion__confirmacion--cantidad').show();
+    })
+    $('#conversion__ingreso--divisa').blur(()=>{
+        $('#conversion__confirmacion--cantidad').hide();
+    })
+
+    
     $('#conversion__ingreso--divisa').keypress(conversionDinamica);
     accionarBtnCompra();
-
     activacionBtnVenta();
 })

@@ -964,6 +964,10 @@ header{
         #conversion__confirmacion{
             grid-area: confirmacion;
             text-align: center;
+            
+            #conversion__confirmacion--cantidad{
+                display: none;
+            }
         }
         #btnConfirmacion{
             grid-area: btnConfirmacion;
