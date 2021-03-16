@@ -75,6 +75,14 @@ function crearElemento (padre, tag, attr, nombreAttr, contenido, i){
     $(nodoPadre[i]).append(nuevoNodo);
 }
 
+function crearSelector(padre, tag, attr, nombreAttr, i){
+    let nuevoNodo, nodoPadre;
+    nodoPadre = $(padre);
+    nuevoNodo = document.createElement(tag);
+    $(nuevoNodo).attr(attr, nombreAttr);
+    $(nodoPadre[i]).append(nuevoNodo);
+}
+
 
 function modificarElemento(elemento, contenido){
      $(elemento).text(contenido)
@@ -248,7 +256,12 @@ function obtenerArrayDeBilleteras(){
     let pesos = obtenerStorage('billeteraArs')
     let dolares = obtenerStorage('billeteraUsd')
     let euros = obtenerStorage('billeteraEur')
-    return [pesos, dolares, euros]
+
+    if(pesos == null || dolares == null || euros == null){
+        return [billeteraPesos, billeteraDolares, billeteraEuros];
+    } else{
+        return [pesos, dolares, euros]
+    }
 }
 
 function arrayComprasToStorage(){
@@ -282,7 +295,6 @@ function billeterasTotalesInicial (){
     billeteraDolares =  billeteraUsdInicial()
     billeteraEuros =  billeteraEurInicial()
     arrayCompras = arrayComprasInicial();
-
 }
 
 function billeteraArsInicial(){

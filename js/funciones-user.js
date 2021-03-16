@@ -174,3 +174,65 @@ function crearBilletera(input){
     //Crea una billetera parcial y la almacena en storage
 }
 
+
+// ---------------------------------------------- //
+// ---------ARMADO DE LISTA DE COMPRAS----------- //
+// ---------------------------------------------- //
+
+function getAjaxArmadoCompras(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=ars&order=market_cap_desc&per_page=25&page=1&sparkline=false",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        infoParaListaCompras(resultado);
+    })
+}
+function getAjaxModificarCompras(moneda, compras){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + moneda + "&order=market_cap_desc&per_page=25&page=1&sparkline=false",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        modificacionCompras(resultado, compras);
+    })
+}
+
+function conversionEntreCantidades(compra, selector){
+    let valDolar = carteraDivisas[1].value;
+    let valEuro = carteraDivisas[2].value;
+
+    let monedaConversion = compra.moneda;
+    let gastoCompra = compra.gasto;
+
+    let conversion;
+
+    if(selector == 'ARS'){
+        if(monedaConversion == 'USD'){
+            conversion = gastoCompra * valDolar;
+        } else if(monedaConversion == 'EUR'){
+            conversion = gastoCompra * valEuro;
+        } else{
+            conversion = gastoCompra;
+        }
+    }
+    if(selector == 'USD'){
+        if(monedaConversion == 'ARS'){
+            conversion =  gastoCompra / valDolar;
+        } else if(monedaConversion == 'EUR'){
+            conversion =  gastoCompra * ((valEuro / valDolar));
+        } else{
+            conversion =  gastoCompra;
+        }
+    }
+    if(selector == 'EUR'){
+        if(monedaConversion == 'ARS'){
+            conversion =  gastoCompra / valEuro;
+        } else if(monedaConversion == 'USD'){
+            conversion =  gastoCompra * (valDolar / valEuro);
+        } else{
+            conversion =  gastoCompra;
+        }
+    }
+    return parseFloat((conversion).toFixed(3));
+}

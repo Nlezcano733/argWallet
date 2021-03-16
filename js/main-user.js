@@ -58,4 +58,6 @@ $(()=>{
 
     habilitacionBtn()
     $('#depositoRetiro__registro--divisas').change(habilitacionBtn)
+
+    getAjaxArmadoCompras();
 })

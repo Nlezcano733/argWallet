@@ -19,11 +19,12 @@ function BilleteraEur (billeteraTotal){
     this.billeteraTotal = parseInt(billeteraTotal);
 }
 
-function Transaccion(tipo, cantidad, moneda, gasto){
+function Transaccion(tipo, cantidad, moneda, gasto, precio){
     this.tipo = tipo,
     this.cantidad = cantidad,
     this.moneda = moneda,
-    this.gasto = gasto
+    this.gasto = gasto,
+    this.precio = precio
 }
 // ------------------------------------ //
 

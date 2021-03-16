@@ -14,8 +14,11 @@ function accionarBtnCompra(){
         let selector = $('#nombreCripto__divisas').val(); 
         let valorInput = $('#conversion__ingreso--divisa').val();
         let conversion = $('#conversion__convertido--valor').text();
+        let precio = $('#infoCripto__cotizacion--valorCompra').text();
+        precio = precio.split(' ');
+        precio = parseFloat(precio[1]);
 
-        validacionCompra(selector, valorInput, conversion);
+        validacionCompra(selector, valorInput, conversion, precio);
         $('#conversion__ingreso--divisa').val('');
         $('#conversion__convertido--valor').text('0,00')
     })
@@ -43,7 +46,7 @@ function accionarBtnVenta(){
 // -------------ALGORITMOS DE COMPRA------------ //
 // ----------------------------------------------// 
 
-function validacionCompra(selector, input, conversion){ 
+function validacionCompra(selector, input, conversion, precio){ 
     let billetera = eleccionDeBilletera(selector);
     let cantidad = billetera.billeteraTotal;
 
@@ -63,7 +66,7 @@ function validacionCompra(selector, input, conversion){
         tk = cripto[0].toUpperCase();
         moneda = cripto[1].toUpperCase();
 
-        compra = new Transaccion(tk, compra, moneda, input);
+        compra = new Transaccion(tk, compra, moneda, input, precio);
         compraToStorage(compra);
         agregarCompras();
 
@@ -201,12 +204,13 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
         actualizacionBilleteras('#nombreCripto__divisas', billeteraActual);
         billeteraParaOcultar = mostrarBilletera();
 
-        cripto = obtenerSessionStorage('cripto');
-        tk = cripto[0].toUpperCase();
-        moneda = cripto[1].toUpperCase();
+        // TO DO - ver utilidad de enviar transacciones de venta a storage - uso para ver ganancias
+        // cripto = obtenerSessionStorage('cripto');
+        // tk = cripto[0].toUpperCase();
+        // moneda = cripto[1].toUpperCase();
 
-        venta = new Transaccion(tk, venta, moneda, input);
-        ventaToStorage(venta);
+        // venta = new Transaccion(tk, venta, moneda, input);
+        // ventaToStorage(venta);
 
         validarOperacion('movimiento exitoso.', '#conversion__confirmacion--texto');
         $('#conversion__ingreso--divisa').val('');

@@ -391,6 +391,8 @@ header{
                 padding-left: 20px;
                 background-color: $colorGris1;
                 border: none;
+                position: sticky;
+                top:0px;
 
                 #lista__cabecera--divisas{
                     @include selector(90px, 35px, $colorGris1, $colorAzul6);
@@ -545,7 +547,7 @@ header{
     @include flexbox(row, space-between, center);
     padding: 10px 80px;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 
     .depositoRetiro__registro{
         width: 30%;
@@ -617,29 +619,64 @@ header{
     height: calc(100vh - 250px);
     padding: 0px 80px;
 
-    h2{
+
+    #cartera__encabezado--titulo{
         font-family: $fuenteTitulo;
+        display: inline-block;
     }
+
 
     #cartera__lista{
         width: 100%;
+        height: calc(100% - 55px);
+        overflow: auto;
         padding: 0px;
-        margin-top: 30px;
+        margin-top: 15px;
+        
+        &::-webkit-scrollbar{
+            width: 5px;
+        }
+        &::-webkit-scrollbar:active{
+            width: 10px;
+        }
 
+        &::-webkit-scrollbar-thumb{
+            background-color: $colorAzul2;
+            border-radius: 10px;
+        }
+
+        #cartera__lista__cabecera{
+            width: 100%;
+            height: 50px;
+            position: sticky;
+            top:0px;
+            @include grids(15px, 0px, start, center);
+            grid-template-columns: 1.5fr repeat(4, 1fr) 110px;
+            font-weight: 600;
+            background-color: $colorGris1;
+
+            #cartera__lista__cabecera--nombre{
+                margin-left: 20px;
+            }
+            #cartera__lista__cabecera--divisas{
+                @include selector(90px, 35px, $colorGris0, $colorAzul6);
+                margin-right: 20px;
+            }
+        }
         .cartera__lista__posesion{
             width: 100%;
-            height: 40px;
-            padding-bottom: 10px;
+            height: 50px;
             @include grids(15px, 0px, start, center);
-            grid-template-columns: repeat(2, 2fr)  150px 100px 150px 1fr 210px;
-            grid-template-areas: "nombre cantidad conversion cambio ganancias . input";
+            grid-template-columns: 1.5fr repeat(4, 1fr) 100px;
+            grid-template-areas: "nombre cantidad conversion cambio ganancias input";
             border-bottom: 1px solid $colorGris2;
 
             .nombre{
                 grid-area: nombre;
                 width: 100%;
                 @include flexbox (row, flex-start, center);
-                .cartera__lista__posesion--imagen{
+                padding-left: 20px;
+                .cartera__lista__posesion--image{
                     width: 30px;
                     margin-right: 10px;
                 }
@@ -660,17 +697,13 @@ header{
             .cartera__lista__posesion--ganancias{
                 grid-area: ganancias;
             }
-            .input{
+            .cartera__lista__posesion--operar{
                 grid-area: input;
-                width: 100%;
-                @include flexbox(row, space-between, center);
-
-                .cartera__lista__posesion--compra{
-                    @include boton(90px, 30px, $colorVioleta2, $colorVioleta3);
-                }
-                .cartera__lista__posesion--venta{
-                    @include botonSecundario(90px, 30px, $colorGris0, $colorVioleta3);
-                }
+                @include botonSecundario(90px, 30px, $colorGris0, $colorVioleta4);
+                margin-right: 20px;
+                line-height: 22px;
+                text-decoration: none;
+                justify-self: end;
             }
 
 
@@ -725,6 +758,8 @@ header{
                 padding-left: 20px;
                 text-align: left;
                 background-color: $colorGris1;
+                position: sticky;
+                top:0px;
 
                 &:last-child{
                     width: 500px;

@@ -449,6 +449,8 @@ header #conversor__navBar, header #user__navBar {
   padding-left: 20px;
   background-color: #dddddd;
   border: none;
+  position: sticky;
+  top: 0px;
 }
 #mercado #mercado__lista #lista__cabecera th #lista__cabecera--divisas {
   width: 90px;
@@ -616,7 +618,7 @@ header #conversor__navBar, header #user__navBar {
   align-items: center;
   padding: 10px 80px;
   margin-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 #depositoRetiro .depositoRetiro__registro {
   width: 30%;
@@ -798,25 +800,79 @@ header #conversor__navBar, header #user__navBar {
   height: calc(100vh - 250px);
   padding: 0px 80px;
 }
-#cartera h2 {
+#cartera #cartera__encabezado--titulo {
   font-family: Noto_sans, sans-serif, verdana;
+  display: inline-block;
 }
 #cartera #cartera__lista {
   width: 100%;
+  height: calc(100% - 55px);
+  overflow: auto;
   padding: 0px;
-  margin-top: 30px;
+  margin-top: 15px;
 }
-#cartera #cartera__lista .cartera__lista__posesion {
+#cartera #cartera__lista::-webkit-scrollbar {
+  width: 5px;
+}
+#cartera #cartera__lista::-webkit-scrollbar:active {
+  width: 10px;
+}
+#cartera #cartera__lista::-webkit-scrollbar-thumb {
+  background-color: #97adc9;
+  border-radius: 10px;
+}
+#cartera #cartera__lista #cartera__lista__cabecera {
   width: 100%;
-  height: 40px;
-  padding-bottom: 10px;
+  height: 50px;
+  position: sticky;
+  top: 0px;
   display: grid;
   grid-column-gap: 15px;
   grid-row-gap: 0px;
   justify-content: start;
   align-items: center;
-  grid-template-columns: repeat(2, 2fr) 150px 100px 150px 1fr 210px;
-  grid-template-areas: "nombre cantidad conversion cambio ganancias . input";
+  grid-template-columns: 1.5fr repeat(4, 1fr) 110px;
+  font-weight: 600;
+  background-color: #dddddd;
+}
+#cartera #cartera__lista #cartera__lista__cabecera #cartera__lista__cabecera--nombre {
+  margin-left: 20px;
+}
+#cartera #cartera__lista #cartera__lista__cabecera #cartera__lista__cabecera--divisas {
+  width: 90px;
+  height: 35px;
+  color: #334761;
+  background-color: #eeeeee;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-right: 20px;
+}
+#cartera #cartera__lista #cartera__lista__cabecera #cartera__lista__cabecera--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#cartera #cartera__lista #cartera__lista__cabecera #cartera__lista__cabecera--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#cartera #cartera__lista #cartera__lista__cabecera #cartera__lista__cabecera--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#cartera #cartera__lista .cartera__lista__posesion {
+  width: 100%;
+  height: 50px;
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 0px;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: 1.5fr repeat(4, 1fr) 100px;
+  grid-template-areas: "nombre cantidad conversion cambio ganancias input";
   border-bottom: 1px solid #bbbbbb;
 }
 #cartera #cartera__lista .cartera__lista__posesion .nombre {
@@ -826,8 +882,9 @@ header #conversor__navBar, header #user__navBar {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  padding-left: 20px;
 }
-#cartera #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--imagen {
+#cartera #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--image {
   width: 30px;
   margin-right: 10px;
 }
@@ -847,55 +904,31 @@ header #conversor__navBar, header #user__navBar {
 #cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--ganancias {
   grid-area: ganancias;
 }
-#cartera #cartera__lista .cartera__lista__posesion .input {
+#cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--operar {
   grid-area: input;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--compra {
   width: 90px;
   height: 30px;
-  color: #eeeeee;
-  background-color: #7908FF;
-  border: 2px solid #5F06CC;
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in;
-}
-#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--compra:hover {
-  background-color: #5F06CC;
-}
-#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--compra:active {
-  outline: none;
-  box-shadow: 0px 0px 5px #4d4d4d inset;
-}
-#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--compra:focus {
-  outline: none;
-}
-#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--venta {
-  width: 90px;
-  height: 30px;
-  color: #5F06CC;
+  color: #3B0480;
   background-color: #eeeeee;
-  border: 1px solid #5F06CC;
+  border: 1px solid #3B0480;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s ease-in;
+  margin-right: 20px;
+  line-height: 22px;
+  text-decoration: none;
+  justify-self: end;
 }
-#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--venta:hover {
-  background-color: #5F06CC;
+#cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--operar:hover {
+  background-color: #3B0480;
   color: #eeeeee;
 }
-#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--venta:active {
+#cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--operar:active {
   outline: none;
   box-shadow: 0px 0px 5px #4d4d4d inset;
 }
-#cartera #cartera__lista .cartera__lista__posesion .input .cartera__lista__posesion--venta:focus {
+#cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--operar:focus {
   outline: none;
 }
 #cartera #cartera__lista #cartera__lista__mensaje {
@@ -942,6 +975,8 @@ header #conversor__navBar, header #user__navBar {
   padding-left: 20px;
   text-align: left;
   background-color: #dddddd;
+  position: sticky;
+  top: 0px;
 }
 #activos #activos__lista #activos__cabecera th:last-child {
   width: 500px;

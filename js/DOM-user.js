@@ -1,3 +1,7 @@
+// ---------------------------------------------- //
+// ----------------NAVEGACION-------------------- //
+// ---------------------------------------------- //
+
 function cambioPagina(boton, enlace){
     $(boton).click(()=>{
         window.location.href = enlace;
@@ -21,18 +25,14 @@ function scrollFinal (){
     let tabla = $('#activos__lista');
 
     $(document).scroll(()=>{
-        let seccionActual = window.location.hash;
-
-        if(seccionActual == '#2'){
-            $(tabla).hover(()=>{
-                deshabilitarScrollify();
-                scrollTabla()
-                deshabilitarScroll();
-            }, ()=>{
-                habilitarScroll()
-                habilitarScrollify();
-            })
-        }
+        $(tabla).hover(()=>{
+            deshabilitarScrollify();
+            scrollTabla()
+            deshabilitarScroll();
+        }, ()=>{
+            habilitarScroll()
+            habilitarScrollify();
+        })
     })
 }
 function scrollTabla (){
@@ -52,9 +52,8 @@ function habilitarScroll (){
 
 
 // ---------------------------------------------- //
+// -------------ARMADO DE LISTAS----------------- //
 // ---------------------------------------------- //
-// ---------------------------------------------- //
-
 
 function cambioMuestraDivisa(){
     let selector = $('#activos__cabecera--divisas');
@@ -286,5 +285,127 @@ function mostrarOcultar (){
     }  
 }
 
+// ---------------------------------------------- //
+// ---------ARMADO DE LISTA DE COMPRAS----------- //
+// ---------------------------------------------- //
 
-// ------------------------------------------------- //
+function cambioConversionCompras(){
+    let arrayCompras = obtenerStorage('listaCompras');
+    let selector = $('#cartera__lista__cabecera--divisas').val();
+    console.log(selector)
+    $('#cartera__lista__cabecera--divisas').change(()=>{
+        if(arrayCompras.length > 0){
+            let moneda = $('#cartera__lista__cabecera--divisas').val();
+            getAjaxModificarCompras(moneda, arrayCompras)
+        }
+    })
+}
+
+function infoParaListaCompras(cripto){
+    let arrayCompras = obtenerStorage('listaCompras');
+    if(arrayCompras == null){
+        arrayCompras = [];
+        let mensaje = 'Usted no dispone de criptomonedas actualmente';
+        crearElemento('#cartera__lista', 'h3', 'id', 'cartera__lista__mensaje', mensaje, 0);
+        return;
+    }
+    let sumaArray;
+    let arrayInfo = [];
+    
+    for(i=0; i<arrayCompras.length;i++){
+        let posicionCompra = arrayCompras[i];
+        let compraTK = posicionCompra.tipo;
+
+        for(j=0;j<cripto.length;j++){
+            let posicionInfo = cripto[j];
+            let criptoTk = posicionInfo.symbol.toUpperCase();
+
+            if(compraTK == criptoTk){
+                sumaArray = cripto[j]
+                break
+            }
+        }
+        arrayInfo.push(sumaArray);
+    }
+    armadoDeCabecera()
+    armadoListaCompras(arrayCompras, arrayInfo)
+}
+
+function armadoDeCabecera(){
+    crearDivIdPadre('#cartera__lista', 'id', 'cartera__lista__cabecera');
+    crearElemento('#cartera__lista__cabecera', 'p', 'id', 'cartera__lista__cabecera--nombre', 'Nombre', 0);
+    crearElemento('#cartera__lista__cabecera', 'p', 'id', 'cartera__lista__cabecera--cantidad', 'Cantidad', 0);
+    crearElemento('#cartera__lista__cabecera', 'p', 'id', 'cartera__lista__cabecera--valor', 'Valor', 0);
+    crearElemento('#cartera__lista__cabecera', 'p', 'id', 'cartera__lista__cabecera--cambio', '24 Cambio', 0);
+    crearElemento('#cartera__lista__cabecera', 'p', 'id', 'cartera__lista__cabecera--ganancia', 'Gan./Perd.', 0);
+
+    crearSelector('#cartera__lista__cabecera', 'select', 'id', 'cartera__lista__cabecera--divisas', 0);
+    crearElemento('#cartera__lista__cabecera--divisas', 'option', 'value', 'ars', 'ARS', 0)
+    crearElemento('#cartera__lista__cabecera--divisas', 'option', 'value', 'usd', 'USD', 0)
+    crearElemento('#cartera__lista__cabecera--divisas', 'option', 'value', 'eur', 'EUR', 0)
+
+    cambioConversionCompras();
+}
+
+function armadoListaCompras(compra, info){
+    let selector = $('#cartera__lista__cabecera--divisas').val();
+    billetera = elegirBilletera(selector);
+    selector = selector.toUpperCase();
+
+    for(i=0; i<compra.length; i++){
+        let imagen = info[i].image;
+        let nombre = info[i].name;
+        let cantidad = compra[i].cantidad;
+        let tk = compra[i].tipo;
+        let conversion = conversionEntreCantidades(compra[i], selector)
+        let cambio = porcentajeDeCambio(info[i].price_change_percentage_24h);
+
+        crearDivIdPadre('#cartera__lista', 'class', 'cartera__lista__posesion');
+        crearDivClassPadre('.cartera__lista__posesion', 'class', 'nombre', i);
+        crearImagen('.nombre', imagen, 'class', 'cartera__lista__posesion--image', i);
+        crearElemento('.nombre', 'p', 'class', 'cartera__lista__posesion--nombre', nombre, i);
+        crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--cantidad', `${cantidad} ${tk}`, i);
+        crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--conversion', `${billetera.simbolo}${conversion}`, i);
+        crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--cambio', cambio, i)
+        crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--ganancias', '+$2000', i) //TO DO - completar agregando precio a compras y realizando algoritmo
+        crearBtn('.cartera__lista__posesion', 'class', 'cartera__lista__posesion--operar',i)
+
+        accionarBtnActivos();
+    }
+}
+
+
+function modificacionCompras(info, compra){ //info sirve para obtener precio del activo para realizar calculo ganancia/perdida
+    //TO DO - modificar ganancia/perdida segun algoritmo
+
+    let selector = $('#cartera__lista__cabecera--divisas').val();
+    billetera = elegirBilletera(selector);
+    selector = selector.toUpperCase();
+    if(compra.length > 0){
+        for(i=0; i<compra.length; i++){
+            let conversion = conversionEntreCantidades(compra[i], selector);
+            let nodoConversion = $('.cartera__lista__posesion--conversion')
+
+            modificarElemento(nodoConversion[i], `${billetera.simbolo}${conversion}`)
+        }
+    }
+}
+
+function accionarBtnActivos(){
+    let arrayCompras = obtenerStorage('listaCompras')
+    for(let i=0; i<arrayCompras.length; i++){
+        let btn = $('.cartera__lista__posesion--operar')
+        $(btn[i]).click(()=>{
+            btnActivos(i, arrayCompras[i])
+        })
+    }
+}
+
+function btnActivos(i, objetoCripto){
+    let selector = $('#cartera__lista__cabecera--divisas').val()
+    let tk = objetoCripto.tipo.toLowerCase();
+
+    let par = [tk, selector]
+    parElegido = JSON.stringify(par)
+    sessionStorage.setItem('cripto', parElegido);
+}
