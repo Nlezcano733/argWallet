@@ -198,6 +198,41 @@ function getAjaxModificarCompras(moneda, compras){
     })
 }
 
+function infoParaListaCompras(cripto){
+    let arrayCompras = obtenerStorage('listaCompras');
+    let sumaArray;
+    let arrayInfo = [];
+
+    if(arrayCompras == null){
+        arrayCompras = [];
+        let mensaje = 'Usted no dispone de criptomonedas actualmente';
+        crearElemento('#cartera__lista', 'h3', 'id', 'cartera__lista__mensaje', mensaje, 0);
+        return;
+    }
+    
+    for(i=0; i<arrayCompras.length;i++){
+        let posicionCompra = arrayCompras[i];
+        let compraTK = posicionCompra.tipo;
+
+        for(j=0;j<cripto.length;j++){
+            let posicionInfo = cripto[j];
+            let criptoTk = posicionInfo.symbol.toUpperCase();
+
+            if(compraTK == criptoTk){
+                sumaArray = cripto[j]
+                break
+            }
+        }
+        arrayInfo.push(sumaArray);
+    }
+
+    armadoDeCabecera()
+    let arrayBalances = gananciaPerdida(arrayCompras, arrayInfo);
+    armadoListaCompras(arrayCompras, arrayInfo, arrayBalances)
+
+    //filtra cantidad de info y arma la lista de activos
+}
+
 function conversionEntreCantidades(compra, selector){
     let valDolar = carteraDivisas[1].value;
     let valEuro = carteraDivisas[2].value;
@@ -235,4 +270,117 @@ function conversionEntreCantidades(compra, selector){
         }
     }
     return parseFloat((conversion).toFixed(3));
+
+    //convierte las cantidades de gasto de las compras segun la moneda de la primer compra para unificar valores
+}
+
+
+
+function modificacionCompras(cripto, compras){
+    let selector = $('#cartera__lista__cabecera--divisas').val();
+    let billetera = elegirBilletera(selector);
+    let sumaArray;
+    let arrayInfo = [];
+    
+    
+    if(compras.length > 0){
+        for(let i=0; i<compras.length;i++){
+            let posicionCompra = compras[i];
+            let compraTK = posicionCompra.tipo;
+
+            for(let j=0;j<cripto.length;j++){
+                let posicionInfo = cripto[j];
+                let criptoTk = posicionInfo.symbol.toUpperCase();
+
+                if(compraTK == criptoTk){
+                    sumaArray = cripto[j]
+                    break
+                }
+            }
+            arrayInfo.push(sumaArray);
+        }
+
+        for(let i=0; i<compras.length; i++){
+            let ganPerd = gananciaPerdida(arrayCompras, arrayInfo);
+
+            selector = selector.toUpperCase();
+            let conversion = conversionEntreCantidades(compras[i], selector);
+            let nodoConversion = $('.cartera__lista__posesion--conversion');
+            let nodoBalance = $('.cartera__lista__posesion--ganancias');
+            let balance = estilosBalance(billetera.simbolo, ganPerd[i])
+
+            modificarElemento(nodoConversion[i], `${billetera.simbolo}${conversion}`);
+            modificarElemento(nodoBalance[i], balance);
+        }
+    }
+    //filtra la cantidad de info y modifica la lista de activos segun selector
+}
+
+function gananciaPerdida(compras, info){
+    let moneda = $('#cartera__lista__cabecera--divisas').val()
+    moneda = moneda.toUpperCase();
+    let arrayBalances = []
+    let suma = 0;
+    let balance;
+
+    for(i=0; i<compras.length; i++){
+        let compraUnidad = compras[i]
+
+        let arrayPrPago = compraUnidad.precio
+        let prActual = info[i].current_price;
+        let cantidad = compraUnidad.cantidad;
+
+        arrayPrPago.forEach((precio)=>{
+            suma += precio;
+        })
+        let promedio = parseFloat((suma / arrayPrPago.length).toFixed(3));
+    
+
+        if(moneda != compraUnidad.moneda){
+            let conversionPrecio = conversionParaListaActivos(moneda, compraUnidad, promedio);
+
+            balance = (prActual - conversionPrecio) * cantidad;
+            balance = parseFloat((balance).toFixed(2))
+            
+        } else{
+            balance = (prActual - promedio) * cantidad;
+            balance = parseFloat((balance).toFixed(2))
+        }
+        
+        arrayBalances.push(balance)
+    }
+    return arrayBalances;
+    // indica la diferencia de $ entre el lo que valian las criptos en la compra y actualmente
+}
+
+function conversionParaListaActivos (selector, cripto, precio){
+    let dolares = carteraDivisas[1].value;
+    let euros = carteraDivisas[2].value;
+    let moneda = cripto.moneda;
+
+    if(selector == 'ARS'){
+        if(moneda == 'USD'){
+            conversion = precio * dolares;
+        }
+        if(moneda == 'EUR'){
+            conversion = precio * euros;
+        }
+    }
+    if(selector == 'USD'){
+        if(moneda == 'ARS'){
+            conversion = precio / dolares;
+        }
+        if(moneda == 'EUR'){
+            conversion = precio * (euros / dolares)
+        }
+    }
+    if(selector == 'EUR'){
+        if(moneda == 'ARS'){
+            conversion = precio / euros
+        } if(moneda == 'USD'){
+            conversion = precio * (dolares / euros);
+        }
+    }
+    return parseFloat((conversion).toFixed(3))
+    // realiza la conversion de precio promedio para unificarlo con selector de tabla
 }

@@ -66,7 +66,7 @@ function validacionCompra(selector, input, conversion, precio){
         tk = cripto[0].toUpperCase();
         moneda = cripto[1].toUpperCase();
 
-        compra = new Transaccion(tk, compra, moneda, input, precio);
+        compra = new Transaccion(tk, compra, moneda, input, precio, 1);
         compraToStorage(compra);
         agregarCompras();
 
@@ -74,38 +74,48 @@ function validacionCompra(selector, input, conversion, precio){
 
         validarOperacion('movimiento exitoso.', '#conversion__confirmacion--texto');
         $('#conversion__ingreso--divisa').val('');
-        $('#conversion__convertido--valor').text('0,00')
+        $('#conversion__convertido--valor').text('0,00');
 
     } else{
-        validarOperacion('No dispone de fondos suficientes. Deposite dinero, por favor.', '#conversion__confirmacion--texto');
+        validarOperacion('No dispone de fondos suficientes.', '#conversion__confirmacion--texto');
     }
 }
 
 function agregarCompras (){
     compra = obtenerSessionStorage('compra');
+    let precioCompra = compra.precio[0];
     arrayCompras = obtenerStorage('listaCompras');
 
     if(arrayCompras == null){
         arrayCompras = [];
         arrayCompras.push(compra);
-
     } else {
         for(i=0; i<arrayCompras.length; i++){
-            let cripto = arrayCompras[i]
+            let cripto = arrayCompras[i];
 
             if(compra.tipo == cripto.tipo && compra.moneda == cripto.moneda){
-                arrayCompras.splice(i, i+1);
-                let nuevoArray = arrayCompras.map(()=>{
-                    return mismaCompra(cripto, compra);
-                })
-                compra = nuevoArray[0];
-            }
+                if(arrayCompras.length > 1){
+                    arrayCompras.splice(i, i+1);
+                    let nuevoArray = arrayCompras.map(()=>{
+                        return mismaCompra(cripto, compra);
+                    })
+                    compra = nuevoArray[0];
+                } else{
+                    compra = mismaCompra(cripto, compra);
+                    arrayCompras.splice(0, 1);
+                }
+            } 
             if(compra.tipo == cripto.tipo && compra.moneda != cripto.moneda){
                 valorCompra = conversionEntreCantidades(compra, cripto)
                 cantidadTotal = parseFloat((compra.cantidad + cripto.cantidad).toFixed(3))
 
-                arrayCompras.splice(i, i+1)
-                compra = new Transaccion (cripto.tipo, cantidadTotal, cripto.moneda, valorCompra)
+                if(arrayCompras.length>1){
+                    arrayCompras.splice(i, i+1);
+                    compra = mismaCompraDiferenteMoneda(cripto, compra, precioCompra)
+                } else{
+                    compra = mismaCompraDiferenteMoneda(cripto, compra, precioCompra);
+                    arrayCompras.splice(0, 1);
+                }
             }
         }
         arrayCompras.push(compra);
@@ -118,10 +128,32 @@ function agregarCompras (){
 function mismaCompra(cripto, compra){
     let gasto = compra.gasto;
     let cantidad = compra.cantidad
+    let cantCompras = cripto.cantCompras;
+
+    let arrayCompras = cripto.precio;
+    array = arrayCompras.push(compra.precio[0])
 
     let copiaObjeto = {...cripto};
-    copiaObjeto.cantidad = cantidad + copiaObjeto.cantidad;
+    copiaObjeto.cantidad = parseFloat((cantidad + copiaObjeto.cantidad).toFixed(3));
     copiaObjeto.gasto = gasto + copiaObjeto.gasto;
+    copiaObjeto.cantCompras = cantCompras + 1;
+    return copiaObjeto;
+}
+
+function mismaCompraDiferenteMoneda(cripto, compra, precioNuevaCompra){
+    let gasto = compra.gasto;
+    let cantidad = compra.cantidad
+    let cantCompras = cripto.cantCompras;
+    let precioConvertido = conversionEntrePrecios(compra, cripto, precioNuevaCompra);
+
+    let copiaObjeto = {...cripto};
+    copiaObjeto.cantidad = parseFloat((cantidad + copiaObjeto.cantidad).toFixed(3));
+    copiaObjeto.gasto = gasto + copiaObjeto.gasto;
+    copiaObjeto.cantCompras = cantCompras + 1;
+
+    let array = copiaObjeto.precio;
+    array.push(precioConvertido)
+
     return copiaObjeto;
 }
 
@@ -166,6 +198,42 @@ function conversionEntreCantidades(compra, cripto){
     return parseFloat((conversion).toFixed(3));
 }
 
+function conversionEntrePrecios(compra, cripto, precioCompra){
+    let dolares = carteraDivisas[1].value;
+    let euros = carteraDivisas[2].value;
+
+    let monedaCompra = compra.moneda;
+    let monedaBilletera = cripto.moneda;
+
+    let conversion;
+    
+    if(monedaBilletera == 'ARS'){
+        if(monedaCompra == 'USD'){
+            conversion = precioCompra * dolares;
+        }
+        if(monedaCompra == 'EUR'){
+            conversion = precioCompra * euros;
+        }
+    }
+    if(monedaBilletera == 'USD'){
+        if(monedaCompra == 'ARS'){
+            conversion = precioCompra / dolares;
+        }
+        if(monedaCompra == 'EUR'){
+            conversion = precioCompra / (euros / dolares);
+        }
+    }
+    if(monedaBilletera == 'EUR'){
+        if(monedaCompra == 'ARS'){
+            conversion = precioCompra / euros;
+        }
+        if(monedaCompra == 'USD'){
+            conversion = precioCompra / (dolares / euros);
+        }
+    }
+    return parseFloat((conversion).toFixed(2));
+}
+
 // ----------------------------------------------//
 // -------------ALGORITMOS DE VENTA------------- //
 // ----------------------------------------------// 
@@ -185,9 +253,10 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
     } else if( cantEnBilletera >= venta){
 
         let nuevoArray = arrayCompleto.map(()=>{
-            return descontarVenta(criptoCliente, venta, input, selector)
+            return descontarVenta(criptoCliente, venta, input, selector)    // TO DO - promediar precios compra
         })
         let objetoDescontado = nuevoArray[0];
+
         if(objetoDescontado.gasto > 0){
             listaBilletera = agregarQuitarCompra(objetoDescontado, true)
         } else{
@@ -229,7 +298,7 @@ function obtenerCriptoDeBilletera (){
     let cripto = obtenerSessionStorage('criptomoneda')
     let tk = cripto.symbol.toUpperCase();
 
-    if(arrayCompras != null){
+    if(arrayCompras != null && arrayCompras[0] != null){
         for(i=0; i<arrayCompras.length;i++){
             let posicion = arrayCompras[i];
             if(posicion.tipo == tk){
@@ -242,14 +311,25 @@ function obtenerCriptoDeBilletera (){
 function descontarVenta (cripto, venta, valor, selector){ 
     selector = selector.toUpperCase();
     let copiaObjeto = {...cripto};
-    copiaObjeto.cantidad = parseFloat((copiaObjeto.cantidad - venta).toFixed(3));
+    let arrayPrPago = copiaObjeto.precio;
+    let suma = 0;
+
+    arrayPrPago.forEach((precio)=>{
+        suma += precio;
+    })
+    let promedio = parseFloat((suma / arrayPrPago.length).toFixed(3));
 
     if(copiaObjeto.moneda == selector){
         copiaObjeto.gasto = parseFloat((copiaObjeto.gasto - valor).toFixed(3));
+        copiaObjeto.precio = [promedio];
     } else{
         conversion = conversionPorBilletera(venta, selector, copiaObjeto);
         copiaObjeto.gasto = parseFloat((copiaObjeto.gasto - conversion).toFixed(3));
+        copiaObjeto.precio = conversionPorBilletera(promedio, selector, copiaObjeto)
     }
+
+    copiaObjeto.cantidad = parseFloat((copiaObjeto.cantidad - venta).toFixed(3));
+    copiaObjeto.cantCompras = 1
     return copiaObjeto;
 }
 

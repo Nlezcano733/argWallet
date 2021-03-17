@@ -42,6 +42,7 @@ let carteraCriptos = [];
 $(()=>{
     avanzarNavbar();
     scrollify();
+    scrollCompras();
     scrollFinal();
 
     valorSelectorInicial();
@@ -59,5 +60,5 @@ $(()=>{
     habilitacionBtn()
     $('#depositoRetiro__registro--divisas').change(habilitacionBtn)
 
-    getAjaxArmadoCompras();
+    getAjaxArmadoCompras(); 
 })

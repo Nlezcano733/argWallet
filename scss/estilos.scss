@@ -630,6 +630,7 @@ header{
         width: 100%;
         height: calc(100% - 55px);
         overflow: auto;
+        position: relative;
         padding: 0px;
         margin-top: 15px;
         
@@ -659,7 +660,7 @@ header{
                 margin-left: 20px;
             }
             #cartera__lista__cabecera--divisas{
-                @include selector(90px, 35px, $colorGris0, $colorAzul6);
+                @include selector(90px, 35px, $colorGris1, $colorAzul6);
                 margin-right: 20px;
             }
         }
@@ -705,9 +706,8 @@ header{
                 text-decoration: none;
                 justify-self: end;
             }
-
-
         }
+
         #cartera__lista__mensaje{
             position: absolute;
             top: 25%;

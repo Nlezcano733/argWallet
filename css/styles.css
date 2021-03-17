@@ -808,6 +808,7 @@ header #conversor__navBar, header #user__navBar {
   width: 100%;
   height: calc(100% - 55px);
   overflow: auto;
+  position: relative;
   padding: 0px;
   margin-top: 15px;
 }
@@ -842,7 +843,7 @@ header #conversor__navBar, header #user__navBar {
   width: 90px;
   height: 35px;
   color: #334761;
-  background-color: #eeeeee;
+  background-color: #dddddd;
   border: 1px solid #334761;
   font-size: 16px;
   text-align: center;
