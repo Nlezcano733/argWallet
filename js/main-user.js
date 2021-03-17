@@ -25,21 +25,23 @@ function BilleteraEur (billeteraTotal){
 function Divisas (nombre, ticker, value, simbolo){
     this. nombre = nombre,
     this.ticker = ticker,
-    this.value = value,
+    this.value = parseFloat((value).toFixed(3)),
     this.simbolo = simbolo
 }
 
 // --------------------------------------- //
 let ars = new Divisas ('Pesos', 'ARS', 1, '$');
-let usd = new Divisas ('Dolar', 'USD', 156, '$');
-let euro = new Divisas ('Euro', 'EURO', 184, '€');
 
-let carteraDivisas = [ars, usd, euro];
+let carteraDivisas = [ars];
+let valorUsd, valorEur;
 // --------------------------------------- //
 
 let carteraCriptos = [];
 
 $(()=>{
+    conversionInicialDolar();
+    conversionInicialEuro();
+
     avanzarNavbar();
     scrollify();
     scrollCompras();
@@ -53,12 +55,10 @@ $(()=>{
 
     mostrarBilletera();
     $('#depositoRetiro__registro--divisas').change(mostrarbilleteraSeleccionada)
-    
+
     accionarDeposito();
     eventoInput('#depositoRetiro__interaccion__input--cantidad');
 
     habilitacionBtn()
     $('#depositoRetiro__registro--divisas').change(habilitacionBtn)
-
-    getAjaxArmadoCompras(); 
 })

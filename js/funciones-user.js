@@ -1,6 +1,33 @@
 // ---------------------------------------------- //
 // ---------------PETICIONES AJAX---------------- //
 // ---------------------------------------------- //
+function conversionInicialDolar(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ars",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        valorUsd =  resultado.tether.ars;
+        usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
+        carteraDivisas.push(usd)
+    })
+}
+
+function conversionInicialEuro(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/simple/price?ids=eurxb&vs_currencies=ars",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        valorEur = resultado.eurxb.ars
+
+        euro = new Divisas ('Euro', 'EURO', valorEur, '€');
+        carteraDivisas.push(euro)
+
+        getAjaxArmadoCompras(); 
+    })
+}
+
 
 function getAjaxMercado(moneda){
     $.ajax({
@@ -37,6 +64,7 @@ function getAjaxConvReferencia(moneda, cantidad){
     })
     //pedido para actualizar valores de btc segun moneda y poder convertirlo segun la moneda y cantidad de la billetera seleccionada
 }
+
 
 // ---------------------------------------------- //
 // -------------DEPOSITO DE DINERO--------------- //

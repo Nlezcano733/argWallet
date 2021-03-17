@@ -1,3 +1,35 @@
+// ---------------------------------------------- //
+// ---------------PETICIONES AJAX---------------- //
+// ---------------------------------------------- //
+function conversionInicialDolar(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ars",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        valorUsd =  resultado.tether.ars;
+        usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
+        carteraDivisas.push(usd)
+    })
+}
+
+function conversionInicialEuro(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/simple/price?ids=eurxb&vs_currencies=ars",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        valorEur = resultado.eurxb.ars
+
+        euro = new Divisas ('Euro', 'EURO', valorEur, '€');
+        carteraDivisas.push(euro)
+    })
+}
+
+// ---------------------------------------------- //
+// ---------------ACCIONAMIENTOS----------------- //
+// ---------------------------------------------- //
+
 function conversionMonedacripto (cantidad){
     if(cantidad > 0){
         let cripto = obtenerSessionStorage('criptomoneda');
@@ -39,8 +71,6 @@ function accionarBtnVenta(){
         $('#confirmacionVenta').off('click')
     }
 }
-
-
 
 // ----------------------------------------------//
 // -------------ALGORITMOS DE COMPRA------------ //

@@ -39,16 +39,18 @@ function Divisas (nombre, ticker, value, simbolo){
 
 // --------------------------------------- //
 let ars = new Divisas ('Pesos', 'ARS', 1, '$');
-let usd = new Divisas ('Dolar', 'USD', 156, '$');
-let euro = new Divisas ('Euro', 'EURO', 184, '€');
 
-let carteraDivisas = [ars, usd, euro];
+let carteraDivisas = [ars];
+let valorUsd, valorEur;
 // --------------------------------------- //
 
 let carteraCriptos = [];
 let arrayCompras = [];
 
 $(()=>{
+    conversionInicialDolar();
+    conversionInicialEuro();
+
     valorSelectorInicial();
     billeterasTotalesInicial();
     mostrarBilletera();
