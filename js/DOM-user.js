@@ -174,6 +174,15 @@ function armarTr (nombre, logo, par, precio, cambio, max, min, vol, i){
 
     crearElemento('.activo__cuerpo', 'td', 'class', 'activo__cuerpo--input', '', i)
     crearBtn('.activo__cuerpo--input', 'class', 'activo__cuerpo--btn', i)
+    
+    let valorCambio = $('.activo__cuerpo--cambio')
+    valorCambio = valorCambio[i]
+    let textoCambio = valorCambio.innerHTML;
+    let valorTextoCambio = textoCambio.indexOf('-')
+
+    if(valorTextoCambio == -1){
+        $(valorCambio).css('color', '#14b10b')
+    }
 
     let criptoPosicion = [nombre, logo];
     return criptoPosicion;
@@ -367,8 +376,26 @@ function armadoListaCompras(compra, info, balances){
         crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--cantidad', `${cantidad} ${tk}`, i);
         crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--conversion', `${billetera.simbolo}${conversion}`, i);
         crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--cambio', cambio, i)
-        crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--ganancias', balance , i) //TO DO - completar agregando precio a compras y realizando algoritmo
+        crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--ganancias', balance , i)
         crearBtn('.cartera__lista__posesion', 'class', 'cartera__lista__posesion--operar',i)
+
+        let valorCambio = $('.cartera__lista__posesion--cambio')
+        valorCambio = valorCambio[i]
+        let textoCambio = valorCambio.innerHTML;
+        let valorTextoCambio = textoCambio.indexOf('-')
+
+        if(valorTextoCambio == -1){
+            $(valorCambio).css('color', '#14b10b')
+        }
+
+        let valorBalance = $('.cartera__lista__posesion--ganancias')
+        valorBalance = valorBalance[i]
+        let textoBalance = valorBalance.innerHTML;
+        let valorTextoBalance = textoBalance.indexOf('-')
+        
+        if(valorTextoBalance == -1){
+            $(valorBalance).css('color', '#14b10b')
+        }
 
         accionarBtnActivos();
     }

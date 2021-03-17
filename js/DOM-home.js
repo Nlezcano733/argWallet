@@ -355,4 +355,11 @@ function armarTr (logo, nombre, par, precio, cambio, max, min, vol, i){
     crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--min', min, i);
     crearElemento('.lista__cripto', 'td', 'class', 'lista__cripto--vol', vol, i);
 
+    let valorCambio = $('.lista__cripto--cambio')
+    valorCambio = valorCambio[i]
+    let texto = valorCambio.innerHTML;
+    let valorTexto = texto.indexOf('-')
+    if(valorTexto == -1){
+        $(valorCambio).css('color', '#14b10b')
+    }
 }

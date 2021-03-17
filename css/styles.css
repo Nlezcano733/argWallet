@@ -533,6 +533,9 @@ header #conversor__navBar, header #user__navBar {
 #mercado #mercado__lista .lista__cripto td .lista__cripto--btn:focus {
   outline: none;
 }
+#mercado #mercado__lista .lista__cripto .lista__cripto--cambio {
+  color: #e70008;
+}
 
 .billeteraUser {
   height: 70px;
@@ -901,9 +904,11 @@ header #conversor__navBar, header #user__navBar {
 }
 #cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--cambio {
   grid-area: cambio;
+  color: #e70008;
 }
 #cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--ganancias {
   grid-area: ganancias;
+  color: #e70008;
 }
 #cartera #cartera__lista .cartera__lista__posesion .cartera__lista__posesion--operar {
   grid-area: input;
@@ -1065,6 +1070,9 @@ header #conversor__navBar, header #user__navBar {
 #activos #activos__lista .activo__cuerpo td .activo__cuerpo--btn:focus {
   outline: none;
 }
+#activos #activos__lista .activo__cuerpo .activo__cuerpo--cambio {
+  color: #e70008;
+}
 
 #transaccion {
   display: grid;
@@ -1188,6 +1196,7 @@ header #conversor__navBar, header #user__navBar {
 }
 #transaccion #infoCripto #infoCripto__cotizacion #infoCripto__cotizacion--valorCambio {
   grid-area: porcentaje;
+  color: #e70008;
 }
 #transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
   display: flex;

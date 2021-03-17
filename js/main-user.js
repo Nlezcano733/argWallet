@@ -54,11 +54,20 @@ $(()=>{
     $('#ojoUser').click(mostrarOcultar)
 
     mostrarBilletera();
-    $('#depositoRetiro__registro--divisas').change(mostrarbilleteraSeleccionada)
+    $('#depositoRetiro__registro--divisas').change(mostrarbilleteraSeleccionada)    //TO DO - ver utilidad de funcion
 
     accionarDeposito();
     eventoInput('#depositoRetiro__interaccion__input--cantidad');
 
     habilitacionBtn()
     $('#depositoRetiro__registro--divisas').change(habilitacionBtn)
+
+    setInterval(()=>{
+        let arrayCompras = obtenerStorage('listaCompras');
+        let monedaActivos = $('#cartera__lista__cabecera--divisas').val()
+        let monedaTabla = $('#activos__cabecera--divisas').val()
+
+        getAjaxModificarCompras(monedaActivos, arrayCompras)
+        getAjaxModMercado(monedaTabla)
+    }, 60000)
 })

@@ -196,6 +196,16 @@ function armadoDePanel(cripto, moneda){
     modificarElemento('#infoCripto__valores--vol', `${simbolo}${vol}`);
     modificarElemento('#infoCripto__valores--ath', `${simbolo}${cripto.ath}`)
     modificarElemento('#infoCripto__valores--dateAth', fecha)
+    
+    let valorCambio = $('#infoCripto__cotizacion--valorCambio')
+    valorCambio = valorCambio[0]
+    let textoCambio = valorCambio.innerHTML;
+    let valorTextoCambio = textoCambio.indexOf('-')
+
+    if(valorTextoCambio == -1){
+        $(valorCambio).css('color', '#14b10b')
+    }
+
 }
 
 function valorSelectorInicial(){

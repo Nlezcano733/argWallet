@@ -113,11 +113,6 @@ header{
             transform: scale(1.2);
         }
     }
-    // #darkMode{
-    //     &:active{
-    //         color: #D3F325;
-    //     }
-    // }
 }
 
 .panelIngreso{
@@ -436,6 +431,10 @@ header{
                     text-decoration: none;
                     text-align: center;
                 }
+
+            }
+            .lista__cripto--cambio{
+                color: $colorRojo2;
             }
         }
     }
@@ -482,25 +481,6 @@ header{
         grid-template-areas: "pesos dolares euros ojo";
         font-size: $cuerpoLg;
 
-        // .billeteraUser__balance--subtitulo{
-        //     grid-area: titulo;
-        //     font-weight: bold;
-        //     margin-right: 20px;
-        // }
-        // .billeteraUser__balance--divisas{
-        //     grid-area: selector;
-        //     @include selector(80px, 35px, $colorGris0, $colorAzul6);
-        //     font-size: $cuerpo;
-        //     margin-right: 50px;
-            
-        //     &:disabled{
-        //         @include selector(80px, 35px, $colorGris0, $colorGris3);
-        //     }
-        // }
-        // .billeteraUser__balance--cantidad{
-        //     grid-area: cantidad;
-        //     text-align: right;
-        // }
         #pesos{
             grid-area: pesos;
         }
@@ -694,9 +674,11 @@ header{
             }
             .cartera__lista__posesion--cambio{
                 grid-area: cambio;
+                color: $colorRojo2;
             }
             .cartera__lista__posesion--ganancias{
                 grid-area: ganancias;
+                color: $colorRojo2;
             }
             .cartera__lista__posesion--operar{
                 grid-area: input;
@@ -813,6 +795,9 @@ header{
                     @include botonSecundario(90px, 30px, $colorGris0, $colorVioleta4);
                 }
             }
+            .activo__cuerpo--cambio{
+                color: $colorRojo2;
+            }
         }
     }
 }
@@ -922,6 +907,7 @@ header{
             }
             #infoCripto__cotizacion--valorCambio{
                 grid-area: porcentaje;
+                color: $colorRojo2;
             }
         }
 

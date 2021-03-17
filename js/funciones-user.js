@@ -348,10 +348,10 @@ function gananciaPerdida(compras, info){
     let moneda = $('#cartera__lista__cabecera--divisas').val()
     moneda = moneda.toUpperCase();
     let arrayBalances = []
-    let suma = 0;
     let balance;
 
-    for(i=0; i<compras.length; i++){
+    for(let i=0; i<compras.length; i++){
+        let suma = 0;
         let compraUnidad = compras[i]
 
         let arrayPrPago = compraUnidad.precio
@@ -361,8 +361,7 @@ function gananciaPerdida(compras, info){
         arrayPrPago.forEach((precio)=>{
             suma += precio;
         })
-        let promedio = parseFloat((suma / arrayPrPago.length).toFixed(3));
-    
+        let promedio = parseFloat((suma / compraUnidad.cantCompras).toFixed(3));
 
         if(moneda != compraUnidad.moneda){
             let conversionPrecio = conversionParaListaActivos(moneda, compraUnidad, promedio);

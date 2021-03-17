@@ -70,8 +70,11 @@ $(()=>{
         $('#conversion__confirmacion--cantidad').hide();
     })
 
-    
     $('#conversion__ingreso--divisa').keypress(conversionDinamica);
     accionarBtnCompra();
     activacionBtnVenta();
+
+    setInterval(()=>{
+        armadoDePanelInicial();
+    }, 60000)
 })
