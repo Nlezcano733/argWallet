@@ -81,8 +81,14 @@ function validacionCompra(selector, input, conversion, precio){
     input = parseFloat(input);
     let compra = parseFloat(conversion);
 
+    let validacion = ingresoNegativo(input, '#conversion__confirmacion--texto')
+    if(validacion == 'negativo'){
+        $('#conversion__ingreso--divisa').val('');
+        return
+    }
+
     if(input == "" || input == undefined || isNaN(input)){
-        validarOperacion('Ingrese un valor real', '#conversion__confirmacion--texto');
+        validarOperacion('Ingrese un valor real.', '#conversion__confirmacion--texto');
 
     } else if(cantidad >= input){
 
@@ -274,6 +280,11 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
     let billetera = eleccionDeBilletera(selector);
     input = parseFloat(input); 
 
+    let validacion = ingresoNegativo(input, '#conversion__confirmacion--texto')
+    if(validacion == 'negativo'){
+        $('#conversion__ingreso--divisa').val('');
+        return
+    }
 
     if(input == "" || input == undefined || isNaN(input)){
         validarOperacion('Ingrese un valor real', '#conversion__confirmacion--texto');

@@ -57,7 +57,14 @@ function depositarBilletera(input, moneda){
     moneda = moneda.toLowerCase()
     let billeteraUsada = eleccionDeBilletera(moneda);
     cantidad = billeteraUsada.billeteraTotal;
+
     
+    let validacion = ingresoNegativo(input, '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion')
+    if(validacion == 'negativo'){
+        $('#depositoRetiro__interaccion__input--cantidad').val('');
+        return
+    }
+
     if(cantidad == 0 && input != ""){
         crearBilletera(input, moneda);
         habilitacionBtn()

@@ -18,6 +18,13 @@ function validarOperacion (mensaje, padreClass, id){
     }, 2500);
 }
 
+function ingresoNegativo(input, nodoPadre, nodoMensaje){
+    if(input <= 0){
+        validarOperacion('Ingrese un valor real.', nodoPadre, nodoMensaje)
+        return 'negativo'
+    }
+}
+
 // -------------------------------------------- //
 //                   NAVEGACION                 //
 // -------------------------------------------- //
