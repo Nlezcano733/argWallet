@@ -45,9 +45,15 @@ header{
         padding: 0px;
         font-family: $fuenteLogo;
         font-size: $titulo;
-        font-weight: 800;
+        font-weight: 400;
         letter-spacing: 1px;
+
     }
+    strong{
+        font-family: ebirma-bold;
+        font-weight: 800;
+    }
+
 
     .navBar{
         @include flexbox (row, space-between, center);
@@ -287,6 +293,17 @@ header{
                     padding: 0px 10px;
                 }
 
+
+            }
+
+            // .inicio__listado--cripto:first-child{
+            //     transform: scale(1.2);
+            //     font-weight: bold;
+            // }
+
+            .inicial{
+                transform: scale(1);
+                font-weight: normal;
             }
             .resaltar{
                 transform: scale(1.2);
@@ -699,6 +716,16 @@ header{
             font-size: $subtitulo;
             color: $colorGris3;
         }
+        #cartera__lista--oculto{
+            display: none;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: $fuenteGeneral;
+            font-size: $subtitulo;
+            color: $colorGris3;
+        }
     }
 }
 
@@ -1072,14 +1099,14 @@ header{
     position: fixed;
     top: 140px;
     left: 0px;
-    width: 55px; // cambiaria a 200px con hover
+    width: 55px;
     height: calc(100vh - 140px);
     padding: 20px 0px;
     @include flexbox(column, flex-start, center);
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: $colorAzul1;
-    color: $colorGris0;
+    background-color: $colorGris1;
+    color: $colorAzul5;
     direction: rtl;
 
     &::-webkit-scrollbar{
@@ -1104,6 +1131,7 @@ header{
 
         &:hover{
             background-color: $colorAzul2;
+            color: $colorGris0;
         }
         &:active{
             box-shadow: 0px 0px 5px $colorAzul3 inset;
@@ -1114,8 +1142,9 @@ header{
             margin-right: 10px;
         }
         .listado__nombreCripto{
+            display: none;
+            min-width: 220px;
             font-size: $cuerpoLg;
-            text-shadow: 0px 0px 2px $colorGris2;
         }
     }
 }

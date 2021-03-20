@@ -25,22 +25,45 @@ function mostrarBilletera(){
     }
 }
 
+function accionarOjo(){
+    estado = obtenerStorage('mostrarBilletera')
+    if(estado == null || estado == false){
+        localStorage.setItem('mostrarBilletera', 'true')
+    } else{
+        localStorage.setItem('mostrarBilletera', 'false')
+    }
+    
+    mostrarOcultar();
+    $('#ojoUser').click(mostrarOcultar)
+}
+
 function mostrarOcultar (){
-    let mostrador = $('#pesos__cantidad').text()
+    estado = obtenerStorage('mostrarBilletera')
     let mensajeOculto = '**************';
     let ojo = $('#ojoUser');
 
     let billeteras = obtenerArrayDeBilleteras();
     let cantidades = textoCantidad(billeteras);
 
-    if(mostrador != mensajeOculto){
+    if(estado == false){
         $(ojo).attr('class', 'fas fa-eye');
         $('.billeteraUser__balance__billetera--cantidad').text(mensajeOculto);
+        $('#conversion__ingreso--divisa').focus(()=>{
+            $('#conversion__confirmacion--cantidad').hide()
+        })
+        
+        localStorage.setItem('mostrarBilletera', 'true')
     } else{
         $(ojo).attr('class', 'fas fa-eye-slash');
         $('#pesos__cantidad').text(cantidades[0])
         $('#dolares__cantidad').text(cantidades[1])
         $('#euros__cantidad').text(cantidades[2])
+        
+        $('#conversion__ingreso--divisa').focus(()=>{
+            $('#conversion__confirmacion--cantidad').show();
+        })
+        
+        localStorage.setItem('mostrarBilletera', 'false')
     }  
 }
 
@@ -77,9 +100,12 @@ function listadoDeCriptos(resultado){
 }
 
 $('#aside').hover(()=>{
+    $('.listado__nombreCripto').fadeIn(500)
     $('#aside').animate({width: '220px'});
 }, ()=>{
-    $('#aside').animate({width: '50px'})
+    $('#aside').animate({width: '50px'}, 500, ()=>{
+        $('.listado__nombreCripto').hide()
+    })
 });
 
 
@@ -121,6 +147,8 @@ function armadoDePanelInicial(){
             if(tk == cripto.symbol){
                 armadoDePanel(cripto, moneda);
                 criptoCompletoToStorage(cripto);
+
+                activacionBtnVenta();
             }
         })
     })
@@ -222,10 +250,25 @@ function valorSelectorInicial(){
 function conversionDinamica(event){
     input = $('#conversion__ingreso--divisa').val();
     let teclaPresionada = event.key;
-    valorATomar = input + teclaPresionada;
+    let borrar = event.keyCode;
+
+    if(borrar == 8 || borrar == 27){
+        $('#conversion__ingreso--divisa').val('');
+        valorATomar = 0
+    } else{
+        valorATomar = input + teclaPresionada;
+    }
 
     conversion = conversionMonedacripto(valorATomar);
     modificarElemento('#conversion__convertido--valor', conversion);
+
+}
+
+function activacionEnter(event){
+    if(event.which == 13){
+        event.preventDefault();
+        comprar();
+    }
 }
 
 function activacionBtnVenta(){

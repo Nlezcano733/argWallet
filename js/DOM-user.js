@@ -55,7 +55,7 @@ function scrollCompras (){
     let tabla = $('#cartera__lista');
 
     if(compras != null ){
-        if(compras.length > 5){ // TO DO - ver cantidad maxima que entra en tabla sin scroll
+        if(compras.length > 6){
             $(tabla).hover(()=>{
                 deshabilitarScrollify();
                 scrollListaCompras()
@@ -247,15 +247,19 @@ function accionarDeposito() {
 
 function AccionarRetiro(){
     $('#depositoRetiro__interaccion--retirar').click(()=>{
-        retirar();
         mostrarBilletera();
+        retirar();
     })
 }
 
-function eventoInput (id){
-    let input;
-    input = $(id);
-    $(input).keypress(depositarConEnter);
+function accionarDepositoEnter(){
+    input = $('#depositoRetiro__interaccion__input--cantidad').keydown((event)=>{
+        if(event.which == 13){
+            event.preventDefault();
+            depositar();
+            mostrarBilletera()
+        }
+    })
 }
 
 // ---------------------------------------------- //
@@ -276,6 +280,7 @@ function mostrarBilletera(){
             modificarElemento(elemento[i], `${posicion.simbolo}${cantidad}`)
         }
     }
+    getAjaxConvReferencia('ARS', billeteraPesos.billeteraTotal)
 }
 
 function mostrarbilleteraSeleccionada (){
@@ -299,9 +304,20 @@ function convertirMonedaCriptoRef(cantidad, cripto){
     return criptoValor
 }
 
+function accionarOjo(){
+    estado = obtenerStorage('mostrarBilletera')
+    if(estado == null || estado == false){
+        localStorage.setItem('mostrarBilletera', 'true')
+    } else{
+        localStorage.setItem('mostrarBilletera', 'false')
+    }
+    
+    mostrarOcultar();
+    $('#ojoUser').click(mostrarOcultar)
+}
+
 function mostrarOcultar (){
-    // TO DO - ocultar valores de criptos compradas cuando se cree la lista
-    let mostrador = $('#pesos__cantidad').text()
+    estado = obtenerStorage('mostrarBilletera')
     let selectorRegistro = $('#depositoRetiro__registro--divisas');
 
     let mensajeOculto = '**************';
@@ -310,19 +326,27 @@ function mostrarOcultar (){
     let billeteras = obtenerArrayDeBilleteras();
     let cantidades = textoCantidad(billeteras);
 
-    if(mostrador != mensajeOculto){
+    if(estado == false){
         $(ojo).attr('class', 'fas fa-eye');
         $(selectorRegistro).attr('disabled', '')
         $('.billeteraUser__balance__billetera--cantidad').text(mensajeOculto);
         $('.depositoRetiro__registro--btc').text(mensajeOculto);
-    } else{
+        $('.cartera__lista__posesion').hide();
+        $('#cartera__lista--oculto').show()
+        
+        localStorage.setItem('mostrarBilletera', 'true')
+    } else {
         $(ojo).attr('class', 'fas fa-eye-slash');
         $(selectorRegistro).removeAttr('disabled', '')
         mostrarbilleteraSeleccionada();
         $('#pesos__cantidad').text(cantidades[0])
         $('#dolares__cantidad').text(cantidades[1])
         $('#euros__cantidad').text(cantidades[2])
-    }  
+        $('.cartera__lista__posesion').show();
+        $('#cartera__lista--oculto').hide()
+
+        localStorage.setItem('mostrarBilletera', 'false')
+    } 
 }
 
 // ---------------------------------------------- //
@@ -369,6 +393,8 @@ function armadoListaCompras(compra, info, balances){
         let cambio = porcentajeDeCambio(info[i].price_change_percentage_24h);
         let balance = estilosBalance(billetera.simbolo, balances[i])
 
+        conversion += balances[i];
+
         crearDivIdPadre('#cartera__lista', 'class', 'cartera__lista__posesion');
         crearDivClassPadre('.cartera__lista__posesion', 'class', 'nombre', i);
         crearImagen('.nombre', imagen, 'class', 'cartera__lista__posesion--image', i);
@@ -391,9 +417,10 @@ function armadoListaCompras(compra, info, balances){
         let valorBalance = $('.cartera__lista__posesion--ganancias')
         valorBalance = valorBalance[i]
         let textoBalance = valorBalance.innerHTML;
-        let valorTextoBalance = textoBalance.indexOf('-')
+        let valorTextoBalance = textoBalance.indexOf('+')
+        let valorNeutro = textoBalance.indexOf('$')
         
-        if(valorTextoBalance == -1){
+        if(valorTextoBalance == 0 || valorNeutro == 0){
             $(valorBalance).css('color', '#14b10b')
         }
 

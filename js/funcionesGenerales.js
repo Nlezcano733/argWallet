@@ -88,6 +88,7 @@ function modificarElemento(elemento, contenido){
 }
 
 function modificarSimbolos(id, modificador){
+    let carteraDivisas = obtenerSessionStorage('divisas')
     billetera = billeteraInicial();
     let objetoDivisa = objetoCompleto(billetera, carteraDivisas);
     if(modificador == 'simbolo'){
@@ -124,7 +125,6 @@ function primeraLetraMayuscula (string){
 
 function nombreDeCripto ({id}, {symbol}){
         nombre = primeraLetraMayuscula(id);
-        let ticker = symbol.toUpperCase();
         return `${nombre}`
 }
 
@@ -178,10 +178,41 @@ function textoCantidad (array){
         texto = `${simbolo}${cantidad}`
         arrayTexto.push(texto)
     }
-    console.log(arrayTexto)
     return arrayTexto;
 }
 
+
+// -------------------------------------------- //
+//               PETICIONES AJAX                //
+// -------------------------------------------- //
+
+function conversionInicialDolar(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ars",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        valorUsd =  resultado.tether.ars;
+        usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
+        carteraDivisas.push(usd)
+
+        valorDivisasToStorage();
+    })
+}
+
+function conversionInicialEuro(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/simple/price?ids=eurxb&vs_currencies=ars",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        valorEur = resultado.eurxb.ars
+        euro = new Divisas ('Euro', 'EURO', valorEur, '€');
+        carteraDivisas.push(euro)
+
+        valorDivisasToStorage();
+    })
+}
 
 // -------------------------------------------- //
 //                    STORAGE                   //
@@ -196,6 +227,33 @@ function obtenerSessionStorage(key){
     let objetoContenido = sessionStorage.getItem(key);
     objeto = JSON.parse(objetoContenido);
     return objeto;
+}
+
+function valorDivisasToStorage(){
+    let divisas = JSON.stringify(carteraDivisas);
+    sessionStorage.setItem('divisas', divisas)
+}
+function actualizacionValoresDivisas(){
+    let arrayCarteraDivisas = obtenerSessionStorage('divisas');
+    let ars, usd, eur;
+
+    arrayCarteraDivisas.forEach((divisa)=>{
+        let nombre = divisa.nombre
+        let ticker = divisa.ticker
+        let value = divisa.value
+        let simbolo = divisa.simbolo
+
+        if(ticker == 'ARS'){
+            ars = new Divisas (nombre, ticker, value, simbolo)
+            carteraDivisas.push(ars)
+        } else if( ticker == 'USD'){
+            usd = new Divisas(nombre, ticker, value, simbolo)
+            carteraDivisas.push(usd)
+        } else{
+            eur = new Divisas (nombre, ticker, value, simbolo)
+            carteraDivisas.push(eur)
+        }
+    })
 }
 
 function criptoToStorage(cripto){

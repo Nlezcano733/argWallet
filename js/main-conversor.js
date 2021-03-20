@@ -36,26 +36,19 @@ function Divisas (nombre, ticker, value, simbolo){
     this.simbolo = simbolo
 }
 
-
 // --------------------------------------- //
-let ars = new Divisas ('Pesos', 'ARS', 1, '$');
-
-let carteraDivisas = [ars];
-let valorUsd, valorEur;
+let carteraDivisas = [];
+let valorArs, valorUsd, valorEur;
 // --------------------------------------- //
 
 let carteraCriptos = [];
 let arrayCompras = [];
 
 $(()=>{
-    conversionInicialDolar();
-    conversionInicialEuro();
+    actualizacionValoresDivisas();
 
     valorSelectorInicial();
     billeterasTotalesInicial();
-    mostrarBilletera();
-    
-    $('#ojoUser').click(mostrarOcultar)
     $('.billeteraUser__balance--divisas').change(mostrarBilletera)
 
     getAjaxArmadoLista();
@@ -69,12 +62,19 @@ $(()=>{
     $('#conversion__ingreso--divisa').blur(()=>{
         $('#conversion__confirmacion--cantidad').hide();
     })
+    
+    accionarOjo()
 
-    $('#conversion__ingreso--divisa').keypress(conversionDinamica);
-    accionarBtnCompra();
-    activacionBtnVenta();
+    $('#conversion__ingreso--divisa').keydown(activacionEnter);
+    $('#conversion__ingreso--divisa').keydown(conversionDinamica);
+    $('#confirmacionCompra').click(comprar);
 
     setInterval(()=>{
         armadoDePanelInicial();
     }, 60000)
+    
+    setInterval(()=>{
+        conversionInicialDolar();
+        conversionInicialEuro();
+    },360000)
 })

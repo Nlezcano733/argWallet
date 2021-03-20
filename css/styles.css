@@ -1,7 +1,13 @@
 @font-face {
   font-family: Ebirma;
-  src: url("../assets/fuentes/ebrima.ttf") format("Truetype");
-  font-weight: normal;
+  src: url("../assets/fuentes/Ebirma/ebrima.ttf") format("Truetype");
+  font-weight: bolder;
+  font-style: normal;
+}
+@font-face {
+  font-family: Ebirma-bold;
+  src: url("../assets/fuentes/Ebirma/ebrima-bold.ttf") format("Truetype");
+  font-weight: bolder;
   font-style: normal;
 }
 @font-face {
@@ -66,8 +72,12 @@ header h1 {
   padding: 0px;
   font-family: Ebirma, sans-serif, verdana;
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 400;
   letter-spacing: 1px;
+}
+header strong {
+  font-family: ebirma-bold;
+  font-weight: 800;
 }
 header .navBar {
   display: flex;
@@ -359,6 +369,10 @@ header #conversor__navBar, header #user__navBar {
 #inicio .contenidoInicio #inicio__listado .inicio__listado--cripto .inicio__listado--imagen {
   width: 60px;
   padding: 0px 10px;
+}
+#inicio .contenidoInicio #inicio__listado .inicial {
+  transform: scale(1);
+  font-weight: normal;
 }
 #inicio .contenidoInicio #inicio__listado .resaltar {
   transform: scale(1.2);
@@ -946,6 +960,16 @@ header #conversor__navBar, header #user__navBar {
   font-size: 20px;
   color: #999999;
 }
+#cartera #cartera__lista #cartera__lista--oculto {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Lato, sans-serif, verdana;
+  font-size: 20px;
+  color: #999999;
+}
 
 #activos {
   width: 100%;
@@ -1412,8 +1436,8 @@ header #conversor__navBar, header #user__navBar {
   align-items: center;
   overflow-x: hidden;
   overflow-y: scroll;
-  background-color: #cdd4e7;
-  color: #eeeeee;
+  background-color: #dddddd;
+  color: #455f83;
   direction: rtl;
 }
 #aside::-webkit-scrollbar {
@@ -1439,6 +1463,7 @@ header #conversor__navBar, header #user__navBar {
 }
 #aside .listado:hover {
   background-color: #97adc9;
+  color: #eeeeee;
 }
 #aside .listado:active {
   box-shadow: 0px 0px 5px #7692b7 inset;
@@ -1448,8 +1473,9 @@ header #conversor__navBar, header #user__navBar {
   margin-right: 10px;
 }
 #aside .listado .listado__nombreCripto {
+  display: none;
+  min-width: 220px;
   font-size: 18px;
-  text-shadow: 0px 0px 2px #bbbbbb;
 }
 
 footer {

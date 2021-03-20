@@ -1,33 +1,6 @@
 // ---------------------------------------------- //
 // ---------------PETICIONES AJAX---------------- //
 // ---------------------------------------------- //
-function conversionInicialDolar(){
-    $.ajax({
-        url: "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ars",
-        type: "GET",
-        dataType: "json"
-    }).done((resultado)=>{
-        valorUsd =  resultado.tether.ars;
-        usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
-        carteraDivisas.push(usd)
-    })
-}
-
-function conversionInicialEuro(){
-    $.ajax({
-        url: "https://api.coingecko.com/api/v3/simple/price?ids=eurxb&vs_currencies=ars",
-        type: "GET",
-        dataType: "json"
-    }).done((resultado)=>{
-        valorEur = resultado.eurxb.ars
-
-        euro = new Divisas ('Euro', 'EURO', valorEur, '€');
-        carteraDivisas.push(euro)
-
-        getAjaxArmadoCompras(); 
-    })
-}
-
 
 function getAjaxMercado(moneda){
     $.ajax({
@@ -79,12 +52,6 @@ function depositar(){
     depositarBilletera(inputNumber, divisaIngresada);
 }
 
-function depositarConEnter  (event){
-    if (event.which == 13) {
-        event.preventDefault();
-        depositar()
-    }
-}
 
 function depositarBilletera(input, moneda){
     moneda = moneda.toLowerCase()
@@ -194,7 +161,6 @@ function crearBilletera(input){
         actualizacionBilleteras('#depositoRetiro__registro--divisas', dineroIngresado);
         actualizarBilleterasStorage();
 
-        objetoMoneda = objetoCompleto(billetera, carteraDivisas);
     } else{
         validarOperacion('Ingrese un valor real.', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion');
         $(input).val('');
@@ -214,6 +180,7 @@ function getAjaxArmadoCompras(){
         dataType: "json"
     }).done((resultado)=>{
         infoParaListaCompras(resultado);
+        accionarOjo();
     })
 }
 function getAjaxModificarCompras(moneda, compras){
@@ -262,8 +229,9 @@ function infoParaListaCompras(cripto){
 }
 
 function conversionEntreCantidades(compra, selector){
-    let valDolar = carteraDivisas[1].value;
-    let valEuro = carteraDivisas[2].value;
+    let arrayDivisas = obtenerSessionStorage('divisas')
+    let valDolar = arrayDivisas[1].value;
+    let valEuro = arrayDivisas[2].value;
 
     let monedaConversion = compra.moneda;
     let gastoCompra = compra.gasto;
@@ -337,8 +305,22 @@ function modificacionCompras(cripto, compras){
             let nodoBalance = $('.cartera__lista__posesion--ganancias');
             let balance = estilosBalance(billetera.simbolo, ganPerd[i])
 
+            conversion += ganPerd[i];
+
             modificarElemento(nodoConversion[i], `${billetera.simbolo}${conversion}`);
             modificarElemento(nodoBalance[i], balance);
+
+            let valorBalance = $('.cartera__lista__posesion--ganancias')
+            valorBalance = valorBalance[i]
+            let textoBalance = valorBalance.innerHTML;
+            let valorTextoBalance = textoBalance.indexOf('+')
+            let valorNeutro = textoBalance.indexOf('$')
+            
+            if(valorTextoBalance == 0 || valorNeutro == 0){
+                $(valorBalance).css('color', '#14b10b')
+            } else{
+                $(valorBalance).css('color', '#e70008')
+            }
         }
     }
     //filtra la cantidad de info y modifica la lista de activos segun selector
@@ -381,8 +363,9 @@ function gananciaPerdida(compras, info){
 }
 
 function conversionParaListaActivos (selector, cripto, precio){
-    let dolares = carteraDivisas[1].value;
-    let euros = carteraDivisas[2].value;
+    let arrayDivisas = obtenerSessionStorage('divisas')
+    let dolares = arrayDivisas[1].value;
+    let euros = arrayDivisas[2].value;
     let moneda = cripto.moneda;
 
     if(selector == 'ARS'){

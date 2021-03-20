@@ -1,17 +1,16 @@
 // TO DO - eliminar funciones tomarJson y tomarJsonHome luego de obtener peticion ajax
-// TO DO - eliminar archivo objetoJson.js
 
-function tomarJson() {
-    let i;
-    let listadoJson = JSON.stringify(LISTA_CRIPTOS);
-    let objetos = JSON.parse(listadoJson);
+// function tomarJson() {
+//     let i;
+//     let listadoJson = JSON.stringify(LISTA_CRIPTOS);
+//     let objetos = JSON.parse(listadoJson);
 
-    for (i = 0; i < objetos.length; i++) {
-        let objetosSeparados = objetos[i];
-        objetoCripto = objetosSeparados;
-        carteraCriptos.push(objetoCripto)
-    }
-}
+//     for (i = 0; i < objetos.length; i++) {
+//         let objetosSeparados = objetos[i];
+//         objetoCripto = objetosSeparados;
+//         carteraCriptos.push(objetoCripto)
+//     }
+// }
 
 function tomarJsonHome() {
     let i;
@@ -25,16 +24,29 @@ function tomarJsonHome() {
     }
 }
 
-// $.ajax({
-//         url: "criptoJSON.json",
-//         type: "GET",
-//         contentType: "application/json; charset=utf-8",
-//         dataType: "json"
-//     }).done((resultado)=>{
-//         console.log(resultado[0])
-//     }).fail(()=>{
-//         console.log('fallo')
-//     })
+function getAjaxInicio(){
+    $.ajax({
+            url: "js/criptoJSON.json",
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json"
+        }).done((resultado)=>{
+            for (i = 0; i < resultado.length; i++) {
+                let objetosSeparados = resultado[i];
+                objetoCripto = objetosSeparados;
+                carteraCriptos.push(objetoCripto)
+            }
+            for (i = 0; i < 8; i++) {
+                let objetosSeparados = resultado[i];
+                objetoCripto = objetosSeparados;
+                carteraMuestraInicio.push(objetoCripto)
+            }
+
+            armadoDeLista();
+            armadoDeCriptos();
+            cambiarCriptoMostrada();
+        })
+}
 
 // ------------------------------------------------------------------ //
 // ------------------------------------------------------------------ //
@@ -72,9 +84,10 @@ function crearFotosInicio(ref, nombreCripto, i) {
     $(nodoPadre[i]).append(nuevoNodo);
 }
 
-function modificarFotoInicio(nodoImagen, direccion) {
+function modificarFotoInicio(nodoImagen, direccion, nombre) {
     setTimeout(() => {
         $(nodoImagen).attr('src', direccion);
+        $(nodoImagen).attr('alt', nombre);
     }, 2000)
 }
 
@@ -102,13 +115,19 @@ function armadoDeCriptos() {
 
 
 function cambiarCriptoMostrada(i) {
-    if (i == undefined || i == 8) {
-        i = 0;
+    if (i == undefined ||  i == 8) {
+        i = 0
     }
+
     $('#inicio__imagenCripto').fadeIn(2000, () => {
         let cripto = carteraMuestraInicio[i];
 
-        modificarFotoInicio('#inicio__imagenCripto', cripto.logo);
+        modificarFotoInicio('#inicio__imagenCripto', cripto.logo, cripto.id);
+        if(i != 0){
+            let primero = $('.inicio__listado--cripto')
+            $(primero[0]).removeClass('resaltar')
+            $(primero[0]).addClass('inicial')
+        }
         marcarCripto(i)
         i++;
         cambiarCriptoMostrada(i);

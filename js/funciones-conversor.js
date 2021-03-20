@@ -41,19 +41,17 @@ function conversionMonedacripto (cantidad){
     }
 }
 
-function accionarBtnCompra(){
-    $('#confirmacionCompra').click(()=>{
-        let selector = $('#nombreCripto__divisas').val(); 
-        let valorInput = $('#conversion__ingreso--divisa').val();
-        let conversion = $('#conversion__convertido--valor').text();
-        let precio = $('#infoCripto__cotizacion--valorCompra').text();
-        precio = precio.split(' ');
-        precio = parseFloat(precio[1]);
+function comprar(){
+    let selector = $('#nombreCripto__divisas').val(); 
+    let valorInput = $('#conversion__ingreso--divisa').val();
+    let conversion = $('#conversion__convertido--valor').text();
+    let precio = $('#infoCripto__cotizacion--valorCompra').text();
+    precio = precio.split(' ');
+    precio = parseFloat(precio[1]);
 
-        validacionCompra(selector, valorInput, conversion, precio);
-        $('#conversion__ingreso--divisa').val('');
-        $('#conversion__convertido--valor').text('0,00')
-    })
+    validacionCompra(selector, valorInput, conversion, precio);
+    $('#conversion__ingreso--divisa').val('');
+    $('#conversion__convertido--valor').text('0,00')
 }
 
 function accionarBtnVenta(){
@@ -283,7 +281,7 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
     } else if( cantEnBilletera >= venta){
 
         let nuevoArray = arrayCompleto.map(()=>{
-            return descontarVenta(criptoCliente, venta, input, selector)    // TO DO - promediar precios compra
+            return descontarVenta(criptoCliente, venta, input, selector)
         })
         let objetoDescontado = nuevoArray[0];
 
@@ -302,14 +300,6 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
         let billeteraActual = ingresoBilletera(billetera, venta);
         actualizacionBilleteras('#nombreCripto__divisas', billeteraActual);
         billeteraParaOcultar = mostrarBilletera();
-
-        // TO DO - ver utilidad de enviar transacciones de venta a storage - uso para ver ganancias
-        // cripto = obtenerSessionStorage('cripto');
-        // tk = cripto[0].toUpperCase();
-        // moneda = cripto[1].toUpperCase();
-
-        // venta = new Transaccion(tk, venta, moneda, input);
-        // ventaToStorage(venta);
 
         validarOperacion('movimiento exitoso.', '#conversion__confirmacion--texto');
         $('#conversion__ingreso--divisa').val('');
@@ -355,7 +345,8 @@ function descontarVenta (cripto, venta, valor, selector){
     } else{
         conversion = conversionPorBilletera(venta, selector, copiaObjeto);
         copiaObjeto.gasto = parseFloat((copiaObjeto.gasto - conversion).toFixed(3));
-        copiaObjeto.precio = conversionPorBilletera(promedio, selector, copiaObjeto)
+        let valorPrecio = conversionPorBilletera(promedio, selector, copiaObjeto)
+        copiaObjeto.precio = [valorPrecio]
     }
 
     copiaObjeto.cantidad = parseFloat((copiaObjeto.cantidad - venta).toFixed(3));

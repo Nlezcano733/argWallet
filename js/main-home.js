@@ -1,24 +1,32 @@
+function Divisas (nombre, ticker, value, simbolo){
+    this. nombre = nombre,
+    this.ticker = ticker,
+    this.value = value,
+    this.simbolo = simbolo
+}
+
+// --------------------------------------- //
+let ars = new Divisas ('Pesos', 'ARS', 1, '$');
+
+let carteraDivisas = [ars];
+let valorUsd, valorEur;
+// --------------------------------------- //
+
 let carteraCriptos = [];
 let carteraMuestraInicio = [];
 
 
 $(()=>{
-    //MODIFICABLE AL APLICAR AJAX -- activar si se arma lista con json 
-    tomarJson()
-    tomarJsonHome();
-    // getAjaxInicio();
+    conversionInicialDolar();
+    conversionInicialEuro();
+
+    getAjaxInicio();
 
     avanzarNavbar();
     scrollify();
     scrollFinal();
     slider();
 
-// HABILITAR EN CASO DE ARMAR LA LISTA CON OBJETO JSON
-// ver setInterval
-
-    armadoDeLista();
-    armadoDeCriptos();
-    cambiarCriptoMostrada();
 
     mostrarPanelIngreso();
     //Funcion parcial hasta que se defina algoritmo logIn
