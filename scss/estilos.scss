@@ -197,6 +197,23 @@ header{
         @include boton(90px, 30px, $colorVioleta3, $colorVioleta4);
         margin-bottom: 20px;
     }
+    .validacion{
+        height: 40px;
+        margin-bottom: 10px;
+
+    }
+    #validacion__txt{
+        display: inline-block;
+        height: 40px;
+        width: calc(100% - 115px);
+        margin: 0px;
+        padding: 0px;
+        margin-left: 20px;
+        font-size: $cuerpoSm;
+        line-height: 20px;
+        color: $colorGris5;
+    }
+
     .panelIngreso__extra{
         .panelIngreso__extra--text{
             display: inline-block;
@@ -295,11 +312,6 @@ header{
 
 
             }
-
-            // .inicio__listado--cripto:first-child{
-            //     transform: scale(1.2);
-            //     font-weight: bold;
-            // }
 
             .inicial{
                 transform: scale(1);

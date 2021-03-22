@@ -19,6 +19,7 @@ let carteraMuestraInicio = [];
 $(()=>{
     conversionInicialDolar();
     conversionInicialEuro();
+    validarSesion();
 
     getAjaxInicio();
 
@@ -27,10 +28,9 @@ $(()=>{
     scrollFinal();
     slider();
 
-
     mostrarPanelIngreso();
-    //Funcion parcial hasta que se defina algoritmo logIn
-    ingresoConversor('.panelIngreso__btn');
+    $('#btnRegistro').click(ingresarUsuario)
+    $('#btnComenzar').click(crearUsuario)
 
     getAjaxMercado();
     cambioMuestraDivisa();

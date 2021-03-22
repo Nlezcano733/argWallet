@@ -29,6 +29,11 @@ function ingresoNegativo(input, nodoPadre, nodoMensaje){
 //                   NAVEGACION                 //
 // -------------------------------------------- //
 
+function nombreUser(){
+    user = obtenerStorage('usuario');
+    modificarElemento('.billeteraUser__info--id', user[1])
+}
+
 function avanzarBody(ubicacion) {
     $('html, body').animate({
         scrollTop: $(ubicacion).offset().top
@@ -49,6 +54,10 @@ function habilitarScrollify(){
     $.scrollify.enable();
 }
 
+function cierreSession(){
+    localStorage.setItem('estadoSesion', 0);
+    window.location.href = 'index.html'
+}
 // -------------------------------------------- //
 //                 CREAR NODOS                  //
 // -------------------------------------------- //
@@ -261,6 +270,12 @@ function actualizacionValoresDivisas(){
             carteraDivisas.push(eur)
         }
     })
+}
+
+function usuarioToStorage(usuario){
+    let user = JSON.stringify(usuario)
+    localStorage.setItem('usuario', user)
+    localStorage.setItem('estadoSesion', 1)
 }
 
 function criptoToStorage(cripto){

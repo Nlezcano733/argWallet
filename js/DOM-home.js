@@ -1,29 +1,3 @@
-// TO DO - eliminar funciones tomarJson y tomarJsonHome luego de obtener peticion ajax
-
-// function tomarJson() {
-//     let i;
-//     let listadoJson = JSON.stringify(LISTA_CRIPTOS);
-//     let objetos = JSON.parse(listadoJson);
-
-//     for (i = 0; i < objetos.length; i++) {
-//         let objetosSeparados = objetos[i];
-//         objetoCripto = objetosSeparados;
-//         carteraCriptos.push(objetoCripto)
-//     }
-// }
-
-function tomarJsonHome() {
-    let i;
-    let listadoJson = JSON.stringify(LISTA_CRIPTOS);
-    let objetos = JSON.parse(listadoJson);
-
-    for (i = 0; i < 8; i++) {
-        let objetosSeparados = objetos[i];
-        objetoCripto = objetosSeparados;
-        carteraMuestraInicio.push(objetoCripto)
-    }
-}
-
 function getAjaxInicio(){
     $.ajax({
             url: "js/criptoJSON.json",
@@ -253,11 +227,12 @@ function volverALogIn(){
     })
 }
 
-function ingresoConversor(id){
-    $(id).click(()=>{
-        $(location).attr('href', 'panelUsuario.html');
-    })
-}
+// TO DO - eliminar funcion
+// function ingresoConversor(id){
+//     $(id).click(()=>{
+//         $(location).attr('href', 'panelUsuario.html');
+//     })
+// }
 
 
 // ---------------------------------------------- //
@@ -381,4 +356,76 @@ function armarTr (logo, nombre, par, precio, cambio, max, min, vol, i){
     if(valorTexto == -1){
         $(valorCambio).css('color', '#14b10b')
     }
+}
+
+// ---------------------------------------------- //
+// ---------------------------------------------- //
+// ---------------------------------------------- //
+
+function ingresarUsuario(){
+    let id = $('#idUsuario').val();
+    let pass = $('#passUsuario').val();
+    let usuario = obtenerStorage('usuario')
+
+    if(id == usuario[1] && pass == usuario[2]){
+        localStorage.setItem('estadoSesion', 1)
+        window.location.href = 'panelUsuario.html';
+    } else{
+        $('#idUsuario').css('border', '1px solid red')
+        $('#passUsuario').css('border', '1px solid red')
+
+        validarOperacion('Usuario o contraseña incorrectos', '.validacion', 'validacion__txt')
+        setTimeout(()=>{
+            $('#idUsuario').css('border', '1px solid #5678a4')
+            $('#passUsuario').css('border', '1px solid #5678a4')
+        }, 2500)
+    }
+}
+
+function crearUsuario(){
+        let nombre = $('#nuevoNombre').val();
+        let id = $('#nuevoId').val();
+        let pass = $('#nuevoPass').val();
+
+
+        nombre = validarNombre(nombre)
+        if(nombre == '' || nombre == false){
+            $('#nuevoNombre').css('border', '1px solid red')
+            $('#nuevoNombre').val('')
+
+            validarOperacion('Ingrese un nombre valido.','.validacion', 'validacion__txt');
+            setTimeout(()=>{
+                $('#nuevoNombre').css('border', '1px solid #5678a4')
+            }, 2500)
+            return
+        }
+
+        id = validarId(id)
+        if(id == '' || id == false){
+            $('#nuevoId').css('border', '1px solid red')
+            $('#nuevoId').val('')
+
+            validarOperacion('Ingrese un Id valido.','.validacion', 'validacion__txt');
+            setTimeout(()=>{
+                $('#nuevoId').css('border', '1px solid #5678a4')
+            }, 2500)
+            return
+        }
+
+        pass = validarPass(pass);
+        if(pass == ''){
+            $('#nuevoPass').css('border', '1px solid red')
+            $('#nuevoPass').val('')
+
+            validarOperacion('Contraseña con 8 caracteres minimo','.validacion', 'validacion__txt');
+            setTimeout(()=>{
+                $('#nuevoPass').css('border', '1px solid #5678a4')
+            }, 2500)
+            return
+        }
+
+        localStorage.clear();
+        let usuario = [nombre, id, pass];
+        usuarioToStorage(usuario)
+        window.location.href = 'panelUsuario.html'
 }

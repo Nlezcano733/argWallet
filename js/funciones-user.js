@@ -313,6 +313,7 @@ function modificacionCompras(cripto, compras){
             let balance = estilosBalance(billetera.simbolo, ganPerd[i])
 
             conversion += ganPerd[i];
+            conversion = parseFloat(conversion.toFixed(2))
 
             modificarElemento(nodoConversion[i], `${billetera.simbolo}${conversion}`);
             modificarElemento(nodoBalance[i], balance);

@@ -272,6 +272,21 @@ header #conversor__navBar, header #user__navBar {
 .panelIngreso .panelIngreso__btn:focus {
   outline: none;
 }
+.panelIngreso .validacion {
+  height: 40px;
+  margin-bottom: 10px;
+}
+.panelIngreso #validacion__txt {
+  display: inline-block;
+  height: 40px;
+  width: calc(100% - 115px);
+  margin: 0px;
+  padding: 0px;
+  margin-left: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #666666;
+}
 .panelIngreso .panelIngreso__extra .panelIngreso__extra--text {
   display: inline-block;
   margin-right: 10px;

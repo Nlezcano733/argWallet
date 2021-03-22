@@ -18,7 +18,6 @@ function avanzarNavbar() {
     });
 }
 
-
 // -------------------------------------- //
 
 function scrollFinal (){
@@ -266,10 +265,12 @@ function accionarDepositoEnter(){
 // ----------MOSTRAR/OCULTAR BILLETERAS---------- //
 // ---------------------------------------------- //
 
+
 function mostrarBilletera(){
     let billeteraTotal = obtenerArrayDeBilleteras();
     let elemento = $('.billeteraUser__balance__billetera--cantidad')
     let posicion;
+    getAjaxConvReferencia('ARS', billeteraPesos.billeteraTotal)
 
     for(i=0; i<billeteraTotal.length; i++){
         posicion = billeteraTotal[i];
@@ -280,7 +281,6 @@ function mostrarBilletera(){
             modificarElemento(elemento[i], `${posicion.simbolo}${cantidad}`)
         }
     }
-    getAjaxConvReferencia('ARS', billeteraPesos.billeteraTotal)
 }
 
 function mostrarbilleteraSeleccionada (){
@@ -394,6 +394,7 @@ function armadoListaCompras(compra, info, balances){
         let balance = estilosBalance(billetera.simbolo, balances[i])
 
         conversion += balances[i];
+        conversion = parseFloat(conversion.toFixed(2))
 
         crearDivIdPadre('#cartera__lista', 'class', 'cartera__lista__posesion');
         crearDivClassPadre('.cartera__lista__posesion', 'class', 'nombre', i);

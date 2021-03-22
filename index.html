@@ -25,7 +25,6 @@
     </header>
 
     <aside id="redes">
-        <!-- <a href="#" id="darkMode"><i class="far fa-moon"></i></a> -->
         <a target="blank" href="https://github.com/Nlezcano733"><i class="fab fa-github-alt"></i></a>
         <a target="blank" href="https://www.linkedin.com/in/nlezcano/"><i class="fab fa-linkedin"></i></a>
     </aside>
@@ -36,21 +35,23 @@
         <form>
             <div>
                 <label for="idUsuario" class="panelIngreso__label">ID usuario</label>
-                <input type="text" name="idUsuario" id="idUsuario" class="panelIngreso__input" disabled>
+                <input type="text" name="idUsuario" id="idUsuario" class="panelIngreso__input" required>
             </div>
             <div>
                 <label for="passUsuario" class="panelIngreso__label">Contraseña</label>
-                <input type="password" name="passUsuario" id="passUsuario" class="panelIngreso__input" disabled>
+                <input type="password" name="passUsuario" id="passUsuario" class="panelIngreso__input" required>
             </div>
-            <input type="button" id="btnRegistro" class="panelIngreso__btn" value="Ingresar">
+            <div class="validacion">
+                <input type="button" id="btnRegistro" class="panelIngreso__btn" value="Ingresar">
+            </div>
         </form>
         <div class="panelIngreso__extra">
-            <!-- <p class="panelIngreso__extra--text">¿No tiene cuenta?</p>
-            <a class="panelIngreso__extra--enlace" id="solicitudRegistro">Registrarse</a> -->
-            <p>Ingreso de usuario en desarrollo. Presione "Ingresar" para continuar</p>
+            <p class="panelIngreso__extra--text">¿No tiene cuenta?</p>
+            <a class="panelIngreso__extra--enlace" id="solicitudRegistro">Registrarse</a>
         </div>
         <h3>Arg<strong>WALLET</strong></h3>
     </div>
+    
     <div id="registro" class="panelIngreso">
         <h2>Registro</h2>
         <a class="panelIngreso__atras"><i class="fas fa-arrow-left"></i></a>
@@ -58,17 +59,19 @@
         <form>
             <div>
                 <label for="nuevoNombre" class="panelIngreso__label">Nombre usuario</label>
-                <input type="text" name="nuevoNombre" id="nuevoNombre" class="panelIngreso__input" disabled>
+                <input type="text" name="nuevoNombre" id="nuevoNombre" class="panelIngreso__input" >
             </div>
             <div>
                 <label for="nuevoId" class="panelIngreso__label">ID usuario</label>
-                <input type="text" name="nuevoId" id="nuevoId" class="panelIngreso__input" disabled>
+                <input type="text" name="nuevoId" id="nuevoId" class="panelIngreso__input" >
             </div>
             <div>
                 <label for="nuevoPass" class="panelIngreso__label">Contraseña</label>
-                <input type="password" name="nuevoPass" id="nuevoPass" class="panelIngreso__input" disabled>
+                <input type="password" name="nuevoPass" id="nuevoPass" class="panelIngreso__input" >
             </div>
-            <input type="button" id="btnComenzar" class="panelIngreso__btn" value="Comenzar">
+            <div class="validacion">
+                <input type="button" id="btnComenzar" class="panelIngreso__btn" value="Comenzar">
+            </div>
         </form>
         <div class="panelIngreso__extra">
             <p class="panelIngreso__extra--text">*Pagina Demo: ningun dato será guardado en una base de datos. 
@@ -178,6 +181,7 @@
     <script src="js/slick.min.js"></script>
     <script src="js/funcionesGenerales.js"></script>
     <script src="js/DOM-home.js"></script>
+    <script src="js/funciones-home.js"></script>
     <script src="js/main-home.js"></script>
 </body>
 </html>

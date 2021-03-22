@@ -39,6 +39,7 @@ let carteraCriptos = [];
 $(()=>{
     actualizacionValoresDivisas();
 
+    nombreUser();
     avanzarNavbar();
     scrollify();
     scrollCompras();
@@ -71,7 +72,14 @@ $(()=>{
     }, 60000)
 
     setInterval(()=>{
+        divisas = obtenerSessionStorage('divisas')
+        if(divisas != null){
+        sessionStorage.removeItem('divisas')
+        }
+        
         conversionInicialDolar();
         conversionInicialEuro();
     },360000)
+
+    $('.navBar__salir').click(cierreSession)
 })

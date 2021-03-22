@@ -47,6 +47,7 @@ let arrayCompras = [];
 $(()=>{
     actualizacionValoresDivisas();
 
+    nombreUser();
     valorSelectorInicial();
     billeterasTotalesInicial();
     $('.billeteraUser__balance--divisas').change(mostrarBilletera)
@@ -77,4 +78,6 @@ $(()=>{
         conversionInicialDolar();
         conversionInicialEuro();
     },360000)
+
+    $('.navBar__salir').click(cierreSession)
 })
