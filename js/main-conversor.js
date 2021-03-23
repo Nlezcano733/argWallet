@@ -58,14 +58,18 @@ $(()=>{
     
     $('#conversion__ingreso--divisa').focus(()=>{
         mostrarCantidadCriptos();
+        $('.maximos').fadeIn(200)
         $('#conversion__confirmacion--cantidad').show();
     })
     $('#conversion__ingreso--divisa').blur(()=>{
+        $('.maximos').fadeOut(200)
         $('#conversion__confirmacion--cantidad').hide();
     })
     
     accionarOjo()
 
+    $('#maxMoneda').click(compraMax)
+    $('#maxCripto').click(ventaMax)
     $('#conversion__ingreso--divisa').keydown(activacionEnter);
     $('#conversion__ingreso--divisa').keydown(conversionDinamica);
     $('#confirmacionCompra').click(comprar);

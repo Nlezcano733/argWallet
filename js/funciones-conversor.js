@@ -30,6 +30,87 @@ function conversionInicialEuro(){
 // ---------------ACCIONAMIENTOS----------------- //
 // ---------------------------------------------- //
 
+function compraMax(){
+    let selector = $('#nombreCripto__divisas').val()
+    let billetera = elegirBilletera(selector)
+    let cantidad = billetera.billeteraTotal
+
+    conversion = conversionMonedacripto(cantidad)
+    modificarElemento('#conversion__convertido--valor', conversion);
+    $('#conversion__ingreso--divisa').val(cantidad)
+
+    $('#confirmacionCompra').click(comprar)
+}
+
+function ventaMax(){
+    let divisas = obtenerSessionStorage('divisas')
+    let selector = $('#nombreCripto__divisas').val()
+    divisas = objetoCompleto(selector, divisas)
+
+    selector = selector.toUpperCase();
+
+    let cripto = obtenerCriptoDeBilletera()
+    let cantidad = cripto.cantidad;
+    modificarElemento('#conversion__convertido--valor', cantidad);
+
+    let arrayPrecios = cripto.precio;
+    let suma = 0;
+
+
+    if(arrayPrecios.length >= 1){
+        arrayPrecios.forEach((precio)=>{
+            suma += precio;
+        })
+    }
+    let promedioPrecio = suma / cripto.cantCompras;
+
+
+    if(cripto.moneda == selector){
+        calculoConversion = promedioPrecio * cantidad
+        conversion = parseFloat((calculoConversion).toFixed(2))
+    } else{
+        conversion = conversionVentaMax(promedioPrecio, selector, cripto)
+    }
+
+    $('#conversion__ingreso--divisa').val(conversion)
+}
+
+function conversionVentaMax(prom, selector, cripto){
+    let divisas = obtenerSessionStorage('divisas');
+    let conversion
+    dolar = divisas[1].value;
+    euro = divisas[2].value;
+
+    moneda = cripto.moneda;
+    cantidad = cripto.cantidad;
+
+    if(selector == 'ARS'){
+        if(moneda == 'USD'){
+            conversion = (dolar / prom) * cantidad;
+        }
+        if(moneda == 'EUR'){
+            conversion = (euro * prom) * cantidad;
+        }
+    }
+    if(selector == 'USD'){
+        if(moneda == 'ARS'){
+            conversion = (dolar / prom) * cantidad;
+        }
+        if(moneda == 'EUR'){
+            conversion = ((euro / dolar) * prom) * cantidad
+        }
+    }
+    if(selector == 'EUR'){
+        if(moneda == 'ARS'){
+            conversion = (prom / euro) * cantidad;
+        }
+        if(moneda == 'USD'){
+            conversion = ((dolar / euro) * prom) * cantidad;
+        }
+    }
+    return parseFloat((conversion).toFixed(3))
+}
+
 function conversionMonedacripto (cantidad){
     if(cantidad > 0){
         let cripto = obtenerSessionStorage('criptomoneda');

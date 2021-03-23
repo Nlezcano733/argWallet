@@ -998,6 +998,7 @@ header{
         #conversion__ingreso{
             grid-area: ingreso;
             @include flexbox(row, space-between, center);
+            position: relative;
 
             #conversion__ingreso--simbolo{
                 font-size: $display;
@@ -1038,6 +1039,7 @@ header{
 
         #conversion__convertido{
             grid-area: resultado;
+            position: relative;
             height: 40px;
             width: 100%;
             @include flexbox(row, space-between, center);
@@ -1063,6 +1065,7 @@ header{
         }
         #btnConfirmacion{
             grid-area: btnConfirmacion;
+            position: relative;
             @include flexbox(row, center, center);
             padding: 0px;
             
@@ -1081,8 +1084,32 @@ header{
                     margin-left: 30px;
                 }
             }
+
             
         }
+
+        .maximos{
+            display: none;
+            position: absolute;
+            @include botonSecundario(60px, 30px, $colorGris0, $colorAzul6);
+            color: $colorAzul7;
+            border: none;
+
+            &:hover{
+                background-color: $colorGris0;
+                color: $colorAzul6;
+                text-shadow: 0px 0px 2px $colorAzul2;
+            }
+        }
+
+        #maxMoneda{
+            left: 60px;
+        }
+        #maxCripto{
+            right: 70px;
+        }
+
+
         #compra{
             grid-area: compra;
             margin: 0 auto;

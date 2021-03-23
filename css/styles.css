@@ -1288,6 +1288,7 @@ header #conversor__navBar, header #user__navBar {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 #transaccion #conversion #conversion__ingreso #conversion__ingreso--simbolo {
   font-size: 30px;
@@ -1322,6 +1323,7 @@ header #conversor__navBar, header #user__navBar {
 }
 #transaccion #conversion #conversion__convertido {
   grid-area: resultado;
+  position: relative;
   height: 40px;
   width: 100%;
   display: flex;
@@ -1348,6 +1350,7 @@ header #conversor__navBar, header #user__navBar {
 }
 #transaccion #conversion #btnConfirmacion {
   grid-area: btnConfirmacion;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -1417,6 +1420,43 @@ header #conversor__navBar, header #user__navBar {
 }
 #transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:focus {
   outline: none;
+}
+#transaccion #conversion .maximos {
+  display: none;
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  color: #334761;
+  background-color: #eeeeee;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  color: #212f40;
+  border: none;
+}
+#transaccion #conversion .maximos:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#transaccion #conversion .maximos:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#transaccion #conversion .maximos:focus {
+  outline: none;
+}
+#transaccion #conversion .maximos:hover {
+  background-color: #eeeeee;
+  color: #334761;
+  text-shadow: 0px 0px 2px #97adc9;
+}
+#transaccion #conversion #maxMoneda {
+  left: 60px;
+}
+#transaccion #conversion #maxCripto {
+  right: 70px;
 }
 #transaccion #conversion #compra {
   grid-area: compra;
