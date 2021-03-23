@@ -151,6 +151,8 @@ function armadoDePanelInicial(){
                 activacionBtnVenta();
             }
         })
+    }).fail(()=>{
+        modificarElemento('#conversion__titulo', `Ocurrio un error en la conexion, vuelva a intenarlo`)
     })
 }
 
@@ -175,6 +177,8 @@ function armadoDePanelElegido(nombre){
                 activacionBtnVenta();
             }
         })
+    }).fail(()=>{
+        modificarElemento('#conversion__titulo', `Ocurrio un error en la conexion, vuelva a intenarlo`)
     })
 }
 

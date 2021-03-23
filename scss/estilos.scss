@@ -30,6 +30,15 @@ body{
     }
 }
 
+.mensajeError{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: $subtitulo;
+    color: $colorGris2;
+}
+
 header{
     @include flexbox (row, space-between, center);
     height: 70px;
@@ -388,6 +397,7 @@ header{
     display: block;
 
     #mercado__lista{
+        position: relative;
         display: block;
         height: 90%;
         overflow-y: scroll;
@@ -405,6 +415,7 @@ header{
         }
 
         #lista__cabecera{
+            width: 100%;
             text-align: left;
             border: none;
 

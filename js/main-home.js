@@ -35,7 +35,7 @@ $(()=>{
     getAjaxMercado();
     cambioMuestraDivisa();
 
-    setInterval(()=>{
+    let intervalo = setInterval(()=>{
         let moneda = $('#lista__cabecera--divisas').val()
         getAjaxModMercado(moneda)
     }, 60000)

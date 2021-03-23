@@ -10,6 +10,9 @@ function conversionInicialDolar(){
         valorUsd =  resultado.tether.ars;
         usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
         carteraDivisas.push(usd)
+    }).fail(()=>{
+        usd = new Divisas ('Dolar', 'USD', 91.5, '$');
+        carteraDivisas.push(usd)
     })
 }
 
@@ -22,6 +25,9 @@ function conversionInicialEuro(){
         valorEur = resultado.eurxb.ars
 
         euro = new Divisas ('Euro', 'EURO', valorEur, '€');
+        carteraDivisas.push(euro)
+    }).fail(()=>{
+        euro = new Divisas ('Euro', 'EURO', 109.5, '€');
         carteraDivisas.push(euro)
     })
 }
@@ -38,8 +44,6 @@ function compraMax(){
     conversion = conversionMonedacripto(cantidad)
     modificarElemento('#conversion__convertido--valor', conversion);
     $('#conversion__ingreso--divisa').val(cantidad)
-
-    $('#confirmacionCompra').click(comprar)
 }
 
 function ventaMax(){

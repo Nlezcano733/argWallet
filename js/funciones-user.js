@@ -9,6 +9,8 @@ function getAjaxMercado(moneda){
         dataType: "json"
     }).done((resultado)=>{
         armadoDeTabla(resultado, moneda);
+    }).fail(()=>{
+        mensajeError('tbody')
     })
 
     //pedido para armado de tabla al inicio de la carga de la pagina
@@ -21,6 +23,8 @@ function getAjaxModMercado(moneda){
         dataType: "json"
     }).done((resultado)=>{
         modificarTabla(resultado, moneda);
+    }).fail(()=>{
+        mensajeError('tbody')
     })
     //pedido para modificar tabla ya creada segun cambios de selector de moneda
 }
@@ -102,8 +106,6 @@ function habilitacionBtn(){
 }
 
 // ---------------------------------------------------------- //
-
-// SUMA DE DINERO
 function sumarBilletera(input, billeteraElegida){
     let dineroIngresado, cantidadSumada;
     dineroIngresado = parseInt(input);
@@ -118,7 +120,7 @@ function sumarBilletera(input, billeteraElegida){
     validarOperacion('movimiento exitoso', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion');
 }
 
-// RETIRO DE DINERO
+// ---------------------------------------------------------- //
 function retirar(){
     let inputNumber, divisa;
 
@@ -188,6 +190,8 @@ function getAjaxArmadoCompras(){
     }).done((resultado)=>{
         infoParaListaCompras(resultado);
         accionarOjo();
+    }).fail(()=>{
+        mensajeError('#cartera__lista')
     })
 }
 function getAjaxModificarCompras(moneda, compras){
@@ -197,6 +201,8 @@ function getAjaxModificarCompras(moneda, compras){
         dataType: "json"
     }).done((resultado)=>{
         modificacionCompras(resultado, compras);
+    }).fail(()=>{
+        mensajeError('#cartera__lista')
     })
 }
 

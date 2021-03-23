@@ -1,25 +1,28 @@
 function getAjaxInicio(){
     $.ajax({
-            url: "js/criptoJSON.json",
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json"
-        }).done((resultado)=>{
-            for (i = 0; i < resultado.length; i++) {
-                let objetosSeparados = resultado[i];
-                objetoCripto = objetosSeparados;
-                carteraCriptos.push(objetoCripto)
-            }
-            for (i = 0; i < 8; i++) {
-                let objetosSeparados = resultado[i];
-                objetoCripto = objetosSeparados;
-                carteraMuestraInicio.push(objetoCripto)
-            }
+        url: "js/criptoJSON.json",
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json"
+    }).done((resultado)=>{
+        for (i = 0; i < resultado.length; i++) {
+            let objetosSeparados = resultado[i];
+            objetoCripto = objetosSeparados;
+            carteraCriptos.push(objetoCripto)
+        }
+        for (i = 0; i < 8; i++) {
+            let objetosSeparados = resultado[i];
+            objetoCripto = objetosSeparados;
+            carteraMuestraInicio.push(objetoCripto)
+        }
 
-            armadoDeLista();
-            armadoDeCriptos();
-            cambiarCriptoMostrada();
-        })
+        armadoDeLista();
+        armadoDeCriptos();
+        cambiarCriptoMostrada();
+    }).fail(()=>{
+        $('#inicio__intro').hide()
+        mensajeError('.contenidoInicio')
+    })
 }
 
 // ------------------------------------------------------------------ //
@@ -246,6 +249,9 @@ function getAjaxMercado(){
         dataType: "json"
     }).done((resultado)=>{
         armadoDeTabla(resultado, 'ars');
+    }).fail(()=>{
+        mensajeError('#mercado__lista')
+        clearInterval(intervalo)
     })
 }
 
@@ -256,6 +262,9 @@ function getAjaxModMercado(moneda){
         dataType: "json"
     }).done((resultado)=>{
         modificarTabla(resultado, moneda);
+    }).fail(()=>{
+        mensajeError('#mercado__lista')
+        clearInterval(intervalo)
     })
 }
 

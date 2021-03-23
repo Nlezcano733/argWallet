@@ -54,6 +54,15 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
+.mensajeError {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  color: #bbbbbb;
+}
+
 header {
   display: flex;
   flex-direction: row;
@@ -453,6 +462,7 @@ header #conversor__navBar, header #user__navBar {
   display: block;
 }
 #mercado #mercado__lista {
+  position: relative;
   display: block;
   height: 90%;
   overflow-y: scroll;
@@ -468,6 +478,7 @@ header #conversor__navBar, header #user__navBar {
   border-radius: 10px;
 }
 #mercado #mercado__lista #lista__cabecera {
+  width: 100%;
   text-align: left;
   border: none;
 }

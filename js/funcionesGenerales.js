@@ -130,6 +130,19 @@ function modificarFoto(nodoImagen, direccion){
     nodo = $(nodoImagen).attr('src', direccion);
 }
 
+function mensajeError(padre){
+    let nuevoNodo, nodoPadre;
+    let mensaje = 'Ocurrio un error en la conexion, vuelva a intenarlo'
+    
+    nodoPadre = $(padre);
+    nuevoNodo = document.createElement('h3');
+    $(nuevoNodo).html(mensaje)
+
+    $(nuevoNodo).attr('class', 'mensajeError');
+    $(nodoPadre[0]).append(nuevoNodo);
+
+}
+
 
 // -------------------------------------------- //
 //            FUNCIONES SOBRE ACTIVO            //
