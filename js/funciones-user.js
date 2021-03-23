@@ -201,8 +201,6 @@ function getAjaxModificarCompras(moneda, compras){
         dataType: "json"
     }).done((resultado)=>{
         modificacionCompras(resultado, compras);
-    }).fail(()=>{
-        mensajeError('#cartera__lista')
     })
 }
 
