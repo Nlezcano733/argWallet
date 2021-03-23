@@ -1,134 +1,6 @@
-function getAjaxInicio(){
-    $.ajax({
-        url: "js/criptoJSON.json",
-        type: "GET",
-        contentType: "application/json",
-        dataType: "json"
-    }).done((resultado)=>{
-        for (i = 0; i < resultado.length; i++) {
-            let objetosSeparados = resultado[i];
-            objetoCripto = objetosSeparados;
-            carteraCriptos.push(objetoCripto)
-        }
-        for (i = 0; i < 8; i++) {
-            let objetosSeparados = resultado[i];
-            objetoCripto = objetosSeparados;
-            carteraMuestraInicio.push(objetoCripto)
-        }
-
-        armadoDeLista();
-        armadoDeCriptos();
-        cambiarCriptoMostrada();
-    }).fail(()=>{
-        $('#inicio__intro').hide()
-        mensajeError('.contenidoInicio')
-    })
-}
-
-// ------------------------------------------------------------------ //
-// ------------------------------------------------------------------ //
-// ------------------------------------------------------------------ //
-
-
-function crearDivCriptosInicio() {
-    let nuevoNodo, nodoPadre;
-    nodoPadre = $('#inicio__listado');
-    nuevoNodo = document.createElement('div');
-    $(nuevoNodo).attr('class', 'inicio__listado--cripto');
-    $(nodoPadre).append(nuevoNodo);
-}
-
-function crearCriptosInicio(contenido, i) {
-    let nuevoNodo, nodoPadre, contenidoTexto;
-    nodoPadre = $('.inicio__listado--cripto');
-
-    nuevoNodo = document.createElement('p');
-    contenidoTexto = document.createTextNode(contenido);
-
-    $(nuevoNodo).append(contenidoTexto);
-    $(nuevoNodo).attr('class', 'inicio__listado--nombre');
-    $(nodoPadre[i]).append(nuevoNodo);
-}
-
-function crearFotosInicio(ref, nombreCripto, i) {
-    let nuevoNodo, nodoPadre;
-    nodoPadre = $('.inicio__listado--cripto');
-    nuevoNodo = document.createElement('img');
-    $(nuevoNodo).attr('src', ref);
-    $(nuevoNodo).attr('class', 'inicio__listado--imagen');
-    $(nuevoNodo).attr('alt', nombreCripto);
-
-    $(nodoPadre[i]).append(nuevoNodo);
-}
-
-function modificarFotoInicio(nodoImagen, direccion, nombre) {
-    setTimeout(() => {
-        $(nodoImagen).attr('src', direccion);
-        $(nodoImagen).attr('alt', nombre);
-    }, 2000)
-}
-
-function armadoDeLista() {
-    carteraMuestraInicio.forEach(() => {
-        crearDivCriptosInicio();
-    })
-
-}
-
-function armadoDeCriptos() {
-    for (let i = 0; i < carteraMuestraInicio.length; i++) {
-        let posicion = carteraMuestraInicio[i];
-        let nombre = posicion.nombre;
-        let foto = posicion.logo;
-        crearCriptosInicio(nombre, i)
-        crearFotosInicio(foto, nombre, i);
-    }
-}
-
-
 // ---------------------------------------------- //
+// -----------------NAVEGACION------------------- //
 // ---------------------------------------------- //
-// ---------------------------------------------- //
-
-
-function cambiarCriptoMostrada(i) {
-    if (i == undefined ||  i == 8) {
-        i = 0
-    }
-
-    $('#inicio__imagenCripto').fadeIn(2000, () => {
-        let cripto = carteraMuestraInicio[i];
-
-        modificarFotoInicio('#inicio__imagenCripto', cripto.logo, cripto.id);
-        if(i != 0){
-            let primero = $('.inicio__listado--cripto')
-            $(primero[0]).removeClass('resaltar')
-            $(primero[0]).addClass('inicial')
-        }
-        marcarCripto(i)
-        i++;
-        cambiarCriptoMostrada(i);
-        $('#inicio__imagenCripto').fadeOut(2000)
-    })
-}
-
-function marcarCripto(i) {
-    let nodoPadre;
-    nodoPadre = $('.inicio__listado--cripto');
-    removerEstilosListado(nodoPadre, i)
-}
-
-function removerEstilosListado(padre, i) {
-    $(padre[i]).addClass('resaltar');
-    setTimeout(() => {
-        $(padre[i]).removeClass('resaltar');
-    }, 4000);
-}
-
-// ---------------------------------------------- //
-// ---------------------------------------------- //
-// ---------------------------------------------- //
-
 
 function slider() {
     $('.single-item').slick({
@@ -142,10 +14,6 @@ function slider() {
     });
 }
 
-
-
-// ---------------------------------------------- //
-// ---------------------------------------------- //
 // ---------------------------------------------- //
 
 function avanzarNavbar() {
@@ -197,49 +65,132 @@ function habilitarScroll (){
 }
 
 // ---------------------------------------------- //
+// --------------PETICIONES AJAX----------------- //
 // ---------------------------------------------- //
-// ---------------------------------------------- //
 
-function mostrarPanelIngreso(){
-    $('#btnIngreso').click(()=>{
-        $('#logIn').fadeIn(300)
-    })
-    ocultarPanelIngreso();
-    mostrarPanelRegistro();
-}
+function getAjaxInicio(){
+    $.ajax({
+        url: "js/criptoJSON.json",
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json"
+    }).done((resultado)=>{
+        for (i = 0; i < resultado.length; i++) {
+            let objetosSeparados = resultado[i];
+            objetoCripto = objetosSeparados;
+            carteraCriptos.push(objetoCripto)
+        }
+        for (i = 0; i < 8; i++) {
+            let objetosSeparados = resultado[i];
+            objetoCripto = objetosSeparados;
+            carteraMuestraInicio.push(objetoCripto)
+        }
 
-function ocultarPanelIngreso(){
-    $('.panelIngreso__salir').click(()=>{
-        $('.panelIngreso').fadeOut(300);
-    })
-}
-
-function mostrarPanelRegistro(){
-    $('.panelIngreso__extra--enlace').click(()=>{
-        $('#logIn').hide();
-        $('#registro').show()
-    })
-    ocultarPanelIngreso()
-    volverALogIn();
-}
-
-function volverALogIn(){
-    $('.panelIngreso__atras').click(()=>{
-        $('#registro').hide()
-        $('#logIn').show();
+        armadoDeLista();
+        armadoDeCriptos();
+        cambiarCriptoMostrada();
+    }).fail(()=>{
+        $('#inicio__intro').hide()
+        mensajeError('.contenidoInicio')
     })
 }
 
-// TO DO - eliminar funcion
-// function ingresoConversor(id){
-//     $(id).click(()=>{
-//         $(location).attr('href', 'panelUsuario.html');
-//     })
-// }
+// ---------------------------------------------- //
+// -------------INTERACCION INICIO--------------- //
+// ---------------------------------------------- //
 
+function crearDivCriptosInicio() {
+    let nuevoNodo, nodoPadre;
+    nodoPadre = $('#inicio__listado');
+    nuevoNodo = document.createElement('div');
+    $(nuevoNodo).attr('class', 'inicio__listado--cripto');
+    $(nodoPadre).append(nuevoNodo);
+}
+
+function crearCriptosInicio(contenido, i) {
+    let nuevoNodo, nodoPadre, contenidoTexto;
+    nodoPadre = $('.inicio__listado--cripto');
+
+    nuevoNodo = document.createElement('p');
+    contenidoTexto = document.createTextNode(contenido);
+
+    $(nuevoNodo).append(contenidoTexto);
+    $(nuevoNodo).attr('class', 'inicio__listado--nombre');
+    $(nodoPadre[i]).append(nuevoNodo);
+}
+
+function crearFotosInicio(ref, nombreCripto, i) {
+    let nuevoNodo, nodoPadre;
+    nodoPadre = $('.inicio__listado--cripto');
+    nuevoNodo = document.createElement('img');
+    $(nuevoNodo).attr('src', ref);
+    $(nuevoNodo).attr('class', 'inicio__listado--imagen');
+    $(nuevoNodo).attr('alt', nombreCripto);
+
+    $(nodoPadre[i]).append(nuevoNodo);
+}
+
+function modificarFotoInicio(nodoImagen, direccion, nombre) {
+    setTimeout(() => {
+        $(nodoImagen).attr('src', direccion);
+        $(nodoImagen).attr('alt', nombre);
+    }, 2000)
+}
+
+function armadoDeLista() {
+    carteraMuestraInicio.forEach(() => {
+        crearDivCriptosInicio();
+    })
+}
+
+function armadoDeCriptos() {
+    for (let i = 0; i < carteraMuestraInicio.length; i++) {
+        let posicion = carteraMuestraInicio[i];
+        let nombre = posicion.nombre;
+        let foto = posicion.logo;
+        crearCriptosInicio(nombre, i)
+        crearFotosInicio(foto, nombre, i);
+    }
+}
 
 // ---------------------------------------------- //
+
+function cambiarCriptoMostrada(i) {
+    if (i == undefined ||  i == 8) {
+        i = 0
+    }
+
+    $('#inicio__imagenCripto').fadeIn(2000, () => {
+        let cripto = carteraMuestraInicio[i];
+
+        modificarFotoInicio('#inicio__imagenCripto', cripto.logo, cripto.id);
+        if(i != 0){
+            let primero = $('.inicio__listado--cripto')
+            $(primero[0]).removeClass('resaltar')
+            $(primero[0]).addClass('inicial')
+        }
+        marcarCripto(i)
+        i++;
+        cambiarCriptoMostrada(i);
+        $('#inicio__imagenCripto').fadeOut(2000)
+    })
+}
+
+function marcarCripto(i) {
+    let nodoPadre;
+    nodoPadre = $('.inicio__listado--cripto');
+    removerEstilosListado(nodoPadre, i)
+}
+
+function removerEstilosListado(padre, i) {
+    $(padre[i]).addClass('resaltar');
+    setTimeout(() => {
+        $(padre[i]).removeClass('resaltar');
+    }, 4000);
+}
+
 // ---------------------------------------------- //
+// --------------ARMADO DE TABLAS---------------- //
 // ---------------------------------------------- //
 
 function getAjaxMercado(){
@@ -368,7 +319,39 @@ function armarTr (logo, nombre, par, precio, cambio, max, min, vol, i){
 }
 
 // ---------------------------------------------- //
+// --------------PANEL DE INGRESO---------------- //
 // ---------------------------------------------- //
+
+function mostrarPanelIngreso(){
+    $('#btnIngreso').click(()=>{
+        $('#logIn').fadeIn(300)
+    })
+    ocultarPanelIngreso();
+    mostrarPanelRegistro();
+}
+
+function ocultarPanelIngreso(){
+    $('.panelIngreso__salir').click(()=>{
+        $('.panelIngreso').fadeOut(300);
+    })
+}
+
+function mostrarPanelRegistro(){
+    $('.panelIngreso__extra--enlace').click(()=>{
+        $('#logIn').hide();
+        $('#registro').show()
+    })
+    ocultarPanelIngreso()
+    volverALogIn();
+}
+
+function volverALogIn(){
+    $('.panelIngreso__atras').click(()=>{
+        $('#registro').hide()
+        $('#logIn').show();
+    })
+}
+
 // ---------------------------------------------- //
 
 function ingresarUsuario(){

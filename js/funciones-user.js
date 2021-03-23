@@ -283,8 +283,6 @@ function conversionEntreCantidades(compra, selector){
     //convierte las cantidades de gasto de las compras segun la moneda de la primer compra para unificar valores
 }
 
-
-
 function modificacionCompras(cripto, compras){
     let selector = $('#cartera__lista__cabecera--divisas').val();
     let billetera = elegirBilletera(selector);

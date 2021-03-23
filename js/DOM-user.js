@@ -47,8 +47,6 @@ function deshabilitarScroll(){
     }
 }
 
-
-
 function scrollCompras (){
     let compras = obtenerStorage('listaCompras')
     let tabla = $('#cartera__lista');
@@ -79,6 +77,121 @@ function deshabilitarScrollCompras(){
 
 function habilitarScroll (){
     window.onscroll = null;
+}
+
+// ---------------------------------------------- //
+// ----------MOSTRAR/OCULTAR BILLETERAS---------- //
+// ---------------------------------------------- //
+
+function mostrarBilletera(){
+    let billeteraTotal = obtenerArrayDeBilleteras();
+    let elemento = $('.billeteraUser__balance__billetera--cantidad')
+    let posicion;
+    getAjaxConvReferencia('ARS', billeteraPesos.billeteraTotal)
+
+    for(i=0; i<billeteraTotal.length; i++){
+        posicion = billeteraTotal[i];
+        if(posicion.billeteraTotal == 0 || posicion.billeteraTotal == null){
+            modificarElemento(elemento[i], `${posicion.simbolo}0,00`)
+        } else{
+            let cantidad = grandesCantidades(posicion.billeteraTotal)
+            modificarElemento(elemento[i], `${posicion.simbolo}${cantidad}`)
+        }
+    }
+}
+
+function mostrarbilleteraSeleccionada (){
+    let selector = $('#depositoRetiro__registro--divisas').val();
+    selectorValor = selector.toUpperCase();
+    let balanceTotal
+
+    if(selector == 'ars'){
+        balanceTotal = billeteraPesos.billeteraTotal;
+    } else if (selector == 'usd'){
+        balanceTotal = billeteraDolares.billeteraTotal;
+    } else{
+        balanceTotal = billeteraEuros.billeteraTotal;
+    }
+    getAjaxConvReferencia(selector, balanceTotal)
+}
+
+function convertirMonedaCriptoRef(cantidad, cripto){
+    let criptoValor = cripto[0].current_price;
+    criptoValor = parseFloat((cantidad / criptoValor)).toFixed(4);
+    return criptoValor
+}
+
+function accionarOjo(){
+    estado = obtenerStorage('mostrarBilletera')
+    if(estado == null || estado == false){
+        localStorage.setItem('mostrarBilletera', 'true')
+    } else{
+        localStorage.setItem('mostrarBilletera', 'false')
+    }
+    
+    mostrarOcultar();
+    $('#ojoUser').click(mostrarOcultar)
+}
+
+function mostrarOcultar (){
+    estado = obtenerStorage('mostrarBilletera')
+    let selectorRegistro = $('#depositoRetiro__registro--divisas');
+
+    let mensajeOculto = '**************';
+    let ojo = $('#ojoUser');
+
+    let billeteras = obtenerArrayDeBilleteras();
+    let cantidades = textoCantidad(billeteras);
+
+    if(estado == false){
+        $(ojo).attr('class', 'fas fa-eye');
+        $(selectorRegistro).attr('disabled', '')
+        $('.billeteraUser__balance__billetera--cantidad').text(mensajeOculto);
+        $('.depositoRetiro__registro--btc').text(mensajeOculto);
+        $('.cartera__lista__posesion').hide();
+        $('#cartera__lista--oculto').show()
+        
+        localStorage.setItem('mostrarBilletera', 'true')
+    } else {
+        $(ojo).attr('class', 'fas fa-eye-slash');
+        $(selectorRegistro).removeAttr('disabled', '')
+        mostrarbilleteraSeleccionada();
+        $('#pesos__cantidad').text(cantidades[0])
+        $('#dolares__cantidad').text(cantidades[1])
+        $('#euros__cantidad').text(cantidades[2])
+        $('.cartera__lista__posesion').show();
+        $('#cartera__lista--oculto').hide()
+
+        localStorage.setItem('mostrarBilletera', 'false')
+    } 
+}
+
+// ---------------------------------------------- //
+// -------------DEPOSITO DE DINERO--------------- //
+// ---------------------------------------------- //
+
+function accionarDeposito() {
+    $('#depositoRetiro__interaccion--depositar').click(()=>{
+        depositar();
+        mostrarBilletera();
+    })
+}
+
+function AccionarRetiro(){
+    $('#depositoRetiro__interaccion--retirar').click(()=>{
+        mostrarBilletera();
+        retirar();
+    })
+}
+
+function accionarDepositoEnter(){
+    input = $('#depositoRetiro__interaccion__input--cantidad').keydown((event)=>{
+        if(event.which == 13){
+            event.preventDefault();
+            depositar();
+            mostrarBilletera()
+        }
+    })
 }
 
 // ---------------------------------------------- //
@@ -231,122 +344,6 @@ function valorSelectorInicial(){
         $('#activos__cabecera--divisas').val(monedaInicial)
         getAjaxMercado(monedaInicial)
     }
-}
-
-// ---------------------------------------------- //
-// -------------DEPOSITO DE DINERO--------------- //
-// ---------------------------------------------- //
-
-function accionarDeposito() {
-    $('#depositoRetiro__interaccion--depositar').click(()=>{
-        depositar();
-        mostrarBilletera();
-    })
-}
-
-function AccionarRetiro(){
-    $('#depositoRetiro__interaccion--retirar').click(()=>{
-        mostrarBilletera();
-        retirar();
-    })
-}
-
-function accionarDepositoEnter(){
-    input = $('#depositoRetiro__interaccion__input--cantidad').keydown((event)=>{
-        if(event.which == 13){
-            event.preventDefault();
-            depositar();
-            mostrarBilletera()
-        }
-    })
-}
-
-// ---------------------------------------------- //
-// ----------MOSTRAR/OCULTAR BILLETERAS---------- //
-// ---------------------------------------------- //
-
-
-function mostrarBilletera(){
-    let billeteraTotal = obtenerArrayDeBilleteras();
-    let elemento = $('.billeteraUser__balance__billetera--cantidad')
-    let posicion;
-    getAjaxConvReferencia('ARS', billeteraPesos.billeteraTotal)
-
-    for(i=0; i<billeteraTotal.length; i++){
-        posicion = billeteraTotal[i];
-        if(posicion.billeteraTotal == 0 || posicion.billeteraTotal == null){
-            modificarElemento(elemento[i], `${posicion.simbolo}0,00`)
-        } else{
-            let cantidad = grandesCantidades(posicion.billeteraTotal)
-            modificarElemento(elemento[i], `${posicion.simbolo}${cantidad}`)
-        }
-    }
-}
-
-function mostrarbilleteraSeleccionada (){
-    let selector = $('#depositoRetiro__registro--divisas').val();
-    selectorValor = selector.toUpperCase();
-    let balanceTotal
-
-    if(selector == 'ars'){
-        balanceTotal = billeteraPesos.billeteraTotal;
-    } else if (selector == 'usd'){
-        balanceTotal = billeteraDolares.billeteraTotal;
-    } else{
-        balanceTotal = billeteraEuros.billeteraTotal;
-    }
-    getAjaxConvReferencia(selector, balanceTotal)
-}
-
-function convertirMonedaCriptoRef(cantidad, cripto){
-    let criptoValor = cripto[0].current_price;
-    criptoValor = parseFloat((cantidad / criptoValor)).toFixed(4);
-    return criptoValor
-}
-
-function accionarOjo(){
-    estado = obtenerStorage('mostrarBilletera')
-    if(estado == null || estado == false){
-        localStorage.setItem('mostrarBilletera', 'true')
-    } else{
-        localStorage.setItem('mostrarBilletera', 'false')
-    }
-    
-    mostrarOcultar();
-    $('#ojoUser').click(mostrarOcultar)
-}
-
-function mostrarOcultar (){
-    estado = obtenerStorage('mostrarBilletera')
-    let selectorRegistro = $('#depositoRetiro__registro--divisas');
-
-    let mensajeOculto = '**************';
-    let ojo = $('#ojoUser');
-
-    let billeteras = obtenerArrayDeBilleteras();
-    let cantidades = textoCantidad(billeteras);
-
-    if(estado == false){
-        $(ojo).attr('class', 'fas fa-eye');
-        $(selectorRegistro).attr('disabled', '')
-        $('.billeteraUser__balance__billetera--cantidad').text(mensajeOculto);
-        $('.depositoRetiro__registro--btc').text(mensajeOculto);
-        $('.cartera__lista__posesion').hide();
-        $('#cartera__lista--oculto').show()
-        
-        localStorage.setItem('mostrarBilletera', 'true')
-    } else {
-        $(ojo).attr('class', 'fas fa-eye-slash');
-        $(selectorRegistro).removeAttr('disabled', '')
-        mostrarbilleteraSeleccionada();
-        $('#pesos__cantidad').text(cantidades[0])
-        $('#dolares__cantidad').text(cantidades[1])
-        $('#euros__cantidad').text(cantidades[2])
-        $('.cartera__lista__posesion').show();
-        $('#cartera__lista--oculto').hide()
-
-        localStorage.setItem('mostrarBilletera', 'false')
-    } 
 }
 
 // ---------------------------------------------- //

@@ -1,38 +1,4 @@
 // ---------------------------------------------- //
-// ---------------PETICIONES AJAX---------------- //
-// ---------------------------------------------- //
-function conversionInicialDolar(){
-    $.ajax({
-        url: "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ars",
-        type: "GET",
-        dataType: "json"
-    }).done((resultado)=>{
-        valorUsd =  resultado.tether.ars;
-        usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
-        carteraDivisas.push(usd)
-    }).fail(()=>{
-        usd = new Divisas ('Dolar', 'USD', 91.5, '$');
-        carteraDivisas.push(usd)
-    })
-}
-
-function conversionInicialEuro(){
-    $.ajax({
-        url: "https://api.coingecko.com/api/v3/simple/price?ids=eurxb&vs_currencies=ars",
-        type: "GET",
-        dataType: "json"
-    }).done((resultado)=>{
-        valorEur = resultado.eurxb.ars
-
-        euro = new Divisas ('Euro', 'EURO', valorEur, '€');
-        carteraDivisas.push(euro)
-    }).fail(()=>{
-        euro = new Divisas ('Euro', 'EURO', 109.5, '€');
-        carteraDivisas.push(euro)
-    })
-}
-
-// ---------------------------------------------- //
 // ---------------ACCIONAMIENTOS----------------- //
 // ---------------------------------------------- //
 
@@ -243,7 +209,6 @@ function agregarCompras (){
 
 }
 
-
 function mismaCompra(cripto, compra){
     let gasto = compra.gasto;
     let cantidad = compra.cantidad
@@ -408,7 +373,6 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
     }
 }
 
-
 function obtenerCriptoDeBilletera (){
     let arrayCompras = obtenerStorage('listaCompras')
     let cripto = obtenerSessionStorage('criptomoneda')
@@ -488,7 +452,6 @@ function ingresoBilletera({billeteraTotal}, cantidad){
     conversion =  cripto.current_price * cantidad;
     return billeteraTotal + conversion
 }
-
 
 function agregarQuitarCompra(cripto, verif){
     let array = obtenerStorage('listaCompras');

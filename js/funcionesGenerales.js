@@ -1,4 +1,42 @@
 // -------------------------------------------- //
+//               PETICIONES AJAX                //
+// -------------------------------------------- //
+
+function conversionInicialDolar(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ars",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        valorUsd =  resultado.tether.ars;
+        usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
+        carteraDivisas.push(usd)
+
+        valorDivisasToStorage();
+    }).fail(()=>{
+        usd = new Divisas ('Dolar', 'USD', 91.5, '$');
+        carteraDivisas.push(usd)
+    })
+}
+
+function conversionInicialEuro(){
+    $.ajax({
+        url: "https://api.coingecko.com/api/v3/simple/price?ids=eurxb&vs_currencies=ars",
+        type: "GET",
+        dataType: "json"
+    }).done((resultado)=>{
+        valorEur = resultado.eurxb.ars
+        euro = new Divisas ('Euro', 'EURO', valorEur, '€');
+        carteraDivisas.push(euro)
+
+        valorDivisasToStorage();
+    }).fail(()=>{
+        euro = new Divisas ('Euro', 'EURO', 109.5, '€');
+        carteraDivisas.push(euro)
+    })
+}
+
+// -------------------------------------------- //
 //                VALIDACIONES                  //
 // -------------------------------------------- //
 
@@ -143,7 +181,6 @@ function mensajeError(padre){
 
 }
 
-
 // -------------------------------------------- //
 //            FUNCIONES SOBRE ACTIVO            //
 // -------------------------------------------- //
@@ -208,39 +245,6 @@ function textoCantidad (array){
         arrayTexto.push(texto)
     }
     return arrayTexto;
-}
-
-
-// -------------------------------------------- //
-//               PETICIONES AJAX                //
-// -------------------------------------------- //
-
-function conversionInicialDolar(){
-    $.ajax({
-        url: "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ars",
-        type: "GET",
-        dataType: "json"
-    }).done((resultado)=>{
-        valorUsd =  resultado.tether.ars;
-        usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
-        carteraDivisas.push(usd)
-
-        valorDivisasToStorage();
-    })
-}
-
-function conversionInicialEuro(){
-    $.ajax({
-        url: "https://api.coingecko.com/api/v3/simple/price?ids=eurxb&vs_currencies=ars",
-        type: "GET",
-        dataType: "json"
-    }).done((resultado)=>{
-        valorEur = resultado.eurxb.ars
-        euro = new Divisas ('Euro', 'EURO', valorEur, '€');
-        carteraDivisas.push(euro)
-
-        valorDivisasToStorage();
-    })
 }
 
 // -------------------------------------------- //
@@ -375,8 +379,6 @@ function actualizarComprasStorage(arrayNuevo){
     let nuevo = JSON.stringify(arrayNuevo);
     localStorage.setItem('listaCompras', nuevo)
 }
-
-
 
 // -------------------------------------------- //
 //               INICIAR BILLETERA              //

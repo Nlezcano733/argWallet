@@ -1,3 +1,7 @@
+// ---------------------------------------------- //
+// ---------------VALIDACIONES------------------- //
+// ---------------------------------------------- //
+
 function validarSesion(){
     estado = obtenerStorage('estadoSesion');
     if(estado == 1){
