@@ -1,0 +1,50 @@
+[
+    {
+        "nombre": "Bitcoin",
+        "ticker": "BTC",
+        "market_ranking": 1,
+        "logo": "assets/logo/btc.png"
+    },
+    {
+        "nombre": "Ethereum",
+        "ticker": "ETH",
+        "market_ranking": 2,
+        "logo": "assets/logo/eth.png"
+    },
+    {
+        "nombre": "Tether",
+        "ticker": "USDT",
+        "market_ranking": 3,
+        "logo": "assets/logo/usdt.png"
+    },
+    {
+        "nombre": "Polkadot",
+        "ticker": "DOT",
+        "market_ranking": 4,
+        "logo": "assets/logo/dot.png"
+    },
+    {
+        "nombre": "Cardano",
+        "ticker": "ADA",
+        "market_ranking": 5,
+        "logo": "assets/logo/ada.png"
+    },
+    {
+        "nombre": "Ripple",
+        "ticker": "XRP",
+        "market_ranking": 6,
+        "logo": "assets/logo/xrp.png"
+    },
+    {
+        "nombre": "Binance Coin",
+        "ticker": "BNB",
+        "market_ranking": 7,
+        "logo": "assets/logo/bnb.png"
+    },
+    {
+        "nombre": "Litecoin",
+        "ticker": "LTC",
+        "market_ranking": 8,
+        "logo": "assets/logo/ltc.png"
+    }
+]

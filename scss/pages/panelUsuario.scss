@@ -1,0 +1,363 @@
+.billeteraUser{
+    height: 70px;
+    width: 100vw;
+    margin-top: 70px;
+    padding: 10px 80px;
+    @include flexbox(row, space-between, center);
+    border-bottom: 1px solid $colorAzul3;
+
+    &__info{
+        height: 100%;
+        width: 200px;
+        @include flexbox (row, flex-start, center);
+
+        i{
+            font-size: $jumbo;
+            color: $colorAzul2;
+        }
+        p{
+            margin-left: 10px;
+            font-size: $titulo;
+            font-weight: 500;
+            line-height: 35px;
+        }
+    }
+
+    &__balance{
+        height: 100%;
+        width: 50%;
+        @include grids (0px, 0px, end, center);
+        grid-template-columns: repeat(3, 1fr) 25px;
+        grid-template-areas: "pesos dolares euros ojo";
+        font-size: $cuerpoLg;
+
+        #pesos{
+            grid-area: pesos;
+        }
+        #dolares{
+            grid-area: dolares;
+        }
+        #euros{
+            grid-area: euros;
+        }
+
+        &__billetera{
+            height: 100%;
+            padding-right: 15px;
+            margin-right: 15px;
+            border-right: 1px solid $colorGris2;
+
+            &--moneda{
+                display: inline-block;
+                width: 40px;
+                font-size: $cuerpoLg;
+                font-weight: 600;
+                font-family: $fuenteGeneral;
+                line-height: 2.5em;
+            }
+            &--cantidad{
+                display: inline-block;
+                width: calc(100% - 55px);
+                margin-left: 10px;
+                text-align: right;
+            }
+        }
+
+        #ojoUser, #ojoConversor{
+            grid-area: ojo;
+            cursor: pointer;
+        }
+    }
+
+}
+
+#depositoRetiro{
+    height: 50px;
+    width: 100%;
+    @include flexbox(row, space-between, center);
+    padding: 10px 80px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .depositoRetiro__registro{
+        width: 30%;
+        @include grids (30px, 0px, start, center);
+        grid-template-columns: 70px 1fr;
+        grid-template-areas:
+            "divisa conversion";
+
+        #depositoRetiro__registro--divisas{
+            grid-area: divisa;
+            @include selector (80px, 35px, $colorGris0, $colorAzul6);
+
+            &:disabled{
+                @include selector(80px, 35px, $colorGris0, $colorGris3);
+            }
+        }
+        &--dinero{
+            grid-area: cantidad;
+            font-size: $cuerpoLg;
+        }
+        &--btc{
+            grid-area: conversion;
+            color: $colorGris4;
+        }
+    }
+
+    .depositoRetiro__interaccion{
+        width: 690px;
+        @include grids (30px, 0px, end, center);
+        grid-template-columns: 180px 1fr repeat(2, 90px);
+        grid-template-areas: "validacion input deposito retiro";
+
+        #depositoRetiro__interaccion--validacion{
+            grid-area: validacion;
+            font-size: $cuerpoSm;
+            text-align: center;
+        }
+
+        #depositoRetiro__interaccion__input{
+            grid-area: input;
+            position: relative;
+
+            #depositoRetiro__interaccion__input--simbolo{
+                position: absolute;
+                left: 5px;
+                font-size: $subtitulo;
+            }
+            #depositoRetiro__interaccion__input--cantidad{
+                @include inputGrande(100%, 30px, $colorAzul6, $subtitulo);
+            }
+        }
+        #depositoRetiro__interaccion--depositar{
+            grid-area: deposito;
+            @include boton(90px, 30px, $colorVioleta2, $colorVioleta3);
+        }
+        #depositoRetiro__interaccion--retirar{
+            grid-area: retiro;
+            @include botonSecundario(90px, 30px, $colorGris0, $colorVioleta3)
+        }
+        #botonDeshabilitado{
+            grid-area: retiro;
+            @include botonDeshabilitado(90px, 30px, $colorGris1, $colorVioleta4);
+        }
+    }
+}
+
+#cartera{
+    width: 100%;
+    height: calc(100vh - 250px);
+    padding: 0px 80px;
+
+
+    &__encabezado--titulo{
+        font-family: $fuenteTitulo;
+        display: inline-block;
+    }
+
+
+    &__lista{
+        width: 100%;
+        height: calc(100% - 55px);
+        overflow: auto;
+        position: relative;
+        padding: 0px;
+        margin-top: 15px;
+        
+        &::-webkit-scrollbar{
+            width: 5px;
+        }
+        &::-webkit-scrollbar:active{
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb{
+            background-color: $colorAzul2;
+            border-radius: 10px;
+        }
+
+        &__cabecera{
+            width: 100%;
+            height: 50px;
+            position: sticky;
+            top:0px;
+            @include grids(15px, 0px, start, center);
+            grid-template-columns: 1.5fr repeat(4, 1fr) 110px;
+            font-weight: 600;
+            background-color: $colorGris1;
+
+            &--nombre{
+                margin-left: 20px;
+            }
+            &--divisas{
+                @include selector(90px, 35px, $colorGris1, $colorAzul6);
+                margin-right: 20px;
+            }
+        }
+        .cartera__lista__posesion{
+            width: 100%;
+            height: 50px;
+            @include grids(15px, 0px, start, center);
+            grid-template-columns: 1.5fr repeat(4, 1fr) 100px;
+            grid-template-areas: "nombre cantidad conversion cambio ganancias input";
+            border-bottom: 1px solid $colorGris2;
+
+            .nombre{
+                grid-area: nombre;
+                width: 100%;
+                @include flexbox (row, flex-start, center);
+                padding-left: 20px;
+                .cartera__lista__posesion--image{
+                    width: 30px;
+                    margin-right: 10px;
+                }
+                .cartera__lista__posesion--nombre{
+                    display: inline;
+                    font-size: $cuerpoLg;
+                }
+            }
+            &--cantidad{
+                grid-area: cantidad;
+            }
+            &--conversion{
+                grid-area: conversion;
+            }
+            &--cambio{
+                grid-area: cambio;
+                color: $colorRojo2;
+            }
+            &--ganancias{
+                grid-area: ganancias;
+                color: $colorRojo2;
+            }
+            &--operar{
+                grid-area: input;
+                @include botonSecundario(90px, 30px, $colorGris0, $colorVioleta4);
+                margin-right: 20px;
+                line-height: 22px;
+                text-decoration: none;
+                justify-self: end;
+            }
+        }
+
+        &__mensaje{
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: $fuenteGeneral;
+            font-size: $subtitulo;
+            color: $colorGris3;
+        }
+        &--oculto{
+            display: none;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: $fuenteGeneral;
+            font-size: $subtitulo;
+            color: $colorGris3;
+        }
+    }
+}
+
+
+#activos{
+    width: 100%;
+    height: calc(100vh);
+    padding: 50px 80px;
+    padding-top: 85px;
+
+
+    &__lista{
+        display: block;
+        position: relative;
+        height: calc(100% - 15px);
+        overflow-y: scroll;
+        
+        &::-webkit-scrollbar{
+                width: 5px;
+        }
+        &::-webkit-scrollbar:active{
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb{
+            background-color: $colorAzul2;
+            border-radius: 10px;
+        }
+
+        #activos__cabecera{
+            width: 100%;
+            height: 50px;
+            background-color: $colorGris1;
+
+            th{
+                width: calc(100% / 8);
+                height: 50px;
+                padding: 2px 20px;
+                padding-left: 20px;
+                text-align: left;
+                background-color: $colorGris1;
+                position: sticky;
+                top:0px;
+
+                &:last-child{
+                    width: 500px;
+                }
+
+                #activos__cabecera--divisas{
+                    @include selector (90px, 35px, $colorGris1, $colorAzul6);
+                }
+            }
+        }
+
+
+
+        .activo__cuerpo{
+            height: 45px;
+            text-align: left;
+
+            td{
+                width: calc(100% / 6);
+                height: 45px;
+                padding: 2px 10px;
+                padding-left: 20px;
+                text-align: left;
+                background-color: $colorGris0;
+                border-bottom: 1px solid $colorAzul3;
+
+                .activo__cuerpo--nombre{
+                    @include flexbox(row, flex-start, center);
+                    width: 200px;
+
+                    .parCriptoLista{
+                        font-family: $fuenteGeneral;
+                        padding: 0px;
+                        line-height: 45px;
+                        border: none;
+                    }
+                    img{
+                        width: 30px;
+                        margin-right: 10px;
+                    }
+                }
+
+                a{
+                    display: inline-block;
+                    padding: 5px 10px;
+                    line-height: 15px;
+                    text-decoration: none;
+                    text-align: center;
+                }
+                .activo__cuerpo--btn{
+                    @include botonSecundario(90px, 30px, $colorGris0, $colorVioleta4);
+                }
+            }
+            .activo__cuerpo--cambio{
+                color: $colorRojo2;
+            }
+        }
+    }
+}

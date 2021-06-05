@@ -1,0 +1,349 @@
+.panelIngreso{
+    display: none;
+    height: 460px;
+    width: 400px;
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    padding: 20px 30px;
+    background-color: $colorGris0;
+    box-shadow: 0px 0px 10px $colorGris2;
+    z-index: 20000;
+    transform: translateX(-50%);
+
+    &__salir{
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: $subtitulo;
+        transition: all 0.2s ease-out;
+
+        &:hover{
+            transform: scale(1.05);
+        }
+    }
+    &__atras{
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        font-size: $subtitulo;
+        transition: all 0.2s ease-out;
+
+        &:hover{
+            transform: scale(1.05);
+        }
+    }
+
+    h2{
+        font-family: $fuenteTitulo;
+        font-size: $display;
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+    div{
+        margin-bottom: 20px;
+
+        .panelIngreso__label{
+            display: block;
+            width: 100%;
+            font-size: $cuerpoLg;
+            margin-bottom: 5px;
+        }
+        .panelIngreso__input{
+            width: 100%;
+            height: 30px;
+            font-size: $cuerpo;
+            line-height: 20px;
+            padding: 5px;
+            color: $colorGris4;
+            border: 1px solid $colorAzul4;
+            outline: none;
+            transition: all 0.2s ease-out;
+
+            &:hover{
+                box-shadow: 0px 0px 5px $colorAzul3;
+            }
+            &:focus{
+                color: $colorGris8;
+                box-shadow: 0px 0px 5px $colorAzul3;
+            }
+        }
+    }
+    &__btn{
+        @include boton(90px, 30px, $colorVioleta3, $colorVioleta4);
+        margin-bottom: 20px;
+    }
+    .validacion{
+        height: 40px;
+        margin-bottom: 10px;
+
+    }
+    #validacion__txt{
+        display: inline-block;
+        height: 40px;
+        width: calc(100% - 115px);
+        margin: 0px;
+        padding: 0px;
+        margin-left: 20px;
+        font-size: $cuerpoSm;
+        line-height: 20px;
+        color: $colorGris5;
+    }
+
+    &__extra{
+        .panelIngreso__extra--text{
+            display: inline-block;
+            margin-right: 10px;
+            color: $colorGris4;
+        }
+        .panelIngreso__extra--enlace{
+            color: $colorAzul7;
+            cursor: pointer;
+            transition: all 0,3s ease-out;
+
+            &:hover{
+                color: $colorAzul8;
+            }
+            &:active{
+                transform: scale(0.9);
+            }
+        }
+    }
+    h3{
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: $fuenteLogo;
+        font-size: $titulo;
+        color: $colorGris2;
+        text-align: center;
+        letter-spacing: 2px;
+        strong{
+            font-weight: bolder;
+        }
+    }
+}
+
+
+#inicio{
+    .contenidoInicio{
+        width: 100%;
+        height: 100vh;
+        padding: 80px 80px;
+
+        @include grids(10px, 0px, start, center);
+        grid-template-columns: repeat(2, 1fr) 250px;
+        grid-template-rows: auto;
+        grid-template-areas: "intro imagen lista";
+        background-image: url(../assets/images/backgroung-1.jpg);
+        background-size: cover;
+        background-position: center;
+
+        #inicio__intro{
+            grid-area: 'intro';
+            @include flexbox(column, center, flex-start);
+            height: 80%;
+            width: 90%;
+            margin-top: -25%;
+            margin-bottom: 0%;
+
+            h2{
+                font-family: $fuenteTitulo;
+                font-weight: bold;
+                font-size: $display;
+                margin-bottom: 30px;
+            }
+            p{
+                font-size: $cuerpoLg;
+                line-height: 1.7em;
+            }
+        }
+
+        #inicio__imagenCripto{
+            grid-area: imagen;
+            width: 70%;
+        }
+
+        #inicio__listado{
+            grid-area: lista;
+            @include flexbox(column, space-between, flex-end);
+            height: 100%;
+            width: 100%;
+            padding-top: 20px;
+
+            .inicio__listado--cripto{
+                @include flexbox (row, space-between, center);
+                width: fit-content;
+                transition: all 1s ease-out 2s;
+
+                .inicio__listado--nombre{
+                    margin-right: 20px;
+                    width: fit-content;
+                }
+                .inicio__listado--imagen{
+                    width: 60px;
+                    padding: 0px 10px;
+                }
+
+
+            }
+
+            .inicial{
+                transform: scale(1);
+                font-weight: normal;
+            }
+            .resaltar{
+                transform: scale(1.2);
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+#info{
+    @include flexbox(column, center, space-around);
+    position: relative;
+
+    #infoDiv{
+        height: 85vh;
+        width: 80vw;
+        margin: 0 auto;
+        margin-top: 15vh;
+
+
+        .info__cuerpoInfo{
+            @include grids (10px, 10px, start, start);
+            grid-template-columns: 450px 1fr;
+            grid-template-rows: 60px auto;
+            grid-template-areas: 
+                "titulo imagen"
+                "contenido imagen";
+            width: 600px;
+            height: 400px;
+            margin-top: 50px;
+
+            &:active{
+                outline: none;
+            }
+            &--titulo{
+                grid-area: titulo;
+                align-self: center;
+                font-family: $fuenteTitulo;
+                font-size: display;
+                margin-bottom: 40px;
+            }
+
+            &--texto{
+                grid-area: contenido;
+                width: 400px;
+                font-size: $cuerpo;
+                line-height: 1.6em;
+                p{
+                    margin-bottom: 15px;
+                }
+            }
+
+            .info__imagen{
+                grid-area: imagen;
+                width: 100%;
+                mix-blend-mode: darken;
+            }
+        }
+    }
+
+
+}
+
+
+#mercado{
+    width: 100%;
+    height: 100vh;
+    padding: 80px 80px;
+    padding-bottom: 20px;
+    display: block;
+
+    &__lista{
+        position: relative;
+        display: block;
+        height: 90%;
+        overflow-y: scroll;
+        
+        &::-webkit-scrollbar{
+                width: 5px;
+        }
+        &::-webkit-scrollbar:active{
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb{
+            background-color: $colorAzul2;
+            border-radius: 10px;
+        }
+
+        #lista__cabecera{
+            width: 100%;
+            text-align: left;
+            border: none;
+
+            th{
+                width: calc(100% / 7);
+                height: 50px;
+                padding: 2px 20px;
+                padding-left: 20px;
+                background-color: $colorGris1;
+                border: none;
+                position: sticky;
+                top:0px;
+
+                #lista__cabecera--divisas{
+                    @include selector(90px, 35px, $colorGris1, $colorAzul6);
+                    font-size: $cuerpo;
+                    font-weight: bold;
+                    margin-left: -5px;
+                }
+            }
+        }
+        .lista__cripto{
+            text-align: left;
+
+            td{
+                width: auto;
+                height: 45px;
+                padding: 2px 10px;
+                padding-left: 20px;
+                background-color: $colorGris0;
+                border-bottom: 1px solid $colorAzul3;
+
+                .lista__cripto--nombre{
+                    @include flexbox(row, flex-start, center);
+                    width: 200px;
+                    .nombreCriptoLista{
+                        font-family: $fuenteGeneral;
+                        padding: 0px;
+                        line-height: 45px;
+                        border: none;
+                    }
+                    img{
+                        width: 30px;
+                        margin-right: 10px;
+                    }
+                }
+
+                &--btn{
+                    display: block;
+                    @include boton(80px, 30px, $colorVioleta3, $colorVioleta4);
+                    padding: 5px 10px;
+                    line-height: 15px;
+                    text-decoration: none;
+                    text-align: center;
+                }
+
+            }
+            &--cambio{
+                color: $colorRojo2;
+            }
+        }
+    }
+}

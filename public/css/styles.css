@@ -1,0 +1,1530 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans&family=Roboto&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  width: 100%;
+  position: relative;
+  background-color: #eeeeee;
+  color: #334761;
+  font-family: "Lato", sans-serif, verdana;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+  width: 5px;
+}
+body::-webkit-scrollbar:active {
+  width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #7692b7;
+  border-radius: 10px;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  padding: 0px 80px;
+  position: fixed;
+  top: 0px;
+  background-color: #f6f6f63f;
+  z-index: 1000;
+}
+header h1 {
+  width: fit-content;
+  padding: 0px;
+  font-family: sans-serif, verdana;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+header strong {
+  font-family: sans-serif, verdana;
+  font-weight: 800;
+}
+header .navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 480px;
+  height: 100%;
+}
+header .navBar input {
+  padding-bottom: 5px;
+  color: #334761;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0, 3s linear;
+}
+header .navBar input:hover {
+  color: #212f40;
+}
+header .navBar input:visited {
+  color: #334761;
+}
+header .navBar input:active {
+  transform: scale(0.95);
+}
+header .navBar #btnIngreso {
+  margin: 0px;
+  width: 110px;
+  height: 35px;
+  color: #eeeeee;
+  background-color: #5F06CC;
+  border: 2px solid #3B0480;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  line-height: 30px;
+  text-decoration: none;
+  color: #dddddd;
+}
+header .navBar #btnIngreso:hover {
+  background-color: #3B0480;
+}
+header .navBar #btnIngreso:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+header .navBar #btnIngreso:focus {
+  outline: none;
+}
+header .navBar .navBar__salir {
+  margin: 0px;
+  width: 110px;
+  height: 35px;
+  color: #7908FF;
+  background-color: #eeeeee;
+  border: 1px solid #7908FF;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  line-height: 30px;
+  text-decoration: none;
+}
+header .navBar .navBar__salir:hover {
+  background-color: #7908FF;
+  color: #eeeeee;
+}
+header .navBar .navBar__salir:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+header .navBar .navBar__salir:focus {
+  outline: none;
+}
+header #conversor__navBar, header #user__navBar {
+  width: 370px;
+}
+
+footer {
+  width: 100vw;
+  height: 35px;
+  padding: 5px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  color: #10161e;
+  text-align: center;
+  z-index: 1000;
+}
+
+#redes {
+  position: fixed;
+  left: 30px;
+  top: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: fit-content;
+  height: 100px;
+  background-color: transparent;
+  z-index: 1000;
+}
+#redes i {
+  font-size: 18px;
+  color: #334761;
+  transition: all 0.1s linear;
+}
+#redes i:hover {
+  transform: scale(1.2);
+}
+
+.mensajeError {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  color: #bbbbbb;
+}
+
+.panelIngreso {
+  display: none;
+  height: 460px;
+  width: 400px;
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  padding: 20px 30px;
+  background-color: #eeeeee;
+  box-shadow: 0px 0px 10px #bbbbbb;
+  z-index: 20000;
+  transform: translateX(-50%);
+}
+.panelIngreso__salir {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 20px;
+  transition: all 0.2s ease-out;
+}
+.panelIngreso__salir:hover {
+  transform: scale(1.05);
+}
+.panelIngreso__atras {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 20px;
+  transition: all 0.2s ease-out;
+}
+.panelIngreso__atras:hover {
+  transform: scale(1.05);
+}
+.panelIngreso h2 {
+  font-family: "Noto Sans", sans-serif, verdana;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+.panelIngreso div {
+  margin-bottom: 20px;
+}
+.panelIngreso div .panelIngreso__label {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.panelIngreso div .panelIngreso__input {
+  width: 100%;
+  height: 30px;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 5px;
+  color: #808080;
+  border: 1px solid #5678a4;
+  outline: none;
+  transition: all 0.2s ease-out;
+}
+.panelIngreso div .panelIngreso__input:hover {
+  box-shadow: 0px 0px 5px #7692b7;
+}
+.panelIngreso div .panelIngreso__input:focus {
+  color: #1a1a1a;
+  box-shadow: 0px 0px 5px #7692b7;
+}
+.panelIngreso__btn {
+  width: 90px;
+  height: 30px;
+  color: #eeeeee;
+  background-color: #5F06CC;
+  border: 2px solid #3B0480;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-bottom: 20px;
+}
+.panelIngreso__btn:hover {
+  background-color: #3B0480;
+}
+.panelIngreso__btn:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+.panelIngreso__btn:focus {
+  outline: none;
+}
+.panelIngreso .validacion {
+  height: 40px;
+  margin-bottom: 10px;
+}
+.panelIngreso #validacion__txt {
+  display: inline-block;
+  height: 40px;
+  width: calc(100% - 115px);
+  margin: 0px;
+  padding: 0px;
+  margin-left: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #666666;
+}
+.panelIngreso__extra .panelIngreso__extra--text {
+  display: inline-block;
+  margin-right: 10px;
+  color: #808080;
+}
+.panelIngreso__extra .panelIngreso__extra--enlace {
+  color: #212f40;
+  cursor: pointer;
+  transition: all 0, 3s ease-out;
+}
+.panelIngreso__extra .panelIngreso__extra--enlace:hover {
+  color: #10161e;
+}
+.panelIngreso__extra .panelIngreso__extra--enlace:active {
+  transform: scale(0.9);
+}
+.panelIngreso h3 {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: sans-serif, verdana;
+  font-size: 24px;
+  color: #bbbbbb;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.panelIngreso h3 strong {
+  font-weight: bolder;
+}
+
+#inicio .contenidoInicio {
+  width: 100%;
+  height: 100vh;
+  padding: 80px 80px;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr) 250px;
+  grid-template-rows: auto;
+  grid-template-areas: "intro imagen lista";
+  background-image: url(../assets/images/backgroung-1.jpg);
+  background-size: cover;
+  background-position: center;
+}
+#inicio .contenidoInicio #inicio__intro {
+  grid-area: "intro";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 80%;
+  width: 90%;
+  margin-top: -25%;
+  margin-bottom: 0%;
+}
+#inicio .contenidoInicio #inicio__intro h2 {
+  font-family: "Noto Sans", sans-serif, verdana;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+#inicio .contenidoInicio #inicio__intro p {
+  font-size: 18px;
+  line-height: 1.7em;
+}
+#inicio .contenidoInicio #inicio__imagenCripto {
+  grid-area: imagen;
+  width: 70%;
+}
+#inicio .contenidoInicio #inicio__listado {
+  grid-area: lista;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+  padding-top: 20px;
+}
+#inicio .contenidoInicio #inicio__listado .inicio__listado--cripto {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+  transition: all 1s ease-out 2s;
+}
+#inicio .contenidoInicio #inicio__listado .inicio__listado--cripto .inicio__listado--nombre {
+  margin-right: 20px;
+  width: fit-content;
+}
+#inicio .contenidoInicio #inicio__listado .inicio__listado--cripto .inicio__listado--imagen {
+  width: 60px;
+  padding: 0px 10px;
+}
+#inicio .contenidoInicio #inicio__listado .inicial {
+  transform: scale(1);
+  font-weight: normal;
+}
+#inicio .contenidoInicio #inicio__listado .resaltar {
+  transform: scale(1.2);
+  font-weight: bold;
+}
+
+#info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-around;
+  position: relative;
+}
+#info #infoDiv {
+  height: 85vh;
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 15vh;
+}
+#info #infoDiv .info__cuerpoInfo {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  justify-content: start;
+  align-items: start;
+  grid-template-columns: 450px 1fr;
+  grid-template-rows: 60px auto;
+  grid-template-areas: "titulo imagen" "contenido imagen";
+  width: 600px;
+  height: 400px;
+  margin-top: 50px;
+}
+#info #infoDiv .info__cuerpoInfo:active {
+  outline: none;
+}
+#info #infoDiv .info__cuerpoInfo--titulo {
+  grid-area: titulo;
+  align-self: center;
+  font-family: "Noto Sans", sans-serif, verdana;
+  font-size: display;
+  margin-bottom: 40px;
+}
+#info #infoDiv .info__cuerpoInfo--texto {
+  grid-area: contenido;
+  width: 400px;
+  font-size: 16px;
+  line-height: 1.6em;
+}
+#info #infoDiv .info__cuerpoInfo--texto p {
+  margin-bottom: 15px;
+}
+#info #infoDiv .info__cuerpoInfo .info__imagen {
+  grid-area: imagen;
+  width: 100%;
+  mix-blend-mode: darken;
+}
+
+#mercado {
+  width: 100%;
+  height: 100vh;
+  padding: 80px 80px;
+  padding-bottom: 20px;
+  display: block;
+}
+#mercado__lista {
+  position: relative;
+  display: block;
+  height: 90%;
+  overflow-y: scroll;
+}
+#mercado__lista::-webkit-scrollbar {
+  width: 5px;
+}
+#mercado__lista::-webkit-scrollbar:active {
+  width: 10px;
+}
+#mercado__lista::-webkit-scrollbar-thumb {
+  background-color: #97adc9;
+  border-radius: 10px;
+}
+#mercado__lista #lista__cabecera {
+  width: 100%;
+  text-align: left;
+  border: none;
+}
+#mercado__lista #lista__cabecera th {
+  width: calc(100% / 7);
+  height: 50px;
+  padding: 2px 20px;
+  padding-left: 20px;
+  background-color: #dddddd;
+  border: none;
+  position: sticky;
+  top: 0px;
+}
+#mercado__lista #lista__cabecera th #lista__cabecera--divisas {
+  width: 90px;
+  height: 35px;
+  color: #334761;
+  background-color: #dddddd;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: -5px;
+}
+#mercado__lista #lista__cabecera th #lista__cabecera--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#mercado__lista #lista__cabecera th #lista__cabecera--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#mercado__lista #lista__cabecera th #lista__cabecera--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#mercado__lista .lista__cripto {
+  text-align: left;
+}
+#mercado__lista .lista__cripto td {
+  width: auto;
+  height: 45px;
+  padding: 2px 10px;
+  padding-left: 20px;
+  background-color: #eeeeee;
+  border-bottom: 1px solid #7692b7;
+}
+#mercado__lista .lista__cripto td .lista__cripto--nombre {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+}
+#mercado__lista .lista__cripto td .lista__cripto--nombre .nombreCriptoLista {
+  font-family: "Lato", sans-serif, verdana;
+  padding: 0px;
+  line-height: 45px;
+  border: none;
+}
+#mercado__lista .lista__cripto td .lista__cripto--nombre img {
+  width: 30px;
+  margin-right: 10px;
+}
+#mercado__lista .lista__cripto td--btn {
+  display: block;
+  width: 80px;
+  height: 30px;
+  color: #eeeeee;
+  background-color: #5F06CC;
+  border: 2px solid #3B0480;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  padding: 5px 10px;
+  line-height: 15px;
+  text-decoration: none;
+  text-align: center;
+}
+#mercado__lista .lista__cripto td--btn:hover {
+  background-color: #3B0480;
+}
+#mercado__lista .lista__cripto td--btn:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#mercado__lista .lista__cripto td--btn:focus {
+  outline: none;
+}
+#mercado__lista .lista__cripto--cambio {
+  color: #e70008;
+}
+
+.billeteraUser {
+  height: 70px;
+  width: 100vw;
+  margin-top: 70px;
+  padding: 10px 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #7692b7;
+}
+.billeteraUser__info {
+  height: 100%;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.billeteraUser__info i {
+  font-size: 38px;
+  color: #97adc9;
+}
+.billeteraUser__info p {
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 35px;
+}
+.billeteraUser__balance {
+  height: 100%;
+  width: 50%;
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-content: end;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr) 25px;
+  grid-template-areas: "pesos dolares euros ojo";
+  font-size: 18px;
+}
+.billeteraUser__balance #pesos {
+  grid-area: pesos;
+}
+.billeteraUser__balance #dolares {
+  grid-area: dolares;
+}
+.billeteraUser__balance #euros {
+  grid-area: euros;
+}
+.billeteraUser__balance__billetera {
+  height: 100%;
+  padding-right: 15px;
+  margin-right: 15px;
+  border-right: 1px solid #bbbbbb;
+}
+.billeteraUser__balance__billetera--moneda {
+  display: inline-block;
+  width: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Lato", sans-serif, verdana;
+  line-height: 2.5em;
+}
+.billeteraUser__balance__billetera--cantidad {
+  display: inline-block;
+  width: calc(100% - 55px);
+  margin-left: 10px;
+  text-align: right;
+}
+.billeteraUser__balance #ojoUser, .billeteraUser__balance #ojoConversor {
+  grid-area: ojo;
+  cursor: pointer;
+}
+
+#depositoRetiro {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 80px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#depositoRetiro .depositoRetiro__registro {
+  width: 30%;
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 0px;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: 70px 1fr;
+  grid-template-areas: "divisa conversion";
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas {
+  grid-area: divisa;
+  width: 80px;
+  height: 35px;
+  color: #334761;
+  background-color: #eeeeee;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:disabled {
+  width: 80px;
+  height: 35px;
+  color: #999999;
+  background-color: #eeeeee;
+  border: 1px solid #999999;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:disabled:hover {
+  background-color: #999999;
+  color: #eeeeee;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:disabled:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:disabled:focus {
+  background-color: #999999;
+  color: #eeeeee;
+  outline: none;
+}
+#depositoRetiro .depositoRetiro__registro--dinero {
+  grid-area: cantidad;
+  font-size: 18px;
+}
+#depositoRetiro .depositoRetiro__registro--btc {
+  grid-area: conversion;
+  color: #808080;
+}
+#depositoRetiro .depositoRetiro__interaccion {
+  width: 690px;
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 0px;
+  justify-content: end;
+  align-items: center;
+  grid-template-columns: 180px 1fr repeat(2, 90px);
+  grid-template-areas: "validacion input deposito retiro";
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--validacion {
+  grid-area: validacion;
+  font-size: 14px;
+  text-align: center;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input {
+  grid-area: input;
+  position: relative;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--simbolo {
+  position: absolute;
+  left: 5px;
+  font-size: 20px;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad {
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
+  text-align: right;
+  color: #334761;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #334761;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad::placeholder {
+  font-size: 20px;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad::step {
+  display: none;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad:focus {
+  outline: none;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar {
+  grid-area: deposito;
+  width: 90px;
+  height: 30px;
+  color: #eeeeee;
+  background-color: #7908FF;
+  border: 2px solid #5F06CC;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar:hover {
+  background-color: #5F06CC;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar:focus {
+  outline: none;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar {
+  grid-area: retiro;
+  width: 90px;
+  height: 30px;
+  color: #5F06CC;
+  background-color: #eeeeee;
+  border: 1px solid #5F06CC;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:hover {
+  background-color: #5F06CC;
+  color: #eeeeee;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:focus {
+  outline: none;
+}
+#depositoRetiro .depositoRetiro__interaccion #botonDeshabilitado {
+  grid-area: retiro;
+  width: 90px;
+  height: 30px;
+  margin: 0 auto;
+  color: #808080;
+  background-color: #dddddd;
+  border: 1px solid #3B0480;
+  border: none;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+#depositoRetiro .depositoRetiro__interaccion #botonDeshabilitado:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+#depositoRetiro .depositoRetiro__interaccion #botonDeshabilitado:focus {
+  outline: none;
+}
+
+#cartera {
+  width: 100%;
+  height: calc(100vh - 250px);
+  padding: 0px 80px;
+}
+#cartera__encabezado--titulo {
+  font-family: "Noto Sans", sans-serif, verdana;
+  display: inline-block;
+}
+#cartera__lista {
+  width: 100%;
+  height: calc(100% - 55px);
+  overflow: auto;
+  position: relative;
+  padding: 0px;
+  margin-top: 15px;
+}
+#cartera__lista::-webkit-scrollbar {
+  width: 5px;
+}
+#cartera__lista::-webkit-scrollbar:active {
+  width: 10px;
+}
+#cartera__lista::-webkit-scrollbar-thumb {
+  background-color: #97adc9;
+  border-radius: 10px;
+}
+#cartera__lista__cabecera {
+  width: 100%;
+  height: 50px;
+  position: sticky;
+  top: 0px;
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 0px;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: 1.5fr repeat(4, 1fr) 110px;
+  font-weight: 600;
+  background-color: #dddddd;
+}
+#cartera__lista__cabecera--nombre {
+  margin-left: 20px;
+}
+#cartera__lista__cabecera--divisas {
+  width: 90px;
+  height: 35px;
+  color: #334761;
+  background-color: #dddddd;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-right: 20px;
+}
+#cartera__lista__cabecera--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#cartera__lista__cabecera--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#cartera__lista__cabecera--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#cartera__lista .cartera__lista__posesion {
+  width: 100%;
+  height: 50px;
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 0px;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: 1.5fr repeat(4, 1fr) 100px;
+  grid-template-areas: "nombre cantidad conversion cambio ganancias input";
+  border-bottom: 1px solid #bbbbbb;
+}
+#cartera__lista .cartera__lista__posesion .nombre {
+  grid-area: nombre;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+}
+#cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--image {
+  width: 30px;
+  margin-right: 10px;
+}
+#cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--nombre {
+  display: inline;
+  font-size: 18px;
+}
+#cartera__lista .cartera__lista__posesion--cantidad {
+  grid-area: cantidad;
+}
+#cartera__lista .cartera__lista__posesion--conversion {
+  grid-area: conversion;
+}
+#cartera__lista .cartera__lista__posesion--cambio {
+  grid-area: cambio;
+  color: #e70008;
+}
+#cartera__lista .cartera__lista__posesion--ganancias {
+  grid-area: ganancias;
+  color: #e70008;
+}
+#cartera__lista .cartera__lista__posesion--operar {
+  grid-area: input;
+  width: 90px;
+  height: 30px;
+  color: #3B0480;
+  background-color: #eeeeee;
+  border: 1px solid #3B0480;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-right: 20px;
+  line-height: 22px;
+  text-decoration: none;
+  justify-self: end;
+}
+#cartera__lista .cartera__lista__posesion--operar:hover {
+  background-color: #3B0480;
+  color: #eeeeee;
+}
+#cartera__lista .cartera__lista__posesion--operar:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#cartera__lista .cartera__lista__posesion--operar:focus {
+  outline: none;
+}
+#cartera__lista__mensaje {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Lato", sans-serif, verdana;
+  font-size: 20px;
+  color: #999999;
+}
+#cartera__lista--oculto {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Lato", sans-serif, verdana;
+  font-size: 20px;
+  color: #999999;
+}
+
+#activos {
+  width: 100%;
+  height: calc(100vh);
+  padding: 50px 80px;
+  padding-top: 85px;
+}
+#activos__lista {
+  display: block;
+  position: relative;
+  height: calc(100% - 15px);
+  overflow-y: scroll;
+}
+#activos__lista::-webkit-scrollbar {
+  width: 5px;
+}
+#activos__lista::-webkit-scrollbar:active {
+  width: 10px;
+}
+#activos__lista::-webkit-scrollbar-thumb {
+  background-color: #97adc9;
+  border-radius: 10px;
+}
+#activos__lista #activos__cabecera {
+  width: 100%;
+  height: 50px;
+  background-color: #dddddd;
+}
+#activos__lista #activos__cabecera th {
+  width: calc(100% / 8);
+  height: 50px;
+  padding: 2px 20px;
+  padding-left: 20px;
+  text-align: left;
+  background-color: #dddddd;
+  position: sticky;
+  top: 0px;
+}
+#activos__lista #activos__cabecera th:last-child {
+  width: 500px;
+}
+#activos__lista #activos__cabecera th #activos__cabecera--divisas {
+  width: 90px;
+  height: 35px;
+  color: #334761;
+  background-color: #dddddd;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#activos__lista #activos__cabecera th #activos__cabecera--divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#activos__lista #activos__cabecera th #activos__cabecera--divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#activos__lista #activos__cabecera th #activos__cabecera--divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#activos__lista .activo__cuerpo {
+  height: 45px;
+  text-align: left;
+}
+#activos__lista .activo__cuerpo td {
+  width: calc(100% / 6);
+  height: 45px;
+  padding: 2px 10px;
+  padding-left: 20px;
+  text-align: left;
+  background-color: #eeeeee;
+  border-bottom: 1px solid #7692b7;
+}
+#activos__lista .activo__cuerpo td .activo__cuerpo--nombre {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+}
+#activos__lista .activo__cuerpo td .activo__cuerpo--nombre .parCriptoLista {
+  font-family: "Lato", sans-serif, verdana;
+  padding: 0px;
+  line-height: 45px;
+  border: none;
+}
+#activos__lista .activo__cuerpo td .activo__cuerpo--nombre img {
+  width: 30px;
+  margin-right: 10px;
+}
+#activos__lista .activo__cuerpo td a {
+  display: inline-block;
+  padding: 5px 10px;
+  line-height: 15px;
+  text-decoration: none;
+  text-align: center;
+}
+#activos__lista .activo__cuerpo td .activo__cuerpo--btn {
+  width: 90px;
+  height: 30px;
+  color: #3B0480;
+  background-color: #eeeeee;
+  border: 1px solid #3B0480;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+#activos__lista .activo__cuerpo td .activo__cuerpo--btn:hover {
+  background-color: #3B0480;
+  color: #eeeeee;
+}
+#activos__lista .activo__cuerpo td .activo__cuerpo--btn:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#activos__lista .activo__cuerpo td .activo__cuerpo--btn:focus {
+  outline: none;
+}
+#activos__lista .activo__cuerpo .activo__cuerpo--cambio {
+  color: #e70008;
+}
+
+#transaccion {
+  display: grid;
+  grid-column-gap: 50px;
+  grid-row-gap: 15px;
+  justify-content: start;
+  align-items: start;
+  grid-template-rows: 125px 1fr;
+  grid-template-columns: 100px 1fr 380px;
+  grid-template-areas: "imagen nombre info" "compra compra info";
+  width: 100%;
+  height: calc(100vh - 140px);
+  padding: 30px 80px;
+}
+#transaccion #logoCripto {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  align-self: center;
+}
+#transaccion #logoCripto #logoCripto__img {
+  width: 100%;
+}
+#transaccion #nombreCripto {
+  grid-area: nombre;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  width: 100%;
+}
+#transaccion #nombreCripto__id {
+  font-size: 46px;
+  font-weight: 200;
+  width: fit-content;
+}
+#transaccion #nombreCripto__tk {
+  font-size: 24px;
+  font-weight: 200;
+  width: fit-content;
+  margin-left: 15px;
+}
+#transaccion #nombreCripto__divisas {
+  width: 70px;
+  height: 30px;
+  color: #334761;
+  background-color: #eeeeee;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  font-size: 18px;
+  border: none;
+  margin-left: 10px;
+}
+#transaccion #nombreCripto__divisas:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#transaccion #nombreCripto__divisas:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#transaccion #nombreCripto__divisas:focus {
+  background-color: #334761;
+  color: #eeeeee;
+  outline: none;
+}
+#transaccion #infoCripto {
+  grid-area: info;
+}
+#transaccion #infoCripto__cotizacion {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 125px;
+  grid-template-rows: 35px 30px 60px;
+  grid-template-areas: "par par" "titulo cambio" "precio porcentaje";
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 20px #bbbbbb;
+  text-align: center;
+}
+#transaccion #infoCripto__cotizacion p, #transaccion #infoCripto__cotizacion h4 {
+  height: 100%;
+  background-color: #dddddd;
+}
+#transaccion #infoCripto__cotizacion p {
+  font-family: "Noto Sans", sans-serif, verdana;
+  font-size: 24px;
+  line-height: 50px;
+  border-top: 1px solid #bbbbbb;
+}
+#transaccion #infoCripto__cotizacion h4 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+}
+#transaccion #infoCripto__cotizacion--par {
+  grid-area: par;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+#transaccion #infoCripto__cotizacion--compra {
+  grid-area: titulo;
+}
+#transaccion #infoCripto__cotizacion--valorCompra {
+  grid-area: precio;
+}
+#transaccion #infoCripto__cotizacion--cambio {
+  grid-area: cambio;
+}
+#transaccion #infoCripto__cotizacion--valorCambio {
+  grid-area: porcentaje;
+  color: #e70008;
+}
+#transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 30px;
+}
+#transaccion #infoCripto #infoCripto__info div, #transaccion #infoCripto #infoCripto__valores div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 400px;
+  margin-bottom: 10px;
+}
+#transaccion #infoCripto #infoCripto__info div p, #transaccion #infoCripto #infoCripto__valores div p {
+  margin-left: 10px;
+}
+#transaccion #infoCripto #infoCripto__info div h3, #transaccion #infoCripto #infoCripto__valores div h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+#transaccion #infoCripto #infoCripto__info div h4, #transaccion #infoCripto #infoCripto__valores div h4 {
+  color: #4d4d4d;
+}
+#transaccion #conversion {
+  grid-area: compra;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-row-gap: 25px;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 50px 1fr;
+  grid-template-rows: 50px 50px 40px 50px 40px;
+  grid-template-areas: "titulo titulo titulo" "ingreso cambio resultado" "btnConfirmacion btnConfirmacion  btnConfirmacion" "confirmacion confirmacion confirmacion";
+  height: 100%;
+  width: 100%;
+  padding-right: 20px;
+}
+#transaccion #conversion__titulo {
+  grid-area: titulo;
+  text-align: center;
+}
+#transaccion #conversion__ingreso {
+  grid-area: ingreso;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+#transaccion #conversion__ingreso--simbolo {
+  font-size: 30px;
+  font-weight: 400;
+  width: 40px;
+  margin-right: 10px;
+}
+#transaccion #conversion__ingreso--divisa {
+  height: 40px;
+  width: calc(100% - 70px);
+  font-size: 30px;
+  text-align: right;
+  color: #333333;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999999;
+}
+#transaccion #conversion__ingreso--divisa::placeholder {
+  font-size: 30px;
+}
+#transaccion #conversion__ingreso--divisa::step {
+  display: none;
+}
+#transaccion #conversion__ingreso--divisa:focus {
+  outline: none;
+}
+#transaccion #conversion__simboloCambio {
+  grid-area: cambio;
+  margin-right: 5px;
+  padding: 0px;
+  text-align: center;
+}
+#transaccion #conversion__convertido {
+  grid-area: resultado;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  color: #333333;
+  background-color: transparent;
+}
+#transaccion #conversion__convertido--valor {
+  width: calc(100% - 80px);
+}
+#transaccion #conversion__convertido--ticker {
+  width: 70px;
+  margin-left: 10px;
+}
+#transaccion #conversion__confirmacion {
+  grid-area: confirmacion;
+  text-align: center;
+}
+#transaccion #conversion__confirmacion--cantidad {
+  display: none;
+}
+#transaccion #conversion #btnConfirmacion {
+  grid-area: btnConfirmacion;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionCompra {
+  width: 150px;
+  height: 40px;
+  color: #eeeeee;
+  background-color: #14b10b;
+  border: 2px solid #097c02;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-right: 30px;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionCompra:hover {
+  background-color: #097c02;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionCompra:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionCompra:focus {
+  outline: none;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta {
+  width: 150px;
+  height: 40px;
+  color: #eeeeee;
+  background-color: #e70008;
+  border: 2px solid #920005;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin-left: 30px;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:hover {
+  background-color: #920005;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:focus {
+  outline: none;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled {
+  width: 150px;
+  height: 40px;
+  margin: 0 auto;
+  color: #808080;
+  background-color: #920005;
+  border: 1px solid #920005;
+  border: none;
+  font-size: 16px;
+  line-height: 1.5em;
+  margin: 0px;
+  margin-left: 30px;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #333333 inset;
+}
+#transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:focus {
+  outline: none;
+}
+#transaccion #conversion .maximos {
+  display: none;
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  color: #334761;
+  background-color: #eeeeee;
+  border: 1px solid #334761;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  color: #212f40;
+  border: none;
+}
+#transaccion #conversion .maximos:hover {
+  background-color: #334761;
+  color: #eeeeee;
+}
+#transaccion #conversion .maximos:active {
+  outline: none;
+  box-shadow: 0px 0px 5px #4d4d4d inset;
+}
+#transaccion #conversion .maximos:focus {
+  outline: none;
+}
+#transaccion #conversion .maximos:hover {
+  background-color: #eeeeee;
+  color: #334761;
+  text-shadow: 0px 0px 2px #97adc9;
+}
+#transaccion #conversion #maxMoneda {
+  left: 60px;
+}
+#transaccion #conversion #maxCripto {
+  right: 70px;
+}
+#transaccion #conversion #compra {
+  grid-area: compra;
+  margin: 0 auto;
+  color: #eeeeee;
+}
+#transaccion #conversion #compra p {
+  height: 35px;
+  min-width: 260px;
+  padding: 0px 10px;
+  line-height: 30px;
+}
+#transaccion #conversion #compra .exito {
+  background-color: #097c02;
+  box-shadow: 0px 0px 2px #097c02;
+}
+#transaccion #conversion #compra .error {
+  background-color: #920005;
+  box-shadow: 0px 0px 2px #920005;
+}
+
+#aside {
+  position: fixed;
+  top: 140px;
+  left: 0px;
+  width: 55px;
+  height: calc(100vh - 140px);
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: #dddddd;
+  color: #455f83;
+  direction: rtl;
+}
+#aside::-webkit-scrollbar {
+  width: 5px;
+}
+#aside::-webkit-scrollbar:active {
+  width: 10px;
+}
+#aside::-webkit-scrollbar-thumb {
+  background-color: #97adc9;
+  border-radius: 10px;
+}
+#aside .listado {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  direction: ltr;
+}
+#aside .listado:hover {
+  background-color: #97adc9;
+  color: #eeeeee;
+}
+#aside .listado:active {
+  box-shadow: 0px 0px 5px #7692b7 inset;
+}
+#aside .listado__logoCripto {
+  width: 30px;
+  margin-right: 10px;
+}
+#aside .listado__nombreCripto {
+  display: none;
+  min-width: 220px;
+  font-size: 18px;
+}
+
+/*# sourceMappingURL=styles.css.map */

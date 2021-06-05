@@ -1,0 +1,140 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    width: 100%;
+    position: relative;
+    background-color: $colorGris0;
+    color: $colorAzul6;
+    font-family: $fuenteGeneral;
+    font-size: 16px;
+    overflow-x: hidden;
+        
+    &::-webkit-scrollbar{
+            width: 5px;
+    }
+    &::-webkit-scrollbar:active{
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        background-color: $colorAzul3;
+        border-radius: 10px;
+    }
+}
+
+header{
+    @include flexbox (row, space-between, center);
+    height: 70px;
+    width: 100%;
+    padding: 0px 80px;
+    position: fixed;
+    top: 0px;
+    background-color: $bg-header;
+    z-index: 1000;
+
+    h1{
+        width: fit-content;
+        padding: 0px;
+        font-family: $fuenteLogo;
+        font-size: $titulo;
+        font-weight: 400;
+        letter-spacing: 1px;
+
+    }
+    strong{
+        font-family: $fuenteLogo;
+        font-weight: 800;
+    }
+
+
+    .navBar{
+        @include flexbox (row, space-between, center);
+        width: 480px;
+        height: 100%;
+
+        input{
+            padding-bottom: 5px;
+            color: $colorAzul6;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            font-size: $cuerpo;
+            cursor: pointer;
+            transition: all 0,3s linear;
+
+            &:hover{
+                color: $colorAzul7;
+            }
+            &:visited{
+                color: $colorAzul6;
+            }
+            &:active{
+                transform: scale(0.95);
+            }
+
+        }
+        #btnIngreso{
+            margin: 0px;
+            @include boton(110px, 35px, $colorVioleta3, $colorVioleta4);
+            line-height: 30px;
+            text-decoration: none;
+            color: $colorGris1;
+        }
+        .navBar__salir{
+            margin: 0px;
+            @include botonSecundario (110px, 35px, $colorGris0, $colorVioleta2);
+            line-height: 30px;
+            text-decoration: none;
+        }
+    }
+
+    #conversor__navBar, #user__navBar{
+        width: 370px;
+    }
+}
+
+footer{
+    width: 100vw;
+    height: 35px;
+    padding: 5px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    color: $colorAzul8;
+    text-align: center;
+    z-index: 1000;
+}
+
+
+#redes {
+    position: fixed;
+    left: 30px;
+    top: 75%;
+    @include flexbox(column, space-around, center);
+    width: fit-content;
+    height: 100px;
+    background-color: transparent;
+    z-index: 1000;
+    i{
+        font-size: $cuerpoLg;
+        color: $colorAzul6;
+        transition: all 0.1s linear;
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+}
+
+.mensajeError{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: $subtitulo;
+    color: $colorGris2;
+}

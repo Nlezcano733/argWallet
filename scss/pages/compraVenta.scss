@@ -1,0 +1,337 @@
+#transaccion{
+    @include grids(50px, 15px, start, start);
+    grid-template-rows: 125px 1fr;
+    grid-template-columns: 100px 1fr 380px;
+    grid-template-areas: 
+        "imagen nombre info"
+        "compra compra info";
+    width: 100%;
+    height: calc(100vh - 140px);
+    padding: 30px 80px;
+
+    #logoCripto{
+        @include flexbox (row, center, center);
+        overflow: hidden;
+        align-self: center;
+        #logoCripto__img{
+            width: 100%;
+        }
+    }
+    #nombreCripto{
+        grid-area: nombre;
+        align-self: center;
+        @include flexbox(row, flex-start, baseline);
+        width: 100%;
+
+        &__id{
+            font-size: $jumboXl;
+            font-weight: 200;
+            width: fit-content;
+        }
+        &__tk{
+            font-size: $titulo;
+            font-weight: 200;
+            width: fit-content;
+            margin-left: 15px;
+        }           
+        &__divisas{
+            @include selector(70px, 30px, $colorGris0, $colorAzul6);
+            font-size: $cuerpoLg;
+            border: none;
+            margin-left: 10px;
+        }
+
+    }
+
+    #infoCripto{
+        grid-area: info;
+
+        &__cotizacion {
+            @include  grids (0px, 0px, center, center);
+            grid-template-columns: 1fr 125px;
+            grid-template-rows: 35px 30px 60px;
+            grid-template-areas:
+                "par par"
+                "titulo cambio"
+                "precio porcentaje";
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 20px $colorGris2;
+            text-align: center;
+
+            p, h4{
+                height: 100%;
+                background-color: $colorGris1;
+            }
+            p{
+                font-family: $fuenteTitulo;
+                font-size: $titulo;
+                line-height: 50px;
+                border-top: 1px solid $colorGris2;
+            }
+            h4{
+                font-size: $subtitulo;
+                line-height: 30px;
+                font-weight: 400;
+            }
+
+            &--par{
+                grid-area: par;
+                font-size: $cuerpoLg;
+                line-height: 28px;
+                font-weight: 400;
+            }
+            &--compra{
+                grid-area: titulo;
+            }
+            &--valorCompra{
+                grid-area: precio;
+            }
+            &--cambio{
+                grid-area: cambio;
+            }
+            &--valorCambio{
+                grid-area: porcentaje;
+                color: $colorRojo2;
+            }
+        }
+
+        #infoCripto__info, #infoCripto__valores{
+            @include flexbox(column, flex-start, flex-start);
+            width: 100%;
+            height: 100%;
+            margin-bottom: 30px;
+
+            div{
+                @include flexbox (row, flex-start, center);
+                width: 400px;
+                margin-bottom: 10px;
+
+                p{
+                    margin-left: 10px;
+                }
+                h3{
+                    font-size: $subtitulo;
+                    font-weight: 700;
+                }
+                h4{
+                    color: $colorGris6;
+                }
+            }
+        }
+    }
+
+
+    #conversion{
+        grid-area: compra;
+        @include grids (20px, 25px, center, center);
+        grid-template-columns: 1fr 50px 1fr;
+        grid-template-rows: 50px 50px 40px 50px 40px;
+        grid-template-areas: 
+            "titulo titulo titulo"
+            "ingreso cambio resultado"
+            "btnConfirmacion btnConfirmacion  btnConfirmacion"
+            "confirmacion confirmacion confirmacion";
+        height: 100%;
+        width: 100%;
+        padding-right: 20px;
+
+        &__titulo{
+            grid-area: titulo;
+            text-align: center;
+        }
+
+        &__ingreso{
+            grid-area: ingreso;
+            @include flexbox(row, space-between, center);
+            position: relative;
+
+            &--simbolo{
+                font-size: $display;
+                font-weight: 400;
+                width: 40px;
+                margin-right: 10px;
+            }
+
+            &--divisa{
+                height: 40px;
+                width: calc(100% - 70px);
+                font-size: $display;
+                text-align: right;
+                color: $colorGris7;
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid $colorGris3;
+
+                &::placeholder{
+                    font-size: $display;
+                }
+                &::step{
+                    display: none;
+                }
+
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+
+        &__simboloCambio{
+            grid-area: cambio;
+            margin-right: 5px;
+            padding: 0px;
+            text-align: center;
+        }
+
+        &__convertido{
+            grid-area: resultado;
+            position: relative;
+            height: 40px;
+            width: 100%;
+            @include flexbox(row, space-between, center);
+            font-size: $display;
+            color: $colorGris7;
+            background-color: transparent;
+
+            &--valor{
+                width: calc(100% - 80px);
+            }
+            &--ticker{
+                width: 70px;
+                margin-left: 10px;
+            }
+        }
+        &__confirmacion{
+            grid-area: confirmacion;
+            text-align: center;
+            
+            &--cantidad{
+                display: none;
+            }
+        }
+        #btnConfirmacion{
+            grid-area: btnConfirmacion;
+            position: relative;
+            @include flexbox(row, center, center);
+            padding: 0px;
+            
+            #confirmacionCompra{
+                @include boton (150px, 40px, $colorVerde2, $colorVerde3);
+                margin-right: 30px
+            }
+
+            #confirmacionVenta{
+                @include boton (150px, 40px, $colorRojo2, $colorRojo3);
+                margin-left: 30px;
+
+                &:disabled{
+                    @include botonDeshabilitado(150px, 40px, $colorRojo3, $colorRojo3);
+                    margin: 0px;
+                    margin-left: 30px;
+                }
+            }
+
+            
+        }
+
+        .maximos{
+            display: none;
+            position: absolute;
+            @include botonSecundario(60px, 30px, $colorGris0, $colorAzul6);
+            color: $colorAzul7;
+            border: none;
+
+            &:hover{
+                background-color: $colorGris0;
+                color: $colorAzul6;
+                text-shadow: 0px 0px 2px $colorAzul2;
+            }
+        }
+
+        #maxMoneda{
+            left: 60px;
+        }
+        #maxCripto{
+            right: 70px;
+        }
+
+
+        #compra{
+            grid-area: compra;
+            margin: 0 auto;
+            color: $colorGris0;
+
+            p{
+                height: 35px;
+                min-width: 260px;
+                padding: 0px 10px;
+                line-height: 30px;
+            }
+            .exito{
+                background-color: $colorVerde3;
+                box-shadow: 0px 0px 2px $colorVerde3;
+            }
+            .error{
+                background-color: $colorRojo3;
+                box-shadow: 0px 0px 2px $colorRojo3;
+            }
+        }
+    }
+}
+
+
+#aside{
+    position: fixed;
+    top: 140px;
+    left: 0px;
+    width: 55px;
+    height: calc(100vh - 140px);
+    padding: 20px 0px;
+    @include flexbox(column, flex-start, center);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: $colorGris1;
+    color: $colorAzul5;
+    direction: rtl;
+
+    &::-webkit-scrollbar{
+            width: 5px;
+    }
+    &::-webkit-scrollbar:active{
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        background-color: $colorAzul2;
+        border-radius: 10px;
+    }
+
+    .listado{
+        width: 100%;
+        height: 50px;
+        padding: 10px;
+        @include flexbox (row, flex-start, center);
+        cursor: pointer;
+        direction: ltr;
+
+        &:hover{
+            background-color: $colorAzul2;
+            color: $colorGris0;
+        }
+        &:active{
+            box-shadow: 0px 0px 5px $colorAzul3 inset;
+        }
+
+        &__logoCripto{
+            width: 30px;
+            margin-right: 10px;
+        }
+        &__nombreCripto{
+            display: none;
+            min-width: 220px;
+            font-size: $cuerpoLg;
+        }
+    }
+}
