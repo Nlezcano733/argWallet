@@ -28,18 +28,7 @@
         width: 50%;
         @include grids (0px, 0px, end, center);
         grid-template-columns: repeat(3, 1fr) 25px;
-        grid-template-areas: "pesos dolares euros ojo";
         font-size: $cuerpoLg;
-
-        #pesos{
-            grid-area: pesos;
-        }
-        #dolares{
-            grid-area: dolares;
-        }
-        #euros{
-            grid-area: euros;
-        }
 
         &__billetera{
             height: 100%;
@@ -62,32 +51,25 @@
                 text-align: right;
             }
         }
-
-        #ojoUser, #ojoConversor{
-            grid-area: ojo;
-            cursor: pointer;
-        }
+        #ojo{ cursor: pointer; }
     }
-
 }
 
 #depositoRetiro{
     height: 50px;
     width: 100%;
-    @include flexbox(row, space-between, center);
+    @include grids(20px, 20px, start, center);
+    grid-template-columns: repeat(12, 1fr);
     padding: 10px 80px;
     margin-top: 20px;
     margin-bottom: 20px;
 
     .depositoRetiro__registro{
-        width: 30%;
+        grid-column: span 4;
         @include grids (30px, 0px, start, center);
         grid-template-columns: 70px 1fr;
-        grid-template-areas:
-            "divisa conversion";
 
         #depositoRetiro__registro--divisas{
-            grid-area: divisa;
             @include selector (80px, 35px, $colorGris0, $colorAzul6);
 
             &:disabled{
@@ -99,46 +81,46 @@
             font-size: $cuerpoLg;
         }
         &--btc{
-            grid-area: conversion;
             color: $colorGris4;
         }
     }
 
-    .depositoRetiro__interaccion{
-        width: 690px;
-        @include grids (30px, 0px, end, center);
-        grid-template-columns: 180px 1fr repeat(2, 90px);
-        grid-template-areas: "validacion input deposito retiro";
+    #depositoRetiro__validacion{
+        grid-column: span 3;
+        justify-self: end;
 
-        #depositoRetiro__interaccion--validacion{
-            grid-area: validacion;
+        #depositoRetiro__validacion--msj{
             font-size: $cuerpoSm;
-            text-align: center;
+            text-align: right;
         }
+    }
 
-        #depositoRetiro__interaccion__input{
-            grid-area: input;
-            position: relative;
+    #depositoRetiro__ingreso{
+        position: relative;
+        grid-column: span 3;
 
-            #depositoRetiro__interaccion__input--simbolo{
-                position: absolute;
-                left: 5px;
-                font-size: $subtitulo;
-            }
-            #depositoRetiro__interaccion__input--cantidad{
-                @include inputGrande(100%, 30px, $colorAzul6, $subtitulo);
-            }
+        #depositoRetiro__ingreso--simbolo{
+            position: absolute;
+            left: 5px;
+            font-size: $subtitulo;
         }
+        #depositoRetiro__ingreso--cantidad{
+            @include inputGrande(100%, 30px, $colorAzul6, $subtitulo);
+        }
+    }
+
+    .depositoRetiro__interaccion{
+        grid-column: span 2;
+        @include flexbox (row, flex-end, center);
+
         #depositoRetiro__interaccion--depositar{
-            grid-area: deposito;
             @include boton(90px, 30px, $colorVioleta2, $colorVioleta3);
+            margin-right: 20px;
         }
-        #depositoRetiro__interaccion--retirar{
-            grid-area: retiro;
+        #depositoRetiro__retirar{
             @include botonSecundario(90px, 30px, $colorGris0, $colorVioleta3)
         }
         #botonDeshabilitado{
-            grid-area: retiro;
             @include botonDeshabilitado(90px, 30px, $colorGris1, $colorVioleta4);
         }
     }
@@ -199,11 +181,9 @@
             height: 50px;
             @include grids(15px, 0px, start, center);
             grid-template-columns: 1.5fr repeat(4, 1fr) 100px;
-            grid-template-areas: "nombre cantidad conversion cambio ganancias input";
             border-bottom: 1px solid $colorGris2;
 
             .nombre{
-                grid-area: nombre;
                 width: 100%;
                 @include flexbox (row, flex-start, center);
                 padding-left: 20px;
@@ -216,22 +196,11 @@
                     font-size: $cuerpoLg;
                 }
             }
-            &--cantidad{
-                grid-area: cantidad;
-            }
-            &--conversion{
-                grid-area: conversion;
-            }
-            &--cambio{
-                grid-area: cambio;
-                color: $colorRojo2;
-            }
-            &--ganancias{
-                grid-area: ganancias;
+            
+            &--cambio, &--ganancias{
                 color: $colorRojo2;
             }
             &--operar{
-                grid-area: input;
                 @include botonSecundario(90px, 30px, $colorGris0, $colorVioleta4);
                 margin-right: 20px;
                 line-height: 22px;
@@ -249,6 +218,7 @@
             font-size: $subtitulo;
             color: $colorGris3;
         }
+        
         &--oculto{
             display: none;
             position: absolute;
@@ -261,7 +231,6 @@
         }
     }
 }
-
 
 #activos{
     width: 100%;
@@ -357,6 +326,706 @@
             }
             .activo__cuerpo--cambio{
                 color: $colorRojo2;
+            }
+        }
+    }
+}
+
+
+
+@include screen-lg {
+    .billeteraUser{
+        height: 70px;
+        width: 100vw;
+        margin-top: 60px;
+        padding: 10px 70px;
+
+        &__info{
+            min-width: 200px;
+            p{ font-size: $subtitulo; }
+        }
+
+        &__balance{
+            max-width: 500px;
+            width: 60%;
+        }
+    }
+
+    #depositoRetiro{
+        height: 50px;
+        padding: 10px 70px;
+
+        .depositoRetiro__registro{
+            grid-column: span 3;
+            @include grids (15px, 0px, start, center);
+            grid-template-columns: 70px 1fr;
+
+            #depositoRetiro__registro--divisas{
+                @include selector (70px, 35px, $colorGris0, $colorAzul6);
+
+                &:disabled{
+                    @include selector(70px, 35px, $colorGris0, $colorGris3);
+                }
+            }
+        }
+
+        #depositoRetiro__validacion{
+            grid-column: span 3;
+        }
+
+        #depositoRetiro__ingreso{
+            position: relative;
+            grid-column: span 3;
+        }
+
+        .depositoRetiro__interaccion{
+            grid-column: span 3;
+            @include flexbox (row, flex-end, center);
+
+            #depositoRetiro__interaccion--depositar{
+                margin-right: 0px;
+            }
+            #depositoRetiro__retirar{
+                margin-right: 0px;
+                margin-left: 16px;
+            }
+            #botonDeshabilitado{
+                margin-right: 0px;
+                margin-left: 16px;
+            }
+        }
+    }
+
+    #cartera{
+        padding: 0px 70px;
+
+        &__lista{
+            width: 100%;
+            overflow: auto;
+            position: relative;
+            padding: 0px;
+
+            &__cabecera{
+                width: 100%;
+                height: 50px;
+                position: sticky;
+                top:0px;
+                @include grids(15px, 0px, start, center);
+                grid-template-columns: 1.5fr repeat(4, 1fr) 110px;
+
+                &--nombre{
+                    margin-left: 10px;
+                }
+                &--divisas{
+                    margin-left: 10px;
+                }
+            }
+            .cartera__lista__posesion{
+                height: 45px;
+                grid-template-columns: 1.5fr repeat(4, 1fr) 110px;
+
+                .nombre{
+                    padding-left: 10px;
+                    .cartera__lista__posesion--image{
+                        width: 25px;
+                        margin-right: 10px;
+                    }
+                    .cartera__lista__posesion--nombre{
+                        display: inline;
+                        font-size: $cuerpo;
+                    }
+                }
+
+                &--cambio, &--ganancias{
+                    color: $colorRojo2;
+                }
+                &--operar{
+                    margin-right: 10px;
+                    line-height: 22px;
+                }
+            }
+        }
+    }
+
+    #activos{
+        padding: 70px;
+        padding-bottom: 50px;
+
+
+        &__lista{
+            display: block;
+            position: relative;
+            height: calc(100% - 10px);
+            overflow-y: scroll;
+
+            #activos__cabecera{
+                height: 50px;
+
+                th{
+                    width: calc(100% / 10);
+                    height: 50px;
+                    padding: 2px 15px;
+                    padding-left: 20px;
+                    position: sticky;
+                    top:0px;
+
+                    &:last-child{
+                        width: 500px;
+                    }
+
+                    #activos__cabecera--divisas{
+                        @include selector (80px, 35px, $colorGris1, $colorAzul6);
+                    }
+                }
+            }
+
+
+
+            .activo__cuerpo{
+                height: 45px;
+                text-align: left;
+
+                td{
+                    padding: 2px 10px;
+                    padding-left: 20px;
+
+                    .activo__cuerpo--nombre{
+                        @include flexbox(row, flex-start, center);
+                        width: 110px;
+                        img{
+                            width: 25px;
+                            margin-right: 7px;
+                        }
+                    }
+                    .activo__cuerpo--btn{
+                        @include botonSecundario(80px, 30px, $colorGris0, $colorVioleta4);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include screen-md {
+    .billeteraUser{
+        position: fixed;
+        top: 0px;
+        right: 7px;
+        display: none;
+        width: 40%;
+        height: calc(100vh - 60px);
+        padding-left: 15px;
+        padding-right: 15px;
+        box-shadow: 0px 0px 10px $colorGris1;
+        background-color: $colorGris0;
+        z-index: 10000;
+
+        &__info{
+            align-self: flex-start;
+            height: 60px;
+            width: 80%;
+            @include flexbox (row, flex-start, center);
+        }
+
+        &__balance{
+            height: 100%;
+            width: 100%;
+            @include flexbox (column, flex-start, flex-start);
+            font-size: $cuerpoLg;
+
+            &__billetera{
+                height: max-content;
+                width: 100%;
+                padding-right: 0px;
+                margin-right: 0px;
+                border: none;
+                border-bottom: 1px solid $colorGris2;
+
+                &--moneda{
+                    display: inline-block;
+                    width: 40px;
+                    font-size: $cuerpoLg;
+                    font-weight: 600;
+                    font-family: $fuenteGeneral;
+                    line-height: 2.5em;
+                }
+                &--cantidad{
+                    display: inline-block;
+                    width: calc(100% - 55px);
+                    margin-left: 10px;
+                    text-align: right;
+                }
+            }
+            #ojo{
+                position: fixed;
+                top: 90px;
+                right: 40px;
+            }
+        }
+    }
+
+    #depositoRetiro{
+        padding: 10px 50px;
+        margin-top: 10px;
+        @include grids(20px, 15px, start, center);
+        grid-template-columns: 70px repeat(4, 1fr) 190px;
+
+        .depositoRetiro__registro{
+            grid-column: span 1;
+            @include grids (15px, 0px, start, center);
+            grid-template-columns: 70px 1fr;
+
+            &--btc{
+                display: none;
+                color: $colorGris4;
+            }
+        }
+
+        #depositoRetiro__validacion{
+            grid-column: span 2;
+        }
+
+        #depositoRetiro__ingreso{
+            position: relative;
+            grid-column: span 2;
+        }
+
+        .depositoRetiro__interaccion{
+            grid-column: span 1;
+        }
+    }
+
+    #cartera{
+        padding: 0px 50px;
+        min-height: 40vh;
+
+        &__encabezado--titulo{
+            font-size: $subtitulo;
+        }
+
+        &__lista{
+            position: relative;
+
+            &__cabecera{
+                height: 40px;
+                position: sticky;
+                top:0px;
+                grid-template-columns: repeat(2, 1.5fr) repeat(3, 1fr) 90px;
+                font-size: $cuerpoSm;
+
+                &--divisas{
+                    @include selector(70px, 35px, $colorGris1, $colorAzul6);
+                }
+            }
+
+            .cartera__lista__posesion{
+                height: 45px;
+                grid-template-columns: repeat(2, 1.5fr) repeat(3, 1fr) 80px;
+
+                p{
+                    font-size: $cuerpoSm;
+                }
+
+                .nombre{
+                    padding-left: 10px;
+                    .cartera__lista__posesion--image{
+                        width: 20px;
+                    }
+                    .cartera__lista__posesion--nombre{
+                        display: inline;
+                    }
+                }
+                &--operar{
+                    @include botonSecundario(70px, 30px, $colorGris0, $colorVioleta4);
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+
+    #activos{
+        padding: 50px;
+        height: fit-content;
+
+        &__lista{
+            display: block;
+            position: relative;
+
+            #activos__cabecera{
+                height: 40px;
+
+                th{
+                    height: 40px;
+                    padding: 2px 15px;
+                    padding-left: 20px;
+                    position: sticky;
+                    top:0px;
+                    font-size: $cuerpoSm;
+
+                    &:nth-child(4), &:nth-child(5){
+                        display: none;
+                    }
+                }
+            }
+
+            .activo__cuerpo{
+                height: 45px;
+                text-align: left;
+
+                td{
+                    padding: 2px 10px;
+                    padding-left: 20px;
+                    font-size: $cuerpoSm;
+
+                    &:nth-child(4), &:nth-child(5){
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@include screen-sm {
+    .billeteraUser{
+        width: 100%;
+        padding-left: 10%;
+        padding-right: 10%;
+
+        &__info{
+            width: 80%;
+        }
+
+        &__balance{
+            margin: 0 auto;
+            #ojo{
+                position: fixed;
+                top: 90px;
+                right: 30px;
+            }
+        }
+    }
+
+    #depositoRetiro{
+        padding: 10px 30px;
+        @include grids(20px, 15px, start, center);
+        grid-template-rows: 35px 30px 24px;
+        grid-template-columns: repeat(8, 1fr);
+        margin-top: 10px;
+
+        .depositoRetiro__registro{
+            grid-column: span 3;
+            order: 1;
+            @include grids (20px, 0px, end, center);
+            grid-template-columns: auto 1fr;
+
+            #depositoRetiro__registro--divisas{
+                width: 80px;
+                justify-self: start;
+            }
+
+            &--btc{
+                display: block;
+            }
+        }
+
+        #depositoRetiro__validacion{
+            grid-column: span 8;
+            order: 4;
+            width: 100%;
+            text-align: center;
+        }
+
+        #depositoRetiro__ingreso{
+            position: relative;
+            grid-column: span 5;
+            order: 2;
+        }
+
+        .depositoRetiro__interaccion{
+            grid-column: span 8;
+            justify-content: center;
+            order: 3;
+
+            #depositoRetiro__interaccion--depositar{
+                width: 100%;
+            }
+            #depositoRetiro__retirar, #botonDeshabilitado{
+                width: 100%;
+                margin-left: 40px;
+            }
+        }
+    }
+
+    #cartera{
+        padding: 0px 30px;
+        margin-top: 90px;
+
+        &__lista{
+            position: relative;
+
+            &__cabecera{
+                position: sticky;
+                top:0px;
+                grid-template-columns: repeat(2, 1.5fr) repeat(2, 1fr) 90px;
+                font-size: $cuerpoSm;
+
+                &--ganancia, &--cambio {
+                    text-align: center;
+                }
+
+                &--valor{
+                    display: none;
+                }
+
+                &--divisas{
+                    @include selector(70px, 35px, $colorGris1, $colorAzul6);
+                }
+            }
+
+            .cartera__lista__posesion{
+                height: 45px;
+                grid-template-columns: repeat(2, 1.5fr) repeat(2, 1fr) 80px;
+                grid-column-gap: 10px;
+
+                .nombre{
+                    padding-left: 5px;
+                    .cartera__lista__posesion--image{
+                        width: 20px;
+                    }
+                    .cartera__lista__posesion--nombre{
+                        display: inline;
+                    }
+                }
+
+                &--conversion{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    #activos{
+        padding: 30px;
+
+        &__lista{
+            display: block;
+            position: relative;
+
+            #activos__cabecera{
+                th{
+                    padding: 2px 10px;
+                    padding-left: 20px;
+                    position: sticky;
+                    top:0px;
+
+                    &:nth-child(6){
+                        display: none;
+                    }
+
+                    #activos__cabecera--divisas{
+                        @include selector (70px, 35px, $colorGris1, $colorAzul6);
+                        padding-left: 10px;
+                    }
+                }
+            }
+            .activo__cuerpo{
+                height: 40px;
+
+                td{
+                    padding: 2px 10px;
+                    padding-left: 10px;
+
+                    &:nth-child(6){
+                        display: none;
+                    }
+
+                    .activo__cuerpo--nombre{
+                        @include flexbox(row, flex-start, center);
+                    }
+                    .activo__cuerpo--btn{
+                        @include botonSecundario(70px, 30px, $colorGris0, $colorVioleta4);
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include screen-xs {
+    .billeteraUser{
+        width: 100%;
+        padding-left: 35px;
+        padding-right: 35px;
+
+        &__info{
+            width: 80%;
+        }
+
+        &__balance{
+            margin: 0 auto;
+            #ojo{
+                position: fixed;
+                top: 90px;
+                right: 35px;
+            }
+        }
+    }
+
+    #depositoRetiro{
+        padding: 10px 15px;
+        @include grids(20px, 15px, start, center);
+        grid-template-rows: 35px 30px 24px;
+        grid-template-columns: repeat(6, 1fr);
+        margin-top: 10px;
+
+        .depositoRetiro__registro{
+            grid-column: span 2;
+            order: 1;
+            display: block;
+
+            #depositoRetiro__registro--divisas{
+                width: 100%;
+                max-width: 90px;
+                justify-self: end;
+            }
+
+            &--btc{
+                display: none;
+            }
+        }
+
+        #depositoRetiro__validacion{
+            grid-column: span 6;
+            order: 4;
+            width: 100%;
+            text-align: center;
+        }
+
+        #depositoRetiro__ingreso{
+            position: relative;
+            grid-column: span 4;
+            order: 2;
+        }
+
+        .depositoRetiro__interaccion{
+            grid-column: span 6;
+            justify-content: center;
+            order: 3;
+            #depositoRetiro__retirar, #botonDeshabilitado{
+                width: 100%;
+                margin-left: 20px;
+            }
+        }
+    }
+
+    #cartera{
+        padding: 0px 15px;
+        margin-top: 90px;
+
+        &__lista{
+            position: relative;
+
+            &__cabecera{
+                position: sticky;
+                top:0px;
+                grid-template-columns: repeat(2, 1.5fr) 1fr 90px;
+                font-size: $cuerpoSm;
+
+                &--cambio {
+                    display: none;
+                }
+
+                &--ganancia{
+                    text-align: center;
+                }
+
+                &--valor{
+                    display: none;
+                }
+
+                &--divisas{
+                    @include selector(70px, 35px, $colorGris1, $colorAzul6);
+                }
+            }
+
+            .cartera__lista__posesion{
+                height: 45px;
+                grid-template-columns: 60px 1fr repeat(2, 80px);
+                grid-column-gap: 10px;
+                text-align: center;
+
+                .nombre{
+                    padding-left: 10px;
+                    text-align: left;
+                    .cartera__lista__posesion--image{
+                        display: none;
+                    }
+                    .cartera__lista__posesion--nombre{
+                        display: inline;
+                    }
+                }
+                &--cambio{
+                    display: none;
+                }
+            }
+
+            &__mensaje{
+                position: absolute;
+                top: 25%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                font-size: $cuerpoLg;
+            }
+        }
+    }
+
+    #activos{
+        padding: 15px;
+        height: fit-content;
+
+        &__lista{
+            display: block;
+            position: relative;
+
+            #activos__cabecera{
+                height: 40px;
+
+                th{
+                    height: 40px;
+                    padding: 2px 15px;
+                    padding-left: 20px;
+                    position: sticky;
+                    top:0px;
+                    font-size: $cuerpoSm;
+
+                    &:nth-child(3){
+                        display: none;
+                    }
+
+                    #activos__cabecera--divisas{
+                        @include selector (70px, 35px, $colorGris1, $colorAzul6);
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            .activo__cuerpo{
+                height: 45px;
+                text-align: left;
+
+                td{
+                    padding: 2px 10px;
+                    padding-left: 20px;
+                    font-size: $cuerpoSm;
+
+                    &:nth-child(3){
+                        display: none;
+                    }
+                }
             }
         }
     }

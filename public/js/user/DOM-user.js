@@ -18,6 +18,40 @@ function avanzarNavbar() {
     });
 }
 
+// -------------------------------------------- //
+//           APERTURA MENU RESPONSIVE           //
+// -------------------------------------------- //
+
+
+function accionarMenu (){
+    $('#burger-logo').click( e =>{ abrirMenu(e.target.className) });
+    $('#user-logo').click( e =>{ abrirMenu(e.target.className) });
+}
+
+function abrirMenu (clase){
+    if(clase === 'fas fa-bars'){
+        $('.billeteraUser').fadeOut();
+        $('.navBar').toggle('slide');
+        $('.navBar').css('display', 'flex');
+
+        setTimeout(()=>{ 
+            $('#burger-logo').attr('class', 'fas fa-times');
+            $('#redes').css('display', 'flex')
+        }, 400)
+
+        btnClose();
+    } else if(clase === 'fas fa-user-circle'){
+        $('.navBar').fadeOut();
+        $('.billeteraUser').toggle('slide');
+        btnClose();
+
+    } else {
+        $('.navBar').fadeOut();
+        $('.billeteraUser').fadeOut();
+        habilitarBotones();
+    }
+}
+
 // -------------------------------------- //
 
 function scrollFinal (){
@@ -129,7 +163,7 @@ function accionarOjo(){
         localStorage.setItem('mostrarBilletera', 'true')
     }
     mostrarOcultar();
-    $('#ojoUser').click(mostrarOcultar)
+    $('#ojo').click(mostrarOcultar)
 }
 
 function mostrarOcultar (){
@@ -137,7 +171,7 @@ function mostrarOcultar (){
     let selectorRegistro = $('#depositoRetiro__registro--divisas');
 
     let mensajeOculto = '**************';
-    let ojo = $('#ojoUser');
+    let ojo = $('#ojo');
 
     let billeteras = obtenerArrayDeBilleteras();
     let cantidades = textoCantidad(billeteras);
@@ -177,14 +211,14 @@ function accionarDeposito() {
 }
 
 function AccionarRetiro(){
-    $('#depositoRetiro__interaccion--retirar').click(()=>{
+    $('#depositoRetiro__retirar').click(()=>{
         mostrarBilletera();
         retirar();
     })
 }
 
 function accionarDepositoEnter(){
-    input = $('#depositoRetiro__interaccion__input--cantidad').keydown((event)=>{
+    input = $('#depositoRetiro__ingreso--cantidad').keydown((event)=>{
         if(event.which == 13){
             event.preventDefault();
             depositar();
@@ -377,29 +411,33 @@ function armadoDeCabecera(){
 
 function armadoListaCompras(compra, info, balances){
     let selector = $('#cartera__lista__cabecera--divisas').val();
-    billetera = elegirBilletera(selector);
+    let billetera = elegirBilletera(selector);
     selector = selector.toUpperCase();
 
     for(i=0; i<compra.length; i++){
+        let cantidad;
         let imagen = info[i].image;
         let nombre = info[i].name;
-        let cantidad = compra[i].cantidad;
+        window.outerWidth > 500 ? cantidad = compra[i].cantidad : cantidad = medianasCantidades(compra[i].cantidad);
         let tk = compra[i].tipo;
         let conversion = conversionEntreCantidades(compra[i], selector)
         let cambio = porcentajeDeCambio(info[i].price_change_percentage_24h);
-        let balance = estilosBalance(billetera.simbolo, balances[i])
+        var balanceEstilizado = estilosBalance(billetera.simbolo, balances[i])
 
+
+        let nombreUsar = window.outerWidth > 940 ? nombre : tk
         conversion += balances[i];
         conversion = parseFloat(conversion.toFixed(2))
+        conversion = grandesCantidades(conversion)
 
         crearDivIdPadre('#cartera__lista', 'class', 'cartera__lista__posesion');
         crearDivClassPadre('.cartera__lista__posesion', 'class', 'nombre', i);
         crearImagen('.nombre', imagen, 'class', 'cartera__lista__posesion--image', i);
-        crearElemento('.nombre', 'p', 'class', 'cartera__lista__posesion--nombre', nombre, i);
+        crearElemento('.nombre', 'p', 'class', 'cartera__lista__posesion--nombre', nombreUsar, i);
         crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--cantidad', `${cantidad} ${tk}`, i);
         crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--conversion', `${billetera.simbolo}${conversion}`, i);
         crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--cambio', cambio, i)
-        crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--ganancias', balance , i)
+        crearElemento('.cartera__lista__posesion', 'p', 'class', 'cartera__lista__posesion--ganancias', balanceEstilizado , i)
         crearBtn('.cartera__lista__posesion', 'class', 'cartera__lista__posesion--operar',i)
 
         let valorCambio = $('.cartera__lista__posesion--cambio')
@@ -446,9 +484,12 @@ function btnActivos(i, objetoCripto){
 
 function estilosBalance(simbolo, balance){
     if (balance > 0){
+        balance = medianasCantidades(balance);
         return `+${simbolo}${balance}`
+
     } else if(balance == 0){
         return `${simbolo}0,00`
+
     } else{
         balance = Math.abs(balance)
         return `-${simbolo}${balance}`

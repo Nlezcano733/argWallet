@@ -2,12 +2,12 @@
 // ---------------VALIDACIONES------------------- //
 // ---------------------------------------------- //
 
-function validarSesion(){
-    estado = obtenerStorage('estadoSesion');
-    if(estado){
-        window.location.replace('/pages/panelUsuario.html')
-    }
-}
+// function validarSesion(){
+//     estado = obtenerStorage('estadoSesion');
+//     if(estado){
+//         window.location.replace('/pages/panelUsuario.html')
+//     }
+// }
 
 function validarNombre(nombre){
     nombre = nombre.trim();

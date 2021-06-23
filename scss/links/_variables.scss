@@ -1,3 +1,17 @@
+// Display
+$screen-lg: 1200px;
+$screen-md: 900px;
+$screen-sm: 700px;
+$screen-xs: 500px;
+
+// Paddings
+$main-padding: 80px;
+@include screen-lg (){ $main-padding: 70px !important;}
+@include screen-md (){ $main-padding: 50px !important;}
+@include screen-sm (){ $main-padding: 30px !important;}
+@include screen-xs (){ $main-padding: 15px !important;}
+
+// Colores
 $colorAzul0: #dae2ec;
 $colorAzul1: #cdd4e7;
 $colorAzul2: #97adc9;
@@ -16,9 +30,7 @@ $colorVioleta3: #5F06CC;
 $colorVioleta4: #3B0480;
 $colorVioleta5: #1d023e;
 
-//opacidades necesarias
 
-//$azulTranslucido: #455f83bb;
 $azulTranslucido: #7692b777;
 
 $colorGris0: #eeeeee;

@@ -17,11 +17,13 @@ let carteraMuestraInicio = [];
 
 
 $(()=>{
+    validarCierreSesion();
     conversionInicialDolar();
     conversionInicialEuro();
-    validarSesion();
 
     getAjaxInicio();
+
+    window.outerWidth <= 900 && accionarMenu();
 
     avanzarNavbar();
     scrollify();

@@ -52,7 +52,7 @@ function depositar(){
 
     monedaSeleccionada = $('#depositoRetiro__registro--divisas option:selected');
     divisaIngresada = $(monedaSeleccionada).val();
-    inputNumber = $('#depositoRetiro__interaccion__input--cantidad').val();
+    inputNumber = $('#depositoRetiro__ingreso--cantidad').val();
     depositarBilletera(inputNumber, divisaIngresada);
 }
 
@@ -62,9 +62,9 @@ function depositarBilletera(input, moneda){
     let billeteraUsada = eleccionDeBilletera(moneda);
     cantidad = billeteraUsada.billeteraTotal;
 
-    let validacion = ingresoNegativo(input, '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion')
+    let validacion = ingresoNegativo(input, '#depositoRetiro__validacion', '#depositoRetiro__validacion--msj')
     if(validacion == 'negativo'){
-        $('#depositoRetiro__interaccion__input--cantidad').val('');
+        $('#depositoRetiro__ingreso--cantidad').val('');
         return
     }
 
@@ -72,14 +72,14 @@ function depositarBilletera(input, moneda){
         if(cantidad > 0){
             sumarBilletera(input, moneda)
         } else if( cantidad < 0){
-            validarOperacion('Ingrese un valor Real', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion');
+            validarOperacion('Ingrese un valor Real', '#depositoRetiro__validacion', '#depositoRetiro__validacion--msj');
         }else{
             crearBilletera(input, moneda);
             habilitacionBtn()
         }
     }
 
-    $('#depositoRetiro__interaccion__input--cantidad').val('');
+    $('#depositoRetiro__ingreso--cantidad').val('');
     AccionarRetiro();
     mostrarbilleteraSeleccionada();
 }
@@ -99,7 +99,7 @@ function habilitacionBtn(){
     }
 
     if(billeteraElegida){
-        $(btn).attr('id', 'depositoRetiro__interaccion--retirar');
+        $(btn).attr('id', 'depositoRetiro__retirar');
         AccionarRetiro()
     } else{
         $(btn).attr('id', 'botonDeshabilitado');
@@ -118,19 +118,19 @@ function sumarBilletera(input, billeteraElegida){
     actualizacionBilleteras('#depositoRetiro__registro--divisas', cantidadSumada);
     actualizarBilleterasStorage();
     mostrarbilleteraSeleccionada();
-    validarOperacion('movimiento exitoso', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion');
+    validarOperacion('movimiento exitoso', '#depositoRetiro__validacion', '#depositoRetiro__validacion--msj');
 }
 
 // ---------------------------------------------------------- //
 function retirar(){
     let inputNumber, divisa;
 
-    inputNumber = $('#depositoRetiro__interaccion__input--cantidad').val();
+    inputNumber = $('#depositoRetiro__ingreso--cantidad').val();
     divisa = $('#depositoRetiro__registro--divisas option:selected').val();
     divisa = divisa.toLowerCase();
     restarBilletera(inputNumber, divisa);
     mostrarbilleteraSeleccionada();
-    $('#depositoRetiro__interaccion__input--cantidad').val('');
+    $('#depositoRetiro__ingreso--cantidad').val('');
 }
 
 
@@ -151,10 +151,10 @@ function restarBilletera(input, billeteraElegida){
         if(cantidadRestante == 0){
             habilitacionBtn();
         }
-        validarOperacion('Movimiento exitoso', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion')
+        validarOperacion('Movimiento exitoso', '#depositoRetiro__validacion', '#depositoRetiro__validacion--msj')
     } 
     if (dineroIngresado > billeteraActual){
-        validarOperacion('No dispone de fondos suficientes', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion');
+        validarOperacion('No dispone de fondos suficientes', '#depositoRetiro__validacion', '#depositoRetiro__validacion--msj');
     }
 }
 
@@ -172,7 +172,7 @@ function crearBilletera(input){
         actualizarBilleterasStorage();
 
     } else{
-        validarOperacion('Ingrese un valor real.', '.depositoRetiro__interaccion', '#depositoRetiro__interaccion--validacion');
+        validarOperacion('Ingrese un valor real.', '#depositoRetiro__validacion', '#depositoRetiro__validacion--msj');
         $(input).val('');
     }
     //Crea una billetera parcial y la almacena en storage

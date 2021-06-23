@@ -9,6 +9,52 @@ $('#conversor__btnMercado').click(()=>{
     window.location.href = 'panelUsuario.html#2';
 })
 
+// -------------------------------------------- //
+//           APERTURA MENU RESPONSIVE           //
+// -------------------------------------------- //
+
+function accionarMenu (){
+    $('#burger-logo').click( e =>{ abrirMenu(e.target.className) });
+    $('#user-logo').click( e =>{ abrirMenu(e.target.className) });
+    $('#market-logo').click( e =>{ abrirMenu(e.target.className) });
+}
+
+function abrirMenu (clase){
+    console.log(clase)
+    if(clase === 'fas fa-bars'){
+        $('.billeteraUser').fadeOut();
+        $('#aside').fadeOut();
+        $('.navBar').toggle('slide');
+        $('.navBar').css('display', 'flex');
+
+        setTimeout(()=>{ 
+            $('#burger-logo').attr('class', 'fas fa-times');
+            $('#redes').css('display', 'flex')
+        }, 400)
+        btnClose();
+
+    } else if(clase === 'fas fa-user-circle'){
+        $('.navBar').fadeOut();
+        $('#aside').fadeOut();
+        $('.billeteraUser').toggle('slide');
+        btnClose();
+
+    } else if(clase === 'fab fa-bitcoin'){
+        $('.navBar').fadeOut();
+        $('.billeteraUser').fadeOut();
+        $('#aside').toggle('slide');
+        $('#aside').css('display', 'flex');
+        btnClose();
+    }
+    
+    else {
+        $('.navBar').fadeOut();
+        $('.billeteraUser').fadeOut();
+        $('#aside').fadeOut();
+        habilitarBotones();
+    }
+}
+
 // ----------------------------------------------//
 // --------------MODIFICAR HEADER--------------- //
 // ----------------------------------------------//
@@ -100,17 +146,24 @@ function listadoDeCriptos(resultado){
             i++
         });
         accionarBtnLista();
+        
     }
 }
 
-$('#aside').hover(()=>{
-    $('.listado__nombreCripto').fadeIn(500)
-    $('#aside').animate({width: '220px'});
-}, ()=>{
-    $('#aside').animate({width: '50px'}, 500, ()=>{
-        $('.listado__nombreCripto').hide()
-    })
-});
+function activarListaCripto () {
+    if(window.outerWidth > 700 ){
+        $('#aside').hover(()=>{
+            $('.listado__nombreCripto').fadeIn(500)
+            $('#aside').animate({width: '220px'});
+        }, ()=>{
+            $('#aside').animate({width: '50px'}, 500, ()=>{
+                $('.listado__nombreCripto').hide()
+            })
+        });
+    } else {
+        $('.listado__nombreCripto').show()
+    }
+}
 
 
 function accionarBtnLista(){
@@ -203,14 +256,15 @@ function armadoDePanel(cripto, moneda){
     let nombre = primeraLetraMayuscula(cripto.id);
     let tk = (cripto.symbol).toUpperCase();
     let par = parDeConversion(cripto, moneda);
-    let cambio = porcentajeDeCambio(cripto.price_change_percentage_24h)
+    let cambio = porcentajeDeCambio(cripto.price_change_percentage_24h);
     let mktCap = grandesCantidades(cripto.market_cap);
-    let vol = grandesCantidades(cripto.total_volume)
-    let maxSupply = cripto.max_supply
+    let vol = grandesCantidades(cripto.total_volume);
+    let totalSupply = grandesCantidades(cripto.circulating_supply);
+    let maxSupply = grandesCantidades(cripto.max_supply);
     if(!maxSupply){
         maxSupply = '---'
     }
-    let fecha = formateoFecha(cripto.ath_date)
+    let fecha = formateoFecha(cripto.ath_date);
 
 
     modificarElemento('#nombreCripto__id', nombre);
@@ -225,7 +279,7 @@ function armadoDePanel(cripto, moneda){
     modificarElemento('#infoCripto__info--mktCap', `${simbolo} ${mktCap}`);
     modificarElemento('#infoCripto__info--rank', `#${cripto.market_cap_rank}`);
 
-    modificarElemento('#infoCripto__info--circSupply', `${cripto.circulating_supply} ${tk}`);
+    modificarElemento('#infoCripto__info--circSupply', `${totalSupply} ${tk}`);
     modificarElemento('#infoCripto__info--maxSupply', `${maxSupply} ${tk}`);
     modificarElemento('#infoCripto__valores--max', `${simbolo}${cripto.high_24h}`);
     modificarElemento('#infoCripto__valores--min', `${simbolo}${cripto.low_24h}`);

@@ -37,7 +37,9 @@ let valorArs, valorUsd, valorEur;
 let carteraCriptos = [];
 
 $(()=>{
+    validarCierreSesion();
     actualizacionValoresDivisas();
+    window.outerWidth <= 900 && accionarMenu();
 
     nombreUser();
     avanzarNavbar();

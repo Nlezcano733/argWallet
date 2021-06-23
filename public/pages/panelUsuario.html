@@ -14,12 +14,22 @@
 <body>
     <header>
         <h1><strong>Arg</strong>WALLET</h1>
-        <div id="user__navBar" class="navBar">
+        <div id="user-navBar" class="navBar">
             <input type="button" id="user__btnBilletera" value="Billetera">
             <input type="button" id="user__btnMercado" value="Mercados"> 
             <a href="../index.html" id="user__btnLogOut" class="navBar__salir" role="button">Cerrar Sesion</a>
         </div>
+        <div id="burger-navbar">
+            <i id="user-logo" class="fas fa-user-circle"></i>
+            <i id="burger-logo" class="fas fa-bars"></i>
+        </div>
     </header>
+
+    <aside id="redes">
+        <a target="blank" href="https://github.com/Nlezcano733"><i class="fab fa-github-alt"></i></a>
+        <a target="blank" href="https://www.linkedin.com/in/nlezcano/"><i class="fab fa-linkedin"></i></a>
+    </aside>
+
     <section class="billeteraUser scrollify">
 
         <div class="billeteraUser__info">
@@ -40,7 +50,7 @@
                 <h2 class="billeteraUser__balance__billetera--moneda">EUR</h2>
                 <p class="billeteraUser__balance__billetera--cantidad" id="euros__cantidad">€ 0,00</p>
             </div>
-            <i id="ojoUser" class="fas fa-eye-slash"></i>
+            <i id="ojo" class="fas fa-eye-slash"></i>
         </div>
     </section>
 
@@ -53,11 +63,12 @@
             </select>
             <p class="depositoRetiro__registro--btc"> 0 BTC</p>
         </div>
+        <div id="depositoRetiro__validacion"></div>
+        <div id="depositoRetiro__ingreso">
+            <label for="ingresoDivisa" id="depositoRetiro__ingreso--simbolo">$</label>
+            <input type="number" name="ingresoDivisa" id="depositoRetiro__ingreso--cantidad">
+        </div>
         <div class="depositoRetiro__interaccion">
-            <div id="depositoRetiro__interaccion__input">
-                <label for="ingresoDivisa" id="depositoRetiro__interaccion__input--simbolo">$</label>
-                <input type="number" name="ingresoDivisa" id="depositoRetiro__interaccion__input--cantidad">
-            </div>
             <input type="button" class="depositoRetiro" id="depositoRetiro__interaccion--depositar" value="Depositar">
             <input type="button" class="depositoRetiro" id="botonDeshabilitado" value="Retirar">
         </div>

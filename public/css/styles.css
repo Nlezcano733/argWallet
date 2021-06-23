@@ -128,8 +128,11 @@ header .navBar .navBar__salir:active {
 header .navBar .navBar__salir:focus {
   outline: none;
 }
+header #burger-navbar {
+  display: none;
+}
 header #conversor__navBar, header #user__navBar {
-  width: 370px;
+  max-width: 370px;
 }
 
 footer {
@@ -175,6 +178,197 @@ footer {
   color: #bbbbbb;
 }
 
+@media (max-width: 1200px) {
+  header {
+    height: 60px;
+    padding: 0px 70px;
+    background-color: #eeeeee;
+  }
+  header .navBar {
+    width: 250px;
+  }
+}
+@media (max-width: 900px) {
+  header {
+    padding: 0px 50px;
+    position: sticky;
+  }
+  header .navBar {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    top: 60px;
+    right: 0px;
+    width: 250px;
+    height: 100vh;
+    padding-top: 40px;
+    background: linear-gradient(to left, #cdd4e7, #eeeeee);
+    box-shadow: 0px 0px 5px #bbbbbb;
+  }
+  header .navBar input {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  header .navBar #btnIngreso {
+    margin: 0px;
+    width: 110px;
+    height: 35px;
+    color: #eeeeee;
+    background-color: #5F06CC;
+    border: 2px solid #3B0480;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    line-height: 30px;
+    text-decoration: none;
+    color: #dddddd;
+  }
+  header .navBar #btnIngreso:hover {
+    background-color: #3B0480;
+  }
+  header .navBar #btnIngreso:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  header .navBar #btnIngreso:focus {
+    outline: none;
+  }
+  header .navBar .navBar__salir {
+    margin: 0px;
+    width: 110px;
+    height: 35px;
+    color: #eeeeee;
+    background-color: #5F06CC;
+    border: 2px solid #3B0480;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    line-height: 30px;
+    text-decoration: none;
+  }
+  header .navBar .navBar__salir:hover {
+    background-color: #3B0480;
+  }
+  header .navBar .navBar__salir:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  header .navBar .navBar__salir:focus {
+    outline: none;
+  }
+  header .flexed {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  header #burger-navbar {
+    display: block;
+  }
+  header #burger-navbar i {
+    font-size: 24px;
+    margin-left: 20px;
+  }
+  header #conversor__navBar, header #user__navBar {
+    max-width: 250px;
+  }
+
+  section {
+    height: calc(100vh - 60px);
+  }
+
+  #redes {
+    position: fixed;
+    bottom: 20px;
+    left: 70vw;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 30%;
+    transform: translateX(20px);
+  }
+  #redes i {
+    font-size: 20px;
+  }
+  #redes i:first-child {
+    margin-right: 40px;
+  }
+}
+@media (max-width: 700px) {
+  header {
+    padding: 0px 30px;
+  }
+  header .navBar {
+    display: none;
+    width: 100vw;
+  }
+  header .navBar .navBar__salir {
+    width: 110px;
+    height: 35px;
+    color: #eeeeee;
+    background-color: #5F06CC;
+    border: 2px solid #3B0480;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  header .navBar .navBar__salir:hover {
+    background-color: #3B0480;
+  }
+  header .navBar .navBar__salir:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  header .navBar .navBar__salir:focus {
+    outline: none;
+  }
+
+  #redes {
+    position: fixed;
+    top: 90vh;
+    left: 50vw;
+    width: 100vw;
+    transform: translateX(-50%);
+  }
+  #redes a {
+    width: fit-content;
+    text-align: center;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  #redes a i {
+    font-size: 24px;
+    transform: translateX(50%);
+  }
+
+  footer {
+    position: relative;
+    font-size: 14px;
+  }
+}
+@media (max-width: 500px) {
+  header {
+    padding: 0px 15px;
+  }
+  header .navBar {
+    display: none;
+    width: 100vw;
+  }
+  header #conversor__navBar, header #user__navBar {
+    max-width: 100vw;
+  }
+
+  section {
+    height: calc(100vh - 60px);
+  }
+}
 .panelIngreso {
   display: none;
   height: 460px;
@@ -313,7 +507,7 @@ footer {
 #inicio .contenidoInicio {
   width: 100%;
   height: 100vh;
-  padding: 80px 80px;
+  padding: 80px;
   display: grid;
   grid-column-gap: 10px;
   grid-row-gap: 0px;
@@ -560,6 +754,285 @@ footer {
   color: #e70008;
 }
 
+@media (max-width: 1200px) {
+  #inicio .contenidoInicio {
+    padding: 70px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+  #inicio .contenidoInicio #inicio__intro {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  #inicio .contenidoInicio #inicio__imagenCripto {
+    justify-self: center;
+  }
+  #inicio .contenidoInicio #inicio__listado {
+    display: none;
+  }
+
+  #info #infoDiv {
+    height: 90vh;
+    width: 80vw;
+    margin-top: 10vh;
+  }
+  #info #infoDiv .info__cuerpoInfo {
+    height: max-content;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 60px 1fr;
+    grid-template-areas: "titulo titulo" "contenido imagen";
+  }
+  #info #infoDiv .info__cuerpoInfo--titulo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  #info #infoDiv .info__cuerpoInfo--texto {
+    height: max-content;
+    width: 100%;
+  }
+  #info #infoDiv .info__cuerpoInfo .info__imagen {
+    align-self: center;
+    margin-bottom: 10vh;
+  }
+
+  #mercado {
+    padding: 70px;
+    padding-bottom: 15px;
+  }
+  #mercado__lista {
+    overflow-x: hidden;
+  }
+  #mercado__lista #lista__cabecera th {
+    width: calc(100% / 6);
+    height: 50px;
+  }
+  #mercado__lista #lista__cabecera th:last-child {
+    display: none;
+  }
+  #mercado__lista .lista__cripto td:last-child {
+    display: none;
+  }
+  #mercado__lista .lista__cripto td .lista__cripto--nombre {
+    width: 160px;
+  }
+  #mercado__lista .lista__cripto td .lista__cripto--nombre .nombreCriptoLista {
+    display: inline;
+  }
+  #mercado__lista .lista__cripto td .lista__cripto--nombre img {
+    margin-right: 15px;
+  }
+  #mercado__lista .lista__cripto td--cambio {
+    color: #e70008;
+  }
+}
+@media (max-width: 900px) {
+  .panelIngreso {
+    display: none;
+    height: calc(100vh - 60px);
+    position: fixed;
+    top: 60px;
+    left: calc(100vw - 400px);
+    transform: none;
+  }
+  .panelIngreso__salir {
+    position: absolute;
+    right: 40px;
+    font-size: 20px;
+    transition: none;
+  }
+  .panelIngreso__salir:hover {
+    transform: none;
+  }
+  .panelIngreso__atras {
+    position: absolute;
+    left: 40px;
+    font-size: 20px;
+    transition: none;
+  }
+  .panelIngreso__atras:hover {
+    transform: none;
+  }
+
+  #inicio {
+    max-height: calc(100vh - 60px);
+  }
+  #inicio .contenidoInicio {
+    height: calc(100vh - 60px);
+    padding: 0 50px;
+    grid-template-columns: 2fr 1fr;
+  }
+  #inicio .contenidoInicio #inicio__imagenCripto {
+    width: 90%;
+  }
+
+  #info #infoDiv .info__cuerpoInfo {
+    height: 85vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 1fr auto;
+    grid-template-areas: "titulo" "contenido" "imagen";
+  }
+  #info #infoDiv .info__cuerpoInfo--titulo {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
+  #info #infoDiv .info__cuerpoInfo--texto {
+    height: max-content;
+    font-size: 16px;
+    width: 100%;
+  }
+  #info #infoDiv .info__cuerpoInfo .info__imagen {
+    height: 200px;
+    width: auto;
+    justify-self: center;
+    padding-bottom: 20px;
+  }
+
+  #mercado {
+    height: fit-content;
+    padding: 50px;
+    overflow-x: scroll;
+    padding-top: 80px;
+    margin-bottom: 20px;
+  }
+  #mercado__lista {
+    height: fit-content;
+  }
+  #mercado__lista #lista__cabecera th:nth-child(5), #mercado__lista #lista__cabecera th:nth-child(6) {
+    display: none;
+  }
+  #mercado__lista .lista__cripto td:nth-child(5), #mercado__lista .lista__cripto td:nth-child(6) {
+    display: none;
+  }
+  #mercado__lista .lista__cripto td .lista__cripto--nombre {
+    width: 140px;
+  }
+}
+@media (max-width: 700px) {
+  .panelIngreso {
+    display: none;
+    height: calc(100vh - 60px);
+    width: 100vw;
+    padding: 20px 20%;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    box-shadow: none;
+  }
+  .panelIngreso__atras, .panelIngreso__salir {
+    position: absolute;
+    font-size: 24px;
+  }
+
+  #inicio .contenidoInicio {
+    padding: 30px;
+    grid-template-columns: 2fr 1fr;
+  }
+  #inicio .contenidoInicio #inicio__imagenCripto {
+    width: 100%;
+  }
+
+  #info #infoDiv .info__cuerpoInfo {
+    height: 85vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 1fr auto;
+    grid-template-areas: "titulo" "contenido" "imagen";
+  }
+  #info #infoDiv .info__cuerpoInfo--titulo {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
+  #info #infoDiv .info__cuerpoInfo--texto p:last-child {
+    display: none;
+  }
+
+  #mercado {
+    padding: 50px;
+  }
+  #mercado__lista #lista__cabecera th:nth-child(3) {
+    display: none;
+  }
+  #mercado__lista .lista__cripto td:nth-child(2) {
+    display: none;
+  }
+  #mercado__lista .lista__cripto td .lista__cripto--nombre {
+    width: 120px;
+  }
+}
+@media (max-width: 500px) {
+  .panelIngreso {
+    display: none;
+    height: calc(100vh - 60px);
+    width: 100vw;
+    padding: 20px 30px;
+    position: fixed;
+  }
+
+  #inicio .contenidoInicio {
+    padding: 15px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: "intro" "imagen";
+    margin-top: 0px;
+  }
+  #inicio .contenidoInicio #inicio__intro {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
+  #inicio .contenidoInicio #inicio__intro h2 {
+    font-size: 24px;
+    width: 100%;
+    margin-top: 20px;
+  }
+  #inicio .contenidoInicio #inicio__intro p {
+    font-size: 14px;
+  }
+  #inicio .contenidoInicio #inicio__imagenCripto {
+    height: 270px;
+    width: auto;
+    align-self: center;
+    padding-bottom: 50px;
+  }
+
+  #info {
+    width: 100%;
+    margin-top: 20px;
+  }
+  #info #infoDiv .info__cuerpoInfo {
+    height: 85vh;
+    width: 355px;
+    margin-top: 20px;
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 70px 1fr 350px;
+    grid-template-areas: "titulo" "contenido" "imagen";
+  }
+  #info #infoDiv .info__cuerpoInfo--titulo {
+    font-size: 18px;
+  }
+  #info #infoDiv .info__cuerpoInfo--texto {
+    font-size: 14px;
+  }
+  #info #infoDiv .info__cuerpoInfo .info__imagen {
+    height: 200px;
+    align-self: start;
+  }
+
+  #mercado {
+    padding: 15px;
+    padding-bottom: 50px;
+    margin-top: 20px;
+  }
+  #mercado__lista #lista__cabecera th:nth-child(4) {
+    display: none;
+  }
+  #mercado__lista .lista__cripto td:nth-child(4) {
+    display: none;
+  }
+  #mercado__lista .lista__cripto td .lista__cripto--nombre {
+    width: 140px;
+  }
+}
 .billeteraUser {
   height: 70px;
   width: 100vw;
@@ -598,17 +1071,7 @@ footer {
   justify-content: end;
   align-items: center;
   grid-template-columns: repeat(3, 1fr) 25px;
-  grid-template-areas: "pesos dolares euros ojo";
   font-size: 18px;
-}
-.billeteraUser__balance #pesos {
-  grid-area: pesos;
-}
-.billeteraUser__balance #dolares {
-  grid-area: dolares;
-}
-.billeteraUser__balance #euros {
-  grid-area: euros;
 }
 .billeteraUser__balance__billetera {
   height: 100%;
@@ -630,34 +1093,33 @@ footer {
   margin-left: 10px;
   text-align: right;
 }
-.billeteraUser__balance #ojoUser, .billeteraUser__balance #ojoConversor {
-  grid-area: ojo;
+.billeteraUser__balance #ojo {
   cursor: pointer;
 }
 
 #depositoRetiro {
   height: 50px;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  justify-content: start;
   align-items: center;
+  grid-template-columns: repeat(12, 1fr);
   padding: 10px 80px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 #depositoRetiro .depositoRetiro__registro {
-  width: 30%;
+  grid-column: span 4;
   display: grid;
   grid-column-gap: 30px;
   grid-row-gap: 0px;
   justify-content: start;
   align-items: center;
   grid-template-columns: 70px 1fr;
-  grid-template-areas: "divisa conversion";
 }
 #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas {
-  grid-area: divisa;
   width: 80px;
   height: 35px;
   color: #334761;
@@ -710,34 +1172,26 @@ footer {
   font-size: 18px;
 }
 #depositoRetiro .depositoRetiro__registro--btc {
-  grid-area: conversion;
   color: #808080;
 }
-#depositoRetiro .depositoRetiro__interaccion {
-  width: 690px;
-  display: grid;
-  grid-column-gap: 30px;
-  grid-row-gap: 0px;
-  justify-content: end;
-  align-items: center;
-  grid-template-columns: 180px 1fr repeat(2, 90px);
-  grid-template-areas: "validacion input deposito retiro";
+#depositoRetiro #depositoRetiro__validacion {
+  grid-column: span 3;
+  justify-self: end;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--validacion {
-  grid-area: validacion;
+#depositoRetiro #depositoRetiro__validacion #depositoRetiro__validacion--msj {
   font-size: 14px;
-  text-align: center;
+  text-align: right;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input {
-  grid-area: input;
+#depositoRetiro #depositoRetiro__ingreso {
   position: relative;
+  grid-column: span 3;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--simbolo {
+#depositoRetiro #depositoRetiro__ingreso #depositoRetiro__ingreso--simbolo {
   position: absolute;
   left: 5px;
   font-size: 20px;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad {
+#depositoRetiro #depositoRetiro__ingreso #depositoRetiro__ingreso--cantidad {
   width: 100%;
   height: 30px;
   font-size: 20px;
@@ -747,17 +1201,23 @@ footer {
   border: none;
   border-bottom: 1px solid #334761;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad::placeholder {
+#depositoRetiro #depositoRetiro__ingreso #depositoRetiro__ingreso--cantidad::placeholder {
   font-size: 20px;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad::step {
+#depositoRetiro #depositoRetiro__ingreso #depositoRetiro__ingreso--cantidad::step {
   display: none;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion__input #depositoRetiro__interaccion__input--cantidad:focus {
+#depositoRetiro #depositoRetiro__ingreso #depositoRetiro__ingreso--cantidad:focus {
   outline: none;
 }
+#depositoRetiro .depositoRetiro__interaccion {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
 #depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar {
-  grid-area: deposito;
   width: 90px;
   height: 30px;
   color: #eeeeee;
@@ -767,6 +1227,7 @@ footer {
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s ease-in;
+  margin-right: 20px;
 }
 #depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar:hover {
   background-color: #5F06CC;
@@ -778,8 +1239,7 @@ footer {
 #depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar:focus {
   outline: none;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar {
-  grid-area: retiro;
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__retirar {
   width: 90px;
   height: 30px;
   color: #5F06CC;
@@ -790,19 +1250,18 @@ footer {
   cursor: pointer;
   transition: background-color 0.2s ease-in;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:hover {
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__retirar:hover {
   background-color: #5F06CC;
   color: #eeeeee;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:active {
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__retirar:active {
   outline: none;
   box-shadow: 0px 0px 5px #4d4d4d inset;
 }
-#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--retirar:focus {
+#depositoRetiro .depositoRetiro__interaccion #depositoRetiro__retirar:focus {
   outline: none;
 }
 #depositoRetiro .depositoRetiro__interaccion #botonDeshabilitado {
-  grid-area: retiro;
   width: 90px;
   height: 30px;
   margin: 0 auto;
@@ -899,11 +1358,9 @@ footer {
   justify-content: start;
   align-items: center;
   grid-template-columns: 1.5fr repeat(4, 1fr) 100px;
-  grid-template-areas: "nombre cantidad conversion cambio ganancias input";
   border-bottom: 1px solid #bbbbbb;
 }
 #cartera__lista .cartera__lista__posesion .nombre {
-  grid-area: nombre;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -919,22 +1376,10 @@ footer {
   display: inline;
   font-size: 18px;
 }
-#cartera__lista .cartera__lista__posesion--cantidad {
-  grid-area: cantidad;
-}
-#cartera__lista .cartera__lista__posesion--conversion {
-  grid-area: conversion;
-}
-#cartera__lista .cartera__lista__posesion--cambio {
-  grid-area: cambio;
-  color: #e70008;
-}
-#cartera__lista .cartera__lista__posesion--ganancias {
-  grid-area: ganancias;
+#cartera__lista .cartera__lista__posesion--cambio, #cartera__lista .cartera__lista__posesion--ganancias {
   color: #e70008;
 }
 #cartera__lista .cartera__lista__posesion--operar {
-  grid-area: input;
   width: 90px;
   height: 30px;
   color: #3B0480;
@@ -1107,6 +1552,870 @@ footer {
   color: #e70008;
 }
 
+@media (max-width: 1200px) {
+  .billeteraUser {
+    height: 70px;
+    width: 100vw;
+    margin-top: 60px;
+    padding: 10px 70px;
+  }
+  .billeteraUser__info {
+    min-width: 200px;
+  }
+  .billeteraUser__info p {
+    font-size: 20px;
+  }
+  .billeteraUser__balance {
+    max-width: 500px;
+    width: 60%;
+  }
+
+  #depositoRetiro {
+    height: 50px;
+    padding: 10px 70px;
+  }
+  #depositoRetiro .depositoRetiro__registro {
+    grid-column: span 3;
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 0px;
+    justify-content: start;
+    align-items: center;
+    grid-template-columns: 70px 1fr;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas {
+    width: 70px;
+    height: 35px;
+    color: #334761;
+    background-color: #eeeeee;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:focus {
+    background-color: #334761;
+    color: #eeeeee;
+    outline: none;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:disabled {
+    width: 70px;
+    height: 35px;
+    color: #999999;
+    background-color: #eeeeee;
+    border: 1px solid #999999;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:disabled:hover {
+    background-color: #999999;
+    color: #eeeeee;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:disabled:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas:disabled:focus {
+    background-color: #999999;
+    color: #eeeeee;
+    outline: none;
+  }
+  #depositoRetiro #depositoRetiro__validacion {
+    grid-column: span 3;
+  }
+  #depositoRetiro #depositoRetiro__ingreso {
+    position: relative;
+    grid-column: span 3;
+  }
+  #depositoRetiro .depositoRetiro__interaccion {
+    grid-column: span 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  #depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar {
+    margin-right: 0px;
+  }
+  #depositoRetiro .depositoRetiro__interaccion #depositoRetiro__retirar {
+    margin-right: 0px;
+    margin-left: 16px;
+  }
+  #depositoRetiro .depositoRetiro__interaccion #botonDeshabilitado {
+    margin-right: 0px;
+    margin-left: 16px;
+  }
+
+  #cartera {
+    padding: 0px 70px;
+  }
+  #cartera__lista {
+    width: 100%;
+    overflow: auto;
+    position: relative;
+    padding: 0px;
+  }
+  #cartera__lista__cabecera {
+    width: 100%;
+    height: 50px;
+    position: sticky;
+    top: 0px;
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 0px;
+    justify-content: start;
+    align-items: center;
+    grid-template-columns: 1.5fr repeat(4, 1fr) 110px;
+  }
+  #cartera__lista__cabecera--nombre {
+    margin-left: 10px;
+  }
+  #cartera__lista__cabecera--divisas {
+    margin-left: 10px;
+  }
+  #cartera__lista .cartera__lista__posesion {
+    height: 45px;
+    grid-template-columns: 1.5fr repeat(4, 1fr) 110px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre {
+    padding-left: 10px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--image {
+    width: 25px;
+    margin-right: 10px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--nombre {
+    display: inline;
+    font-size: 16px;
+  }
+  #cartera__lista .cartera__lista__posesion--cambio, #cartera__lista .cartera__lista__posesion--ganancias {
+    color: #e70008;
+  }
+  #cartera__lista .cartera__lista__posesion--operar {
+    margin-right: 10px;
+    line-height: 22px;
+  }
+
+  #activos {
+    padding: 70px;
+    padding-bottom: 50px;
+  }
+  #activos__lista {
+    display: block;
+    position: relative;
+    height: calc(100% - 10px);
+    overflow-y: scroll;
+  }
+  #activos__lista #activos__cabecera {
+    height: 50px;
+  }
+  #activos__lista #activos__cabecera th {
+    width: calc(100% / 10);
+    height: 50px;
+    padding: 2px 15px;
+    padding-left: 20px;
+    position: sticky;
+    top: 0px;
+  }
+  #activos__lista #activos__cabecera th:last-child {
+    width: 500px;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas {
+    width: 80px;
+    height: 35px;
+    color: #334761;
+    background-color: #dddddd;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:focus {
+    background-color: #334761;
+    color: #eeeeee;
+    outline: none;
+  }
+  #activos__lista .activo__cuerpo {
+    height: 45px;
+    text-align: left;
+  }
+  #activos__lista .activo__cuerpo td {
+    padding: 2px 10px;
+    padding-left: 20px;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--nombre {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 110px;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--nombre img {
+    width: 25px;
+    margin-right: 7px;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--btn {
+    width: 80px;
+    height: 30px;
+    color: #3B0480;
+    background-color: #eeeeee;
+    border: 1px solid #3B0480;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--btn:hover {
+    background-color: #3B0480;
+    color: #eeeeee;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--btn:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--btn:focus {
+    outline: none;
+  }
+}
+@media (max-width: 900px) {
+  .billeteraUser {
+    position: fixed;
+    top: 0px;
+    right: 7px;
+    display: none;
+    width: 40%;
+    height: calc(100vh - 60px);
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0px 0px 10px #dddddd;
+    background-color: #eeeeee;
+    z-index: 10000;
+  }
+  .billeteraUser__info {
+    align-self: flex-start;
+    height: 60px;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .billeteraUser__balance {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 18px;
+  }
+  .billeteraUser__balance__billetera {
+    height: max-content;
+    width: 100%;
+    padding-right: 0px;
+    margin-right: 0px;
+    border: none;
+    border-bottom: 1px solid #bbbbbb;
+  }
+  .billeteraUser__balance__billetera--moneda {
+    display: inline-block;
+    width: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Lato", sans-serif, verdana;
+    line-height: 2.5em;
+  }
+  .billeteraUser__balance__billetera--cantidad {
+    display: inline-block;
+    width: calc(100% - 55px);
+    margin-left: 10px;
+    text-align: right;
+  }
+  .billeteraUser__balance #ojo {
+    position: fixed;
+    top: 90px;
+    right: 40px;
+  }
+
+  #depositoRetiro {
+    padding: 10px 50px;
+    margin-top: 10px;
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 15px;
+    justify-content: start;
+    align-items: center;
+    grid-template-columns: 70px repeat(4, 1fr) 190px;
+  }
+  #depositoRetiro .depositoRetiro__registro {
+    grid-column: span 1;
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 0px;
+    justify-content: start;
+    align-items: center;
+    grid-template-columns: 70px 1fr;
+  }
+  #depositoRetiro .depositoRetiro__registro--btc {
+    display: none;
+    color: #808080;
+  }
+  #depositoRetiro #depositoRetiro__validacion {
+    grid-column: span 2;
+  }
+  #depositoRetiro #depositoRetiro__ingreso {
+    position: relative;
+    grid-column: span 2;
+  }
+  #depositoRetiro .depositoRetiro__interaccion {
+    grid-column: span 1;
+  }
+
+  #cartera {
+    padding: 0px 50px;
+    min-height: 40vh;
+  }
+  #cartera__encabezado--titulo {
+    font-size: 20px;
+  }
+  #cartera__lista {
+    position: relative;
+  }
+  #cartera__lista__cabecera {
+    height: 40px;
+    position: sticky;
+    top: 0px;
+    grid-template-columns: repeat(2, 1.5fr) repeat(3, 1fr) 90px;
+    font-size: 14px;
+  }
+  #cartera__lista__cabecera--divisas {
+    width: 70px;
+    height: 35px;
+    color: #334761;
+    background-color: #dddddd;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #cartera__lista__cabecera--divisas:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #cartera__lista__cabecera--divisas:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #cartera__lista__cabecera--divisas:focus {
+    background-color: #334761;
+    color: #eeeeee;
+    outline: none;
+  }
+  #cartera__lista .cartera__lista__posesion {
+    height: 45px;
+    grid-template-columns: repeat(2, 1.5fr) repeat(3, 1fr) 80px;
+  }
+  #cartera__lista .cartera__lista__posesion p {
+    font-size: 14px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre {
+    padding-left: 10px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--image {
+    width: 20px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--nombre {
+    display: inline;
+  }
+  #cartera__lista .cartera__lista__posesion--operar {
+    width: 70px;
+    height: 30px;
+    color: #3B0480;
+    background-color: #eeeeee;
+    border: 1px solid #3B0480;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    margin-right: 10px;
+  }
+  #cartera__lista .cartera__lista__posesion--operar:hover {
+    background-color: #3B0480;
+    color: #eeeeee;
+  }
+  #cartera__lista .cartera__lista__posesion--operar:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #cartera__lista .cartera__lista__posesion--operar:focus {
+    outline: none;
+  }
+
+  #activos {
+    padding: 50px;
+    height: fit-content;
+  }
+  #activos__lista {
+    display: block;
+    position: relative;
+  }
+  #activos__lista #activos__cabecera {
+    height: 40px;
+  }
+  #activos__lista #activos__cabecera th {
+    height: 40px;
+    padding: 2px 15px;
+    padding-left: 20px;
+    position: sticky;
+    top: 0px;
+    font-size: 14px;
+  }
+  #activos__lista #activos__cabecera th:nth-child(4), #activos__lista #activos__cabecera th:nth-child(5) {
+    display: none;
+  }
+  #activos__lista .activo__cuerpo {
+    height: 45px;
+    text-align: left;
+  }
+  #activos__lista .activo__cuerpo td {
+    padding: 2px 10px;
+    padding-left: 20px;
+    font-size: 14px;
+  }
+  #activos__lista .activo__cuerpo td:nth-child(4), #activos__lista .activo__cuerpo td:nth-child(5) {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .billeteraUser {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .billeteraUser__info {
+    width: 80%;
+  }
+  .billeteraUser__balance {
+    margin: 0 auto;
+  }
+  .billeteraUser__balance #ojo {
+    position: fixed;
+    top: 90px;
+    right: 30px;
+  }
+
+  #depositoRetiro {
+    padding: 10px 30px;
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 15px;
+    justify-content: start;
+    align-items: center;
+    grid-template-rows: 35px 30px 24px;
+    grid-template-columns: repeat(8, 1fr);
+    margin-top: 10px;
+  }
+  #depositoRetiro .depositoRetiro__registro {
+    grid-column: span 3;
+    order: 1;
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 0px;
+    justify-content: end;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas {
+    width: 80px;
+    justify-self: start;
+  }
+  #depositoRetiro .depositoRetiro__registro--btc {
+    display: block;
+  }
+  #depositoRetiro #depositoRetiro__validacion {
+    grid-column: span 8;
+    order: 4;
+    width: 100%;
+    text-align: center;
+  }
+  #depositoRetiro #depositoRetiro__ingreso {
+    position: relative;
+    grid-column: span 5;
+    order: 2;
+  }
+  #depositoRetiro .depositoRetiro__interaccion {
+    grid-column: span 8;
+    justify-content: center;
+    order: 3;
+  }
+  #depositoRetiro .depositoRetiro__interaccion #depositoRetiro__interaccion--depositar {
+    width: 100%;
+  }
+  #depositoRetiro .depositoRetiro__interaccion #depositoRetiro__retirar, #depositoRetiro .depositoRetiro__interaccion #botonDeshabilitado {
+    width: 100%;
+    margin-left: 40px;
+  }
+
+  #cartera {
+    padding: 0px 30px;
+    margin-top: 90px;
+  }
+  #cartera__lista {
+    position: relative;
+  }
+  #cartera__lista__cabecera {
+    position: sticky;
+    top: 0px;
+    grid-template-columns: repeat(2, 1.5fr) repeat(2, 1fr) 90px;
+    font-size: 14px;
+  }
+  #cartera__lista__cabecera--ganancia, #cartera__lista__cabecera--cambio {
+    text-align: center;
+  }
+  #cartera__lista__cabecera--valor {
+    display: none;
+  }
+  #cartera__lista__cabecera--divisas {
+    width: 70px;
+    height: 35px;
+    color: #334761;
+    background-color: #dddddd;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #cartera__lista__cabecera--divisas:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #cartera__lista__cabecera--divisas:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #cartera__lista__cabecera--divisas:focus {
+    background-color: #334761;
+    color: #eeeeee;
+    outline: none;
+  }
+  #cartera__lista .cartera__lista__posesion {
+    height: 45px;
+    grid-template-columns: repeat(2, 1.5fr) repeat(2, 1fr) 80px;
+    grid-column-gap: 10px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre {
+    padding-left: 5px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--image {
+    width: 20px;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--nombre {
+    display: inline;
+  }
+  #cartera__lista .cartera__lista__posesion--conversion {
+    display: none;
+  }
+
+  #activos {
+    padding: 30px;
+  }
+  #activos__lista {
+    display: block;
+    position: relative;
+  }
+  #activos__lista #activos__cabecera th {
+    padding: 2px 10px;
+    padding-left: 20px;
+    position: sticky;
+    top: 0px;
+  }
+  #activos__lista #activos__cabecera th:nth-child(6) {
+    display: none;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas {
+    width: 70px;
+    height: 35px;
+    color: #334761;
+    background-color: #dddddd;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    padding-left: 10px;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:focus {
+    background-color: #334761;
+    color: #eeeeee;
+    outline: none;
+  }
+  #activos__lista .activo__cuerpo {
+    height: 40px;
+  }
+  #activos__lista .activo__cuerpo td {
+    padding: 2px 10px;
+    padding-left: 10px;
+  }
+  #activos__lista .activo__cuerpo td:nth-child(6) {
+    display: none;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--nombre {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--btn {
+    width: 70px;
+    height: 30px;
+    color: #3B0480;
+    background-color: #eeeeee;
+    border: 1px solid #3B0480;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    margin-left: 10px;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--btn:hover {
+    background-color: #3B0480;
+    color: #eeeeee;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--btn:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #activos__lista .activo__cuerpo td .activo__cuerpo--btn:focus {
+    outline: none;
+  }
+}
+@media (max-width: 500px) {
+  .billeteraUser {
+    width: 100%;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+  .billeteraUser__info {
+    width: 80%;
+  }
+  .billeteraUser__balance {
+    margin: 0 auto;
+  }
+  .billeteraUser__balance #ojo {
+    position: fixed;
+    top: 90px;
+    right: 35px;
+  }
+
+  #depositoRetiro {
+    padding: 10px 15px;
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 15px;
+    justify-content: start;
+    align-items: center;
+    grid-template-rows: 35px 30px 24px;
+    grid-template-columns: repeat(6, 1fr);
+    margin-top: 10px;
+  }
+  #depositoRetiro .depositoRetiro__registro {
+    grid-column: span 2;
+    order: 1;
+    display: block;
+  }
+  #depositoRetiro .depositoRetiro__registro #depositoRetiro__registro--divisas {
+    width: 100%;
+    max-width: 90px;
+    justify-self: end;
+  }
+  #depositoRetiro .depositoRetiro__registro--btc {
+    display: none;
+  }
+  #depositoRetiro #depositoRetiro__validacion {
+    grid-column: span 6;
+    order: 4;
+    width: 100%;
+    text-align: center;
+  }
+  #depositoRetiro #depositoRetiro__ingreso {
+    position: relative;
+    grid-column: span 4;
+    order: 2;
+  }
+  #depositoRetiro .depositoRetiro__interaccion {
+    grid-column: span 6;
+    justify-content: center;
+    order: 3;
+  }
+  #depositoRetiro .depositoRetiro__interaccion #depositoRetiro__retirar, #depositoRetiro .depositoRetiro__interaccion #botonDeshabilitado {
+    width: 100%;
+    margin-left: 20px;
+  }
+
+  #cartera {
+    padding: 0px 15px;
+    margin-top: 90px;
+  }
+  #cartera__lista {
+    position: relative;
+  }
+  #cartera__lista__cabecera {
+    position: sticky;
+    top: 0px;
+    grid-template-columns: repeat(2, 1.5fr) 1fr 90px;
+    font-size: 14px;
+  }
+  #cartera__lista__cabecera--cambio {
+    display: none;
+  }
+  #cartera__lista__cabecera--ganancia {
+    text-align: center;
+  }
+  #cartera__lista__cabecera--valor {
+    display: none;
+  }
+  #cartera__lista__cabecera--divisas {
+    width: 70px;
+    height: 35px;
+    color: #334761;
+    background-color: #dddddd;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #cartera__lista__cabecera--divisas:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #cartera__lista__cabecera--divisas:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #cartera__lista__cabecera--divisas:focus {
+    background-color: #334761;
+    color: #eeeeee;
+    outline: none;
+  }
+  #cartera__lista .cartera__lista__posesion {
+    height: 45px;
+    grid-template-columns: 60px 1fr repeat(2, 80px);
+    grid-column-gap: 10px;
+    text-align: center;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre {
+    padding-left: 10px;
+    text-align: left;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--image {
+    display: none;
+  }
+  #cartera__lista .cartera__lista__posesion .nombre .cartera__lista__posesion--nombre {
+    display: inline;
+  }
+  #cartera__lista .cartera__lista__posesion--cambio {
+    display: none;
+  }
+  #cartera__lista__mensaje {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    font-size: 18px;
+  }
+
+  #activos {
+    padding: 15px;
+    height: fit-content;
+  }
+  #activos__lista {
+    display: block;
+    position: relative;
+  }
+  #activos__lista #activos__cabecera {
+    height: 40px;
+  }
+  #activos__lista #activos__cabecera th {
+    height: 40px;
+    padding: 2px 15px;
+    padding-left: 20px;
+    position: sticky;
+    top: 0px;
+    font-size: 14px;
+  }
+  #activos__lista #activos__cabecera th:nth-child(3) {
+    display: none;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas {
+    width: 70px;
+    height: 35px;
+    color: #334761;
+    background-color: #dddddd;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    margin-left: 10px;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #activos__lista #activos__cabecera th #activos__cabecera--divisas:focus {
+    background-color: #334761;
+    color: #eeeeee;
+    outline: none;
+  }
+  #activos__lista .activo__cuerpo {
+    height: 45px;
+    text-align: left;
+  }
+  #activos__lista .activo__cuerpo td {
+    padding: 2px 10px;
+    padding-left: 20px;
+    font-size: 14px;
+  }
+  #activos__lista .activo__cuerpo td:nth-child(3) {
+    display: none;
+  }
+}
 #transaccion {
   display: grid;
   grid-column-gap: 50px;
@@ -1177,86 +2486,6 @@ footer {
   background-color: #334761;
   color: #eeeeee;
   outline: none;
-}
-#transaccion #infoCripto {
-  grid-area: info;
-}
-#transaccion #infoCripto__cotizacion {
-  display: grid;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: 1fr 125px;
-  grid-template-rows: 35px 30px 60px;
-  grid-template-areas: "par par" "titulo cambio" "precio porcentaje";
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  box-shadow: 0px 0px 20px #bbbbbb;
-  text-align: center;
-}
-#transaccion #infoCripto__cotizacion p, #transaccion #infoCripto__cotizacion h4 {
-  height: 100%;
-  background-color: #dddddd;
-}
-#transaccion #infoCripto__cotizacion p {
-  font-family: "Noto Sans", sans-serif, verdana;
-  font-size: 24px;
-  line-height: 50px;
-  border-top: 1px solid #bbbbbb;
-}
-#transaccion #infoCripto__cotizacion h4 {
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 400;
-}
-#transaccion #infoCripto__cotizacion--par {
-  grid-area: par;
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 400;
-}
-#transaccion #infoCripto__cotizacion--compra {
-  grid-area: titulo;
-}
-#transaccion #infoCripto__cotizacion--valorCompra {
-  grid-area: precio;
-}
-#transaccion #infoCripto__cotizacion--cambio {
-  grid-area: cambio;
-}
-#transaccion #infoCripto__cotizacion--valorCambio {
-  grid-area: porcentaje;
-  color: #e70008;
-}
-#transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: 100%;
-  margin-bottom: 30px;
-}
-#transaccion #infoCripto #infoCripto__info div, #transaccion #infoCripto #infoCripto__valores div {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 400px;
-  margin-bottom: 10px;
-}
-#transaccion #infoCripto #infoCripto__info div p, #transaccion #infoCripto #infoCripto__valores div p {
-  margin-left: 10px;
-}
-#transaccion #infoCripto #infoCripto__info div h3, #transaccion #infoCripto #infoCripto__valores div h3 {
-  font-size: 20px;
-  font-weight: 700;
-}
-#transaccion #infoCripto #infoCripto__info div h4, #transaccion #infoCripto #infoCripto__valores div h4 {
-  color: #4d4d4d;
 }
 #transaccion #conversion {
   grid-area: compra;
@@ -1471,6 +2700,75 @@ footer {
   background-color: #920005;
   box-shadow: 0px 0px 2px #920005;
 }
+#transaccion #infoCripto {
+  grid-area: info;
+}
+#transaccion #infoCripto__cotizacion {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 125px;
+  grid-template-rows: 35px 30px 60px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 20px #bbbbbb;
+  text-align: center;
+}
+#transaccion #infoCripto__cotizacion p, #transaccion #infoCripto__cotizacion h4 {
+  height: 100%;
+  background-color: #dddddd;
+}
+#transaccion #infoCripto__cotizacion p {
+  font-family: "Noto Sans", sans-serif, verdana;
+  font-size: 24px;
+  line-height: 50px;
+  border-top: 1px solid #bbbbbb;
+}
+#transaccion #infoCripto__cotizacion h4 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+}
+#transaccion #infoCripto__cotizacion--par {
+  grid-column: span 2;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+#transaccion #infoCripto__cotizacion--valorCambio {
+  color: #e70008;
+}
+#transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 30px;
+}
+#transaccion #infoCripto #infoCripto__info div, #transaccion #infoCripto #infoCripto__valores div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 400px;
+  margin-bottom: 10px;
+}
+#transaccion #infoCripto #infoCripto__info div p, #transaccion #infoCripto #infoCripto__valores div p {
+  margin-left: 10px;
+}
+#transaccion #infoCripto #infoCripto__info div h3, #transaccion #infoCripto #infoCripto__valores div h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+#transaccion #infoCripto #infoCripto__info div h4, #transaccion #infoCripto #infoCripto__valores div h4 {
+  color: #4d4d4d;
+}
 
 #aside {
   position: fixed;
@@ -1525,6 +2823,650 @@ footer {
   display: none;
   min-width: 220px;
   font-size: 18px;
+}
+
+@media (max-width: 1200px) {
+  #transaccion {
+    display: grid;
+    grid-column-gap: 40px;
+    grid-row-gap: 15px;
+    justify-content: start;
+    align-items: start;
+    grid-template-rows: 80px 1fr;
+    grid-template-columns: 80px 1fr 320px;
+    padding: 20px 70px;
+    max-height: 75vh;
+    overflow-y: hidden;
+  }
+  #transaccion #nombreCripto__id {
+    font-size: 38px;
+  }
+  #transaccion #conversion {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 30px 1fr;
+    grid-template-rows: 50px 50px 40px 50px 40px;
+  }
+  #transaccion #conversion__titulo {
+    font-size: 20px;
+  }
+  #transaccion #conversion__ingreso {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+    margin-left: auto;
+  }
+  #transaccion #conversion__ingreso--simbolo {
+    font-size: 24px;
+  }
+  #transaccion #conversion__ingreso--divisa {
+    width: calc(100% - 30px);
+    font-size: 24px;
+  }
+  #transaccion #conversion__ingreso--divisa::placeholder {
+    font-size: 24px;
+  }
+  #transaccion #conversion__convertido {
+    position: relative;
+    font-size: 24px;
+    max-width: 250px;
+  }
+  #transaccion #conversion__convertido--valor {
+    width: calc(100% - 30px);
+  }
+  #transaccion #conversion #btnConfirmacion {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionCompra {
+    width: 140px;
+    height: 40px;
+    color: #eeeeee;
+    background-color: #14b10b;
+    border: 2px solid #097c02;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionCompra:hover {
+    background-color: #097c02;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionCompra:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionCompra:focus {
+    outline: none;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta {
+    width: 140px;
+    height: 40px;
+    color: #eeeeee;
+    background-color: #e70008;
+    border: 2px solid #920005;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:hover {
+    background-color: #920005;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:focus {
+    outline: none;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled {
+    width: 120px;
+    height: 40px;
+    margin: 0 auto;
+    color: #808080;
+    background-color: #920005;
+    border: 1px solid #920005;
+    border: none;
+    font-size: 16px;
+    line-height: 1.5em;
+    margin: 0px;
+    margin-left: 30px;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #333333 inset;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:focus {
+    outline: none;
+  }
+  #transaccion #conversion .maximos {
+    display: none;
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    color: #334761;
+    background-color: #eeeeee;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    font-size: 14px;
+    border: none;
+  }
+  #transaccion #conversion .maximos:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #transaccion #conversion .maximos:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #transaccion #conversion .maximos:focus {
+    outline: none;
+  }
+  #transaccion #conversion #maxMoneda {
+    left: 30px;
+  }
+  #transaccion #conversion #maxCripto {
+    right: 70px;
+  }
+  #transaccion #infoCripto__cotizacion {
+    grid-template-columns: 4fr 3fr;
+    grid-template-rows: 35px 30px 50px;
+  }
+  #transaccion #infoCripto__cotizacion p, #transaccion #infoCripto__cotizacion h4 {
+    height: 100%;
+    background-color: #dddddd;
+  }
+  #transaccion #infoCripto__cotizacion p {
+    line-height: 50px;
+  }
+  #transaccion #infoCripto__cotizacion h4 {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  #transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 12px;
+  }
+  #transaccion #infoCripto #infoCripto__info div, #transaccion #infoCripto #infoCripto__valores div {
+    margin-bottom: 6px;
+  }
+
+  #aside {
+    position: fixed;
+    top: 130px;
+    left: 0px;
+    width: 55px;
+    height: calc(100vh - 140px);
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: #dddddd;
+    color: #455f83;
+    direction: rtl;
+  }
+  #aside::-webkit-scrollbar {
+    width: 5px;
+  }
+  #aside::-webkit-scrollbar:active {
+    width: 10px;
+  }
+  #aside::-webkit-scrollbar-thumb {
+    background-color: #97adc9;
+    border-radius: 10px;
+  }
+  #aside .listado {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    direction: ltr;
+  }
+  #aside .listado:hover {
+    background-color: #97adc9;
+    color: #eeeeee;
+  }
+  #aside .listado:active {
+    box-shadow: 0px 0px 5px #7692b7 inset;
+  }
+  #aside .listado__logoCripto {
+    width: 30px;
+    margin-right: 10px;
+  }
+  #aside .listado__nombreCripto {
+    display: none;
+    min-width: 220px;
+    font-size: 18px;
+  }
+}
+@media (max-width: 900px) {
+  #transaccion {
+    display: grid;
+    grid-column-gap: 40px;
+    grid-row-gap: 15px;
+    justify-content: start;
+    align-items: start;
+    grid-template-rows: 80px 1fr auto;
+    grid-template-columns: 80px 1fr;
+    grid-template-areas: "imagen nombre" "compra compra" "info info";
+    padding: 20px 50px;
+    height: auto;
+    max-height: fit-content;
+    overflow-y: auto;
+  }
+  #transaccion #conversion {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 50px 1fr;
+    grid-template-rows: 50px 50px 40px 50px;
+    padding-right: 0px;
+  }
+  #transaccion #conversion__titulo {
+    font-size: 20px;
+  }
+  #transaccion #conversion__ingreso {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  #transaccion #conversion__convertido {
+    position: relative;
+    font-size: 24px;
+  }
+  #transaccion #conversion__convertido--ticker {
+    width: fit-content;
+  }
+  #transaccion #infoCripto {
+    height: max-content;
+    width: 100%;
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+    justify-content: start;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #transaccion #infoCripto__cotizacion {
+    grid-column: span 2;
+    height: fit-content;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 40vh;
+    height: fit-content;
+    margin-bottom: 0px;
+  }
+
+  #aside {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: calc(100vw - 250px);
+    width: 250px;
+    height: calc(100vh - 60px);
+    padding: 10px 0px;
+    direction: ltr;
+    background-color: #eeeeee;
+    box-shadow: 0px 0px 10px #bbbbbb;
+  }
+  #aside .listado__nombreCripto {
+    order: 1;
+    display: inline;
+    margin-right: 10px;
+    width: fit-content;
+    min-width: 180px;
+    font-size: 16px;
+    text-align: right;
+  }
+  #aside .listado__logoCripto {
+    order: 2;
+    width: 30px;
+    margin-right: 0px;
+  }
+}
+@media (max-width: 700px) {
+  #transaccion {
+    display: grid;
+    grid-column-gap: 40px;
+    grid-row-gap: 15px;
+    justify-content: start;
+    align-items: start;
+    grid-template-rows: 80px 1fr auto;
+    grid-template-columns: 80px 1fr;
+    grid-template-areas: "imagen nombre" "compra compra" "info info";
+    padding: 20px 30px;
+  }
+  #transaccion #conversion {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 50px 1fr;
+    grid-template-rows: 50px 50px 40px 50px;
+  }
+  #transaccion #conversion__titulo {
+    font-size: 20px;
+  }
+  #transaccion #conversion__ingreso {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  #transaccion #conversion__convertido {
+    position: relative;
+    font-size: 24px;
+  }
+  #transaccion #conversion #maxMoneda {
+    left: 40px;
+    top: 40px;
+  }
+  #transaccion #conversion #maxCripto {
+    right: 40px;
+    top: 40px;
+  }
+  #transaccion #infoCripto {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  #transaccion #infoCripto__cotizacion {
+    grid-column: span 2;
+    height: fit-content;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    box-shadow: 0px 0px 20px #bbbbbb;
+  }
+  #transaccion #infoCripto__cotizacion h3 {
+    font-size: 16px;
+    border-top: 1px solid #bbbbbb;
+  }
+  #transaccion #infoCripto__cotizacion h4 {
+    font-size: 18px;
+  }
+  #transaccion #infoCripto__cotizacion p {
+    font-size: 20px;
+  }
+  #transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 0px;
+  }
+  #transaccion #infoCripto #infoCripto__info div, #transaccion #infoCripto #infoCripto__valores div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: fit-content;
+  }
+  #transaccion #infoCripto #infoCripto__info div h3, #transaccion #infoCripto #infoCripto__valores div h3 {
+    font-size: 16px;
+  }
+  #transaccion #infoCripto #infoCripto__info div h4, #transaccion #infoCripto #infoCripto__info div p, #transaccion #infoCripto #infoCripto__valores div h4, #transaccion #infoCripto #infoCripto__valores div p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 500px) {
+  #transaccion {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    justify-content: start;
+    align-items: start;
+    grid-template-rows: 50px 1fr auto;
+    grid-template-columns: 40px 1fr;
+    grid-template-areas: "imagen nombre" "compra compra" "info info";
+    padding: 20px 15px;
+  }
+  #transaccion #nombreCripto__id {
+    font-size: 20px;
+  }
+  #transaccion #nombreCripto__tk {
+    font-size: 16px;
+    width: fit-content;
+  }
+  #transaccion #nombreCripto__divisas {
+    width: fit-content;
+    height: 30px;
+    color: #334761;
+    background-color: #eeeeee;
+    border: 1px solid #334761;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    font-size: 16px;
+    border: none;
+    margin-left: 10px;
+  }
+  #transaccion #nombreCripto__divisas:hover {
+    background-color: #334761;
+    color: #eeeeee;
+  }
+  #transaccion #nombreCripto__divisas:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #transaccion #nombreCripto__divisas:focus {
+    background-color: #334761;
+    color: #eeeeee;
+    outline: none;
+  }
+  #transaccion #conversion {
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 16px 1fr;
+    grid-template-rows: 30px 65px 40px 20px;
+    margin-top: 20px;
+  }
+  #transaccion #conversion__titulo {
+    font-size: 18px;
+  }
+  #transaccion #conversion__ingreso {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    align-self: flex-start;
+  }
+  #transaccion #conversion__ingreso--simbolo {
+    font-size: 20px;
+    width: 24px;
+    margin-right: 10px;
+  }
+  #transaccion #conversion__ingreso--divisa {
+    width: 100%;
+    font-size: 20px;
+    text-align: right;
+  }
+  #transaccion #conversion__ingreso--divisa::placeholder {
+    font-size: 20px;
+  }
+  #transaccion #conversion__simboloCambio {
+    align-self: start;
+    padding-top: 15px;
+  }
+  #transaccion #conversion__convertido {
+    position: relative;
+    font-size: 20px;
+    align-self: flex-start;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionCompra {
+    width: calc(100% - 30px);
+    height: 40px;
+    color: #eeeeee;
+    background-color: #14b10b;
+    border: 2px solid #097c02;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    margin-right: 20px;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionCompra:hover {
+    background-color: #097c02;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionCompra:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionCompra:focus {
+    outline: none;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta {
+    width: calc(100% - 30px);
+    height: 40px;
+    color: #eeeeee;
+    background-color: #e70008;
+    border: 2px solid #920005;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in;
+    margin-left: 20px;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:hover {
+    background-color: #920005;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d inset;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:focus {
+    outline: none;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled {
+    width: calc(100% - 30px);
+    height: 40px;
+    margin: 0 auto;
+    color: #808080;
+    background-color: #920005;
+    border: 1px solid #920005;
+    border: none;
+    font-size: 16px;
+    line-height: 1.5em;
+    margin-left: 20px;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:active {
+    outline: none;
+    box-shadow: 0px 0px 5px #333333 inset;
+  }
+  #transaccion #conversion #btnConfirmacion #confirmacionVenta:disabled:focus {
+    outline: none;
+  }
+  #transaccion #conversion .maximos {
+    width: calc(100% - 30px);
+    border: 1px solid #97adc9;
+    margin-top: 10px;
+  }
+  #transaccion #conversion #maxMoneda {
+    left: 30px;
+  }
+  #transaccion #conversion #maxCripto {
+    right: 30px;
+  }
+  #transaccion #infoCripto {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  #transaccion #infoCripto__cotizacion {
+    grid-column: span 2;
+    height: fit-content;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    box-shadow: 0px 0px 20px #bbbbbb;
+  }
+  #transaccion #infoCripto__cotizacion h3 {
+    font-size: 16px;
+    border-top: 1px solid #bbbbbb;
+  }
+  #transaccion #infoCripto__cotizacion h4 {
+    font-size: 18px;
+  }
+  #transaccion #infoCripto__cotizacion p {
+    font-size: 20px;
+  }
+  #transaccion #infoCripto #infoCripto__info, #transaccion #infoCripto #infoCripto__valores {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 0px;
+    width: 100%;
+  }
+
+  #aside {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    top: 60px;
+    left: 0px;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    padding: 10px 70px;
+    direction: ltr;
+    z-index: 2000;
+  }
+  #aside .listado__nombreCripto {
+    order: 2;
+    text-align: left;
+    display: inline;
+    width: fit-content;
+    min-width: 180px;
+    font-size: 16px;
+  }
+  #aside .listado__logoCripto {
+    order: 1;
+    margin-right: 30px;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

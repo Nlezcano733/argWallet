@@ -17,6 +17,7 @@
             width: 100%;
         }
     }
+
     #nombreCripto{
         grid-area: nombre;
         align-self: center;
@@ -42,87 +43,6 @@
         }
 
     }
-
-    #infoCripto{
-        grid-area: info;
-
-        &__cotizacion {
-            @include  grids (0px, 0px, center, center);
-            grid-template-columns: 1fr 125px;
-            grid-template-rows: 35px 30px 60px;
-            grid-template-areas:
-                "par par"
-                "titulo cambio"
-                "precio porcentaje";
-            width: 100%;
-            height: 100%;
-            margin: 0 auto;
-            margin-bottom: 20px;
-            box-shadow: 0px 0px 20px $colorGris2;
-            text-align: center;
-
-            p, h4{
-                height: 100%;
-                background-color: $colorGris1;
-            }
-            p{
-                font-family: $fuenteTitulo;
-                font-size: $titulo;
-                line-height: 50px;
-                border-top: 1px solid $colorGris2;
-            }
-            h4{
-                font-size: $subtitulo;
-                line-height: 30px;
-                font-weight: 400;
-            }
-
-            &--par{
-                grid-area: par;
-                font-size: $cuerpoLg;
-                line-height: 28px;
-                font-weight: 400;
-            }
-            &--compra{
-                grid-area: titulo;
-            }
-            &--valorCompra{
-                grid-area: precio;
-            }
-            &--cambio{
-                grid-area: cambio;
-            }
-            &--valorCambio{
-                grid-area: porcentaje;
-                color: $colorRojo2;
-            }
-        }
-
-        #infoCripto__info, #infoCripto__valores{
-            @include flexbox(column, flex-start, flex-start);
-            width: 100%;
-            height: 100%;
-            margin-bottom: 30px;
-
-            div{
-                @include flexbox (row, flex-start, center);
-                width: 400px;
-                margin-bottom: 10px;
-
-                p{
-                    margin-left: 10px;
-                }
-                h3{
-                    font-size: $subtitulo;
-                    font-weight: 700;
-                }
-                h4{
-                    color: $colorGris6;
-                }
-            }
-        }
-    }
-
 
     #conversion{
         grid-area: compra;
@@ -232,8 +152,6 @@
                     margin-left: 30px;
                 }
             }
-
-            
         }
 
         .maximos{
@@ -279,8 +197,74 @@
             }
         }
     }
-}
 
+    #infoCripto{
+        grid-area: info;
+
+        &__cotizacion {
+            @include  grids (0px, 0px, center, center);
+            grid-template-columns: 1fr 125px;
+            grid-template-rows: 35px 30px 60px;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 20px $colorGris2;
+            text-align: center;
+
+            p, h4{
+                height: 100%;
+                background-color: $colorGris1;
+            }
+            p{
+                font-family: $fuenteTitulo;
+                font-size: $titulo;
+                line-height: 50px;
+                border-top: 1px solid $colorGris2;
+            }
+            h4{
+                font-size: $subtitulo;
+                line-height: 30px;
+                font-weight: 400;
+            }
+
+            &--par{
+                grid-column: span 2;
+                font-size: $cuerpoLg;
+                line-height: 28px;
+                font-weight: 400;
+            }
+            &--valorCambio{
+                color: $colorRojo2;
+            }
+        }
+
+        #infoCripto__info, #infoCripto__valores{
+            @include flexbox(column, flex-start, flex-start);
+            width: 100%;
+            height: 100%;
+            margin-bottom: 30px;
+
+            div{
+                @include flexbox (row, flex-start, center);
+                width: 400px;
+                margin-bottom: 10px;
+
+                p{
+                    margin-left: 10px;
+                }
+                h3{
+                    font-size: $subtitulo;
+                    font-weight: 700;
+                }
+                h4{
+                    color: $colorGris6;
+                }
+            }
+        }
+    }
+
+}
 
 #aside{
     position: fixed;
@@ -332,6 +316,514 @@
             display: none;
             min-width: 220px;
             font-size: $cuerpoLg;
+        }
+    }
+}
+
+
+@include screen-lg {
+    #transaccion{
+        @include grids(40px, 15px, start, start);
+        grid-template-rows: 80px 1fr;
+        grid-template-columns: 80px 1fr 320px;
+        padding: 20px 70px;
+        max-height: 75vh;
+        overflow-y: hidden;
+
+        #nombreCripto__id{
+            font-size: $jumbo;
+        }
+
+        #conversion{
+            @include grids (20px, 20px, center, center);
+            grid-template-columns: 1fr 30px 1fr;
+            grid-template-rows: 50px 50px 40px 50px 40px;
+
+            &__titulo{
+                font-size: $subtitulo;
+            }
+
+            &__ingreso{
+                @include flexbox(row, space-between, center);
+                position: relative;
+                width: 100%;
+                max-width: 250px;
+                margin-left: auto;
+
+                &--simbolo{
+                    font-size: $titulo;
+                }
+
+                &--divisa{
+                    width: calc(100% - 30px);
+                    font-size: $titulo;
+
+                    &::placeholder{
+                        font-size: $titulo;
+                    }
+                }
+            }
+
+            &__convertido{
+                position: relative;
+                font-size: $titulo;
+                max-width: 250px;
+
+                &--valor{
+                    width: calc(100% - 30px);
+                }
+            }
+
+            #btnConfirmacion{
+                position: relative;
+                @include flexbox(row, center, center);
+                padding: 0px;
+                
+                #confirmacionCompra{
+                    @include boton (140px, 40px, $colorVerde2, $colorVerde3);
+                }
+
+                #confirmacionVenta{
+                    @include boton (140px, 40px, $colorRojo2, $colorRojo3);
+
+                    &:disabled{
+                        @include botonDeshabilitado(120px, 40px, $colorRojo3, $colorRojo3);
+                        margin: 0px;
+                        margin-left: 30px;
+                    }
+                }
+
+                
+            }
+
+            .maximos{
+                display: none;
+                position: absolute;
+                @include botonSecundario(40px, 20px, $colorGris0, $colorAzul6);
+                font-size: $cuerpoSm;
+                border: none;
+            }
+
+            #maxMoneda{
+                left: 30px;
+            }
+            #maxCripto{
+                right: 70px;
+            }
+        }
+
+        #infoCripto{
+            &__cotizacion {
+                grid-template-columns: 4fr 3fr;
+                grid-template-rows: 35px 30px 50px;
+
+                p, h4{
+                    height: 100%;
+                    background-color: $colorGris1;
+                }
+                p{
+                    line-height: 50px;
+                }
+                h4{
+                    font-size: $subtitulo;
+                    line-height: 30px;
+                }
+            }
+
+            #infoCripto__info, #infoCripto__valores{
+                @include flexbox(column, flex-start, flex-start);
+                width: 100%;
+                height: 100%;
+                margin-bottom: 12px;
+
+                div{
+                    margin-bottom: 6px;
+                }
+            }
+        }
+    }
+
+    #aside{
+        position: fixed;
+        top: 130px;
+        left: 0px;
+        width: 55px;
+        height: calc(100vh - 140px);
+        padding: 20px 0px;
+        @include flexbox(column, flex-start, center);
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background-color: $colorGris1;
+        color: $colorAzul5;
+        direction: rtl;
+
+        &::-webkit-scrollbar{
+                width: 5px;
+        }
+        &::-webkit-scrollbar:active{
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb{
+            background-color: $colorAzul2;
+            border-radius: 10px;
+        }
+
+        .listado{
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            @include flexbox (row, flex-start, center);
+            cursor: pointer;
+            direction: ltr;
+
+            &:hover{
+                background-color: $colorAzul2;
+                color: $colorGris0;
+            }
+            &:active{
+                box-shadow: 0px 0px 5px $colorAzul3 inset;
+            }
+
+            &__logoCripto{
+                width: 30px;
+                margin-right: 10px;
+            }
+            &__nombreCripto{
+                display: none;
+                min-width: 220px;
+                font-size: $cuerpoLg;
+            }
+        }
+    }
+
+}
+
+@include screen-md{
+    #transaccion{
+        @include grids(40px, 15px, start, start);
+        grid-template-rows: 80px 1fr auto;
+        grid-template-columns: 80px 1fr;
+        grid-template-areas: 
+            "imagen nombre"
+            "compra compra"
+            "info info";
+        padding: 20px 50px;
+        height: auto;
+        max-height: fit-content;
+        overflow-y: auto;
+
+        #conversion{
+            @include grids (20px, 20px, center, center);
+            grid-template-columns: 1fr 50px 1fr;
+            grid-template-rows: 50px 50px 40px 50px;
+            padding-right: 0px;
+
+            &__titulo{
+                font-size: $subtitulo;
+            }
+
+            &__ingreso{
+                @include flexbox(row, space-between, center);
+                position: relative;
+            }
+
+            &__convertido{
+                position: relative;
+                font-size: $titulo;
+
+                &--ticker{
+                    width: fit-content;
+                }
+            }
+        }
+
+        #infoCripto{
+            height: max-content;
+            width: 100%;
+            @include grids (20px, 30px, start, center );
+            grid-template-columns: repeat(2, 1fr);
+
+            &__cotizacion {
+                grid-column: span 2;
+                height: fit-content;
+                width: 100%;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #infoCripto__info, #infoCripto__valores{
+                @include flexbox(column, flex-start, flex-start);
+                width: 40vh;
+                height: fit-content;
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    #aside{
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: calc(100vw - 250px);
+        width: 250px;
+        height: calc(100vh - 60px);
+        padding: 10px 0px;
+        direction: ltr;
+        background-color: $colorGris0;
+        box-shadow: 0px 0px 10px $colorGris2;
+
+        .listado{
+            &__nombreCripto{
+                order: 1;
+                display: inline;
+                margin-right: 10px;
+                width: fit-content;
+                min-width: 180px;
+                font-size: $cuerpo;
+                text-align: right;
+            }
+
+            &__logoCripto{
+                order: 2;
+                width: 30px;
+                margin-right: 0px;
+            }
+        }
+    }
+}
+
+
+@include screen-sm{
+    #transaccion{
+        @include grids(40px, 15px, start, start);
+        grid-template-rows: 80px 1fr auto;
+        grid-template-columns: 80px 1fr;
+        grid-template-areas: 
+            "imagen nombre"
+            "compra compra"
+            "info info";
+        padding: 20px 30px;
+
+        #conversion{
+            @include grids (20px, 20px, center, center);
+            grid-template-columns: 1fr 50px 1fr;
+            grid-template-rows: 50px 50px 40px 50px;
+
+            &__titulo{
+                font-size: $subtitulo;
+            }
+
+            &__ingreso{
+                @include flexbox(row, space-between, center);
+                position: relative;
+            }
+
+            &__convertido{
+                position: relative;
+                font-size: $titulo;
+            }
+
+            #maxMoneda{
+                left: 40px;
+                top: 40px;
+            }
+            #maxCripto{
+                right: 40px;
+                top: 40px;
+            }
+        }
+
+        #infoCripto{
+            max-width: 100%;
+            overflow-x: hidden;
+
+
+            &__cotizacion {
+                grid-column: span 2;
+                height: fit-content;
+                grid-template-columns: repeat(2, 1fr);
+                width: 100%;
+                box-shadow: 0px 0px 20px $colorGris2;
+
+                h3{ 
+                    font-size: $cuerpo;
+                    border-top: 1px solid $colorGris2;
+                };
+                h4{ font-size: $cuerpoLg};
+                p{ font-size: $subtitulo};
+            }
+
+            #infoCripto__info, #infoCripto__valores{
+                @include flexbox(column, flex-start, flex-start);
+                margin-bottom: 0px;
+
+                div{
+                    @include flexbox (row, flex-start, center);
+                    flex-wrap: wrap;
+                    max-width: fit-content;
+                    h3{ font-size: $cuerpo };
+                    h4, p{ font-size: $cuerpoSm };
+                }
+            }
+        }
+    }
+}
+
+
+@include screen-xs{
+    #transaccion{
+        @include grids(20px, 10px, start, start);
+        grid-template-rows: 50px 1fr auto;
+        grid-template-columns: 40px 1fr;
+        grid-template-areas: 
+            "imagen nombre"
+            "compra compra"
+            "info info";
+        padding: 20px 15px;
+
+        #nombreCripto{
+            &__id{
+                font-size: $subtitulo;
+            }
+            &__tk{
+                font-size: $cuerpo;
+                width: fit-content;
+            }           
+            &__divisas{
+                @include selector(fit-content, 30px, $colorGris0, $colorAzul6);
+                font-size: $cuerpo;
+                border: none;
+                margin-left: 10px;
+            }
+        }
+
+        #conversion {
+            @include grids (15px, 20px, center, center);
+            grid-template-columns: 1fr 16px 1fr;
+            grid-template-rows: 30px 65px 40px 20px;
+            margin-top: 20px;
+
+            &__titulo{
+                font-size: $cuerpoLg;
+            }
+
+            &__ingreso{
+                @include flexbox(row, space-between, center);
+                position: relative;
+                align-self: flex-start;
+
+                &--simbolo{
+                    font-size: $subtitulo;
+                    width: 24px;
+                    margin-right: 10px;
+                }
+                &--divisa{
+                    width: 100%;
+                    font-size: $subtitulo;
+                    text-align: right;
+
+                    &::placeholder{
+                        font-size: $subtitulo
+                    }
+                }
+            }
+
+            &__simboloCambio{
+                align-self: start;
+                padding-top: 15px;
+            }
+
+
+            &__convertido{
+                position: relative;
+                font-size: $subtitulo;
+                align-self: flex-start;
+            }
+
+            
+            #btnConfirmacion{                
+                #confirmacionCompra{
+                    @include boton (calc(100% - 30px), 40px, $colorVerde2, $colorVerde3);
+                    margin-right: 20px;
+                }
+
+                #confirmacionVenta{
+                    @include boton (calc(100% - 30px), 40px, $colorRojo2, $colorRojo3);
+                    margin-left: 20px;
+
+                    &:disabled{
+                        @include botonDeshabilitado(calc(100% - 30px), 40px, $colorRojo3, $colorRojo3);
+                        margin-left: 20px;
+                    }
+                }
+            }
+
+            .maximos{
+                width: calc(100% - 30px);
+                border: 1px solid $colorAzul2;
+                margin-top: 10px;
+            }
+            #maxMoneda{ left: 30px; }
+            #maxCripto{ right: 30px; }
+        }
+        
+        #infoCripto{
+            max-width: 100%;
+            overflow-x: hidden;
+
+
+            &__cotizacion {
+                grid-column: span 2;
+                height: fit-content;
+                grid-template-columns: repeat(2, 1fr);
+                width: 100%;
+                box-shadow: 0px 0px 20px $colorGris2;
+
+                h3{ 
+                    font-size: $cuerpo;
+                    border-top: 1px solid $colorGris2;
+                };
+                h4{ font-size: $cuerpoLg};
+                p{ font-size: $subtitulo};
+            }
+
+            #infoCripto__info, #infoCripto__valores{
+                grid-column: span 2;
+                @include flexbox(column, flex-start, flex-start);
+                margin-bottom: 0px;
+                width: 100%;
+            }
+        }
+    }
+
+    #aside{
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: fixed;
+        top: 60px;
+        left: 0px;
+        width: 100vw;
+        height: calc(100vh - 60px);
+        padding: 10px 70px;
+        direction: ltr;
+        z-index: 2000;
+
+        .listado{
+            &__nombreCripto{
+                order: 2;
+                text-align: left;
+                display: inline;
+                width: fit-content;
+                min-width: 180px;
+                font-size: $cuerpo;
+            }
+
+            &__logoCripto{
+                order: 1;
+                margin-right: 30px;
+            }
         }
     }
 }

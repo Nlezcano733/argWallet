@@ -45,7 +45,10 @@ let carteraCriptos = [];
 let arrayCompras = [];
 
 $(()=>{
+    validarCierreSesion();
+    activarListaCripto();
     actualizacionValoresDivisas();
+    window.outerWidth <= 900 && accionarMenu();
 
     nombreUser();
     valorSelectorInicial();

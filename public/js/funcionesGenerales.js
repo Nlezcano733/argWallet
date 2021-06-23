@@ -64,8 +64,28 @@ function ingresoNegativo(input, nodoPadre, nodoMensaje){
 }
 
 // -------------------------------------------- //
+//           APERTURA MENU RESPONSIVE           //
+// -------------------------------------------- //
+
+function btnClose (){
+    $('#user-logo').fadeOut();
+    $('#market-logo').fadeOut();
+    $('#burger-logo').removeAttr('class');
+    $('#burger-logo').attr('class', 'fas fa-times');
+}
+
+function habilitarBotones () {
+    $('#burger-logo').removeAttr('class');
+    $('#burger-logo').attr('class', 'fas fa-bars');
+    $('#user-logo').fadeIn();
+    $('#market-logo').fadeIn();
+    $('#redes').hide()
+}
+
+// -------------------------------------------- //
 //                   NAVEGACION                 //
 // -------------------------------------------- //
+
 
 function nombreUser(){
     user = obtenerStorage('usuario');
@@ -73,16 +93,21 @@ function nombreUser(){
 }
 
 function avanzarBody(ubicacion) {
+    let off;
+    window.outerWidth <= 900 && ubicacion == "#inicio" ? off = 60 : off = 0;
+
     $('html, body').animate({
-        scrollTop: $(ubicacion).offset().top
+        scrollTop: $(ubicacion).offset().top - off
     }, 1000);
 }
 
 function scrollify() {
-    $.scrollify({
-        section: '.scrollify',
-        setHeights: false
-    });
+    if(window.outerWidth > 900){
+        $.scrollify({
+            section: '.scrollify',
+            setHeights: false
+        });
+    }
 }
 
 function deshabilitarScrollify (){
@@ -92,9 +117,20 @@ function habilitarScrollify(){
     $.scrollify.enable();
 }
 
+function validarCierreSesion () {
+    let path = window.location.pathname;
+    let estado = localStorage.getItem('estadoSesion');
+
+    if (estado){
+        path === '/public/index.html' && window.location.replace('/public/pages/panelUsuario.html');
+    } else{
+        path !== '/public/index.html' && window.location.replace('/public/index.html');
+    }
+}
+
 function cierreSession(){
     localStorage.removeItem('estadoSesion');
-    window.location.href = '/index.html';
+    window.location.replace('/public/index.html');
 }
 
 // -------------------------------------------- //
@@ -206,18 +242,28 @@ function porcentajeDeCambio (cambio){
 }
 
 function grandesCantidades (cantidad){
-    let criptoVol = cantidad;
     let millon = 1000000;
     let billon = millon * 1000;
 
-    if(criptoVol >= billon){
-        criptoVol = parseFloat(criptoVol / billon).toFixed(2);
-        return `${criptoVol} B`
+    if(cantidad >= billon){
+        cantidad = parseFloat(cantidad / billon).toFixed(2);
+        return `${cantidad} B`
     }
-    if(criptoVol >= millon){
-        criptoVol = parseFloat(criptoVol / millon).toFixed(2);
-        return `${criptoVol} M`
+    if(cantidad >= millon){
+        cantidad = parseFloat(cantidad / millon).toFixed(2);
+        return `${cantidad} M`
     }
+    return cantidad
+}
+
+function medianasCantidades (cantidad){
+    let mil = 1000;
+
+    if(cantidad >= 1000){
+        cantidad = parseFloat((cantidad / mil).toFixed(2));
+        return  `${cantidad} K`;
+    }
+    cantidad = grandesCantidades(cantidad);
     return cantidad
 }
 

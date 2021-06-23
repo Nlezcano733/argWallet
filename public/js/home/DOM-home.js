@@ -3,15 +3,49 @@
 // ---------------------------------------------- //
 
 function slider() {
-    $('.single-item').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 10000,
-        appendArrows: $('#info'),
-        dots: true,
-        appendDots: $('#info')
-    });
+    if(window.outerWidth > 900){
+        $('.single-item').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            appendArrows: $('#info'),
+            dots: true,
+            appendDots: $('#info')
+        });
+    } else {
+        $('.single-item').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            dots: false,
+            arrows: false
+        });
+    }
+}
+
+// -------------------------------------------- //
+//           APERTURA MENU RESPONSIVE           //
+// -------------------------------------------- //
+
+
+function accionarMenu (){
+    $('#burger-logo').click( e =>{ abrirMenuSimple(e.target.className) });
+    $('#btnIngreso').click( e =>{ abrirMenuSimple(e.target.className) });
+}
+
+function abrirMenuSimple(clase){
+    $('.navBar').toggle('slide');
+    $('.navBar').css('display', 'flex');
+
+    if(clase === 'fas fa-bars'){
+        setTimeout(()=>{ 
+            $('#burger-logo').attr('class', 'fas fa-times');
+            $('#redes').css('display', 'flex')
+        }, 400)
+    } else {
+        $('#burger-logo').attr('class', 'fas fa-bars');
+        $('#redes').hide()
+    }
 }
 
 // ---------------------------------------------- //
@@ -28,7 +62,6 @@ function avanzarNavbar() {
     $('#btnMercado').click(() => {
         avanzarBody('#mercado')
     });
-
 }
 
 function scrollFinal (){
@@ -86,8 +119,11 @@ function getAjaxInicio(){
             carteraMuestraInicio.push(objetoCripto)
         }
 
-        armadoDeLista();
-        armadoDeCriptos();
+        if(window.outerWidth > 900){
+            armadoDeLista();
+            armadoDeCriptos();
+        }
+
         cambiarCriptoMostrada();
     }).fail(()=>{
         $('#inicio__intro').hide()
