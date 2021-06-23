@@ -130,7 +130,7 @@ function validarCierreSesion () {
     } else{
         path.includes(subdominio)
         ? path !== `${subdominio}/public/index.html` && window.location.replace(subdominio + '/public/index.html')
-        : path !== '/public/index.html' && window.location.replace('../index.html');
+        : path !== '/index.html' && window.location.replace('/index.html');
     }
 }
 
