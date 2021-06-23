@@ -119,12 +119,18 @@ function habilitarScrollify(){
 
 function validarCierreSesion () {
     let path = window.location.pathname;
+    let subdominio = '/argWallet';
+    console.log(path)
     let estado = localStorage.getItem('estadoSesion');
 
     if (estado){
-        path === 'argWallet/public/index.html' && window.location.replace('argWallet/public/pages/panelUsuario.html');
+        path.includes(subdominio)
+        ? path.includes('/index.html') && window.location.replace('./pages/panelUsuario.html')
+        : path.includes('/index.html') && window.location.replace('/pages/panelUsuario.html');
     } else{
-        path !== 'argWallet/public/index.html' && window.location.replace('argWallet/public/index.html');
+        path.includes(subdominio)
+        ? path !== `${subdominio}/public/index.html` && window.location.replace(subdominio + '/public/index.html')
+        : path !== '/public/index.html' && window.location.replace('../index.html');
     }
 }
 
