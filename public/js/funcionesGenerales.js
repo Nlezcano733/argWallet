@@ -122,15 +122,15 @@ function validarCierreSesion () {
     let estado = localStorage.getItem('estadoSesion');
 
     if (estado){
-        path === '/public/index.html' && window.location.replace('/public/pages/panelUsuario.html');
+        path === 'argWallet/public/index.html' && window.location.replace('argWallet/public/pages/panelUsuario.html');
     } else{
-        path !== '/public/index.html' && window.location.replace('/public/index.html');
+        path !== 'argWallet/public/index.html' && window.location.replace('argWallet/public/index.html');
     }
 }
 
 function cierreSession(){
     localStorage.removeItem('estadoSesion');
-    window.location.replace('/public/index.html');
+    window.location.replace('argWallet/public/index.html');
 }
 
 // -------------------------------------------- //
