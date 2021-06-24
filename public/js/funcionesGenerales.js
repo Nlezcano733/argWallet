@@ -120,7 +120,6 @@ function habilitarScrollify(){
 function validarCierreSesion () {
     let path = window.location.pathname;
     let subdominio = '/argWallet';
-    console.log(path)
     let estado = localStorage.getItem('estadoSesion');
 
     if (estado){

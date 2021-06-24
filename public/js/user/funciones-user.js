@@ -233,6 +233,7 @@ function infoParaListaCompras(cripto){
         arrayInfo.push(sumaArray);
     }
 
+    arrayCompras = arrayCompras.filter(compra => compra.cantidad > 0);
     armadoDeCabecera()
     let arrayBalances = gananciaPerdida(arrayCompras, arrayInfo);
     armadoListaCompras(arrayCompras, arrayInfo, arrayBalances)

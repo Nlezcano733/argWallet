@@ -30,6 +30,11 @@ function Divisas (nombre, ticker, value, simbolo){
 }
 
 // --------------------------------------- //
+let ars = new Divisas ('Pesos', 'ARS', 1, '$');
+
+let carteraDivisas = [ars];
+
+// --------------------------------------- //
 let carteraDivisas = [];
 let valorArs, valorUsd, valorEur;
 // --------------------------------------- //
@@ -37,7 +42,10 @@ let valorArs, valorUsd, valorEur;
 let carteraCriptos = [];
 
 $(()=>{
-    validarCierreSesion();
+    conversionInicialDolar();
+    conversionInicialEuro();
+
+
     actualizacionValoresDivisas();
     window.outerWidth <= 900 && accionarMenu();
 
@@ -84,4 +92,5 @@ $(()=>{
     },360000)
 
     $('.navBar__salir').click(cierreSession)
+    validarCierreSesion();
 })
