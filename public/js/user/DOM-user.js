@@ -422,7 +422,16 @@ function armadoListaCompras(compra, info, balances){
         let tk = compra[i].tipo;
         let conversion = conversionEntreCantidades(compra[i], selector)
         let cambio = porcentajeDeCambio(info[i].price_change_percentage_24h);
-        var balanceEstilizado = estilosBalance(billetera.simbolo, balances[i])
+
+
+
+        let balanceConvertido = conversionBalance(compra[i], selector);
+
+
+
+
+        let balanceEstilizado = estilosBalance(billetera.simbolo, balances[i])
+
 
 
         let nombreUsar = window.outerWidth > 940 ? nombre : tk
@@ -494,4 +503,12 @@ function estilosBalance(simbolo, balance){
         balance = Math.abs(balance)
         return `-${simbolo}${balance}`
     }
+}
+
+function conversionBalance (balance, moneda){
+    let preciosMonedas = obtenerStorage('divisas');
+    let monedaSelector = preciosMonedas.find(divisa => divisa.ticker === moneda);
+    let monedaCompra = preciosMonedas.find(divisa => divisa.ticker === balance.moneda);
+    
+    return monedaSelector * monedaCompra;
 }

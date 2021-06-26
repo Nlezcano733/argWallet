@@ -242,7 +242,7 @@ function infoParaListaCompras(cripto){
 }
 
 function conversionEntreCantidades(compra, selector){
-    let arrayDivisas = obtenerSessionStorage('divisas')
+    let arrayDivisas = obtenerStorage('divisas')
     let valDolar = arrayDivisas[1].value;
     let valEuro = arrayDivisas[2].value;
 
@@ -375,7 +375,7 @@ function gananciaPerdida(compras, info){
 }
 
 function conversionParaListaActivos (selector, cripto, precio){
-    let arrayDivisas = obtenerSessionStorage('divisas')
+    let arrayDivisas = obtenerStorage('divisas')
     let dolares = arrayDivisas[1].value;
     let euros = arrayDivisas[2].value;
     let moneda = cripto.moneda;

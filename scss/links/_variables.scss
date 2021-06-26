@@ -6,7 +6,7 @@ $screen-xs: 500px;
 
 // Paddings
 $main-padding: 80px;
-@include screen-lg (){ $main-padding: 70px !important;}
+@include screen-lg (){ $main-padding: 90px !important;}
 @include screen-md (){ $main-padding: 50px !important;}
 @include screen-sm (){ $main-padding: 30px !important;}
 @include screen-xs (){ $main-padding: 15px !important;}

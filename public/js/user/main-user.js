@@ -34,43 +34,29 @@ let ars = new Divisas ('Pesos', 'ARS', 1, '$');
 
 let carteraDivisas = [ars];
 
-// --------------------------------------- //
-let carteraDivisas = [];
 let valorArs, valorUsd, valorEur;
 // --------------------------------------- //
 
 let carteraCriptos = [];
 
 $(()=>{
+    validarCierreSesion();
     conversionInicialDolar();
     conversionInicialEuro();
-
-
-    actualizacionValoresDivisas();
-    window.outerWidth <= 900 && accionarMenu();
-
-    nombreUser();
-    avanzarNavbar();
-    scrollify();
-    scrollCompras();
-    scrollFinal();
+    
+    getAjaxArmadoCompras(); 
+    billeterasTotalesInicial();
 
     valorSelectorInicial();
     cambioMuestraDivisa();
+    nombreUser();
 
-    billeterasTotalesInicial();
-
-    accionarDeposito();
-    accionarDepositoEnter();
+    habilitacionBtn()
+    $('#depositoRetiro__registro--divisas').change(habilitacionBtn)
 
     mostrarBilletera();
     $('#depositoRetiro__registro--divisas').change(mostrarbilleteraSeleccionada)
 
-
-    habilitacionBtn()
-    $('#depositoRetiro__registro--divisas').change(habilitacionBtn)
-    
-    getAjaxArmadoCompras(); 
 
     setInterval(()=>{
         let arrayCompras = obtenerStorage('listaCompras');
@@ -82,7 +68,7 @@ $(()=>{
     }, 60000)
 
     setInterval(()=>{
-        divisas = obtenerSessionStorage('divisas')
+        divisas = obtenerStorage('divisas')
         if(divisas != null){
         sessionStorage.removeItem('divisas')
         }
@@ -91,6 +77,15 @@ $(()=>{
         conversionInicialEuro();
     },360000)
 
+
+    window.outerWidth <= 900 && accionarMenu();
     $('.navBar__salir').click(cierreSession)
-    validarCierreSesion();
+    accionarDeposito();
+    accionarDepositoEnter();
+
+    scrollify();
+    scrollCompras();
+    scrollFinal();
+
+    avanzarNavbar();
 })

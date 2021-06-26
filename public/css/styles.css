@@ -603,7 +603,7 @@ footer {
   grid-template-rows: 60px auto;
   grid-template-areas: "titulo imagen" "contenido imagen";
   width: 600px;
-  height: 400px;
+  min-height: 400px;
   margin-top: 50px;
 }
 #info #infoDiv .info__cuerpoInfo:active {
@@ -627,7 +627,8 @@ footer {
 }
 #info #infoDiv .info__cuerpoInfo .info__imagen {
   grid-area: imagen;
-  width: 100%;
+  width: 80%;
+  justify-self: center;
   mix-blend-mode: darken;
 }
 
@@ -660,7 +661,7 @@ footer {
   border: none;
 }
 #mercado__lista #lista__cabecera th {
-  width: calc(100% / 7);
+  width: calc(100% / 6);
   height: 50px;
   padding: 2px 20px;
   padding-left: 20px;
@@ -668,6 +669,10 @@ footer {
   border: none;
   position: sticky;
   top: 0px;
+}
+#mercado__lista #lista__cabecera th:first-child {
+  width: 250px;
+  padding-left: 30px;
 }
 #mercado__lista #lista__cabecera th #lista__cabecera--divisas {
   width: 90px;
@@ -679,6 +684,7 @@ footer {
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s ease-in;
+  padding: 0 auto;
   font-size: 16px;
   font-weight: bold;
   margin-left: -5px;
@@ -698,6 +704,7 @@ footer {
 }
 #mercado__lista .lista__cripto {
   text-align: left;
+  padding: 0 auto;
 }
 #mercado__lista .lista__cripto td {
   width: auto;
@@ -2426,8 +2433,10 @@ footer {
   grid-template-columns: 100px 1fr 380px;
   grid-template-areas: "imagen nombre info" "compra compra info";
   width: 100%;
+  max-width: 1400px;
   height: calc(100vh - 140px);
   padding: 30px 80px;
+  margin: 0 auto;
 }
 #transaccion #logoCripto {
   display: flex;
@@ -2489,6 +2498,7 @@ footer {
 }
 #transaccion #conversion {
   grid-area: compra;
+  justify-self: center;
   display: grid;
   grid-column-gap: 20px;
   grid-row-gap: 25px;

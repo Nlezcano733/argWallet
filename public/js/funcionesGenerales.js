@@ -12,7 +12,7 @@ function conversionInicialDolar(){
         usd = new Divisas ('Dolar', 'USD', valorUsd, '$');
         carteraDivisas.push(usd)
 
-        valorDivisasToStorage();
+        // valorDivisasToStorage(carteraDivisas);
     }).fail(()=>{
         usd = new Divisas ('Dolar', 'USD', 91.5, '$');
         carteraDivisas.push(usd)
@@ -29,7 +29,7 @@ function conversionInicialEuro(){
         euro = new Divisas ('Euro', 'EURO', valorEur, '€');
         carteraDivisas.push(euro)
 
-        valorDivisasToStorage();
+        valorDivisasToStorage(carteraDivisas);
     }).fail(()=>{
         euro = new Divisas ('Euro', 'EURO', 109.5, '€');
         carteraDivisas.push(euro)
@@ -122,20 +122,16 @@ function validarCierreSesion () {
     let subdominio = '/argWallet';
     let estado = localStorage.getItem('estadoSesion');
 
-    if (estado){
+    if (!estado){
         path.includes(subdominio)
-        ? path.includes('/index.html') && window.location.replace('./pages/panelUsuario.html')
-        : path.includes('/index.html') && window.location.replace('/pages/panelUsuario.html');
-    } else{
-        path.includes(subdominio)
-        ? path !== `${subdominio}/public/index.html` && window.location.replace(subdominio + '/public/index.html')
-        : path !== '/index.html' && window.location.replace('/index.html');
+        ? !path.includes('index.html') && window.location.replace(`${subdominio}/public/index.html`)
+        : !path.includes('index.html') && window.location.replace('/public/index.html')
     }
 }
 
 function cierreSession(){
     localStorage.removeItem('estadoSesion');
-    window.location.replace('argWallet/public/index.html');
+    window.location.replace('/public/index.html');
 }
 
 // -------------------------------------------- //
@@ -184,7 +180,7 @@ function modificarElemento(elemento, contenido){
 }
 
 function modificarSimbolos(id, modificador){
-    let carteraDivisas = obtenerSessionStorage('divisas')
+    let carteraDivisas = obtenerStorage('divisas')
     billetera = billeteraInicial();
     let objetoDivisa = objetoCompleto(billetera, carteraDivisas);
     if(modificador == 'simbolo'){
@@ -308,18 +304,30 @@ function obtenerStorage(key){
     objeto = JSON.parse(objetoObtenido);
     return objeto;
 }
+
 function obtenerSessionStorage(key){
     let objetoContenido = sessionStorage.getItem(key);
     objeto = JSON.parse(objetoContenido);
     return objeto;
 }
 
-function valorDivisasToStorage(){
-    let divisas = JSON.stringify(carteraDivisas);
-    sessionStorage.setItem('divisas', divisas)
+function valorDivisasToStorage(cartera){
+    let array = [];
+    for(divisa of cartera){
+        !array.includes(divisa) && array.push(divisa)
+    }
+    
+    let divisas = JSON.stringify(array);
+    localStorage.setItem('divisas', divisas)
 }
+
 function actualizacionValoresDivisas(){
-    let arrayCarteraDivisas = obtenerSessionStorage('divisas');
+    let arrayCarteraDivisas = obtenerStorage('divisas');
+    localStorage.removeItem('divisas');
+
+    arrayCarteraDivisas && (arrayCarteraDivisas.splice(4));
+    valorDivisasToStorage(arrayCarteraDivisas)
+
     let ars, usd, eur;
 
     arrayCarteraDivisas.forEach((divisa)=>{
@@ -474,7 +482,7 @@ function arrayComprasInicial(){
 }
 
 function objetoCompleto (divisa, array){
-    let i, arrayDivisas;
+    let arrayDivisas;
     for(let i=0; i< array.length; i++){
         arrayDivisas = array[i];
         if(divisa == arrayDivisas.ticker){ 
@@ -486,7 +494,7 @@ function objetoCompleto (divisa, array){
 }
 
 function objetoCompletoSelecto(selector, array){
-    let i, arrayDivisas;
+    arrayDivisas;
     for(let i=0; i< array.length; i++){
         arrayDivisas = array[i];
         if(selector == arrayDivisas.ticker){

@@ -250,6 +250,7 @@ function armadoDePanelPorSelector(){
 }
 
 function armadoDePanel(cripto, moneda){
+    let carteraDivisas = obtenerStorage('divisas');
     moneda = moneda.toUpperCase();
     let objetoMoneda = objetoCompleto(moneda, carteraDivisas);
     let simbolo = objetoMoneda.simbolo;

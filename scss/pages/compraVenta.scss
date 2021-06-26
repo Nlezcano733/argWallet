@@ -6,8 +6,10 @@
         "imagen nombre info"
         "compra compra info";
     width: 100%;
+    max-width: 1400px;
     height: calc(100vh - 140px);
     padding: 30px 80px;
+    margin: 0 auto;
 
     #logoCripto{
         @include flexbox (row, center, center);
@@ -46,6 +48,7 @@
 
     #conversion{
         grid-area: compra;
+        justify-self: center;
         @include grids (20px, 25px, center, center);
         grid-template-columns: 1fr 50px 1fr;
         grid-template-rows: 50px 50px 40px 50px 40px;
