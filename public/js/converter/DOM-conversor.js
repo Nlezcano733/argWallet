@@ -20,7 +20,6 @@ function accionarMenu (){
 }
 
 function abrirMenu (clase){
-    console.log(clase)
     if(clase === 'fas fa-bars'){
         $('.billeteraUser').fadeOut();
         $('#aside').fadeOut();
@@ -84,13 +83,13 @@ function accionarOjo(){
     }
     
     mostrarOcultar();
-    $('#ojoUser').click(mostrarOcultar)
+    $('#ojo').click(mostrarOcultar)
 }
 
 function mostrarOcultar (){
     estado = obtenerStorage('mostrarBilletera')
     let mensajeOculto = '**************';
-    let ojo = $('#ojoUser');
+    let ojo = $('#ojo');
 
     let billeteras = obtenerArrayDeBilleteras();
     let cantidades = textoCantidad(billeteras);
