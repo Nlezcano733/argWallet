@@ -13,7 +13,7 @@ function compraMax(){
 }
 
 function ventaMax(){
-    let divisas = obtenerSessionStorage('divisas')
+    let divisas = obtenerStorage('divisas')
     let selector = $('#nombreCripto__divisas').val()
     divisas = objetoCompleto(selector, divisas)
 
@@ -46,7 +46,7 @@ function ventaMax(){
 }
 
 function conversionVentaMax(prom, selector, cripto){
-    let divisas = obtenerSessionStorage('divisas');
+    let divisas = obtenerStorage('divisas');
     let conversion
     dolar = divisas[1].value;
     euro = divisas[2].value;
@@ -346,7 +346,8 @@ function validacionVenta(selector, input, criptoCliente, cantCriptos){
         }
 
         if(listaBilletera.length > 0){
-            actualizarComprasStorage(listaBilletera)
+            let listaCompleta = listaBilletera.filter(({cantidad}) => cantidad > 0)
+            actualizarComprasStorage(listaCompleta)
         } else{
             localStorage.removeItem('listaCompras')
         }

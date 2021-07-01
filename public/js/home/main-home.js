@@ -31,6 +31,7 @@ $(()=>{
     slider();
 
     mostrarPanelIngreso();
+    validarEnterUsuario();
     $('#btnRegistro').click(ingresarUsuario)
     $('#btnComenzar').click(crearUsuario)
 

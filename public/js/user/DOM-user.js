@@ -184,6 +184,7 @@ function mostrarOcultar (){
         $('#dolares__cantidad').text(cantidades[1])
         $('#euros__cantidad').text(cantidades[2])
         $('.cartera__lista__posesion').show();
+        $('#cartera__lista__mensaje').show();
         $('#cartera__lista--oculto').hide()
 
         localStorage.setItem('mostrarBilletera', 'false')
@@ -193,6 +194,7 @@ function mostrarOcultar (){
         $('.billeteraUser__balance__billetera--cantidad').text(mensajeOculto);
         $('.depositoRetiro__registro--btc').text(mensajeOculto);
         $('.cartera__lista__posesion').hide();
+        $('#cartera__lista__mensaje').hide();
         $('#cartera__lista--oculto').show()
         
         localStorage.setItem('mostrarBilletera', 'true')

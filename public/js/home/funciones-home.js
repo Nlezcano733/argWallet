@@ -1,6 +1,20 @@
 // ---------------------------------------------- //
 // ---------------VALIDACIONES------------------- //
 // ---------------------------------------------- //
+function validarEnterUsuario(){
+    $('#idUsuario').keydown(e => ingresoUserTecla(e, 'ingreso'));
+    $('#passUsuario').keydown(e => ingresoUserTecla(e, 'ingreso'));
+    $('#nuevoNombre').keydown(e => ingresoUserTecla(e, 'ingreso'));
+    $('#nuevoId').keydown(e => ingresoUserTecla(e));
+    $('#nuevoPass').keydown(e => ingresoUserTecla(e));
+}
+
+function ingresoUserTecla (e, uso){
+    console.log(e)
+    if(e.which === 13){
+       uso === 'ingreso' ? ingresarUsuario() : crearUsuario()
+    }
+}
 
 function validarNombre(nombre){
     nombre = nombre.trim();
